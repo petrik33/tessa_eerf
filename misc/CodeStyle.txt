@@ -1,0 +1,19 @@
+## Order in scripts
+
+1. signal
+
+2. @export
+
+3. const
+
+4. var
+
+5. public override
+
+6. public func
+
+7. _var
+
+8. _private override
+
+9. _private func

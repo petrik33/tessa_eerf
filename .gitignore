@@ -1,0 +1,23 @@
+# Godot 4 ignores
+.import
+.godot
+export_presets.cfg
+
+# Heavy Assets
+*.png
+*.mp4
+*.gif
+*.cur
+*.aseprite
+
+# Mono / C#
+.mono/
+data_*/
+
+# OS / Editor-specific
+.DS_Store
+Thumbs.db
+android/
+.vscode
+
+source/Obsidian/Tessa Eerf/.obsidian

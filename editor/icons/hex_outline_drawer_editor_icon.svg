@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 16.933333 16.933334"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="hex_outline_drawer_editor_icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:lockguides="false"
+     inkscape:zoom="4.1524866"
+     inkscape:cx="-0.36122934"
+     inkscape:cy="13.124666"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showborder="true"
+     units="px"
+     width="64px"
+     height="64px" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-73.114554,-31.699915)">
+    <path
+       sodipodi:type="star"
+       style="fill:none;fill-opacity:1;stroke:#8eef97;stroke-width:5.36036;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path37987-3"
+       inkscape:flatsided="true"
+       sodipodi:sides="6"
+       sodipodi:cx="217.94171"
+       sodipodi:cy="140.87944"
+       sodipodi:r1="17.360737"
+       sodipodi:r2="15.034838"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.0471976"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       transform="matrix(0.40811798,0,0,0.34110447,-7.3647111,-7.8880257)"
+       d="m 232.97655,149.55981 -15.03484,8.68037 -15.03484,-8.68037 0,-17.36074 15.03484,-8.68037 15.03484,8.68037 z" />
+  </g>
+</svg>

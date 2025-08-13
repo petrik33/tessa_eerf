@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://btrq57sgn8t01"]
+
+[ext_resource type="Script" uid="uid://dxly5dxcxcmc6" path="res://script/unit/unit_combat_visuals_base.gd" id="1_rq3px"]
+
+[node name="SkeletonCombatVisuals" type="Node2D"]
+script = ExtResource("1_rq3px")
+metadata/_custom_type_script = "uid://dxly5dxcxcmc6"

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://b6ksxv6834hrv"]
+
+[ext_resource type="Texture2D" uid="uid://dvaxowejx8tdo" path="res://asset/texture/ui/cursor/cursor_atlas.png" id="1_lpvv4"]
+
+[resource]
+atlas = ExtResource("1_lpvv4")
+region = Rect2(99, 3, 26, 26)

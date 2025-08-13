@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RectangleHexGrid" load_steps=3 format=3 uid="uid://b2feo8yu360oc"]
+
+[ext_resource type="Resource" uid="uid://cymfk6o15evoq" path="res://resource/combat/combat_offset_hex_math_res.tres" id="1_won3r"]
+[ext_resource type="Script" uid="uid://b602cf0tvj4sj" path="res://script/hex/grid/rectangle_hex_grid.gd" id="2_awbiu"]
+
+[resource]
+script = ExtResource("2_awbiu")
+bounds = Rect2i(0, 0, 15, 10)
+offset_hex_math = ExtResource("1_won3r")
+metadata/_custom_type_script = "uid://i3tn4p7t8jr7"

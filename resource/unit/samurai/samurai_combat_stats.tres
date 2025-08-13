@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UnitCombatStats" load_steps=2 format=3 uid="uid://du3m2jefvb2it"]
+
+[ext_resource type="Script" uid="uid://docn60vvfh160" path="res://script/unit/unit_combat_stats.gd" id="1_qreyd"]
+
+[resource]
+script = ExtResource("1_qreyd")
+attack = 10
+defense = 10
+damage = Vector2i(5, 10)
+hp = 30
+max_hp = 30
+morale = 0
+luck = 0
+speed = 5
+initiative = 10
+range_type = 0
+metadata/_custom_type_script = "uid://docn60vvfh160"

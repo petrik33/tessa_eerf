@@ -1,0 +1,1 @@
+A strategy game with factions, heroes, creatures, towns, adventure map and all that leading to turn based combat

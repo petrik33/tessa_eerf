@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CombatRules" load_steps=2 format=3 uid="uid://b7rh5anph2oyf"]
+
+[ext_resource type="Script" uid="uid://g8ik7o5a7yk7" path="res://script/combat/combat_rules.gd" id="1_2fuve"]
+
+[resource]
+script = ExtResource("1_2fuve")
+metadata/_custom_type_script = "uid://g8ik7o5a7yk7"
