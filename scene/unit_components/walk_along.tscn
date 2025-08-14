@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://r2ihovciwhb4"]
+
+[ext_resource type="Script" uid="uid://cjjbko8na4chk" path="res://script/unit_components/walk_along_impl.gd" id="1_q42gf"]
+[ext_resource type="Curve2D" uid="uid://cx8pv2yqlmbqy" path="res://resource/unit/utils/combat_unit_reference_walk_path.tres" id="2_sswhf"]
+
+[sub_resource type="Animation" id="Animation_ja20i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gotmv"]
+_data = {
+&"RESET": SubResource("Animation_ja20i")
+}
+
+[sub_resource type="Animation" id="Animation_8nyx4"]
+resource_name = "normal"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_sswhf"]
+resource_name = "normal"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_dtvl5"]
+resource_name = "normal"
+length = 3.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_fft4j"]
+resource_name = "normal"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_82wbk"]
+resource_name = "normal"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ja20i"]
+_data = {
+&"fast": SubResource("Animation_8nyx4"),
+&"normal": SubResource("Animation_sswhf"),
+&"slow": SubResource("Animation_dtvl5"),
+&"very fast": SubResource("Animation_fft4j"),
+&"very slow": SubResource("Animation_82wbk")
+}
+
+[node name="WalkAlong" type="Node"]
+script = ExtResource("1_q42gf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_gotmv"),
+&"combat_unit_walk_presets": SubResource("AnimationLibrary_ja20i")
+}
+
+[node name="Path2D" type="Path2D" parent="."]
+unique_name_in_owner = true
+curve = ExtResource("2_sswhf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true

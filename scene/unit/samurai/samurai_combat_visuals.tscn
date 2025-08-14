@@ -1,245 +1,27 @@
-[gd_scene load_steps=18 format=3 uid="uid://wsj38kc8rrd7"]
+[gd_scene load_steps=5 format=3 uid="uid://wsj38kc8rrd7"]
 
 [ext_resource type="Script" uid="uid://cqkcewvedrswf" path="res://script/unit/samurai/samurai_combat_visuals.gd" id="1_cxdu6"]
-[ext_resource type="Script" uid="uid://c2fy43snty3k1" path="res://script/hex/drawer/hex_grid_drawer.gd" id="1_j4sae"]
 [ext_resource type="SpriteFrames" uid="uid://cg2rhdtlw806q" path="res://resource/unit/samurai/samurai_combat_sprite_frames.tres" id="1_jiays"]
-[ext_resource type="Script" uid="uid://bwitt2ghi4geg" path="res://script/hex/hex_layout.gd" id="2_j4sae"]
-[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="3_600al"]
-[ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="4_q6fvo"]
-[ext_resource type="Script" uid="uid://d130a16refx2p" path="res://script/hex/drawer/hex_outline_drawer.gd" id="5_acrq0"]
-[ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="5_q6fvo"]
-[ext_resource type="Texture2D" uid="uid://b22v3buy1aljn" path="res://asset/texture/unit/samurai/IDLE.png" id="6_600al"]
-[ext_resource type="Texture2D" uid="uid://ckyj7arax4yd8" path="res://asset/texture/unit/samurai/RUN.png" id="7_w30jv"]
-
-[sub_resource type="Resource" id="Resource_cxdu6"]
-script = ExtResource("2_j4sae")
-base_hex_rotation = 0.523599
-size = 20
-offset = Vector2(0, 0)
-metadata/_custom_type_script = "uid://bwitt2ghi4geg"
-
-[sub_resource type="Resource" id="Resource_w30jv"]
-script = ExtResource("3_600al")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
-
-[sub_resource type="Animation" id="Animation_600al"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("6_600al")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_w30jv"]
-resource_name = "idle"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.0333333, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 9]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("6_600al")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-
-[sub_resource type="Animation" id="Animation_rsym6"]
-resource_name = "walk"
-length = 1.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0, 15]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_w30jv")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rsym6"]
-_data = {
-&"RESET": SubResource("Animation_600al"),
-&"idle": SubResource("Animation_w30jv"),
-&"walk": SubResource("Animation_rsym6")
-}
-
-[sub_resource type="Curve2D" id="Curve2D_acrq0"]
+[ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk_along.tscn" id="2_bqx6h"]
+[ext_resource type="Script" uid="uid://cickks54ubjqn" path="res://script/unit_components/face_walk_direction.gd" id="4_j4sae"]
 
 [node name="SamuraiCombatVisuals" type="Node2D"]
 script = ExtResource("1_cxdu6")
 
-[node name="HexGridDrawer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -82.0
-offset_top = -164.0
-offset_right = -42.0
-offset_bottom = -124.0
-script = ExtResource("1_j4sae")
-hex_color = Color(0.688638, 0.80431, 0.417734, 0.392157)
-layout = ExtResource("5_q6fvo")
-grid = ExtResource("4_q6fvo")
-metadata/_custom_type_script = "uid://c2fy43snty3k1"
-
-[node name="HexOutlineDrawer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -82.0
-offset_top = -164.0
-offset_right = -42.0
-offset_bottom = -124.0
-script = ExtResource("5_acrq0")
-layout = ExtResource("5_q6fvo")
-grid = ExtResource("4_q6fvo")
-metadata/_custom_type_script = "uid://d130a16refx2p"
-
-[node name="Hex" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_j4sae")
-hex_color = Color(0.688638, 0.80431, 0.417734, 0.392157)
-layout = SubResource("Resource_cxdu6")
-grid = SubResource("Resource_w30jv")
-metadata/_custom_type_script = "uid://c2fy43snty3k1"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("6_600al")
-offset = Vector2(-1, -29)
-hframes = 10
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1, 4)
 sprite_frames = ExtResource("1_jiays")
-animation = &"idle"
-frame = 2
-frame_progress = 0.801607
+animation = &"walk"
 offset = Vector2(0, -33)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_rsym6")
-}
+[node name="WalkAlong" parent="." node_paths=PackedStringArray("moved_node") instance=ExtResource("2_bqx6h")]
+unique_name_in_owner = true
+moved_node = NodePath("../AnimatedSprite2D")
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_acrq0")
+[node name="FaceWalkDirection" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+unique_name_in_owner = true
+script = ExtResource("4_j4sae")
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://cickks54ubjqn"
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-rotates = false
-loop = false
+[connection signal="finished" from="WalkAlong" to="." method="_on_walk_along_finished"]

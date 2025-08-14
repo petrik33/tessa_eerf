@@ -17,7 +17,7 @@ func _handle_action(action: CombatActionBase):
 		var path = Utils.to_typed(TYPE_VECTOR2, action.path.map(
 			func(hex: Vector2i): return hex_layout.hex_to_pixel(hex)
 		))
-		unit.play_move(path)
+		unit.walk_along(path)
 
 func _handle_combat_started():
 	for unit in combat.context().state().units:
@@ -25,7 +25,7 @@ func _handle_combat_started():
 		_unit_visuals.append(visuals)
 		visuals.position = hex_layout.hex_to_pixel(unit.placement)
 		visuals.face_direction(0 if unit.side_idx == 0 else PI)
-		visuals.go_to_idle_animation_state()
+		visuals.go_to_idle()
 		units_node.add_child(visuals)
 	return
 
