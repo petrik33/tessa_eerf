@@ -12,10 +12,9 @@ const FLAT_TOP_BASE_HEX_ROTATION := 0.0
 const Q_BASIS_BASE = Vector2(3.0 / 2.0, sqrt(3.0) / 2.0)
 const R_BASIS_BASE = Vector2(0.0, sqrt(3.0))
 
-static func axial_basis(rotation_angle: float, offset: Vector2, size: float) -> Transform2D:
+static func axial_basis(rotation_angle: float, size: float) -> Transform2D:
 	var basis = Transform2D(Q_BASIS_BASE, R_BASIS_BASE, Vector2.ZERO)
 	basis = basis.rotated(-rotation_angle) * size
-	basis.origin = offset
 	return basis
 	
 static func hex_corner(rotation_angle: float, index: int) -> Vector2:

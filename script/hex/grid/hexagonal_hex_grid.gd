@@ -16,15 +16,18 @@ func has_point(hex: Vector2i) -> bool:
 	return HexMath.is_in_radius(hex, radius)
 	
 func approx_pixel_bounds(layout: HexLayout) -> Rect2:
-	var bounds := Rect2(Vector2.ZERO, Vector2.ZERO)
+	var bounds := layout.hex_pixel_bounds()
 	var corners := [
 		Vector2i(-radius, radius), Vector2i(radius, -radius),
 		Vector2i(radius, 0), Vector2i(0, radius),
 		Vector2i(-radius, 0), Vector2i(0, -radius)
 	]
 	for corner in corners:
-		bounds.expand(layout.hex_to_pixel(corner))
+		bounds = bounds.expand(layout.hex_to_pixel(corner))
 	return bounds
+
+func pivot_point() -> Vector2i:
+	return Vector2i.ZERO
 
 func is_layout_compatible(_layout: HexLayout) -> bool:
 	return true # compatible with any axial layout

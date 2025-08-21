@@ -21,6 +21,19 @@ func approx_pixel_bounds(layout: HexLayout) -> Rect2:
 		bounds = bounds.expand(layout.hex_to_pixel(hex))
 	return bounds
 
+func pivot_point() -> Vector2i:
+	if points.is_empty():
+		return Vector2i.ZERO
+	
+	var min_hex := points[0]
+	var max_hex := points[0]
+	
+	for hex in points:
+		min_hex = Vector2i(min(min_hex.x, hex.x), min(min_hex.y, hex.y))
+		max_hex = Vector2i(max(max_hex.x, hex.x), max(max_hex.y, hex.y))
+	
+	return (min_hex + max_hex) / 2
+
 func is_layout_compatible(_layout: HexLayout) -> bool:
 	return true  # Compatible with any layout
 

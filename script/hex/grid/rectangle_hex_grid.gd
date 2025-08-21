@@ -24,6 +24,9 @@ func has_point(hex: Vector2i) -> bool:
 func approx_pixel_bounds(layout: HexLayout) -> Rect2:
 	return Rect2(layout.hex_to_pixel(bounds.position), layout.hex_to_pixel(bounds.size))
 
+func pivot_point() -> Vector2i:
+	return bounds.position
+
 func is_layout_compatible(layout: HexLayout) -> bool:
 	return offset_hex_math != null and offset_hex_math.is_layout_compatible(layout)
 

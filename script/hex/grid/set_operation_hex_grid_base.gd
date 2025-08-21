@@ -17,6 +17,9 @@ class_name SetOperationHexGridBase extends HexGridBase
 		if gridB != null:
 			gridB.changed.connect(emit_changed)
 
+func pivot_point() -> Vector2i:
+	return (gridA.pivot_point() + gridB.pivot_point()) / 2
+
 func is_layout_compatible(layout: HexLayout) -> bool:
 	return gridA.is_layout_compatible(layout) and gridB.is_layout_compatible(layout)
 

@@ -8,4 +8,7 @@ func has_point(hex: Vector2i) -> bool:
 	return gridA.has_point(hex) and (not gridB.has_point(hex))
 	
 func approx_pixel_bounds(layout: HexLayout) -> Rect2:
-	return gridA.approx_pixel_bounds(layout)	
+	return gridA.approx_pixel_bounds(layout)
+
+func pivot_point() -> Vector2i:
+	return gridA.pivot_point()

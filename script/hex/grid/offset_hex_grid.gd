@@ -29,6 +29,9 @@ func approx_pixel_bounds(layout: HexLayout) -> Rect2:
 	var offset_pixel = layout.hex_to_pixel(offset)
 	return Rect2(base_bounds.position + offset_pixel, base_bounds.size)
 
+func pivot_point() -> Vector2i:
+	return offset + grid.pivot_point()
+
 func is_layout_compatible(layout: HexLayout) -> bool:
 	return grid.is_layout_compatible(layout)
 

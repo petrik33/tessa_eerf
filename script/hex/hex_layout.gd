@@ -12,12 +12,6 @@ class_name HexLayout extends Resource
 		size = new_size
 		_recalc()
 		emit_changed()
-		
-@export var offset := Vector2.ZERO:
-	set(value):
-		offset = value
-		_recalc()
-		emit_changed()
 	
 func hex_corner(corner: int) -> Vector2:
 	return _hex_corner_offset[corner]
@@ -58,7 +52,7 @@ func _init():
 	_recalc()
 	
 func _recalc():
-	_axial_basis = HexLayoutMath.axial_basis(base_hex_rotation, offset, size)
+	_axial_basis = HexLayoutMath.axial_basis(base_hex_rotation, size)
 	_inverse_axial_basis = _axial_basis.affine_inverse()
 	
 	_hex_pixel_bounds = Rect2(Vector2.ZERO, Vector2.ZERO)
@@ -66,7 +60,7 @@ func _recalc():
 	for i in range(HexLayoutMath.CORNER_NUM):
 		var offset = size * HexLayoutMath.hex_corner(base_hex_rotation, i)
 		_hex_corner_offset[i] = offset
-		_hex_pixel_bounds.expand(offset)
+		_hex_pixel_bounds = _hex_pixel_bounds.expand(offset)
 
 	var hex_polygon_points = hex_polygon(Vector2.ZERO)
 	var hex_triangulation = Geometry2D.triangulate_polygon(hex_polygon_points)

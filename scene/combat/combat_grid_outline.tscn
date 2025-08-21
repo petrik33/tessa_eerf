@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqk36cw4s8ty"]
+[gd_scene load_steps=8 format=3 uid="uid://cqk36cw4s8ty"]
 
 [ext_resource type="Script" uid="uid://c2fy43snty3k1" path="res://script/hex/drawer/hex_grid_drawer.gd" id="1_sl4t7"]
 [ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="2_3740s"]
 [ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="3_7es4y"]
 [ext_resource type="Script" uid="uid://d130a16refx2p" path="res://script/hex/drawer/hex_outline_drawer.gd" id="4_5jd5j"]
+[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="5_3740s"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pa4ab"]
 blend_mode = 3
+
+[sub_resource type="Resource" id="Resource_7es4y"]
+script = ExtResource("5_3740s")
+radius = 3
+metadata/_custom_type_script = "uid://6riqabamogrw"
 
 [node name="Grid" type="Control"]
 layout_mode = 3
@@ -17,6 +23,8 @@ offset_bottom = 40.0
 [node name="FullGrid" type="Control" parent="."]
 material = SubResource("CanvasItemMaterial_pa4ab")
 anchors_preset = 0
+offset_right = 692.82
+offset_bottom = 300.0
 script = ExtResource("1_sl4t7")
 hex_color = Color(0.7704, 0.9, 0.468, 0.196078)
 layout = ExtResource("2_3740s")
@@ -25,8 +33,20 @@ metadata/_custom_type_script = "uid://c2fy43snty3k1"
 
 [node name="FullGridOutline" type="Control" parent="."]
 anchors_preset = 0
+offset_right = 692.82
+offset_bottom = 300.0
 script = ExtResource("4_5jd5j")
 outline_color = Color(0.462, 0.55, 0.11, 1)
 layout = ExtResource("2_3740s")
 grid = ExtResource("3_7es4y")
 metadata/_custom_type_script = "uid://d130a16refx2p"
+
+[node name="HexGridDrawer" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 207.846
+offset_bottom = 180.0
+pivot_offset = Vector2(103.923, 90)
+script = ExtResource("1_sl4t7")
+layout = ExtResource("2_3740s")
+grid = SubResource("Resource_7es4y")
+metadata/_custom_type_script = "uid://c2fy43snty3k1"

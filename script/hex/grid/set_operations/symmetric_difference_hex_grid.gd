@@ -19,4 +19,3 @@ func approx_pixel_bounds(layout: HexLayout) -> Rect2:
 	else:
 		bounds = bounds.merge(gridB.approx_pixel_bounds(layout))
 	return bounds
-	
