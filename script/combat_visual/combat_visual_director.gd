@@ -1,7 +1,7 @@
 class_name CombatVisualDirector extends Node
 
 @export var units_map: CombatVisualUnitsMap
-@export var units_node: Node
+@export var units_node: Node2D
 @export var hex_layout: HexLayout
 
 func get_unit(idx: int) -> CombatVisualUnit:
@@ -12,6 +12,7 @@ func setup_scene(runtime: CombatRuntime):
 	for unit in runtime.state().units:
 		var visuals = _instantiate_unit_visuals(unit.data)
 		units_node.add_child(visuals)
+		print(units_node.global_position)
 	_is_setup = true
 
 func clear_scene():

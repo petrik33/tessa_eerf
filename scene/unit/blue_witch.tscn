@@ -1,10 +1,6 @@
-[gd_scene load_steps=61 format=3 uid="uid://c8asf4s1t6aie"]
+[gd_scene load_steps=56 format=3 uid="uid://c8asf4s1t6aie"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat_visual/combat_visual_unit.gd" id="1_yb0an"]
-[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_r7y2t"]
-[ext_resource type="Script" uid="uid://c2fy43snty3k1" path="res://script/hex/drawer/hex_grid_drawer.gd" id="3_65xch"]
-[ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="4_7nox7"]
-[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="5_fhnv6"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="6_7nox7"]
 [ext_resource type="Texture2D" uid="uid://bf2vulfaopn3j" path="res://asset/texture/unit/blue_witch/B_witch_idle.png" id="6_hebk6"]
 [ext_resource type="Texture2D" uid="uid://cjig7lus2c3md" path="res://asset/texture/unit/blue_witch/B_witch_run.png" id="7_ax8xb"]
@@ -15,11 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="11_tt52y"]
 [ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="12_uyugg"]
 [ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="13_vdl7i"]
-
-[sub_resource type="Resource" id="Resource_k6dhr"]
-script = ExtResource("5_fhnv6")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyjtx"]
 atlas = ExtResource("6_7nox7")
@@ -355,23 +346,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BlueWitch" type="Node"]
+[node name="BlueWitch" type="Node2D"]
 script = ExtResource("1_yb0an")
-config = ExtResource("2_r7y2t")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
-
-[node name="HexGridDrawer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -82.0
-offset_top = -164.0
-offset_right = -42.0
-offset_bottom = -124.0
-script = ExtResource("3_65xch")
-hex_color = Color(1, 0.27, 0.27, 1)
-layout = ExtResource("4_7nox7")
-grid = SubResource("Resource_k6dhr")
-metadata/_custom_type_script = "uid://c2fy43snty3k1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_eyjtx")

@@ -1,10 +1,6 @@
-[gd_scene load_steps=44 format=3 uid="uid://djblfmp6cwiwq"]
+[gd_scene load_steps=39 format=3 uid="uid://djblfmp6cwiwq"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat_visual/combat_visual_unit.gd" id="1_fftru"]
-[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_02ptm"]
-[ext_resource type="Script" uid="uid://c2fy43snty3k1" path="res://script/hex/drawer/hex_grid_drawer.gd" id="2_onfqa"]
-[ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="3_qr1lv"]
-[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="4_pjkb0"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="5_qb0rn"]
 [ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk.tscn" id="6_02ptm"]
 [ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="6_qb0rn"]
@@ -13,11 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="7_tx6bj"]
 [ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="8_vas6a"]
 [ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="9_r0mm1"]
-
-[sub_resource type="Resource" id="Resource_aojjl"]
-script = ExtResource("4_pjkb0")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_blpkp"]
 atlas = ExtResource("5_qb0rn")
@@ -238,23 +229,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node"]
+[node name="MartialHero" type="Node2D"]
 script = ExtResource("1_fftru")
-config = ExtResource("2_02ptm")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
-
-[node name="HexGridDrawer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -82.0
-offset_top = -164.0
-offset_right = -42.0
-offset_bottom = -124.0
-script = ExtResource("2_onfqa")
-hex_color = Color(1, 0.27, 0.27, 1)
-layout = ExtResource("3_qr1lv")
-grid = SubResource("Resource_aojjl")
-metadata/_custom_type_script = "uid://c2fy43snty3k1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wlhx3")

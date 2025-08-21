@@ -7,9 +7,12 @@ script/source = "extends Node
 @export var animation_name: String = \"idle\"
 
 func idle(action: CombatVisualUnitActionGoIdle) -> void:
-	animated_sprite.flip_h = cos(action.enemy_direction) < 0
 	animated_sprite.position = action.position
 	animated_sprite.play(animation_name)
+	animated_sprite.scale = Vector2(
+		abs(animated_sprite.scale.x) if cos(action.enemy_direction) > 0 else -abs(animated_sprite.scale.x),
+		animated_sprite.scale.y
+	)
 "
 
 [node name="Idle" type="Node"]

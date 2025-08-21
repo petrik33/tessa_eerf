@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://eqxcmyqh3s85"
-path="res://.godot/imported/hex_outline_drawer_editor_icon.svg-4e879f6084be0cb9c90078eb977d9a95.ctex"
+path="res://.godot/imported/hex_outline_renderer_editor_icon.svg-7caa86db1442f5c65cd96eba7e119eb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://editor/icons/hex_outline_drawer_editor_icon.svg"
-dest_files=["res://.godot/imported/hex_outline_drawer_editor_icon.svg-4e879f6084be0cb9c90078eb977d9a95.ctex"]
+source_file="res://editor/icons/hex_outline_renderer_editor_icon.svg"
+dest_files=["res://.godot/imported/hex_outline_renderer_editor_icon.svg-7caa86db1442f5c65cd96eba7e119eb4.ctex"]
 
 [params]
 

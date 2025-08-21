@@ -1,9 +1,6 @@
-[gd_scene load_steps=60 format=3 uid="uid://dx0g014t166re"]
+[gd_scene load_steps=56 format=3 uid="uid://dx0g014t166re"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat_visual/combat_visual_unit.gd" id="1_i7f35"]
-[ext_resource type="Script" uid="uid://c2fy43snty3k1" path="res://script/hex/drawer/hex_grid_drawer.gd" id="2_ro02e"]
-[ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="3_8idou"]
-[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="4_0v5xn"]
 [ext_resource type="Texture2D" uid="uid://bxcj0cp6dvrys" path="res://asset/texture/unit/blind_huntress/6. Dash 112 x 56.png" id="5_0v5xn"]
 [ext_resource type="Texture2D" uid="uid://f2f0q3n320d7" path="res://asset/texture/unit/blind_huntress/1. Idle 48 x 48.png" id="5_q2b0d"]
 [ext_resource type="Texture2D" uid="uid://dgkqoerpj2gik" path="res://asset/texture/unit/blind_huntress/4. Fall 48 x 48.png" id="5_ro02e"]
@@ -14,11 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="10_3dman"]
 [ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="11_js656"]
 [ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="12_ll718"]
-
-[sub_resource type="Resource" id="Resource_cmv0i"]
-script = ExtResource("4_0v5xn")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgpv3"]
 atlas = ExtResource("5_0v5xn")
@@ -359,22 +351,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node"]
+[node name="BlindHuntress" type="Node2D"]
 script = ExtResource("1_i7f35")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
-
-[node name="HexGridDrawer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -82.0
-offset_top = -164.0
-offset_right = -42.0
-offset_bottom = -124.0
-script = ExtResource("2_ro02e")
-hex_color = Color(1, 0.27, 0.27, 1)
-layout = ExtResource("3_8idou")
-grid = SubResource("Resource_cmv0i")
-metadata/_custom_type_script = "uid://c2fy43snty3k1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ll718")

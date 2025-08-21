@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5niwqun547uj"
-path="res://.godot/imported/hex_perimeter_drawer_editor_icon.svg-877ed89a4d4935fbc03339af596c4f81.ctex"
+uid="uid://34ocwqtsjotk"
+path="res://.godot/imported/hex_filled_renderer_editor_icon.svg-59e10d4ca54ecc3a580d26b4792d17ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://editor/icons/hex_perimeter_drawer_editor_icon.svg"
-dest_files=["res://.godot/imported/hex_perimeter_drawer_editor_icon.svg-877ed89a4d4935fbc03339af596c4f81.ctex"]
+source_file="res://editor/icons/hex_filled_renderer_editor_icon.svg"
+dest_files=["res://.godot/imported/hex_filled_renderer_editor_icon.svg-59e10d4ca54ecc3a580d26b4792d17ae.ctex"]
 
 [params]
 

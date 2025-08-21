@@ -4,14 +4,15 @@ class_name CombatPlayerControl extends Node
 @export var side_idx: int
 @export var combat: Combat
 
+@export var hex_map: HexMap
 @export var hex_layout: HexLayout
 
-@export var unit_outline: HexDrawerBase
-@export var move_range_outline: HexDrawerBase
-@export var mouse_pick_outline: HexDrawerBase
-@export var enemies_outline: HexDrawerBase
-@export var allies_outline: HexDrawerBase
-@export var move_path_outline: HexDrawerBase
+@export var unit_outline: HexMapSubset
+@export var move_range_outline: HexMapSubset
+@export var mouse_pick_outline: HexMapSubset
+@export var enemies_outline: HexMapSubset
+@export var allies_outline: HexMapSubset
+@export var move_path_outline: HexMapSubset
 
 enum Cursor {
 	ARROW,
@@ -95,9 +96,10 @@ func _update_potential_command():
 			_local_state.current_unit().placement,
 			_mouse_hex
 		)
+		_potential_command.move_id_path.remove_at(_potential_command.move_id_path.size() - 1)
 
 func _handle_mouse_motion(position: Vector2, force_update = false):
-	var hex = hex_layout.pixel_to_hex(position)
+	var hex = hex_layout.pixel_to_hex(position - hex_map.position)
 	if _mouse_hex == hex and not force_update:
 		return
 	_previous_mouse_hex = _mouse_hex
@@ -128,13 +130,13 @@ func _update_move_path_outline():
 		move_path_outline.show()
 
 func _update_turn_outlines():
+	var current_unit = _local_state.current_unit()
 	unit_outline.grid = HexGrids.point(
-		_local_state.current_unit().placement
+		current_unit.placement
 	)
 	move_range_outline.grid = HexGrids.ranged(
-		_local_state.current_unit().placement,
-		combat.runtime().navigation().grid(),
-		_local_state.current_unit().stats().speed
+		current_unit.placement,
+		current_unit.stats().speed
 	)
 	enemies_outline.grid = HexGrids.points(
 		Utils.to_typed(TYPE_VECTOR2I, _local_state.enemies(side_idx).map(
@@ -142,13 +144,18 @@ func _update_turn_outlines():
 		))
 	)
 	allies_outline.grid = HexGrids.points(
-		Utils.to_typed(TYPE_VECTOR2I, _local_state.allies(side_idx).map(
-			func(unit: CombatUnitState): return unit.placement
-		))
+		Utils.to_typed(TYPE_VECTOR2I, _local_state.allies(side_idx)
+			.filter(
+				func(unit: CombatUnitState): return unit != current_unit
+			)
+			.map(
+				func(unit: CombatUnitState): return unit.placement
+			)
+		)
 	)
 	
 func _show_outlines():
-	#unit_outline.show()
+	unit_outline.show()
 	move_range_outline.show()
 	enemies_outline.show()
 	allies_outline.show()

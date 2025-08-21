@@ -22,7 +22,9 @@ func has_point(hex: Vector2i) -> bool:
 	return bounds.has_point(offset_hex_math.from_axial(hex))
 	
 func approx_pixel_bounds(layout: HexLayout) -> Rect2:
-	return Rect2(layout.hex_to_pixel(bounds.position), layout.hex_to_pixel(bounds.size))
+	var left_top = offset_hex_math.to_axial(bounds.position)
+	var right_bottom = offset_hex_math.to_axial(bounds.position + bounds.size - Vector2i.ONE)
+	return Rect2(layout.hex_to_pixel(left_top), layout.hex_to_pixel(right_bottom))
 
 func pivot_point() -> Vector2i:
 	return bounds.position

@@ -1,5 +1,5 @@
 @tool
-class_name CombatVisualUnit extends Node
+class_name CombatVisualUnit extends Node2D
 
 @export var config: CombatVisualUnitConfig
 

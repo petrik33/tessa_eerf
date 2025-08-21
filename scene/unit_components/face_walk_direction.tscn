@@ -16,12 +16,21 @@ var _last_pos: Vector2
 func start_walk(action: CombatVisualUnitActionWalk):
 	_last_pos = Vector2.ZERO if sprite == null else sprite.position
 
+func _ready() -> void:
+	set_process(false)
+
 func _process(delta: float) -> void:
 	var delta_pos = sprite.position - _last_pos
 	if not inverse:
-		sprite.flip_h = cos(delta_pos.angle()) < 0
+		sprite.scale = Vector2(
+			abs(sprite.scale.x) if cos(delta_pos.angle()) > 0 else -abs(sprite.scale.x),
+			sprite.scale.y
+		)
 	else:
-		sprite.flip_h = cos(delta_pos.angle()) > 0
+		sprite.scale = Vector2(
+			abs(sprite.scale.x) if cos(delta_pos.angle()) < 0 else -abs(sprite.scale.x),
+			sprite.scale.y
+		)
 	_last_pos = sprite.position
 
 func _get_configuration_warnings() -> PackedStringArray:

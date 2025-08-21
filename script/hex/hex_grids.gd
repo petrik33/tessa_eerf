@@ -14,13 +14,15 @@ static func points(_points: Array[Vector2i]) -> HexGridBase:
 	grid.points = _points.duplicate()
 	return grid
 
-static func ranged(offset: Vector2i, base_grid: HexGridBase, range: int, include_center: bool = true) -> HexGridBase:
+static func ranged(offset: Vector2i, range: int, include_center: bool = true) -> HexGridBase:
 	var hexagonalGrid = HexagonalHexGrid.new(range)
 	var offsetRangeGrid = OffsetHexGrid.new(hexagonalGrid, offset)
-	var result_grid = IntersectionHexGrid.new(base_grid, offsetRangeGrid)
 	if include_center:
-		return result_grid
-	return subtract(result_grid, point(offset))
+		return offsetRangeGrid
+	return subtract(offsetRangeGrid, point(offset))
+
+static func intersection(gridA: HexGridBase, gridB: HexGridBase) -> IntersectionHexGrid:
+	return IntersectionHexGrid.new(gridA, gridB)
 	
 static func subtract(gridA : HexGridBase, gridB : HexGridBase) -> HexGridBase:
 		return SubtractionHexGrid.new(gridA, gridB)
