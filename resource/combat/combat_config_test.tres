@@ -3,40 +3,46 @@
 [ext_resource type="Script" uid="uid://sewp0x4jip31" path="res://script/combat/combat_config.gd" id="1_pvtna"]
 [ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="1_udr15"]
 [ext_resource type="Script" uid="uid://0sdphiqbel8m" path="res://script/combat/combat_unit.gd" id="2_kteoc"]
-[ext_resource type="Resource" uid="uid://d0jl7den3fal0" path="res://resource/unit/knight/knight.tres" id="4_aocpy"]
-[ext_resource type="Resource" uid="uid://64qigef8y3mg" path="res://resource/unit/samurai/samurai.tres" id="6_aocpy"]
+[ext_resource type="Resource" uid="uid://dqlj27v272gvf" path="res://resource/unit/red_hood_archer/red_hood_archer.tres" id="6_lm4b4"]
 
 [sub_resource type="Resource" id="Resource_ma4qp"]
 script = ExtResource("2_kteoc")
-data = ExtResource("4_aocpy")
+data = ExtResource("6_lm4b4")
 placement = Vector2i(0, 2)
 combat_side = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_331en"]
 script = ExtResource("2_kteoc")
-data = ExtResource("4_aocpy")
+data = ExtResource("6_lm4b4")
 placement = Vector2i(-2, 6)
+combat_side = 0
+metadata/_custom_type_script = "uid://0sdphiqbel8m"
+
+[sub_resource type="Resource" id="Resource_vjf5r"]
+script = ExtResource("2_kteoc")
+data = ExtResource("6_lm4b4")
+placement = Vector2i(-3, 9)
 combat_side = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_qlba5"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_aocpy")
+data = ExtResource("6_lm4b4")
 placement = Vector2i(12, 1)
 combat_side = 1
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_ehym5"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_aocpy")
+data = ExtResource("6_lm4b4")
 placement = Vector2i(10, 5)
 combat_side = 1
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_pcsul"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_aocpy")
+data = ExtResource("6_lm4b4")
 placement = Vector2i(9, 7)
 combat_side = 1
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
@@ -44,6 +50,6 @@ metadata/_custom_type_script = "uid://0sdphiqbel8m"
 [resource]
 script = ExtResource("1_pvtna")
 grid = ExtResource("1_udr15")
-units = Array[ExtResource("2_kteoc")]([SubResource("Resource_ma4qp"), SubResource("Resource_331en"), SubResource("Resource_qlba5"), SubResource("Resource_ehym5"), SubResource("Resource_pcsul")])
+units = Array[ExtResource("2_kteoc")]([SubResource("Resource_ma4qp"), SubResource("Resource_331en"), SubResource("Resource_vjf5r"), SubResource("Resource_qlba5"), SubResource("Resource_ehym5"), SubResource("Resource_pcsul")])
 seed = 42
 metadata/_custom_type_script = "uid://sewp0x4jip31"

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dserqrwva583k"]
+
+[sub_resource type="GDScript" id="GDScript_amw00"]
+script/source = "extends Node
+
+@export var animated_sprite: AnimatedSprite2D
+@export var animation_name: String = \"idle\"
+
+func idle(action: CombatVisualUnitActionGoIdle) -> void:
+	animated_sprite.flip_h = cos(action.enemy_direction) < 0
+	animated_sprite.position = action.position
+	animated_sprite.play(animation_name)
+"
+
+[node name="Idle" type="Node"]
+script = SubResource("GDScript_amw00")

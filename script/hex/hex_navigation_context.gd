@@ -30,4 +30,4 @@ func path_iterator(id_path: PackedInt64Array) -> HexPathIterator:
 	return HexPathIterator.new(id_path, _hex_to_id)
 
 var _grid: HexGridBase
-var _hex_to_id: Dictionary
+var _hex_to_id: Dictionary[Vector2i, int]

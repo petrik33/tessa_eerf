@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://dfd7a2ox05wed"]
+[gd_scene load_steps=50 format=4 uid="uid://dfd7a2ox05wed"]
 
 [ext_resource type="Script" uid="uid://cqhbrul7iip6p" path="res://script/combat/combat.gd" id="1_rlkjv"]
 [ext_resource type="Resource" uid="uid://bu3fcgqr7bojh" path="res://resource/combat/combat_config_test.tres" id="2_rlkjv"]
@@ -15,14 +15,22 @@
 [ext_resource type="Script" uid="uid://b2pxpdqko02pr" path="res://script/hex/drawer/hex_coordinates_drawer.gd" id="9_o43o7"]
 [ext_resource type="Script" uid="uid://djmun4c7plqvn" path="res://script/combat/combat_player_control.gd" id="9_yl8u6"]
 [ext_resource type="Texture2D" uid="uid://cqxkh3j2y1o6n" path="res://asset/texture/ui/cursor/cursor_attack_melee.tres" id="10_58tkr"]
+[ext_resource type="Script" uid="uid://cyg3pjgbmf1vv" path="res://script/combat_visual/combat_visual.gd" id="11_7vakg"]
 [ext_resource type="Texture2D" uid="uid://2wh84sqqbgc2" path="res://asset/texture/ui/cursor/cursor_pointy_hand.tres" id="11_md4tn"]
+[ext_resource type="Script" uid="uid://bd84dh3vdcgpd" path="res://script/combat_visual/combat_visual_writer.gd" id="12_jccvw"]
+[ext_resource type="Script" uid="uid://dce88q3ja7wu" path="res://script/combat_visual/combat_visual_director.gd" id="13_m8dvu"]
+[ext_resource type="Resource" uid="uid://cop36n7ulsjs4" path="res://resource/combat_visual/combat_visual_unit_map.tres" id="14_7vakg"]
 [ext_resource type="PackedScene" uid="uid://cqk36cw4s8ty" path="res://scene/combat/combat_grid_outline.tscn" id="15_nhyjj"]
 [ext_resource type="Script" uid="uid://b3kuj58myv8xi" path="res://script/hex/grid/point_list_hex_grid.gd" id="15_rlkjv"]
 [ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="16_ffse3"]
 [ext_resource type="Script" uid="uid://yoo6pqfudyay" path="res://script/hex/grid/offset_hex_grid.gd" id="17_fgtyp"]
 [ext_resource type="Script" uid="uid://b1du0g8uquyfg" path="res://script/hex/grid/set_operations/intersection_hex_grid.gd" id="18_rlkjv"]
 [ext_resource type="Script" uid="uid://bt2c6cshvla5f" path="res://script/hex/grid/set_operations/subtraction_hex_grid.gd" id="19_ffse3"]
-[ext_resource type="Script" uid="uid://c1cdqchdtk2bh" path="res://script/combat/combat_visualization.gd" id="22_md4tn"]
+
+[sub_resource type="Resource" id="Resource_y2xs1"]
+script = ExtResource("12_jccvw")
+hex_layout = ExtResource("5_ddas7")
+metadata/_custom_type_script = "uid://bd84dh3vdcgpd"
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fgtyp"]
 blend_mode = 1
@@ -2465,13 +2473,19 @@ cursor_arrow = ExtResource("8_md4tn")
 cursor_point = ExtResource("11_md4tn")
 cursor_attack_melee = ExtResource("10_58tkr")
 
-[node name="Visualization" type="Node" parent="." node_paths=PackedStringArray("combat", "units_node")]
-script = ExtResource("22_md4tn")
+[node name="CombatVisual" type="Node" parent="." node_paths=PackedStringArray("combat", "director")]
+script = ExtResource("11_7vakg")
 combat = NodePath("..")
-config = ExtResource("2_rlkjv")
+writer = SubResource("Resource_y2xs1")
+director = NodePath("../CombatVisualDirector")
+metadata/_custom_type_script = "uid://cyg3pjgbmf1vv"
+
+[node name="CombatVisualDirector" type="Node" parent="." node_paths=PackedStringArray("units_node")]
+script = ExtResource("13_m8dvu")
+units_map = ExtResource("14_7vakg")
 units_node = NodePath("../Map/Units")
 hex_layout = ExtResource("5_ddas7")
-metadata/_custom_type_script = "uid://c1cdqchdtk2bh"
+metadata/_custom_type_script = "uid://dce88q3ja7wu"
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -2590,13 +2604,13 @@ text = "Some UI"
 
 [connection signal="combat_finished" from="." to="PlayerA" method="_handle_combat_finished"]
 [connection signal="combat_finished" from="." to="PlayerB" method="_handle_combat_finished"]
-[connection signal="combat_finished" from="." to="Visualization" method="_handle_combat_finished"]
+[connection signal="combat_finished" from="." to="CombatVisual" method="_handle_combat_finished"]
 [connection signal="combat_started" from="." to="PlayerA" method="_handle_combat_started"]
 [connection signal="combat_started" from="." to="PlayerB" method="_handle_combat_started"]
-[connection signal="combat_started" from="." to="Visualization" method="_handle_combat_started"]
+[connection signal="combat_started" from="." to="CombatVisual" method="_handle_combat_started"]
 [connection signal="command_processed" from="." to="PlayerA" method="_handle_command_processed"]
 [connection signal="command_processed" from="." to="PlayerB" method="_handle_command_processed"]
-[connection signal="command_processed" from="." to="Visualization" method="_handle_command_processed"]
+[connection signal="command_processed" from="." to="CombatVisual" method="_handle_command_processed"]
 [connection signal="turn_finished" from="TurnSystem" to="PlayerA" method="_handle_turn_finished"]
 [connection signal="turn_finished" from="TurnSystem" to="PlayerB" method="_handle_turn_finished"]
 [connection signal="turn_started" from="TurnSystem" to="PlayerA" method="_handle_turn_started"]

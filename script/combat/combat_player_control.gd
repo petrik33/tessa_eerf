@@ -33,7 +33,7 @@ var _local_state: CombatState
 var _potential_command: CombatCommandBase
 
 func _handle_combat_started():
-	_local_state = combat.context().state()
+	_local_state = combat.runtime().state()
 	pass
 
 func _handle_command_processed(command: CombatCommandBase, actions: CombatActionsBuffer):
@@ -69,7 +69,7 @@ func _unhandled_input(event: InputEvent):
 func _update_potential_command():
 	_potential_command = null
 	
-	if not combat.context().navigation().grid().has_point(_mouse_hex):
+	if not combat.runtime().navigation().grid().has_point(_mouse_hex):
 		return
 	
 	var target_distance = HexMath.distance(
@@ -84,14 +84,14 @@ func _update_potential_command():
 	
 	if targeted_unit == null:
 		_potential_command = CombatCommandMoveUnit.new()
-		_potential_command.id_path = combat.context().pathfinding().id_path(
+		_potential_command.id_path = combat.runtime().pathfinding().id_path(
 			_local_state.current_unit().placement,
 			_mouse_hex
 		)
 	elif targeted_unit.is_an_enemy(side_idx):
 		_potential_command = CombatCommandAttackUnit.new()
 		_potential_command.attacked_hex = _mouse_hex
-		_potential_command.move_id_path = combat.context().pathfinding().id_path(
+		_potential_command.move_id_path = combat.runtime().pathfinding().id_path(
 			_local_state.current_unit().placement,
 			_mouse_hex
 		)
@@ -118,12 +118,12 @@ func _update_move_path_outline():
 		move_path_outline.hide()
 	elif _potential_command is CombatCommandAttackUnit:
 		move_path_outline.grid = HexGrids.points(
-			combat.context().navigation().path(_potential_command.move_id_path)
+			combat.runtime().navigation().path(_potential_command.move_id_path)
 		)
 		move_path_outline.show()
 	elif _potential_command is CombatCommandMoveUnit:
 		move_path_outline.grid = HexGrids.points(
-			combat.context().navigation().path(_potential_command.id_path)
+			combat.runtime().navigation().path(_potential_command.id_path)
 		)
 		move_path_outline.show()
 
@@ -133,7 +133,7 @@ func _update_turn_outlines():
 	)
 	move_range_outline.grid = HexGrids.ranged(
 		_local_state.current_unit().placement,
-		combat.context().navigation().grid(),
+		combat.runtime().navigation().grid(),
 		_local_state.current_unit().stats().speed
 	)
 	enemies_outline.grid = HexGrids.points(

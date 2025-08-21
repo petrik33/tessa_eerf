@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CombatVisualUnitsMap" load_steps=3 format=3 uid="uid://cop36n7ulsjs4"]
+
+[ext_resource type="Script" uid="uid://ifvvd3g24jhv" path="res://script/combat_visual/combat_visual_units_map.gd" id="1_yfwx4"]
+[ext_resource type="PackedScene" uid="uid://bqq7xa1o1e1io" path="res://scene/unit/red_hood_archer.tscn" id="4_gonuo"]
+
+[resource]
+script = ExtResource("1_yfwx4")
+units = Dictionary[StringName, PackedScene]({
+&"red_hood_archer": ExtResource("4_gonuo")
+})
+metadata/_custom_type_script = "uid://ifvvd3g24jhv"

@@ -18,24 +18,24 @@ func get_initial_state(config: CombatConfig) -> CombatState:
 func get_current_combat_side_idx(state: CombatState) -> int:
 	return state.current_unit().side_idx
 
-func process_command(command: CombatCommandBase, context: CombatContext) -> CombatActionsBuffer:
+func process_command(command: CombatCommandBase, runtime: CombatRuntime) -> CombatActionsBuffer:
 	var buffer = CombatActionsBuffer.new()
-	fill_actions_buffer(command, context, buffer)
+	fill_actions_buffer(command, runtime, buffer)
 	return buffer
 
-func fill_actions_buffer(command: CombatCommandBase, context: CombatContext, buffer: CombatActionsBuffer) -> void:
+func fill_actions_buffer(command: CombatCommandBase, runtime: CombatRuntime, buffer: CombatActionsBuffer) -> void:
 	if command is CombatCommandMoveUnit:
-		buffer.push_back(CombatActions.move(context, command.id_path))
+		buffer.push_back(CombatActions.move(runtime, command.id_path))
 		buffer.push_back(CombatActionPopTurnQueue.new())
-		buffer.push_back(CombatActionAppendToTurnQueue.new(context.state().current_unit_idx()))
+		buffer.push_back(CombatActionAppendToTurnQueue.new(runtime.state().current_unit_idx()))
 		return
 	if command is CombatCommandAttackUnit:
-		buffer.push_back(CombatActions.move(context, command.move_id_path))
+		buffer.push_back(CombatActions.move(runtime, command.move_id_path))
 		buffer.push_back(CombatActionPopTurnQueue.new())
-		buffer.push_back(CombatActionAppendToTurnQueue.new(context.state().current_unit_idx()))
+		buffer.push_back(CombatActionAppendToTurnQueue.new(runtime.state().current_unit_idx()))
 		return
 
-func validate_command(command: CombatCommandBase, context: CombatContext) -> bool:
+func validate_command(command: CombatCommandBase, runtime: CombatRuntime) -> bool:
 	# TODO: Actual implementation
 	return true
 	
