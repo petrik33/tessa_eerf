@@ -12,7 +12,6 @@ func setup_scene(runtime: CombatRuntime):
 	for unit in runtime.state().units:
 		var visuals = _instantiate_unit_visuals(unit.data)
 		units_node.add_child(visuals)
-		print(units_node.global_position)
 	_is_setup = true
 
 func clear_scene():

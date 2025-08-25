@@ -1,6 +1,6 @@
 @tool
-@icon("res://editor/icons/hex_outline_renderer_editor_icon.svg")
-class_name HexOutlineRenderer extends HexMapRendererBase
+@icon("res://editor/icons/hex_outline_renderer.svg")
+class_name HexOutlineRenderer extends HexGridRendererBase
 
 @export var outline_color := Color.BLACK:
 	set(new_color):

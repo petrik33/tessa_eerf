@@ -25,10 +25,6 @@ func exact_pixel_bounds(layout: HexLayout) -> Rect2:
 		bounds.merge(layout.hex_pixel_bounds(hex))
 	return bounds
 
-func pivot_point() -> Vector2i:
-	assert(false, "not implemented")
-	return Vector2i.ZERO
-
 func is_layout_compatible(layout: HexLayout) -> bool:
 	assert(false, "not implemented")
 	return false

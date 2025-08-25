@@ -26,9 +26,6 @@ func approx_pixel_bounds(layout: HexLayout) -> Rect2:
 		bounds = bounds.expand(layout.hex_to_pixel(corner))
 	return bounds
 
-func pivot_point() -> Vector2i:
-	return Vector2i.ZERO
-
 func is_layout_compatible(_layout: HexLayout) -> bool:
 	return true # compatible with any axial layout
 

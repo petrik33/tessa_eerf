@@ -20,8 +20,6 @@ var walk_animation: String = \"normal\"
 @onready var path_follow: PathFollow2D = %PathFollow2D
 @onready var path_2d: Path2D = %Path2D
 
-const EASING_CORRECTION := 1.5
-
 func walk(action: CombatVisualUnitActionWalk) -> Signal:
 	along_path(action.path)
 	return finished

@@ -1,5 +1,6 @@
 @tool
-class_name HexCoordinatesRenderer extends HexMapRendererBase
+@icon("res://editor/icons/hex_coordinates_renderer.svg")
+class_name HexCoordinatesRenderer extends HexGridRendererBase
 		
 @export var use_cube_format := true:
 	set(value):

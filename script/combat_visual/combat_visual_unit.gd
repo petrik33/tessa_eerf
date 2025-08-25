@@ -2,9 +2,13 @@
 class_name CombatVisualUnit extends Node2D
 
 @export var config: CombatVisualUnitConfig
+@export var physical_node: Node2D
 
 const EFFECT_START_METHOD_NAME_PREFIX = "start_"
 const EFFECT_STOP_METHOD_NAME_PREFIX = "stop_"
+
+func get_physical_node() -> Node2D:
+	return physical_node if physical_node != null else self
 
 func get_resolver(id: StringName) -> CombatVisualActionResolver:
 	return config.resolvers[id]

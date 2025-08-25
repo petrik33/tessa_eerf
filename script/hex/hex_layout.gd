@@ -21,9 +21,6 @@ func hex_pixel_bounds(hex := Vector2i.ZERO) -> Rect2:
 	bounds.position += hex_to_pixel(hex)
 	return bounds
 	
-func hex_mesh() -> Mesh:
-	return _hex_mesh
-	
 func hex_polygon(offset := Vector2.ZERO) -> PackedVector2Array:
 	var polygon := PackedVector2Array()
 	polygon.resize(HexLayoutMath.CORNER_NUM + 1)
@@ -42,7 +39,6 @@ func pixel_to_hex(point: Vector2) -> Vector2i:
 	
 var _hex_corner_offset := PackedVector2Array()
 var _hex_pixel_bounds: Rect2
-var _hex_mesh: Mesh
 
 var _axial_basis: Transform2D
 var _inverse_axial_basis: Transform2D
@@ -61,14 +57,3 @@ func _recalc():
 		var offset = size * HexLayoutMath.hex_corner(base_hex_rotation, i)
 		_hex_corner_offset[i] = offset
 		_hex_pixel_bounds = _hex_pixel_bounds.expand(offset)
-
-	var hex_polygon_points = hex_polygon(Vector2.ZERO)
-	var hex_triangulation = Geometry2D.triangulate_polygon(hex_polygon_points)
-
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = hex_polygon_points
-	arrays[Mesh.ARRAY_INDEX] = hex_triangulation
-
-	_hex_mesh = ArrayMesh.new()
-	_hex_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)

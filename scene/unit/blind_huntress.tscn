@@ -1,6 +1,7 @@
-[gd_scene load_steps=56 format=3 uid="uid://dx0g014t166re"]
+[gd_scene load_steps=57 format=3 uid="uid://dx0g014t166re"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat_visual/combat_visual_unit.gd" id="1_i7f35"]
+[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_ro02e"]
 [ext_resource type="Texture2D" uid="uid://bxcj0cp6dvrys" path="res://asset/texture/unit/blind_huntress/6. Dash 112 x 56.png" id="5_0v5xn"]
 [ext_resource type="Texture2D" uid="uid://f2f0q3n320d7" path="res://asset/texture/unit/blind_huntress/1. Idle 48 x 48.png" id="5_q2b0d"]
 [ext_resource type="Texture2D" uid="uid://dgkqoerpj2gik" path="res://asset/texture/unit/blind_huntress/4. Fall 48 x 48.png" id="5_ro02e"]
@@ -351,8 +352,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node2D"]
+[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = ExtResource("1_i7f35")
+config = ExtResource("2_ro02e")
+physical_node = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

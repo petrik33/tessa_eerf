@@ -4,15 +4,15 @@ class_name CombatPlayerControl extends Node
 @export var side_idx: int
 @export var combat: Combat
 
-@export var hex_map: HexMap
-@export var hex_layout: HexLayout
+@export var hex_space: HexSpace
+@export var hex_grid: HexGridNode
 
-@export var unit_outline: HexMapSubset
-@export var move_range_outline: HexMapSubset
-@export var mouse_pick_outline: HexMapSubset
-@export var enemies_outline: HexMapSubset
-@export var allies_outline: HexMapSubset
-@export var move_path_outline: HexMapSubset
+@export var unit_outline: HexGridNode
+@export var move_range_outline: HexGridNode
+@export var mouse_pick_outline: HexGridNode
+@export var enemies_outline: HexGridNode
+@export var allies_outline: HexGridNode
+@export var move_path_outline: HexGridNode
 
 enum Cursor {
 	ARROW,
@@ -99,7 +99,7 @@ func _update_potential_command():
 		_potential_command.move_id_path.remove_at(_potential_command.move_id_path.size() - 1)
 
 func _handle_mouse_motion(position: Vector2, force_update = false):
-	var hex = hex_layout.pixel_to_hex(position - hex_map.position)
+	var hex = hex_space.layout.pixel_to_hex(position - hex_space.position)
 	if _mouse_hex == hex and not force_update:
 		return
 	_previous_mouse_hex = _mouse_hex
@@ -136,7 +136,8 @@ func _update_turn_outlines():
 	)
 	move_range_outline.grid = HexGrids.ranged(
 		current_unit.placement,
-		current_unit.stats().speed
+		current_unit.stats().speed,
+		hex_grid.grid
 	)
 	enemies_outline.grid = HexGrids.points(
 		Utils.to_typed(TYPE_VECTOR2I, _local_state.enemies(side_idx).map(

@@ -1,6 +1,6 @@
 @tool
-@icon("res://editor/icons/hex_filled_renderer_editor_icon.svg")
-class_name HexFilledRenderer extends HexMapRendererBase
+@icon("res://editor/icons/hex_filled_renderer.svg")
+class_name HexFilledRenderer extends HexGridRendererBase
 
 @export var hex_color := Color.WHITE:
 	set(new_color):
@@ -13,5 +13,4 @@ func _draw_impl(grid: HexGridBase, layout: HexLayout):
 
 func _draw_hex(layout: HexLayout, hex: Vector2i):
 	var hex_offset := layout.hex_to_pixel(hex)
-	var hex_transform := Transform2D(0, hex_offset)
-	draw_mesh(layout.hex_mesh(), null, hex_transform, hex_color)
+	draw_polygon(layout.hex_polygon(hex_offset), [hex_color])

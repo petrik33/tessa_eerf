@@ -1,48 +1,51 @@
-[gd_resource type="Resource" script_class="CombatConfig" load_steps=11 format=3 uid="uid://bu3fcgqr7bojh"]
+[gd_resource type="Resource" script_class="CombatConfig" load_steps=14 format=3 uid="uid://bu3fcgqr7bojh"]
 
 [ext_resource type="Script" uid="uid://sewp0x4jip31" path="res://script/combat/combat_config.gd" id="1_pvtna"]
 [ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="1_udr15"]
 [ext_resource type="Script" uid="uid://0sdphiqbel8m" path="res://script/combat/combat_unit.gd" id="2_kteoc"]
-[ext_resource type="Resource" uid="uid://dqlj27v272gvf" path="res://resource/unit/red_hood_archer/red_hood_archer.tres" id="6_lm4b4"]
+[ext_resource type="Resource" uid="uid://dqlj27v272gvf" path="res://resource/unit/red_hood_archer.tres" id="4_lm4b4"]
+[ext_resource type="Resource" uid="uid://cnbpll1hklit6" path="res://resource/unit/blue_witch.tres" id="5_vjf5r"]
+[ext_resource type="Resource" uid="uid://cit1hlmexpbnn" path="res://resource/unit/martial_hero.tres" id="6_ma4qp"]
+[ext_resource type="Resource" uid="uid://bucmmowyh3bsh" path="res://resource/unit/blind_huntress.tres" id="7_331en"]
 
 [sub_resource type="Resource" id="Resource_ma4qp"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_lm4b4")
+data = ExtResource("4_lm4b4")
 placement = Vector2i(0, 2)
 combat_side = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_331en"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_lm4b4")
+data = ExtResource("5_vjf5r")
 placement = Vector2i(-2, 6)
 combat_side = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_vjf5r"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_lm4b4")
+data = ExtResource("6_ma4qp")
 placement = Vector2i(-3, 9)
 combat_side = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_qlba5"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_lm4b4")
+data = ExtResource("7_331en")
 placement = Vector2i(12, 1)
 combat_side = 1
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_ehym5"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_lm4b4")
+data = ExtResource("4_lm4b4")
 placement = Vector2i(10, 5)
 combat_side = 1
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_pcsul"]
 script = ExtResource("2_kteoc")
-data = ExtResource("6_lm4b4")
+data = ExtResource("6_ma4qp")
 placement = Vector2i(9, 7)
 combat_side = 1
 metadata/_custom_type_script = "uid://0sdphiqbel8m"

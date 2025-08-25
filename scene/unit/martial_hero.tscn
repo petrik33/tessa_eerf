@@ -1,6 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://djblfmp6cwiwq"]
+[gd_scene load_steps=40 format=3 uid="uid://djblfmp6cwiwq"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat_visual/combat_visual_unit.gd" id="1_fftru"]
+[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_qr1lv"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="5_qb0rn"]
 [ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk.tscn" id="6_02ptm"]
 [ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="6_qb0rn"]
@@ -229,8 +230,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node2D"]
+[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = ExtResource("1_fftru")
+config = ExtResource("2_qr1lv")
+physical_node = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
