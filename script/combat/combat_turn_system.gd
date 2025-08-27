@@ -23,6 +23,7 @@ func progress_combat(next_side_idx: int):
 	wait_started.emit()
 	
 func finish_combat():
+	turn_finished.emit(_current_side_idx)
 	_current_side_idx = -1
 
 # TODO: Implement timeout on waits

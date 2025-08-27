@@ -30,7 +30,7 @@ func _exit_tree() -> void:
 func _update_parent():
 	if _hex_space != null:
 		_hex_space.changed.disconnect(_update)
-	_hex_space = get_parent() as HexSpace
+	
 	if _hex_space != null:
 		_hex_space.changed.connect(_update)
 	_update()

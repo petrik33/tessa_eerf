@@ -24,12 +24,12 @@ func request_command(command: CombatCommandBase):
 	
 	# TODO: possibly save state, actions or command
 	
+	command_processed.emit(command, actions)
+	
 	if rules.is_combat_finished(_runtime.state()):
 		turn_system.finish_combat()
 	else:
 		turn_system.progress_combat(rules.get_current_combat_side_idx(_runtime.state()))
-	
-	command_processed.emit(command, actions)
 
 func finish():
 	turn_system.finish_combat()

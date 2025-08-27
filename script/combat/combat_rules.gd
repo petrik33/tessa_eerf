@@ -37,7 +37,7 @@ func fill_actions_buffer(command: CombatCommandBase, runtime: CombatRuntime, buf
 
 func validate_command(command: CombatCommandBase, runtime: CombatRuntime) -> bool:
 	# TODO: Actual implementation
-	return true
+	return command != null
 	
 func is_combat_finished(state: CombatState) -> bool:
 	# TODO: Actual implementation

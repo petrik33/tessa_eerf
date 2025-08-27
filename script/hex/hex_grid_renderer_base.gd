@@ -1,41 +1,39 @@
 @tool
 class_name HexGridRendererBase extends Node2D
 
-func is_configured() -> bool:
-	return _grid_node != null and _grid_node.is_configured()
-
-var _grid_node: HexGridNode
-
-func _enter_tree() -> void:
-	_update_grid_node()
-
-func _exit_tree() -> void:
-	_update_grid_node()
+@export var grid: HexGridBase:
+	set(value):
+		if grid != null:
+			grid.changed.disconnect(_update)
+		grid = value
+		if grid != null:
+			grid.changed.connect(_update)
+		_update()
 
 func _ready() -> void:
 	_update()
 
+func _enter_tree() -> void:
+	_update()
+
+func _exit_tree() -> void:
+	_update()
+
 func _draw():
-	if not is_configured():
+	if grid == null:
 		return
-	_draw_impl(_grid_node.grid, _grid_node.layout())
+	_draw_impl(grid, HexUtils.find_hex_space(self).layout)
 
 func _draw_impl(_grid: HexGridBase, _layout: HexLayout):
 	assert(false, "Not implemented")
-
-func _update_grid_node():
-	if _grid_node != null:
-		_grid_node.changed.disconnect(_update)
-	_grid_node = get_parent() as HexGridNode
-	if _grid_node != null:
-		_grid_node.changed.connect(_update)
-	_update()
 
 func _update():
 	update_configuration_warnings()
 	queue_redraw()
 
 func _get_configuration_warnings() -> PackedStringArray:
-	if not is_configured():
-		return ["Hex map renderer should be a child of HexGridNode"]
+	if grid == null:
+		return ["Hex grid not configured"]
+	if HexUtils.find_hex_space(self) == null:
+		return ["Should be in HexSpace node child hierarchy"]
 	return []

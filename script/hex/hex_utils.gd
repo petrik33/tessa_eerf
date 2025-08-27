@@ -12,3 +12,13 @@ static func axial_format(hex: Vector2i) -> String:
 	
 static func cube_format(hex: Vector2i) -> String:
 	return HEX_CUBE_FORMAT % [hex.x, hex.y, -hex.x - hex.y]
+
+static func find_hex_space(node: Node) -> HexSpace:
+	var hex_space: HexSpace = null
+	var ancestor := node
+	
+	while ancestor != null and hex_space == null:
+		hex_space = ancestor as HexSpace
+		ancestor = ancestor.get_parent()
+	
+	return hex_space

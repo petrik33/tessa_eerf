@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://dfd7a2ox05wed"]
+[gd_scene load_steps=31 format=4 uid="uid://dfd7a2ox05wed"]
 
 [ext_resource type="Script" uid="uid://cqhbrul7iip6p" path="res://script/combat/combat.gd" id="1_rlkjv"]
 [ext_resource type="Resource" uid="uid://bu3fcgqr7bojh" path="res://resource/combat/combat_config_test.tres" id="2_rlkjv"]
@@ -11,21 +11,20 @@
 [ext_resource type="Texture2D" uid="uid://bxqocpjtikd83" path="res://asset/texture/ui/cursor/cursor_arrow.tres" id="8_md4tn"]
 [ext_resource type="Script" uid="uid://djmun4c7plqvn" path="res://script/combat/combat_player_control.gd" id="9_yl8u6"]
 [ext_resource type="Texture2D" uid="uid://cqxkh3j2y1o6n" path="res://asset/texture/ui/cursor/cursor_attack_melee.tres" id="10_58tkr"]
+[ext_resource type="Script" uid="uid://ulh2ys5y8bdo" path="res://script/combat_ui/combat_ui.gd" id="10_m8dvu"]
 [ext_resource type="Script" uid="uid://cyg3pjgbmf1vv" path="res://script/combat_visual/combat_visual.gd" id="11_7vakg"]
 [ext_resource type="Texture2D" uid="uid://2wh84sqqbgc2" path="res://asset/texture/ui/cursor/cursor_pointy_hand.tres" id="11_md4tn"]
 [ext_resource type="Script" uid="uid://bd84dh3vdcgpd" path="res://script/combat_visual/combat_visual_writer.gd" id="12_jccvw"]
 [ext_resource type="Script" uid="uid://dce88q3ja7wu" path="res://script/combat_visual/combat_visual_director.gd" id="13_m8dvu"]
 [ext_resource type="Resource" uid="uid://cop36n7ulsjs4" path="res://resource/combat_visual/combat_visual_unit_map.tres" id="14_7vakg"]
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="15_jccvw"]
-[ext_resource type="Script" uid="uid://b3kuj58myv8xi" path="res://script/hex/grid/point_list_hex_grid.gd" id="15_rlkjv"]
-[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="16_ffse3"]
-[ext_resource type="Script" uid="uid://yoo6pqfudyay" path="res://script/hex/grid/offset_hex_grid.gd" id="17_fgtyp"]
+[ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/combat_ui_outlines.tscn" id="21_jccvw"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="22_tio6x"]
-[ext_resource type="Script" uid="uid://b1du0g8uquyfg" path="res://script/hex/grid/set_operations/intersection_hex_grid.gd" id="26_7vakg"]
+[ext_resource type="Script" uid="uid://hyrcsvlnclb2" path="res://script/combat/combat_observer.gd" id="25_tio6x"]
+[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="27_jccvw"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="28_m8dvu"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="29_0dby8"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="30_t4gs2"]
-[ext_resource type="Script" uid="uid://dd0h42luop87v" path="res://script/hex/hex_grid_node.gd" id="32_6b6sh"]
 
 [sub_resource type="Resource" id="Resource_y2xs1"]
 script = ExtResource("12_jccvw")
@@ -751,70 +750,18 @@ cache/0/10/0/glyphs/28/size = Vector2(8, 10)
 cache/0/10/0/glyphs/28/uv_rect = Rect2(103, 1, 8, 10)
 cache/0/10/0/glyphs/28/texture_idx = 0
 
-[sub_resource type="Resource" id="Resource_58tkr"]
-script = ExtResource("15_rlkjv")
-points = Array[Vector2i]([Vector2i(-2, 5)])
-metadata/_custom_type_script = "uid://b3kuj58myv8xi"
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fgtyp"]
-blend_mode = 1
-
-[sub_resource type="Resource" id="Resource_m8dvu"]
-script = ExtResource("16_ffse3")
-radius = 7
-metadata/_custom_type_script = "uid://6riqabamogrw"
-
-[sub_resource type="Resource" id="Resource_7vakg"]
-script = ExtResource("17_fgtyp")
-grid = SubResource("Resource_m8dvu")
-offset = Vector2i(-2, 5)
-metadata/_custom_type_script = "uid://yoo6pqfudyay"
-
-[sub_resource type="Resource" id="Resource_0dby8"]
-script = ExtResource("26_7vakg")
-gridA = ExtResource("6_j4016")
-gridB = SubResource("Resource_7vakg")
-metadata/_custom_type_script = "uid://b1du0g8uquyfg"
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rlkjv"]
-blend_mode = 3
-
-[sub_resource type="Resource" id="Resource_pa5ap"]
-script = ExtResource("15_rlkjv")
-points = Array[Vector2i]([Vector2i(0, 8), Vector2i(7, 1)])
-metadata/_custom_type_script = "uid://b3kuj58myv8xi"
-
-[sub_resource type="Resource" id="Resource_6b6sh"]
-script = ExtResource("15_rlkjv")
-points = Array[Vector2i]([Vector2i(8, 7), Vector2i(11, 2)])
-metadata/_custom_type_script = "uid://b3kuj58myv8xi"
-
-[sub_resource type="Resource" id="Resource_i3a2g"]
-script = ExtResource("15_rlkjv")
-points = Array[Vector2i]([Vector2i(-2, 5), Vector2i(-1, 5), Vector2i(0, 5), Vector2i(1, 5), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6)])
-metadata/_custom_type_script = "uid://b3kuj58myv8xi"
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ffse3"]
-blend_mode = 2
-
-[sub_resource type="Resource" id="Resource_u74qc"]
-script = ExtResource("16_ffse3")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
-
-[sub_resource type="Resource" id="Resource_tg7y0"]
-script = ExtResource("17_fgtyp")
-grid = SubResource("Resource_u74qc")
-offset = Vector2i(3, 6)
-metadata/_custom_type_script = "uid://yoo6pqfudyay"
-
 [node name="Combat" type="Node" node_paths=PackedStringArray("turn_system")]
 script = ExtResource("1_rlkjv")
 config = ExtResource("2_rlkjv")
 rules = ExtResource("3_6vbif")
 turn_system = NodePath("TurnSystem")
 
-[node name="DbgCombatController" type="Node" parent="." node_paths=PackedStringArray("combat")]
+[node name="Observer" type="Node" parent="." node_paths=PackedStringArray("combat")]
+script = ExtResource("25_tio6x")
+combat = NodePath("..")
+metadata/_custom_type_script = "uid://hyrcsvlnclb2"
+
+[node name="DbgController" type="Node" parent="." node_paths=PackedStringArray("combat")]
 script = ExtResource("4_nhyjj")
 combat = NodePath("..")
 metadata/_custom_type_script = "uid://3bxue3cl0qjn"
@@ -823,45 +770,35 @@ metadata/_custom_type_script = "uid://3bxue3cl0qjn"
 script = ExtResource("4_md4tn")
 metadata/_custom_type_script = "uid://bb1ghxsvc6cag"
 
-[node name="PlayerA" type="Node" parent="." node_paths=PackedStringArray("combat", "hex_space", "hex_grid", "unit_outline", "move_range_outline", "mouse_pick_outline", "enemies_outline", "allies_outline", "move_path_outline")]
+[node name="PlayerA" type="Node" parent="." node_paths=PackedStringArray("observer", "combat", "hex_picking")]
 script = ExtResource("9_yl8u6")
+observer = NodePath("../Observer")
 combat = NodePath("..")
-hex_space = NodePath("../HexSpace")
-hex_grid = NodePath("../HexSpace/Map")
-unit_outline = NodePath("../HexSpace/CurrentUnit")
-move_range_outline = NodePath("../HexSpace/MoveRange")
-mouse_pick_outline = NodePath("../HexSpace/MouseHighlight")
-enemies_outline = NodePath("../HexSpace/Enemies")
-allies_outline = NodePath("../HexSpace/Allies")
-move_path_outline = NodePath("../HexSpace/MovePath")
-cursor_arrow = ExtResource("8_md4tn")
-cursor_point = ExtResource("11_md4tn")
-cursor_attack_melee = ExtResource("10_58tkr")
+hex_picking = NodePath("../HexSpace/HexPicking")
 
-[node name="PlayerB" type="Node" parent="." node_paths=PackedStringArray("combat", "hex_space", "hex_grid", "unit_outline", "move_range_outline", "mouse_pick_outline", "enemies_outline", "allies_outline", "move_path_outline")]
+[node name="PlayerB" type="Node" parent="." node_paths=PackedStringArray("observer", "combat", "hex_picking")]
 script = ExtResource("9_yl8u6")
 side_idx = 1
+observer = NodePath("../Observer")
 combat = NodePath("..")
-hex_space = NodePath("../HexSpace")
-hex_grid = NodePath("../HexSpace/Map")
-unit_outline = NodePath("../HexSpace/CurrentUnit")
-move_range_outline = NodePath("../HexSpace/MoveRange")
-mouse_pick_outline = NodePath("../HexSpace/MouseHighlight")
-enemies_outline = NodePath("../HexSpace/Enemies")
-allies_outline = NodePath("../HexSpace/Allies")
-move_path_outline = NodePath("../HexSpace/MovePath")
+hex_picking = NodePath("../HexSpace/HexPicking")
+
+[node name="UI" type="Node" parent="." node_paths=PackedStringArray("outlines")]
+script = ExtResource("10_m8dvu")
+outlines = NodePath("../HexSpace/Outlines")
 cursor_arrow = ExtResource("8_md4tn")
 cursor_point = ExtResource("11_md4tn")
 cursor_attack_melee = ExtResource("10_58tkr")
+metadata/_custom_type_script = "uid://ulh2ys5y8bdo"
 
-[node name="CombatVisual" type="Node" parent="." node_paths=PackedStringArray("combat", "director")]
+[node name="Visual" type="Node" parent="." node_paths=PackedStringArray("combat", "director")]
 script = ExtResource("11_7vakg")
 combat = NodePath("..")
 writer = SubResource("Resource_y2xs1")
-director = NodePath("../CombatVisualDirector")
+director = NodePath("../VisualDirector")
 metadata/_custom_type_script = "uid://cyg3pjgbmf1vv"
 
-[node name="CombatVisualDirector" type="Node" parent="." node_paths=PackedStringArray("units_node")]
+[node name="VisualDirector" type="Node" parent="." node_paths=PackedStringArray("units_node")]
 script = ExtResource("13_m8dvu")
 units_map = ExtResource("14_7vakg")
 units_node = NodePath("../HexSpace/Units")
@@ -884,21 +821,20 @@ layout = ExtResource("5_ddas7")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
 
 [node name="Map" type="Node2D" parent="HexSpace"]
-script = ExtResource("32_6b6sh")
-grid = ExtResource("6_j4016")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
 
 [node name="Base" type="Node2D" parent="HexSpace/Map"]
 physics_interpolation_mode = 2
 material = SubResource("CanvasItemMaterial_m8dvu")
 script = ExtResource("28_m8dvu")
 hex_color = Color(0.7704, 0.9, 0.468, 0.196078)
+grid = ExtResource("6_j4016")
 metadata/_custom_type_script = "uid://pjy55ieuvcl5"
 
 [node name="Outline" type="Node2D" parent="HexSpace/Map"]
 physics_interpolation_mode = 2
 script = ExtResource("29_0dby8")
 outline_color = Color(0.462, 0.55, 0.11, 1)
+grid = ExtResource("6_j4016")
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
 [node name="Perimeter" type="Node2D" parent="HexSpace/Map"]
@@ -906,103 +842,62 @@ physics_interpolation_mode = 2
 visible = false
 script = ExtResource("30_t4gs2")
 color = Color(0.392157, 0.588235, 1, 0.490196)
+grid = ExtResource("6_j4016")
 metadata/_custom_type_script = "uid://dtavfh04dvr10"
 
-[node name="Coordinates" type="Node2D" parent="HexSpace/Map"]
+[node name="Outlines" parent="HexSpace" node_paths=PackedStringArray("combat_observer") instance=ExtResource("21_jccvw")]
+visible = false
+combat_observer = NodePath("../../Observer")
+
+[node name="Coordinates" type="Node2D" parent="HexSpace"]
 script = ExtResource("22_tio6x")
 use_cube_format = false
 font = SubResource("FontFile_jccvw")
+grid = ExtResource("6_j4016")
 metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 
-[node name="CurrentUnit" type="Node2D" parent="HexSpace"]
-script = ExtResource("32_6b6sh")
-grid = SubResource("Resource_58tkr")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
-
-[node name="HexFilledRenderer" type="Node2D" parent="HexSpace/CurrentUnit"]
-physics_interpolation_mode = 2
-material = SubResource("CanvasItemMaterial_fgtyp")
-script = ExtResource("28_m8dvu")
-hex_color = Color(0.2, 0.4, 0, 0.588235)
-metadata/_custom_type_script = "uid://pjy55ieuvcl5"
-
-[node name="MoveRange" type="Node2D" parent="HexSpace"]
-script = ExtResource("32_6b6sh")
-grid = SubResource("Resource_0dby8")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
-
-[node name="HexFilledRenderer" type="Node2D" parent="HexSpace/MoveRange"]
-physics_interpolation_mode = 2
-material = SubResource("CanvasItemMaterial_rlkjv")
-script = ExtResource("28_m8dvu")
-hex_color = Color(0.5992, 0.7, 0.364, 0.392157)
-metadata/_custom_type_script = "uid://pjy55ieuvcl5"
-
-[node name="Allies" type="Node2D" parent="HexSpace"]
-script = ExtResource("32_6b6sh")
-grid = SubResource("Resource_pa5ap")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
-
-[node name="HexOutlineRenderer" type="Node2D" parent="HexSpace/Allies"]
-physics_interpolation_mode = 2
-script = ExtResource("29_0dby8")
-outline_color = Color(0.02, 0, 0.6, 0.588235)
-outline_width = 2.0
-metadata/_custom_type_script = "uid://k7hs7m35gx78"
-
-[node name="Enemies" type="Node2D" parent="HexSpace"]
-script = ExtResource("32_6b6sh")
-grid = SubResource("Resource_6b6sh")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
-
-[node name="HexOutlineRenderer" type="Node2D" parent="HexSpace/Enemies"]
-physics_interpolation_mode = 2
-script = ExtResource("29_0dby8")
-outline_color = Color(0.6, 0, 0, 0.490196)
-outline_width = 2.0
-metadata/_custom_type_script = "uid://k7hs7m35gx78"
-
-[node name="MovePath" type="Node2D" parent="HexSpace"]
-script = ExtResource("32_6b6sh")
-grid = SubResource("Resource_i3a2g")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
-
-[node name="HexPerimeterRenderer" type="Node2D" parent="HexSpace/MovePath"]
-physics_interpolation_mode = 2
-script = ExtResource("30_t4gs2")
-color = Color(0.768099, 0.768118, 0.193797, 1)
-metadata/_custom_type_script = "uid://dtavfh04dvr10"
-
-[node name="MouseHighlight" type="Node2D" parent="HexSpace"]
-material = SubResource("CanvasItemMaterial_ffse3")
-script = ExtResource("32_6b6sh")
-grid = SubResource("Resource_tg7y0")
-metadata/_custom_type_script = "uid://dd0h42luop87v"
-
-[node name="HexFilledRenderer" type="Node2D" parent="HexSpace/MouseHighlight"]
-physics_interpolation_mode = 2
-material = SubResource("CanvasItemMaterial_ffse3")
-script = ExtResource("28_m8dvu")
-hex_color = Color(0.5136, 0.6, 0.312, 0.196078)
-metadata/_custom_type_script = "uid://pjy55ieuvcl5"
-
 [node name="Units" type="Node2D" parent="HexSpace"]
+
+[node name="HexPicking" type="Control" parent="HexSpace"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -35.074
+offset_top = -20.25
+offset_right = 502.728
+offset_bottom = 290.25
+pivot_offset = Vector2(35.074, 20.25)
+mouse_filter = 1
+script = ExtResource("27_jccvw")
+bbox_scale = 1.15
+grid = ExtResource("6_j4016")
+metadata/_custom_type_script = "uid://bpsuuaaepbib7"
 
 [node name="UiLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Some UI"
 
+[connection signal="combat_finished" from="." to="Observer" method="_on_combat_finished"]
 [connection signal="combat_finished" from="." to="PlayerA" method="_handle_combat_finished"]
 [connection signal="combat_finished" from="." to="PlayerB" method="_handle_combat_finished"]
-[connection signal="combat_finished" from="." to="CombatVisual" method="_handle_combat_finished"]
+[connection signal="combat_finished" from="." to="Visual" method="_handle_combat_finished"]
+[connection signal="combat_started" from="." to="Observer" method="_on_combat_started"]
 [connection signal="combat_started" from="." to="PlayerA" method="_handle_combat_started"]
 [connection signal="combat_started" from="." to="PlayerB" method="_handle_combat_started"]
-[connection signal="combat_started" from="." to="CombatVisual" method="_handle_combat_started"]
+[connection signal="combat_started" from="." to="Visual" method="_handle_combat_started"]
 [connection signal="command_processed" from="." to="PlayerA" method="_handle_command_processed"]
 [connection signal="command_processed" from="." to="PlayerB" method="_handle_command_processed"]
-[connection signal="command_processed" from="." to="CombatVisual" method="_handle_command_processed"]
+[connection signal="command_processed" from="." to="Visual" method="_handle_command_processed"]
 [connection signal="turn_finished" from="TurnSystem" to="PlayerA" method="_handle_turn_finished"]
 [connection signal="turn_finished" from="TurnSystem" to="PlayerB" method="_handle_turn_finished"]
+[connection signal="turn_finished" from="TurnSystem" to="UI" method="_on_turn_finished"]
+[connection signal="turn_finished" from="TurnSystem" to="HexSpace/Outlines" method="_on_turn_finished"]
 [connection signal="turn_started" from="TurnSystem" to="PlayerA" method="_handle_turn_started"]
 [connection signal="turn_started" from="TurnSystem" to="PlayerB" method="_handle_turn_started"]
+[connection signal="turn_started" from="TurnSystem" to="UI" method="_on_turn_started"]
+[connection signal="turn_started" from="TurnSystem" to="HexSpace/Outlines" method="_on_turn_started"]
+[connection signal="potential_command_changed" from="PlayerA" to="UI" method="_on_potential_command_changed"]
+[connection signal="potential_command_changed" from="PlayerA" to="HexSpace/Outlines" method="_on_potential_command_changed"]
+[connection signal="potential_command_changed" from="PlayerB" to="UI" method="_on_potential_command_changed"]
+[connection signal="potential_command_changed" from="PlayerB" to="HexSpace/Outlines" method="_on_potential_command_changed"]
+[connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]
