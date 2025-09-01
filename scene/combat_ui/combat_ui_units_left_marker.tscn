@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhbh5qgpou0uk"]
+
+[ext_resource type="Script" uid="uid://c2mw8uctlpp4m" path="res://script/combat/ui/combat_ui_units_left_marker.gd" id="1_3ob66"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ob66"]
+
+[node name="CombatUiUnitsLeftMarker" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3ob66")
+metadata/_custom_type_script = "uid://c2mw8uctlpp4m"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 4.0
+offset_right = 10.0
+offset_bottom = 27.0
+text = "33"
+label_settings = SubResource("LabelSettings_3ob66")
+horizontal_alignment = 1
+vertical_alignment = 1

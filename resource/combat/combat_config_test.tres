@@ -12,42 +12,48 @@
 script = ExtResource("2_kteoc")
 data = ExtResource("4_lm4b4")
 placement = Vector2i(0, 2)
-combat_side = 0
+stack_size = 0
+hp = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_331en"]
 script = ExtResource("2_kteoc")
 data = ExtResource("5_vjf5r")
 placement = Vector2i(-2, 6)
-combat_side = 0
+stack_size = 0
+hp = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_vjf5r"]
 script = ExtResource("2_kteoc")
 data = ExtResource("6_ma4qp")
 placement = Vector2i(-3, 9)
-combat_side = 0
+stack_size = 0
+hp = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_qlba5"]
 script = ExtResource("2_kteoc")
 data = ExtResource("7_331en")
 placement = Vector2i(12, 1)
-combat_side = 1
+stack_size = 0
+hp = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_ehym5"]
 script = ExtResource("2_kteoc")
 data = ExtResource("4_lm4b4")
 placement = Vector2i(10, 5)
-combat_side = 1
+stack_size = 0
+hp = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [sub_resource type="Resource" id="Resource_pcsul"]
 script = ExtResource("2_kteoc")
 data = ExtResource("6_ma4qp")
 placement = Vector2i(9, 7)
-combat_side = 1
+stack_size = 0
+hp = 0
 metadata/_custom_type_script = "uid://0sdphiqbel8m"
 
 [resource]

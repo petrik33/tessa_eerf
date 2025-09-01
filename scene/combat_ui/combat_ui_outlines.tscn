@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://ceo6axggrq01l"]
 
-[ext_resource type="Script" uid="uid://b25lhts4sbe66" path="res://script/combat_ui/combat_ui_outlines.gd" id="1_q6jb8"]
+[ext_resource type="Script" uid="uid://b25lhts4sbe66" path="res://script/combat/ui/combat_ui_outlines.gd" id="1_q6jb8"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="2_e0jjo"]
 [ext_resource type="Script" uid="uid://b3kuj58myv8xi" path="res://script/hex/grid/point_list_hex_grid.gd" id="3_lhtrk"]
 [ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="4_6rwol"]

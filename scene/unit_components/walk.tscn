@@ -203,3 +203,5 @@ curve = ExtResource("2_sswhf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
+position = Vector2(201.412, 0)
+progress = 201.411

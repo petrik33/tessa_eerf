@@ -11,6 +11,7 @@ func setup_scene(runtime: CombatRuntime):
 	assert(not _is_setup, "Scene already setup")
 	for unit in runtime.state().units:
 		var visuals = _instantiate_unit_visuals(unit.data)
+		visuals.get_physical_node().position = hex_layout.hex_to_pixel(unit.placement)
 		units_node.add_child(visuals)
 	_is_setup = true
 

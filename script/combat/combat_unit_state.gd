@@ -3,6 +3,7 @@ class_name CombatUnitState extends Resource
 @export var data: UnitData
 @export var placement: Vector2i
 @export var side_idx: int
+@export var stack_count: int
 
 func stats() -> UnitCombatStats:
 	return data.combat_stats

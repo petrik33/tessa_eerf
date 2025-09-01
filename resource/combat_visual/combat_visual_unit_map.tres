@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CombatVisualUnitsMap" load_steps=6 format=3 uid="uid://cop36n7ulsjs4"]
 
-[ext_resource type="Script" uid="uid://ifvvd3g24jhv" path="res://script/combat_visual/combat_visual_units_map.gd" id="1_yfwx4"]
+[ext_resource type="Script" uid="uid://ifvvd3g24jhv" path="res://script/combat/visual/combat_visual_units_map.gd" id="1_yfwx4"]
 [ext_resource type="PackedScene" uid="uid://djblfmp6cwiwq" path="res://scene/unit/martial_hero.tscn" id="3_2dlc5"]
 [ext_resource type="PackedScene" uid="uid://dx0g014t166re" path="res://scene/unit/blind_huntress.tscn" id="4_8kobq"]
 [ext_resource type="PackedScene" uid="uid://bqq7xa1o1e1io" path="res://scene/unit/red_hood_archer.tscn" id="4_gonuo"]

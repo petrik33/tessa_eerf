@@ -1,4 +1,4 @@
-class_name UnitData extends Resource
+class_name Unit extends Resource
 
 @export var uid: StringName
 @export var combat_stats: UnitCombatStats
