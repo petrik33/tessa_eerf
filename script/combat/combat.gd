@@ -4,13 +4,13 @@ signal combat_started()
 signal command_processed(command: CombatCommandBase, actions: CombatActionsBuffer)
 signal combat_finished()
 
-@export var config: CombatConfig
+@export var definition: CombatDefinition
 @export var rules: CombatRules
 @export var turn_system: CombatTurnSystem
 
 func start():
-	var initial_state = rules.get_initial_state(config)
-	_runtime = CombatRuntime.new(config, initial_state)
+	var initial_state = rules.get_initial_state(definition)
+	_runtime = CombatRuntime.new(definition, initial_state)
 	combat_started.emit()
 	turn_system.start_combat(get_current_side_idx())
 

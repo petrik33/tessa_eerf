@@ -4,8 +4,10 @@ class_name CombatVisualDirector extends Node
 @export var units_node: Node2D
 @export var hex_layout: HexLayout
 
-func get_unit(idx: int) -> CombatVisualUnit:
-	return units_node.get_child(idx)
+
+func get_unit(unit_handle: CombatUnitHandle) -> CombatVisualUnit:
+	return units_node.get_child(unit_handle.idx)
+
 
 func setup_scene(runtime: CombatRuntime):
 	assert(not _is_setup, "Scene already setup")
@@ -32,6 +34,6 @@ func play(queue: CombatVisualActionsQueue):
 var _is_playing: bool
 var _is_setup: bool
 
-func _instantiate_unit_visuals(unit: UnitData) -> CombatVisualUnit:
+func _instantiate_unit_visuals(unit: Unit) -> CombatVisualUnit:
 	var unit_scene = units_map.units[unit.uid]
 	return unit_scene.instantiate()

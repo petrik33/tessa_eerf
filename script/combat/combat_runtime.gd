@@ -1,8 +1,8 @@
 class_name CombatRuntime
 
-func _init(config: CombatConfig, state: CombatState):
+func _init(definition: CombatDefinition, state: CombatState):
 	_state = state
-	_nav_context = HexNavigationContext.new(config.grid)
+	_nav_context = HexNavigationContext.new(definition.grid)
 	_pathfinding = HexPathfinding.new(_nav_context)
 
 func state() -> CombatState:

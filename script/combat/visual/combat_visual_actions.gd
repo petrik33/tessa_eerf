@@ -1,5 +1,12 @@
 class_name CombatVisualActions
 
+const IDLE := &"idle"
+const WALK := &"walk"
+const MELEE := &"melee"
+const RANGED := &"ranged"
+const HURT := &"hurt"
+const DEATH := &"death"
+
 func _init() -> void:
 	assert(false, "Library class not supposed to be created")
 	

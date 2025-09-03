@@ -1,6 +1,6 @@
 class_name CombatActionAppendToTurnQueue extends CombatActionBase
 
-@export var unit_idx: int
+@export var unit_handle: CombatUnitHandle
 
-func _init(_unit_idx: int = -1) -> void:
-	unit_idx = _unit_idx
+func _init(_unit_handle: CombatUnitHandle = null) -> void:
+	unit_handle = _unit_handle

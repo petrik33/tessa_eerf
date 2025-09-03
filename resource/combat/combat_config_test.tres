@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CombatConfig" load_steps=14 format=3 uid="uid://bu3fcgqr7bojh"]
 
-[ext_resource type="Script" uid="uid://sewp0x4jip31" path="res://script/combat/combat_config.gd" id="1_pvtna"]
+[ext_resource type="Script" uid="uid://sewp0x4jip31" path="res://script/combat/combat_definition.gd" id="1_pvtna"]
 [ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="1_udr15"]
 [ext_resource type="Script" uid="uid://0sdphiqbel8m" path="res://script/combat/combat_unit.gd" id="2_kteoc"]
 [ext_resource type="Resource" uid="uid://dqlj27v272gvf" path="res://resource/unit/red_hood_archer.tres" id="4_lm4b4"]

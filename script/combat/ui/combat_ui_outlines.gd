@@ -46,16 +46,16 @@ func _on_turn_started(side_idx: int) -> void:
 	)
 	enemies_outline.grid = HexGrids.points(
 		Utils.to_typed(TYPE_VECTOR2I, combat_observer.runtime().state().enemies(side_idx).map(
-			func(unit: CombatUnitState): return unit.placement
+			func(unit: CombatUnit): return unit.placement
 		))
 	)
 	allies_outline.grid = HexGrids.points(
 		Utils.to_typed(TYPE_VECTOR2I, combat_observer.runtime().state().allies(side_idx)
 			.filter(
-				func(unit: CombatUnitState): return unit != current_unit
+				func(unit: CombatUnit): return unit != current_unit
 			)
 			.map(
-				func(unit: CombatUnitState): return unit.placement
+				func(unit: CombatUnit): return unit.placement
 			)
 		)
 	)

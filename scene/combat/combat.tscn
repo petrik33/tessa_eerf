@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=4 uid="uid://dfd7a2ox05wed"]
+[gd_scene load_steps=32 format=4 uid="uid://dfd7a2ox05wed"]
 
 [ext_resource type="Script" uid="uid://cqhbrul7iip6p" path="res://script/combat/combat.gd" id="1_rlkjv"]
-[ext_resource type="Resource" uid="uid://bu3fcgqr7bojh" path="res://resource/combat/combat_config_test.tres" id="2_rlkjv"]
 [ext_resource type="Resource" uid="uid://b7rh5anph2oyf" path="res://resource/combat/combat_rules.tres" id="3_6vbif"]
 [ext_resource type="Texture2D" uid="uid://d1u8ho7e010r2" path="res://asset/texture/battle_background/homm3_swamp/Combat_Swamp.png" id="3_o4wx4"]
 [ext_resource type="Script" uid="uid://bb1ghxsvc6cag" path="res://script/combat/combat_turn_system.gd" id="4_md4tn"]
@@ -754,7 +753,6 @@ cache/0/10/0/glyphs/28/texture_idx = 0
 
 [node name="Combat" type="Node" node_paths=PackedStringArray("turn_system")]
 script = ExtResource("1_rlkjv")
-config = ExtResource("2_rlkjv")
 rules = ExtResource("3_6vbif")
 turn_system = NodePath("TurnSystem")
 

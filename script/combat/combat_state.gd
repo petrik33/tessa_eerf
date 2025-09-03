@@ -1,60 +1,48 @@
 class_name CombatState extends Resource
 
-@export var units: Array[CombatUnitState] = []
-@export var turn_queue: Array[int] = []
+@export var armies: Array[CombatArmy] = []
+@export var turn_queue: Array[CombatUnitHandle] = []
 
-func current_unit() -> CombatUnitState:
-	return units[current_unit_idx()]
 
-func current_unit_idx() -> int:
+func get_current_unit() -> CombatUnit:
+	return get_unit(get_current_unit_handle())
+
+
+func get_current_unit_handle() -> CombatUnitHandle:
 	return turn_queue.front()
 
-func current_placement() -> Vector2i:
-	return current_unit().placement
 
-func unit_on_hex(hex: Vector2i) -> CombatUnitState:
-	for unit in units:
-		if unit.placement == hex:
-			return unit
-	return null
+func get_unit(unit_handle: CombatUnitHandle) -> CombatUnit:
+	return armies[unit_handle.army_idx].units[unit_handle.idx]
 
-func enemies(side_idx: int) -> Array[CombatUnitState]:
-	return units.filter(
-		func(unit: CombatUnitState): return unit.is_an_enemy(side_idx)
-	)
 
-func enemies_placement(side_idx: int) -> Array[Vector2i]:
-	return enemies(side_idx).map(
-		func(unit): return unit.placement
-	)
+func get_army(army_handle: CombatArmyHandle) -> CombatArmy:
+	return armies[army_handle.idx]
 
-func allies(side_idx: int) -> Array[CombatUnitState]:
-	return units.filter(
-		func(unit: CombatUnitState): return unit.is_an_ally(side_idx)
-	)
+
+func get_all_unit_handles() -> Array[CombatUnitHandle]:
+	var unit_handles: Array[CombatUnitHandle] = []
+	var army_idx := 0
+	var unit_idx := 0
+	for army in armies:
+		for unit in army.units:
+			unit_handles.push_back(CombatUnitHandle.new(unit_idx, army_idx))
+			unit_idx += 1
+		army_idx += 1
+	return unit_handles
 
 func apply_actions(buffer: CombatActionsBuffer):
 	for action in buffer.actions:
 		apply_action(action)
-		
+
+
 func apply_action(action: CombatActionBase):
 	if action is CombatActionPopTurnQueue:
 		turn_queue.pop_front()
 		return
 	if action is CombatActionMove:
-		units[action.unit_idx].placement = action.target_hex()
+		get_unit(action.unit_handle).placement = action.target_hex()
 		return
 	if action is CombatActionAppendToTurnQueue:
-		turn_queue.append(action.unit_idx)
+		turn_queue.append(action.unit_handle)
 		return
-
-func clone() -> CombatState:
-	var cloned = CombatState.new()
-	cloned.units = []
-	cloned.units.resize(units.size())
-	var unit_idx = 0
-	for unit in units:
-		cloned.units[unit_idx] = unit.duplicate(true)
-		unit_idx += 1
-	cloned.turn_queue = turn_queue.duplicate()
-	return cloned

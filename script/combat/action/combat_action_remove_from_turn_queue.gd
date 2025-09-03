@@ -1,6 +1,6 @@
 class_name CombatActionRemoveFromTurnQueue extends CombatActionBase
 
-@export var turn_queue_idx: int
+@export var unit_handle: CombatUnitHandle
 
-func _init(_turn_queue_idx: int = -1):
-	turn_queue_idx = _turn_queue_idx
+func _init(_unit_handle: CombatUnitHandle = null):
+	unit_handle = _unit_handle

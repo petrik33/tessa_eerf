@@ -31,5 +31,5 @@ func sequence(runtime: CombatRuntime, command: CombatCommandBase, buffer: Combat
 			continue
 	return queue
 
-func _get_unit_enemy_direction(unit: CombatUnitState) -> float:
+func _get_unit_enemy_direction(unit: CombatUnit) -> float:
 	return 0 if unit.side_idx == 0 else PI

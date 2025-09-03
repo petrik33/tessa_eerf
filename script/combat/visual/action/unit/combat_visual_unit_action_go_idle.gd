@@ -4,4 +4,4 @@ class_name CombatVisualUnitActionGoIdle extends CombatVisualUnitActionBase
 @export var position := Vector2.ZERO
 
 func _init() -> void:
-	id = CombatVisualActionID.IDLE
+	id = CombatVisualActions.IDLE

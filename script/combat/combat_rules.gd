@@ -3,25 +3,30 @@ class_name CombatRules extends Resource
 # TODO: Extract interface to base class
 # TODO: Extract some implementations as static in utility class
 
-# TODO: Ensure valid config
-func get_initial_state(config: CombatConfig) -> CombatState:
-	var state = CombatState.new()
-	for unit in config.units:
-		var unit_state = CombatUnitState.new(unit.data, unit.placement, unit.combat_side)
-		state.units.append(unit_state)
-	var idx = 0
-	for unit in state.units:
-		state.turn_queue.append(idx)
-		idx += 1
+# TODO: Ensure valid definition
+func get_initial_state(definition: CombatDefinition) -> CombatState:
+	var state := CombatState.new()
+	var initializer := definition.initializer()
+	var army_idx := -1
+	var unit_idx := -1
+	while not initializer.is_finished():
+		if initializer.is_first_unit_in_army():
+			var army := CombatArmy.new()
+			army.units = []
+			army_idx += 1
+		state.armies[army_idx].units.append(initializer.get_current_unit())
+		initializer.next()
+	var unit_handles := state.get_all_unit_handles()
+	for unit_handle in unit_handles:
+		state.turn_queue.append(unit_handle)
 	return state
 
-func get_current_combat_side_idx(state: CombatState) -> int:
-	return state.current_unit().side_idx
 
 func process_command(command: CombatCommandBase, runtime: CombatRuntime) -> CombatActionsBuffer:
 	var buffer = CombatActionsBuffer.new()
 	fill_actions_buffer(command, runtime, buffer)
 	return buffer
+
 
 func fill_actions_buffer(command: CombatCommandBase, runtime: CombatRuntime, buffer: CombatActionsBuffer) -> void:
 	if command is CombatCommandMoveUnit:
@@ -35,10 +40,12 @@ func fill_actions_buffer(command: CombatCommandBase, runtime: CombatRuntime, buf
 		buffer.push_back(CombatActionAppendToTurnQueue.new(runtime.state().current_unit_idx()))
 		return
 
+
 func validate_command(command: CombatCommandBase, runtime: CombatRuntime) -> bool:
 	# TODO: Actual implementation
 	return command != null
-	
+
+
 func is_combat_finished(state: CombatState) -> bool:
 	# TODO: Actual implementation
 	return false
