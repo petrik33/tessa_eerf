@@ -8,8 +8,8 @@ signal reset_finished()
 @export var director: CombatVisualDirector
 
 
-func get_unit_physical_node(unit_idx: int) -> Node2D:
-	return director.get_unit(unit_idx).get_physical_node()
+func get_unit(unit_handle: CombatUnitHandle) -> CombatVisualUnit:
+	return director.get_unit(unit_handle)
 
 
 func _handle_command_processed(command: CombatCommandBase, buffer: CombatActionsBuffer):

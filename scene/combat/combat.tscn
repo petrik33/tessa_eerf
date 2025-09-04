@@ -797,23 +797,23 @@ metadata/_custom_type_script = "uid://ulh2ys5y8bdo"
 
 [node name="UnitMarkers" type="Node" parent="UI" node_paths=PackedStringArray("observer", "visual")]
 script = ExtResource("13_jccvw")
+units_left_marker = ExtResource("9_7vakg")
 observer = NodePath("../../Observer")
 visual = NodePath("../../Visual")
-units_left_marker = ExtResource("9_7vakg")
 metadata/_custom_type_script = "uid://dy2tluo30mpc6"
 
 [node name="Visual" type="Node" parent="." node_paths=PackedStringArray("combat", "director")]
 script = ExtResource("11_7vakg")
-combat = NodePath("..")
 writer = SubResource("Resource_y2xs1")
+combat = NodePath("..")
 director = NodePath("../VisualDirector")
 metadata/_custom_type_script = "uid://cyg3pjgbmf1vv"
 
 [node name="VisualDirector" type="Node" parent="." node_paths=PackedStringArray("units_node")]
 script = ExtResource("13_m8dvu")
 units_map = ExtResource("14_7vakg")
-units_node = NodePath("../HexSpace/Units")
 hex_layout = ExtResource("5_ddas7")
+units_node = NodePath("../HexSpace/Units")
 metadata/_custom_type_script = "uid://dce88q3ja7wu"
 
 [node name="BackgroundImage" type="TextureRect" parent="."]
@@ -911,6 +911,4 @@ text = "Some UI"
 [connection signal="potential_command_changed" from="PlayerA" to="HexSpace/Outlines" method="_on_potential_command_changed"]
 [connection signal="potential_command_changed" from="PlayerB" to="UI" method="_on_potential_command_changed"]
 [connection signal="potential_command_changed" from="PlayerB" to="HexSpace/Outlines" method="_on_potential_command_changed"]
-[connection signal="reset_finished" from="Visual" to="UI" method="_on_visual_reset_finished"]
-[connection signal="setup_finished" from="Visual" to="UI" method="_on_visual_setup_finished"]
 [connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]

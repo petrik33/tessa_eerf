@@ -1,5 +1,6 @@
 class_name CombatState extends Resource
 
+
 @export var armies: Array[CombatArmy] = []
 @export var turn_queue: Array[CombatUnitHandle] = []
 
@@ -8,8 +9,16 @@ func get_current_unit() -> CombatUnit:
 	return get_unit(get_current_unit_handle())
 
 
+func get_current_army() -> CombatArmy:
+	return get_army(get_current_army_handle())
+
+
 func get_current_unit_handle() -> CombatUnitHandle:
 	return turn_queue.front()
+
+
+func get_current_army_handle() -> CombatArmyHandle:
+	return CombatArmyHandle.new(get_current_unit_handle().army_idx)
 
 
 func get_unit(unit_handle: CombatUnitHandle) -> CombatUnit:

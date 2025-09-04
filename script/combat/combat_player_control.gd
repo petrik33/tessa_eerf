@@ -5,7 +5,7 @@ signal potential_command_changed(command: CombatCommandBase)
 
 
 ## TODO: Implement in a cleaner manner
-@export var side_idx: int
+@export var army_handle: CombatArmyHandle
 @export var observer: CombatObserver
 @export var combat: Combat
 @export var hex_picking: HexPicking
@@ -14,24 +14,24 @@ signal potential_command_changed(command: CombatCommandBase)
 func get_potential_command(_previous_hex: Vector2i, target_hex: Vector2i) -> CombatCommandBase:
 	if not observer.runtime().navigation().grid().has_point(target_hex):
 		return null
-	
+
 	var target_distance = HexMath.distance(
 		observer.runtime().state().current_placement(),
 		target_hex
 	)
-	
+
 	if target_distance > observer.runtime().state().current_unit().stats().speed:
 		return null
-	
+
 	var targeted_unit = observer.runtime().state().unit_on_hex(target_hex)
-	
+
 	if targeted_unit == null:
 		return CombatCommands.move_unit(
 			combat.runtime().pathfinding().id_path(
 				observer.runtime().state().current_unit().placement, target_hex
 			)
 		)
-	elif targeted_unit.is_an_enemy(side_idx):
+	elif targeted_unit.is_an_enemy(army_handle):
 		# TODO: Actual algorithm to find hex to attack from
 		var move_path = combat.runtime().pathfinding().id_path(
 			observer.runtime().state().current_unit().placement,
@@ -41,7 +41,7 @@ func get_potential_command(_previous_hex: Vector2i, target_hex: Vector2i) -> Com
 		return CombatCommands.attack_unit(
 			move_path, target_hex
 		)
-	
+
 	return null
 
 
@@ -57,27 +57,27 @@ func _unhandled_input(event: InputEvent):
 		combat.request_command(_potential_command)
 
 
-func _handle_combat_started():
+func _on_combat_started():
 	pass
 
 
-func _handle_command_processed(command: CombatCommandBase, actions: CombatActionsBuffer):
+func _on_command_processed(_command: CombatCommandBase, _actions: CombatActionsBuffer):
 	pass
 
 
-func _handle_combat_finished():
+func _on_combat_finished():
 	pass
 
 
-func _handle_turn_started(turn_side_idx: int):
-	if side_idx != turn_side_idx:
+func _on_turn_started(turn_handle: CombatHandle):
+	if not turn_handle.is_equal(army_handle):
 		return
 	set_process_unhandled_input(true)
 	hex_picking.updated.connect(_on_hex_picking_updated)
 
 
-func _handle_turn_finished(turn_side_idx: int):
-	if side_idx != turn_side_idx:
+func _handle_turn_finished(turn_handle: CombatHandle):
+	if not turn_handle.is_equal(army_handle):
 		return
 	hex_picking.updated.disconnect(_on_hex_picking_updated)
 	set_process_unhandled_input(false)

@@ -241,7 +241,7 @@ metadata/_custom_type_script = "uid://br5qv3kv304kl"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"walk"
-frame_progress = 0.303082
+frame_progress = 0.678889
 offset = Vector2(0, -14)
 
 [node name="Walk" parent="." node_paths=PackedStringArray("moved_node") instance=ExtResource("6_02ptm")]

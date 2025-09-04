@@ -6,21 +6,27 @@ class_name CombatVisualDirector extends Node
 
 
 func get_unit(unit_handle: CombatUnitHandle) -> CombatVisualUnit:
-	return units_node.get_child(unit_handle.idx)
+	return _units[unit_handle.id()]
 
 
 func setup_scene(runtime: CombatRuntime):
 	assert(not _is_setup, "Scene already setup")
-	for unit in runtime.state().units:
+	for unit_handle in runtime.state().get_all_unit_handles():
+		var unit = runtime.state().get_unit(unit_handle)
 		var visuals = _instantiate_unit_visuals(unit.data)
 		visuals.get_physical_node().position = hex_layout.hex_to_pixel(unit.placement)
 		units_node.add_child(visuals)
+		_units[unit_handle.id()] = visuals
 	_is_setup = true
+
 
 func clear_scene():
 	assert(_is_setup, "Scene not setup yet")
-	for idx in units_node.get_child_count():
-		get_unit(idx).queue_free()
+	for visuals in _units.values():
+		visuals.queue_free()
+	_units.clear()
+	_is_setup = false
+
 
 func play(queue: CombatVisualActionsQueue):
 	#assert(not _is_playing, "Already playing")
@@ -31,8 +37,11 @@ func play(queue: CombatVisualActionsQueue):
 			continue
 	_is_playing = false
 
+
 var _is_playing: bool
 var _is_setup: bool
+var _units: Dictionary[String, CombatVisualUnit]
+
 
 func _instantiate_unit_visuals(unit: Unit) -> CombatVisualUnit:
 	var unit_scene = units_map.units[unit.uid]

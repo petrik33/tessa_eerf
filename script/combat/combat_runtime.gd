@@ -1,20 +1,25 @@
 class_name CombatRuntime
 
-func _init(definition: CombatDefinition, state: CombatState):
-	_state = state
+
+func get_navigation_context() -> HexNavigationContext:
+	return _nav_context
+
+
+func get_pathfinding() -> HexPathfinding:
+	return _pathfinding
+
+
+func update(state: CombatState):
+	_pathfinding.clear_disabled_points()
+	for unit_handle in state.get_all_unit_handles():
+		var unit := state.get_unit(unit_handle)
+		_pathfinding.set_point_disabled(unit.placement, true)
+
+
+func _init(definition: CombatDefinition):
 	_nav_context = HexNavigationContext.new(definition.grid)
 	_pathfinding = HexPathfinding.new(_nav_context)
 
-func state() -> CombatState:
-	return _state
 
-func navigation() -> HexNavigationContext:
-	return _nav_context
-
-func pathfinding() -> HexPathfinding:
-	return _pathfinding
-
-var _state: CombatState
 var _nav_context: HexNavigationContext
 var _pathfinding: HexPathfinding
-var _occupied_hex: Array[int]
