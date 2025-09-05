@@ -779,7 +779,6 @@ hex_picking = NodePath("../HexSpace/HexPicking")
 
 [node name="PlayerB" type="Node" parent="." node_paths=PackedStringArray("observer", "combat", "hex_picking")]
 script = ExtResource("9_yl8u6")
-side_idx = 1
 observer = NodePath("../Observer")
 combat = NodePath("..")
 hex_picking = NodePath("../HexSpace/HexPicking")
@@ -804,16 +803,16 @@ metadata/_custom_type_script = "uid://dy2tluo30mpc6"
 
 [node name="Visual" type="Node" parent="." node_paths=PackedStringArray("combat", "director")]
 script = ExtResource("11_7vakg")
-writer = SubResource("Resource_y2xs1")
 combat = NodePath("..")
+writer = SubResource("Resource_y2xs1")
 director = NodePath("../VisualDirector")
 metadata/_custom_type_script = "uid://cyg3pjgbmf1vv"
 
 [node name="VisualDirector" type="Node" parent="." node_paths=PackedStringArray("units_node")]
 script = ExtResource("13_m8dvu")
 units_map = ExtResource("14_7vakg")
-hex_layout = ExtResource("5_ddas7")
 units_node = NodePath("../HexSpace/Units")
+hex_layout = ExtResource("5_ddas7")
 metadata/_custom_type_script = "uid://dce88q3ja7wu"
 
 [node name="BackgroundImage" type="TextureRect" parent="."]
