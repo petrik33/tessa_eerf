@@ -4,7 +4,6 @@
 export_presets.cfg
 
 # Heavy Assets
-*.png
 *.mp4
 *.gif
 *.cur
@@ -21,3 +20,4 @@ android/
 .vscode
 
 source/Obsidian/Tessa Eerf/.obsidian
+source/**/*.png
