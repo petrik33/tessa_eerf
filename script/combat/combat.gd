@@ -1,17 +1,29 @@
 class_name Combat extends Node
 
-signal combat_started()
+signal started()
+signal finished()
+
 signal command_processed(command: CombatCommandBase, actions: CombatActionsBuffer)
-signal combat_finished()
+
+signal turn_started(turn_handle: CombatHandle)
+signal turn_finished(turn_handle: CombatHandle)
+
+signal wait_started(reason: StringName)
+signal wait_reason_changed(new_reason: StringName)
+signal wait_finished()
+
 
 @export var definition: CombatDefinition
 @export var rules: CombatRules
 @export var turn_system: CombatTurnSystem
 
+
 func start():
-	_state = rules.get_initial_state(definition)
+	_state = definition.initializer().create_initial_state()
+	rules.fill_initial_state(_state)
 	_runtime = CombatRuntime.new(definition)
-	combat_started.emit()
+	_runtime.update(_state)
+	started.emit()
 	turn_system.start_combat(_state.get_current_army_handle())
 
 
@@ -28,19 +40,23 @@ func request_command(command: CombatCommandBase):
 
 	command_processed.emit(command, actions)
 
-	if rules.is_combat_finished(_runtime.state()):
+	if rules.is_combat_finished(_state):
 		turn_system.finish_combat()
 	else:
-		turn_system.progress_combat(rules.get_current_combat_side_idx(_runtime.state()))
+		turn_system.progress_combat(_state.get_current_army_handle())
 
 
 func finish():
 	turn_system.finish_combat()
-	combat_finished.emit()
+	finished.emit()
 
 
 func get_runtime() -> CombatRuntime:
 	return _runtime
+
+
+func observe_state(_observer_handle: CombatHandle) -> CombatState:
+	return _state
 
 
 func get_state() -> CombatState:

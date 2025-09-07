@@ -3,6 +3,10 @@ class_name CombatRules extends Resource
 # TODO: Extract interface to base class
 # TODO: Extract some implementations as static in utility class
 
+func fill_initial_state(state: CombatState) -> void:
+	for unit_handle in state.get_all_unit_handles():
+		state.append_to_turn_queue(unit_handle)
+
 
 func process_command(command: CombatCommandBase, state: CombatState, runtime: CombatRuntime) -> CombatActionsBuffer:
 	var buffer = CombatActionsBuffer.new()

@@ -1,13 +1,14 @@
 class_name CombatUiUnitMarkers extends Node
 
-@export var observer: CombatObserver
+@export var player: CombatPlayer
 @export var visual: CombatVisual
 @export var units_left_marker: PackedScene
 
+
 func create_units_left_markers():
-	var units := observer.runtime().state().units
-	for idx in units.size():
-		var attach_node = visual.get_unit_physical_node(idx)
+	var unit_handles := player.get_observed_state().get_all_unit_handles()
+	for unit_handle in unit_handles:
+		var attach_node = visual.get_unit(unit_handle).get_physical_node()
 		var marker = units_left_marker.instantiate() as CombatUiUnitsLeftMarker
 		attach_node.add_child(marker)
 		_markers.push_back(marker)

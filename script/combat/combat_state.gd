@@ -40,6 +40,7 @@ func get_all_unit_handles() -> Array[CombatUnitHandle]:
 		army_idx += 1
 	return unit_handles
 
+
 func apply_actions(buffer: CombatActionsBuffer):
 	for action in buffer.actions:
 		apply_action(action)
@@ -53,5 +54,9 @@ func apply_action(action: CombatActionBase):
 		get_unit(action.unit_handle).placement = action.target_hex()
 		return
 	if action is CombatActionAppendToTurnQueue:
-		turn_queue.append(action.unit_handle)
+		append_to_turn_queue(action.unit_handle)
 		return
+
+
+func append_to_turn_queue(unit_handle: CombatUnitHandle):
+	turn_queue.append(unit_handle)
