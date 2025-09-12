@@ -1,7 +1,5 @@
 class_name CombatUiOutlines extends Node2D
 
-@export var player: CombatPlayer
-
 @onready var unit_outline: HexGridRendererBase = %CurrentUnit
 @onready var move_range_outline: HexGridRendererBase = %MoveRange
 @onready var mouse_pick_outline: HexGridRendererBase = %MouseHover
@@ -10,47 +8,23 @@ class_name CombatUiOutlines extends Node2D
 @onready var move_path_outline: HexGridRendererBase = %MovePath
 
 
-func _on_hex_picking_updated(previous_hex: Vector2i, new_hex: Vector2i) -> void:
-	mouse_pick_outline.grid = HexGrids.point(new_hex)
-
-
-func _on_potential_command_changed(command: CombatCommandBase) -> void:
-	if command == null:
-		mouse_pick_outline.hide()
-		move_path_outline.hide()
-		return
-
-	mouse_pick_outline.show()
-	move_path_outline.show()
-
-	if command is CombatCommandAttackUnit:
-		move_path_outline.grid = HexGrids.points(
-			player.get_runtime().navigation().path(command.move_id_path)
-		)
-		move_path_outline.show()
-	elif command is CombatCommandMoveUnit:
-		move_path_outline.grid = HexGrids.points(
-			player.get_runtime().navigation().path(command.id_path)
-		)
-
-
-func _on_turn_started(side_idx: int) -> void:
-	var current_unit = player.get_observed_state().current_unit()
+func update_turn_context(turn_context: CombatTurnContext) -> void:
+	var current_unit = turn_context.observed_state.current_unit()
 	unit_outline.grid = HexGrids.point(
 		current_unit.placement
 	)
 	move_range_outline.grid = HexGrids.ranged(
 		current_unit.placement,
-		current_unit.stats().speed,
-		player.get_runtime().navigation().grid()
+		current_unit.movement_range(),
+		turn_context.services.navigation.grid
 	)
 	enemies_outline.grid = HexGrids.points(
-		Utils.to_typed(TYPE_VECTOR2I, player.get_observed_state().enemies(side_idx).map(
+		Utils.to_typed(TYPE_VECTOR2I, turn_context.observed_state.enemy_units(turn_context.observed_state.current_army_handle()).map(
 			func(unit: CombatUnit): return unit.placement
 		))
 	)
 	allies_outline.grid = HexGrids.points(
-		Utils.to_typed(TYPE_VECTOR2I, player.get_observed_state().allies(side_idx)
+		Utils.to_typed(TYPE_VECTOR2I, turn_context.observed_state.ally_units(turn_context.observed_state.current_army_handle())
 			.filter(
 				func(unit: CombatUnit): return unit != current_unit
 			)
@@ -61,6 +35,22 @@ func _on_turn_started(side_idx: int) -> void:
 	)
 
 
-func _on_turn_finished(side_idx: int) -> void:
-	move_path_outline.grid = null
-	mouse_pick_outline.grid = null
+func update_potential_command(turn_context: CombatTurnContext, command: CombatCommandBase) -> void:
+	if command == null:
+		mouse_pick_outline.hide()
+		move_path_outline.hide()
+		return
+
+	mouse_pick_outline.show()
+	move_path_outline.show()
+
+	if command is CombatCommandAttackUnit:
+		move_path_outline.grid = HexGrids.points(
+			turn_context.services.navigation.path(command.move_id_path)
+		)
+		mouse_pick_outline.grid = HexGrids.point(command.attacked_hex)
+	elif command is CombatCommandMoveUnit:
+		move_path_outline.grid = HexGrids.points(
+			turn_context.services.navigation.path(command.id_path)
+		)
+		mouse_pick_outline.grid = HexGrids.point(turn_context.services.navigation.hex(command.id_path[-1]))

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tessa Eerf"
-run/main_scene="uid://dfd7a2ox05wed"
+run/main_scene="uid://cjqerd1pwwpv1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,16 @@ window/size/viewport_height=480
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/codeandweb.texturepacker/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://asset/": "red",
+"res://resource/": "orange",
+"res://scene/": "blue",
+"res://script/": "yellow",
+"res://source/": "green"
+}
 
 [input]
 

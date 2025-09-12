@@ -4,10 +4,11 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_3ob66"]
 
-[node name="CombatUiUnitsLeftMarker" type="Control"]
+[node name="CombatUiUnitsLeftMarker" type="Control" node_paths=PackedStringArray("stack_size_label")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_3ob66")
+stack_size_label = NodePath("Label")
 metadata/_custom_type_script = "uid://c2mw8uctlpp4m"
 
 [node name="Label" type="Label" parent="."]

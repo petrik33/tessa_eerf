@@ -4,33 +4,30 @@ class_name CombatRules extends Resource
 # TODO: Extract some implementations as static in utility class
 
 func fill_initial_state(state: CombatState) -> void:
-	for unit_handle in state.get_all_unit_handles():
+	for unit_handle in state.all_unit_handles():
 		state.append_to_turn_queue(unit_handle)
 
 
-func process_command(command: CombatCommandBase, state: CombatState, runtime: CombatRuntime) -> CombatActionsBuffer:
+func process_command(command: CombatCommandBase, state: CombatState, services: CombatServices) -> CombatActionsBuffer:
 	var buffer = CombatActionsBuffer.new()
-	fill_actions_buffer(command, state, runtime, buffer)
+	fill_actions_buffer(command, state, services, buffer)
 	return buffer
 
 
-func fill_actions_buffer(command: CombatCommandBase, state: CombatState, runtime: CombatRuntime, buffer: CombatActionsBuffer) -> void:
-	if command is CombatCommandStartCombat:
-		for unit_handle in state.get_all_unit_handles():
-			buffer.push_back(CombatActionAppendToTurnQueue.new(unit_handle))
+func fill_actions_buffer(command: CombatCommandBase, state: CombatState, services: CombatServices, buffer: CombatActionsBuffer) -> void:
 	if command is CombatCommandMoveUnit:
-		buffer.push_back(CombatActions.move(state, runtime, command.id_path))
+		buffer.push_back(CombatActions.move(state, services, command.id_path))
 		buffer.push_back(CombatActionPopTurnQueue.new())
-		buffer.push_back(CombatActionAppendToTurnQueue.new(state.get_current_unit_handle()))
+		buffer.push_back(CombatActionAppendToTurnQueue.new(state.current_unit_handle()))
 		return
 	if command is CombatCommandAttackUnit:
-		buffer.push_back(CombatActions.move(state, runtime, command.move_id_path))
+		buffer.push_back(CombatActions.move(state, services, command.move_id_path))
 		buffer.push_back(CombatActionPopTurnQueue.new())
-		buffer.push_back(CombatActionAppendToTurnQueue.new(state.get_current_unit_handle()))
+		buffer.push_back(CombatActionAppendToTurnQueue.new(state.current_unit_handle()))
 		return
 
 
-func validate_command(command: CombatCommandBase, _state: CombatState, _runtime: CombatRuntime) -> bool:
+func validate_command(command: CombatCommandBase, _state: CombatState, _services: CombatServices) -> bool:
 	# TODO: Actual implementation
 	return command != null
 

@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="CombatDefinition" load_steps=20 format=3 uid="uid://cu7i7k7yynmmt"]
+
+[ext_resource type="Script" uid="uid://ni5u100avrmg" path="res://script/combat/definition/combat_army_definition.gd" id="1_wpchj"]
+[ext_resource type="Script" uid="uid://sewp0x4jip31" path="res://script/combat/combat_definition.gd" id="2_omq7q"]
+[ext_resource type="Script" uid="uid://buensl7ro1oqp" path="res://script/combat/definition/combat_unit_definition.gd" id="2_wcalo"]
+[ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="3_0vuh8"]
+[ext_resource type="Script" uid="uid://bodrahntvm63k" path="res://script/unit/unit_stack.gd" id="3_2adw1"]
+[ext_resource type="Resource" uid="uid://bucmmowyh3bsh" path="res://resource/unit/blind_huntress.tres" id="4_6p0wk"]
+[ext_resource type="Resource" uid="uid://cnbpll1hklit6" path="res://resource/unit/blue_witch.tres" id="5_xlnsy"]
+[ext_resource type="Resource" uid="uid://cit1hlmexpbnn" path="res://resource/unit/martial_hero.tres" id="6_y8lry"]
+[ext_resource type="Resource" uid="uid://dqlj27v272gvf" path="res://resource/unit/red_hood_archer.tres" id="7_wt3jt"]
+
+[sub_resource type="Resource" id="Resource_pboku"]
+script = ExtResource("3_2adw1")
+unit = ExtResource("4_6p0wk")
+size = 3
+metadata/_custom_type_script = "uid://bodrahntvm63k"
+
+[sub_resource type="Resource" id="Resource_wtsk8"]
+script = ExtResource("2_wcalo")
+stack = SubResource("Resource_pboku")
+placement = Vector2i(1, 2)
+metadata/_custom_type_script = "uid://buensl7ro1oqp"
+
+[sub_resource type="Resource" id="Resource_t5n4k"]
+script = ExtResource("3_2adw1")
+unit = ExtResource("5_xlnsy")
+size = 7
+metadata/_custom_type_script = "uid://bodrahntvm63k"
+
+[sub_resource type="Resource" id="Resource_7vc4l"]
+script = ExtResource("2_wcalo")
+stack = SubResource("Resource_t5n4k")
+placement = Vector2i(-1, 6)
+metadata/_custom_type_script = "uid://buensl7ro1oqp"
+
+[sub_resource type="Resource" id="Resource_15l3s"]
+script = ExtResource("1_wpchj")
+units = Array[ExtResource("2_wcalo")]([SubResource("Resource_wtsk8"), SubResource("Resource_7vc4l")])
+metadata/_custom_type_script = "uid://ni5u100avrmg"
+
+[sub_resource type="Resource" id="Resource_hwdv6"]
+script = ExtResource("3_2adw1")
+unit = ExtResource("6_y8lry")
+size = 2
+metadata/_custom_type_script = "uid://bodrahntvm63k"
+
+[sub_resource type="Resource" id="Resource_jkjeu"]
+script = ExtResource("2_wcalo")
+stack = SubResource("Resource_hwdv6")
+placement = Vector2i(11, 2)
+metadata/_custom_type_script = "uid://buensl7ro1oqp"
+
+[sub_resource type="Resource" id="Resource_u1gnf"]
+script = ExtResource("3_2adw1")
+unit = ExtResource("7_wt3jt")
+size = 9
+metadata/_custom_type_script = "uid://bodrahntvm63k"
+
+[sub_resource type="Resource" id="Resource_2yb34"]
+script = ExtResource("2_wcalo")
+stack = SubResource("Resource_u1gnf")
+placement = Vector2i(9, 6)
+metadata/_custom_type_script = "uid://buensl7ro1oqp"
+
+[sub_resource type="Resource" id="Resource_nnrcw"]
+script = ExtResource("1_wpchj")
+units = Array[ExtResource("2_wcalo")]([SubResource("Resource_jkjeu"), SubResource("Resource_2yb34")])
+metadata/_custom_type_script = "uid://ni5u100avrmg"
+
+[resource]
+script = ExtResource("2_omq7q")
+grid = ExtResource("3_0vuh8")
+armies = Array[ExtResource("1_wpchj")]([SubResource("Resource_15l3s"), SubResource("Resource_nnrcw")])
+seed = 42
+metadata/_custom_type_script = "uid://sewp0x4jip31"

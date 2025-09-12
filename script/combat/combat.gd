@@ -21,51 +21,77 @@ signal wait_finished()
 func start():
 	_state = definition.initializer().create_initial_state()
 	rules.fill_initial_state(_state)
-	_runtime = CombatRuntime.new(definition)
-	_runtime.update(_state)
+	_services = CombatServices.new(definition)
+	_services.update(_state)
 	started.emit()
-	turn_system.start_combat(_state.get_current_army_handle())
+	var first_army_handle := _state.current_army_handle()
+	turn_system.start(first_army_handle)
+	turn_started.emit(first_army_handle)
 
 
 func request_command(command: CombatCommandBase):
-	if not rules.validate_command(command, _state, _runtime):
-		_handle_invalid_command_requested()
+	if not rules.validate_command(command, _state, _services):
+		_on_invalid_command_requested()
 		return
 
-	var actions = rules.process_command(command, _state, _runtime)
+	var turn_handle := _state.current_army_handle()
+
+	var actions = rules.process_command(command, _state, _services)
 	_state.apply_actions(actions)
-	_runtime.update(_state)
+	_services.update(_state)
 
 	# TODO: possibly save state, actions or/and command
 
 	command_processed.emit(command, actions)
 
+	turn_finished.emit(turn_handle)
+
 	if rules.is_combat_finished(_state):
-		turn_system.finish_combat()
+		turn_system.finish()
+		finished.emit()
 	else:
-		turn_system.progress_combat(_state.get_current_army_handle())
+		var next_turn_handle := _state.current_army_handle()
+		if turn_system.progress(next_turn_handle):
+			turn_started.emit(next_turn_handle)
 
 
 func finish():
-	turn_system.finish_combat()
+	turn_system.finish()
 	finished.emit()
 
 
-func get_runtime() -> CombatRuntime:
-	return _runtime
-
-
-func observe_state(_observer_handle: CombatHandle) -> CombatState:
+func observe_state(_observer_handle: CombatHandle = null) -> CombatState:
 	return _state
 
 
-func get_state() -> CombatState:
-	return _state
-
-
-var _runtime: CombatRuntime
+var _services: CombatServices
 var _state: CombatState
 
 
-func _handle_invalid_command_requested():
+func _on_invalid_command_requested():
 	pass
+
+
+func _on_turn_system_wait_started(reason: String):
+	wait_started.emit(reason)
+
+
+func _on_turn_system_wait_reason_changed(new_reason: String):
+	wait_reason_changed.emit(new_reason)
+
+
+func _on_turn_system_wait_finished():
+	wait_finished.emit()
+	turn_started.emit(_state.current_army_handle())
+
+
+func _connect_to_turn_system():
+	turn_system.wait_started.connect(_on_turn_system_wait_started)
+	turn_system.wait_reason_changed.connect(_on_turn_system_wait_reason_changed)
+	turn_system.wait_finished.connect(_on_turn_system_wait_finished)
+
+
+func _disconnect_from_turn_system():
+	turn_system.wait_started.disconnect(_on_turn_system_wait_started)
+	turn_system.wait_reason_changed.disconnect(_on_turn_system_wait_reason_changed)
+	turn_system.wait_finished.disconnect(_on_turn_system_wait_finished)

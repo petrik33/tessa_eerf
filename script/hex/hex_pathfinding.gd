@@ -17,7 +17,7 @@ func id_path(from: Vector2i, to: Vector2i, allow_partial_path: bool = false) -> 
 func _init(context: HexNavigationContext):
 	_context = context
 	_hex_astar = HexAStar2D.new()
-	var grid = _context.grid()
+	var grid = _context.grid
 	for hex in grid.iterator():
 		_hex_astar.add_point(_context.id(hex), hex)
 	for hex in grid.iterator():

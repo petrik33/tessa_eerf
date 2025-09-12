@@ -9,11 +9,11 @@ func get_unit(unit_handle: CombatUnitHandle) -> CombatVisualUnit:
 	return _units[unit_handle.id()]
 
 
-func setup_scene(runtime: CombatRuntime):
+func setup_scene(state: CombatState):
 	assert(not _is_setup, "Scene already setup")
-	for unit_handle in runtime.state().get_all_unit_handles():
-		var unit = runtime.state().get_unit(unit_handle)
-		var visuals = _instantiate_unit_visuals(unit.data)
+	for unit_handle in state.all_unit_handles():
+		var unit = state.unit(unit_handle)
+		var visuals = _instantiate_unit_visuals(unit.unit)
 		visuals.get_physical_node().position = hex_layout.hex_to_pixel(unit.placement)
 		units_node.add_child(visuals)
 		_units[unit_handle.id()] = visuals
@@ -33,7 +33,7 @@ func play(queue: CombatVisualActionsQueue):
 	_is_playing = true
 	for action in queue.actions:
 		if action is CombatVisualUnitActionBase:
-			await get_unit(action.unit_idx).execute(action)
+			await get_unit(action.unit_handle).execute(action)
 			continue
 	_is_playing = false
 

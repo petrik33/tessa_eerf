@@ -1,35 +1,39 @@
 class_name CombatVisualWriter extends Resource
 
+
 @export var hex_layout: HexLayout
 
-func intro(runtime: CombatRuntime) -> CombatVisualActionsQueue:
+
+func intro(state: CombatState) -> CombatVisualActionsQueue:
 	var queue := CombatVisualActionsQueue.new()
-	var idx := 0
-	for unit in runtime.state().units:
+	for unit_handle in state.all_unit_handles():
+		var unit := state.unit(unit_handle)
 		queue.push_back(CombatVisualActions.idle(
-			idx,
+			unit_handle,
 			hex_layout.hex_to_pixel(unit.placement),
 			_get_unit_enemy_direction(unit)
 		))
-		idx += 1
 	return queue
 
-func sequence(runtime: CombatRuntime, command: CombatCommandBase, buffer: CombatActionsBuffer) -> CombatVisualActionsQueue:
+
+func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatActionsBuffer) -> CombatVisualActionsQueue:
 	var queue := CombatVisualActionsQueue.new()
-	
+
 	for action in buffer.actions:
 		if action is CombatActionMove:
 			var path = Utils.to_typed(TYPE_VECTOR2, action.path.map(
 				func(hex: Vector2i): return hex_layout.hex_to_pixel(hex)
 			))
-			queue.push_back(CombatVisualActions.walk(action.unit_idx, path))
+			queue.push_back(CombatVisualActions.walk(action.unit_handle, path))
 			queue.push_back(CombatVisualActions.idle(
-				action.unit_idx,
+				action.unit_handle,
 				hex_layout.hex_to_pixel(action.path[-1]),
-				_get_unit_enemy_direction(runtime.state().units[action.unit_idx])
+				_get_unit_enemy_direction(state.unit(action.unit_handle))
 			))
 			continue
 	return queue
 
+
 func _get_unit_enemy_direction(unit: CombatUnit) -> float:
-	return 0 if unit.side_idx == 0 else PI
+	# TODO: Solve properly
+	return 0.0 if unit.placement.x < 5 else PI

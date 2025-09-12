@@ -1,31 +1,27 @@
 class_name CombatTurnSystem extends Node
 
-signal turn_started(turn_handle: CombatHandle)
-signal turn_finished(turn_handle: CombatHandle)
+
 signal wait_started(reason: StringName)
 signal wait_reason_changed(new_reason: StringName)
 signal wait_finished()
 
 # TODO: Assert `start -> progress -> finish` flow
 
-func start_combat(turn_handle: CombatHandle):
+func start(turn_handle: CombatHandle):
 	_turn_handle = turn_handle
-	turn_started.emit(turn_handle)
 
 
-func progress_combat(next_turn_handle: CombatHandle):
-	turn_finished.emit(_turn_handle)
+func progress(next_turn_handle: CombatHandle) -> bool:
 	_turn_handle = next_turn_handle
 	for wait in _auto_waits:
 		add_wait(wait)
 	if _waits.is_empty():
-		turn_started.emit(_turn_handle)
-		return
-	wait_started.emit()
+		return true
+	wait_started.emit(_waits.front())
+	return false
 
 
-func finish_combat():
-	turn_finished.emit(_turn_handle)
+func finish():
 	_turn_handle = null
 
 
@@ -43,7 +39,6 @@ func remove_wait(reason: StringName):
 		return
 	if _waits.is_empty():
 		wait_finished.emit()
-		turn_started.emit(_turn_handle)
 	else:
 		wait_reason_changed.emit(_waits.front())
 
