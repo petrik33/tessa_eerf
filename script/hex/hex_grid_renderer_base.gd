@@ -22,7 +22,10 @@ func _exit_tree() -> void:
 func _draw():
 	if grid == null:
 		return
-	_draw_impl(grid, HexUtils.find_hex_space(self).layout)
+	var hex_space := HexUtils.find_hex_space(self)
+	if hex_space == null:
+		return
+	_draw_impl(grid, hex_space.layout)
 
 func _draw_impl(_grid: HexGridBase, _layout: HexLayout):
 	assert(false, "Not implemented")
