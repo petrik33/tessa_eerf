@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqytium2kohc1"]
+
+[ext_resource type="Script" uid="uid://car1egec0hn4i" path="res://script/combat/visual/unit/components/combat_visual_unit_face_walk_direction.gd" id="1_j7adx"]
+
+[node name="FaceWalkDirection" type="Node"]
+script = ExtResource("1_j7adx")
