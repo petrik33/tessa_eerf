@@ -1,0 +1,44 @@
+@tool
+class_name CombatVisualUnitFaceWalkDirection extends Node
+
+
+@export var physical: Node2D
+
+@export var sprite: AnimatedSprite2D:
+	set(value):
+		sprite = value
+		update_configuration_warnings()
+
+@export var inverse := false
+
+
+var _last_pos: Vector2
+
+
+func start_walk(action: CombatVisualUnitActionWalk):
+	_last_pos = Vector2.ZERO if physical == null else physical.position
+
+
+func _ready() -> void:
+	set_process(false)
+
+
+func _process(delta: float) -> void:
+	var delta_pos = physical.position - _last_pos
+	if not inverse:
+		sprite.scale = Vector2(
+			abs(sprite.scale.x) if cos(delta_pos.angle()) > 0 else -abs(sprite.scale.x),
+			sprite.scale.y
+		)
+	else:
+		sprite.scale = Vector2(
+			abs(sprite.scale.x) if cos(delta_pos.angle()) < 0 else -abs(sprite.scale.x),
+			sprite.scale.y
+		)
+	_last_pos = physical.position
+
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if sprite == null:
+		return ["Sprite not assigned"]
+	return []
