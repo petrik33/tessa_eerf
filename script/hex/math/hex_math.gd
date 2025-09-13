@@ -22,6 +22,9 @@ static func neighbor(hex: Vector2i, direction: int) -> Vector2i:
 static func in_direction(direction: int, length: int) -> Vector2i:
 	return neighbor_direction(direction) * length
 
+static func are_neighbors(hexA: Vector2i, hexB: Vector2i) -> bool:
+	return distance(hexA, hexB) <= 1
+
 static func is_in_radius(hex: Vector2i, radius: int) -> bool:
 	var s = -hex.x - hex.y
 	return max(abs(hex.x), abs(hex.y), abs(s)) <= radius
