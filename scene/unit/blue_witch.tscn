@@ -1,7 +1,8 @@
-[gd_scene load_steps=57 format=3 uid="uid://c8asf4s1t6aie"]
+[gd_scene load_steps=61 format=3 uid="uid://c8asf4s1t6aie"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit.gd" id="1_yb0an"]
-[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_ax8xb"]
+[ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_r7y2t"]
+[ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_65xch"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="6_7nox7"]
 [ext_resource type="Texture2D" uid="uid://bf2vulfaopn3j" path="res://asset/texture/unit/blue_witch/B_witch_idle.png" id="6_hebk6"]
 [ext_resource type="Texture2D" uid="uid://cjig7lus2c3md" path="res://asset/texture/unit/blue_witch/B_witch_run.png" id="7_ax8xb"]
@@ -12,6 +13,26 @@
 [ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="11_tt52y"]
 [ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="12_uyugg"]
 [ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="13_vdl7i"]
+
+[sub_resource type="Resource" id="Resource_7nox7"]
+script = ExtResource("2_r7y2t")
+performer = NodePath("Idle")
+effects = Array[NodePath]([])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_fhnv6"]
+script = ExtResource("2_r7y2t")
+performer = NodePath("Walk")
+effects = Array[NodePath]([NodePath("FaceWalkDirection"), NodePath("PlayWalkAnimation")])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_ddj48"]
+script = ExtResource("3_65xch")
+resolvers = Dictionary[StringName, ExtResource("2_r7y2t")]({
+&"idle": SubResource("Resource_7nox7"),
+&"walk": SubResource("Resource_fhnv6")
+})
+metadata/_custom_type_script = "uid://bk6djqwqor3ka"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyjtx"]
 atlas = ExtResource("6_7nox7")
@@ -349,7 +370,7 @@ animations = [{
 
 [node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = ExtResource("1_yb0an")
-config = ExtResource("2_ax8xb")
+config = SubResource("Resource_ddj48")
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
 

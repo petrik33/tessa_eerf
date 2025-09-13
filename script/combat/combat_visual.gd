@@ -11,7 +11,7 @@ func setup(state: CombatState):
 
 
 func visualize(state: CombatState, command: CombatCommandBase, buffer: CombatActionsBuffer):
-	director.play(writer.sequence(state, command, buffer))
+	await director.play(writer.sequence(state, command, buffer))
 
 
 func reset():

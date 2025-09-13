@@ -1,10 +1,12 @@
-[gd_scene load_steps=57 format=3 uid="uid://dx0g014t166re"]
+[gd_scene load_steps=68 format=3 uid="uid://dx0g014t166re"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit.gd" id="1_i7f35"]
-[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_ro02e"]
+[ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_u4sfu"]
+[ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_fwstl"]
 [ext_resource type="Texture2D" uid="uid://bxcj0cp6dvrys" path="res://asset/texture/unit/blind_huntress/6. Dash 112 x 56.png" id="5_0v5xn"]
 [ext_resource type="Texture2D" uid="uid://f2f0q3n320d7" path="res://asset/texture/unit/blind_huntress/1. Idle 48 x 48.png" id="5_q2b0d"]
 [ext_resource type="Texture2D" uid="uid://dgkqoerpj2gik" path="res://asset/texture/unit/blind_huntress/4. Fall 48 x 48.png" id="5_ro02e"]
+[ext_resource type="Texture2D" uid="uid://cqmpk5e1n543k" path="res://asset/texture/unit/blind_huntress/7. Hit 48 x 48.png" id="5_u4sfu"]
 [ext_resource type="Texture2D" uid="uid://bmx6c1q4tpa1h" path="res://asset/texture/unit/blind_huntress/3. Jump 48 x 48.png" id="6_ff1j4"]
 [ext_resource type="Texture2D" uid="uid://cmsr6e540231s" path="res://asset/texture/unit/blind_huntress/2. Run 48 x 48.png" id="7_ro02e"]
 [ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk.tscn" id="9_ajifw"]
@@ -12,6 +14,34 @@
 [ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="10_3dman"]
 [ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="11_js656"]
 [ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="12_ll718"]
+[ext_resource type="PackedScene" uid="uid://1l6hpsowrlfl" path="res://scene/unit_components/hurt.tscn" id="14_u4sfu"]
+
+[sub_resource type="Resource" id="Resource_c3ipx"]
+script = ExtResource("2_u4sfu")
+performer = NodePath("Resolvers/Idle")
+effects = Array[NodePath]([])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_ea563"]
+script = ExtResource("2_u4sfu")
+performer = NodePath("Resolvers/Walk")
+effects = Array[NodePath]([NodePath("Effects/FaceWalkDirection"), NodePath("Effects/PlayWalkAnimation")])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_ajifw"]
+script = ExtResource("2_u4sfu")
+performer = NodePath("Resolvers/Hurt")
+effects = Array[NodePath]([])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_3dman"]
+script = ExtResource("3_fwstl")
+resolvers = Dictionary[StringName, ExtResource("2_u4sfu")]({
+&"hurt": SubResource("Resource_ajifw"),
+&"idle": SubResource("Resource_c3ipx"),
+&"walk": SubResource("Resource_ea563")
+})
+metadata/_custom_type_script = "uid://bk6djqwqor3ka"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgpv3"]
 atlas = ExtResource("5_0v5xn")
@@ -47,6 +77,22 @@ region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uymh2"]
 atlas = ExtResource("5_ro02e")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lugw1"]
+atlas = ExtResource("5_u4sfu")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnoxl"]
+atlas = ExtResource("5_u4sfu")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_310ov"]
+atlas = ExtResource("5_u4sfu")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_re6j3"]
+atlas = ExtResource("5_u4sfu")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rvcoe"]
@@ -226,6 +272,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_lugw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnoxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_310ov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_re6j3")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rvcoe")
 }, {
 "duration": 1.0,
@@ -354,7 +417,7 @@ animations = [{
 
 [node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = ExtResource("1_i7f35")
-config = ExtResource("2_ro02e")
+config = SubResource("Resource_3dman")
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
 
@@ -362,19 +425,25 @@ metadata/_custom_type_script = "uid://br5qv3kv304kl"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 sprite_frames = SubResource("SpriteFrames_ll718")
-animation = &"idle"
-frame_progress = 0.41105
+animation = &"hurt"
 offset = Vector2(-1, -9)
 
-[node name="Walk" parent="." node_paths=PackedStringArray("moved_node") instance=ExtResource("9_ajifw")]
-moved_node = NodePath("../Physical")
+[node name="Resolvers" type="Node" parent="."]
 
-[node name="FaceWalkDirection" parent="." node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("10_3dman")]
-physical = NodePath("../Physical")
-sprite = NodePath("../Physical/AnimatedSprite2D")
+[node name="Idle" parent="Resolvers" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("11_js656")]
+animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
 
-[node name="Idle" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("11_js656")]
-animated_sprite = NodePath("../Physical/AnimatedSprite2D")
+[node name="Hurt" parent="Resolvers" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("14_u4sfu")]
+animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
 
-[node name="PlayWalkAnimation" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("12_ll718")]
-animated_sprite = NodePath("../Physical/AnimatedSprite2D")
+[node name="Walk" parent="Resolvers" node_paths=PackedStringArray("moved_node") instance=ExtResource("9_ajifw")]
+moved_node = NodePath("../../Physical")
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="FaceWalkDirection" parent="Effects" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("10_3dman")]
+physical = NodePath("../../Physical")
+sprite = NodePath("../../Physical/AnimatedSprite2D")
+
+[node name="PlayWalkAnimation" parent="Effects" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("12_ll718")]
+animated_sprite = NodePath("../../Physical/AnimatedSprite2D")

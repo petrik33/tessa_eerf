@@ -758,12 +758,12 @@ cache/0/10/0/glyphs/28/size = Vector2(8, 10)
 cache/0/10/0/glyphs/28/uv_rect = Rect2(103, 1, 8, 10)
 cache/0/10/0/glyphs/28/texture_idx = 0
 
-[node name="CombatSession" type="Node" node_paths=PackedStringArray("visual", "controller", "ui", "combat")]
+[node name="CombatSession" type="Node" node_paths=PackedStringArray("combat", "controller", "visual", "ui")]
 script = ExtResource("1_rdbvd")
-visual = NodePath("Visual")
-controller = NodePath("HotSeatController")
-ui = NodePath("UI")
 combat = NodePath("Combat")
+controller = NodePath("HotSeatController")
+visual = NodePath("Visual")
+ui = NodePath("UI")
 metadata/_custom_type_script = "uid://cat4m8lo70qu3"
 
 [node name="Combat" type="Node" parent="." node_paths=PackedStringArray("turn_system")]

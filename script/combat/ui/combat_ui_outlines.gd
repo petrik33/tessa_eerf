@@ -33,6 +33,8 @@ func update_turn_context(turn_context: CombatTurnContext) -> void:
 			)
 		)
 	)
+	mouse_pick_outline.grid = null
+	move_path_outline.grid = null
 
 
 func update_potential_command(turn_context: CombatTurnContext, command: CombatCommandBase) -> void:

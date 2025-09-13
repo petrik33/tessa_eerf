@@ -16,6 +16,15 @@ func reset():
 	unit_markers.destroy_units_left_markers()
 
 
+func start_turn(turn_context: CombatTurnContext):
+	enable_turn_outlines(turn_context)
+
+
+func finish_turn():
+	disable_turn_outlines()
+	Input.set_custom_mouse_cursor(cursor_arrow)
+
+
 func enable_turn_outlines(turn_context: CombatTurnContext):
 	outlines.show()
 	outlines.update_turn_context(turn_context)

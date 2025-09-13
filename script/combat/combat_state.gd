@@ -85,6 +85,13 @@ func apply_action(action: CombatActionBase):
 	if action is CombatActionAppendToTurnQueue:
 		append_to_turn_queue(action.unit_handle)
 		return
+	if action is CombatActionMeleeAttack:
+		var defending_unit := unit(action.defending)
+		var stacks_died = action.damage / defending_unit.unit.combat_stats.hp
+		var hp_damaged = action.damage % defending_unit.unit.combat_stats.hp
+		defending_unit.hp -= hp_damaged
+		defending_unit.stack_size -= stacks_died
+		return
 
 
 func append_to_turn_queue(unit_handle: CombatUnitHandle):

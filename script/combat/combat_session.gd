@@ -1,14 +1,20 @@
 class_name CombatSession extends Node
 
 
-@export var visual: CombatVisual
-@export var controller: CombatController
-@export var ui: CombatUI
 @export var combat: Combat
+@export var controller: CombatController
+@export var visual: CombatVisual
+@export var ui: CombatUI
+
+# TODO: Configuration system
+@export var wait_visual := true
 
 
 var services: CombatServices
 var turn_context: CombatTurnContext
+
+
+const VISUAL_WAIT_REASON := "visual_playing"
 
 
 func _enter_tree() -> void:
@@ -29,6 +35,8 @@ func _exit_tree() -> void:
 
 func _on_combat_started():
 	services = CombatServices.new(combat.definition)
+	if wait_visual:
+		combat.add_auto_wait(VISUAL_WAIT_REASON)
 	controller.potential_command_changed.connect(_on_controller_potential_command_changed)
 	controller.command_requested.connect(_on_controller_command_requested)
 	controller.setup()
@@ -43,6 +51,8 @@ func _on_combat_finished():
 	controller.reset()
 	controller.command_requested.disconnect(_on_controller_command_requested)
 	controller.potential_command_changed.disconnect(_on_controller_potential_command_changed)
+	if wait_visual:
+		combat.remove_auto_wait(VISUAL_WAIT_REASON)
 
 
 func _on_combat_turn_started(turn_handle: CombatHandle):
@@ -57,20 +67,21 @@ func _on_combat_turn_started(turn_handle: CombatHandle):
 	if not turn_controlled:
 		return
 	controller.enable(turn_context)
-	ui.enable_turn_outlines(turn_context)
+	ui.start_turn(turn_context)
 
 
 func _on_combat_turn_finished(turn_handle: CombatHandle):
 	if not controller.is_turn_controlled(turn_handle):
 		return
-	ui.disable_turn_outlines()
+	ui.finish_turn()
 	controller.disable()
 
 
 func _on_combat_command_processed(command: CombatCommandBase, actions: CombatActionsBuffer):
-	visual.visualize(turn_context.observed_state, command, actions)
+	await visual.visualize(turn_context.observed_state, command, actions)
 	# TODO: Pass proper handle to observe state
 	ui.update_observed_state(combat.observe_state())
+	combat.remove_wait(VISUAL_WAIT_REASON)
 
 
 func _on_controller_potential_command_changed(command: CombatCommandBase):
@@ -79,3 +90,7 @@ func _on_controller_potential_command_changed(command: CombatCommandBase):
 
 func _on_controller_command_requested(command: CombatCommandBase):
 	combat.request_command(command)
+	
+	
+func _on_visual_queue_empty():
+	pass	

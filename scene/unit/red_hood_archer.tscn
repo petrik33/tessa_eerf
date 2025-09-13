@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://bqq7xa1o1e1io"]
+[gd_scene load_steps=45 format=3 uid="uid://bqq7xa1o1e1io"]
 
 [ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit.gd" id="1_thga5"]
-[ext_resource type="Resource" uid="uid://cyn777tde54ja" path="res://resource/combat_visual/unit_config/combat_visual_unit_config_default.tres" id="2_hg1j5"]
+[ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_8x6yu"]
+[ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_thga5"]
 [ext_resource type="Texture2D" uid="uid://cyr5endd10o6h" path="res://asset/texture/unit/red_hood_archer/spr_ArcherAttack_strip_NoBkg.png" id="4_2ehl4"]
 [ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="6_mtyab"]
 [ext_resource type="Texture2D" uid="uid://bfvqi3iwbixhb" path="res://asset/texture/unit/red_hood_archer/spr_ArcherRun_strip_NoBkg.png" id="7_hncd6"]
@@ -9,6 +10,26 @@
 [ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="9_rqjpj"]
 [ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="10_nqpyj"]
 [ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="11_xpkhi"]
+
+[sub_resource type="Resource" id="Resource_hg1j5"]
+script = ExtResource("2_8x6yu")
+performer = NodePath("Idle")
+effects = Array[NodePath]([])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_hmb3u"]
+script = ExtResource("2_8x6yu")
+performer = NodePath("Walk")
+effects = Array[NodePath]([NodePath("FaceWalkDirection"), NodePath("PlayWalkAnimation")])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_fg625"]
+script = ExtResource("3_thga5")
+resolvers = Dictionary[StringName, ExtResource("2_8x6yu")]({
+&"idle": SubResource("Resource_hg1j5"),
+&"walk": SubResource("Resource_hmb3u")
+})
+metadata/_custom_type_script = "uid://bk6djqwqor3ka"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qykq"]
 atlas = ExtResource("6_mtyab")
@@ -240,7 +261,7 @@ animations = [{
 
 [node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = ExtResource("1_thga5")
-config = ExtResource("2_hg1j5")
+config = SubResource("Resource_fg625")
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://br5qv3kv304kl"
 

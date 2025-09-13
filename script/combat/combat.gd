@@ -19,6 +19,9 @@ signal wait_finished()
 
 
 func start():
+	turn_system.wait_started.connect(_on_turn_system_wait_started)
+	turn_system.wait_reason_changed.connect(_on_turn_system_wait_reason_changed)
+	turn_system.wait_finished.connect(_on_turn_system_wait_finished)
 	_state = definition.initializer().create_initial_state()
 	rules.fill_initial_state(_state)
 	_services = CombatServices.new(definition)
@@ -58,10 +61,29 @@ func request_command(command: CombatCommandBase):
 func finish():
 	turn_system.finish()
 	finished.emit()
+	turn_system.wait_started.disconnect(_on_turn_system_wait_started)
+	turn_system.wait_reason_changed.disconnect(_on_turn_system_wait_reason_changed)
+	turn_system.wait_finished.disconnect(_on_turn_system_wait_finished)
 
 
 func observe_state(_observer_handle: CombatHandle = null) -> CombatState:
 	return _state
+
+
+func add_wait(reason: StringName):
+	turn_system.add_wait(reason)
+
+
+func remove_wait(reason: StringName):
+	turn_system.remove_wait(reason)
+
+
+func add_auto_wait(reason: StringName):
+	turn_system.add_auto_wait(reason)
+
+
+func remove_auto_wait(reason: StringName):
+	turn_system.remove_auto_wait(reason)
 
 
 var _services: CombatServices

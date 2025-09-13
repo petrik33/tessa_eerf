@@ -11,3 +11,17 @@ static func move(state: CombatState, services: CombatServices, id_path: PackedIn
 		state.current_unit_handle(),
 		services.navigation.path(id_path)
 	)
+	
+	
+static func melee_attack(
+	attacking: CombatUnitHandle, 
+	defending: CombatUnitHandle,
+	from_hex: Vector2i,
+	damage: int
+) -> CombatActionMeleeAttack:
+	var action := CombatActionMeleeAttack.new()
+	action.attacking = attacking
+	action.defending = defending
+	action.from_hex = from_hex
+	action.damage = damage
+	return action

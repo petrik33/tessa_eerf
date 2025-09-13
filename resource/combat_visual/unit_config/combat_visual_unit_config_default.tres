@@ -1,23 +1,30 @@
-[gd_resource type="Resource" script_class="CombatVisualUnitConfig" load_steps=5 format=3 uid="uid://cyn777tde54ja"]
+[gd_resource type="Resource" script_class="CombatVisualUnitConfig" load_steps=6 format=3 uid="uid://cyn777tde54ja"]
 
 [ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="1_rq7bh"]
 [ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="2_d8a0q"]
 
 [sub_resource type="Resource" id="Resource_4qykq"]
 script = ExtResource("1_rq7bh")
-performer = NodePath("Idle")
+performer = NodePath("Resolvers/Idle")
 effects = Array[NodePath]([])
 metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
 
 [sub_resource type="Resource" id="Resource_iy3cg"]
 script = ExtResource("1_rq7bh")
-performer = NodePath("Walk")
+performer = NodePath("Resolvers/Walk")
 effects = Array[NodePath]([NodePath("FaceWalkDirection"), NodePath("PlayWalkAnimation")])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_rq7bh"]
+script = ExtResource("1_rq7bh")
+performer = NodePath("Hurt")
+effects = Array[NodePath]([])
 metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
 
 [resource]
 script = ExtResource("2_d8a0q")
 resolvers = Dictionary[StringName, ExtResource("1_rq7bh")]({
+&"hurt": SubResource("Resource_rq7bh"),
 &"idle": SubResource("Resource_4qykq"),
 &"walk": SubResource("Resource_iy3cg")
 })

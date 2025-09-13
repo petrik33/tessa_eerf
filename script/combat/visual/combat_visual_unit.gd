@@ -24,6 +24,7 @@ func get_performer(resolver: CombatVisualActionResolver) -> Node:
 func get_effects(resolver: CombatVisualActionResolver) -> Array[Node]:
 	var effects: Array[Node] = []
 	for path in resolver.effects:
+		assert(get_node(path) != null, "Incorrect effect node path: %s" % [path])
 		effects.push_back(get_node(path))
 	return effects
 

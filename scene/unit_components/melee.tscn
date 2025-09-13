@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcca6somsn7b5"]
+
+[sub_resource type="GDScript" id="GDScript_8x7yc"]
+script/source = "extends Node
+
+@export var animated_sprite: AnimatedSprite2D
+@export var animation_name: String = \"melee\"
+
+func melee(action: CombatVisualUnitActionMelee):
+	var attack_vector := animated_sprite.position - action.attacked_position 
+	animated_sprite.play(animation_name)
+	animated_sprite.scale = Vector2(
+		abs(animated_sprite.scale.x) if cos(attack_vector.angle()) > 0 else -abs(animated_sprite.scale.x),
+		animated_sprite.scale.y
+	)
+	return animated_sprite.animation_finished
+"
+
+[node name="Melee" type="Node"]
+script = SubResource("GDScript_8x7yc")

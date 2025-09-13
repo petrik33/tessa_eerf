@@ -31,6 +31,19 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 				_get_unit_enemy_direction(state.unit(action.unit_handle))
 			))
 			continue
+		if action is CombatActionMeleeAttack:
+			queue.push_back(CombatVisualActions.melee(action.attacking, hex_layout.hex_to_pixel(action.from_hex)))
+			queue.push_back(CombatVisualActions.idle(
+				action.attacking,
+				hex_layout.hex_to_pixel(action.from_hex),
+				_get_unit_enemy_direction(state.unit(action.attacking))
+			))
+			queue.push_back(CombatVisualActions.hurt(action.defending))
+			queue.push_back(CombatVisualActions.idle(
+				action.defending,
+				hex_layout.hex_to_pixel(state.unit(action.defending).placement),
+				_get_unit_enemy_direction(state.unit(action.defending))
+			))
 	return queue
 
 

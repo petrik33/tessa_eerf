@@ -22,6 +22,7 @@ func is_turn_controlled(turn_handle: CombatHandle):
 
 func enable(turn_context: CombatTurnContext):
 	input.enable(turn_context)
+	
 
 
 func disable():

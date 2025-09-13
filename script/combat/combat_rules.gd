@@ -24,6 +24,19 @@ func fill_actions_buffer(command: CombatCommandBase, state: CombatState, service
 		buffer.push_back(CombatActions.move(state, services, command.move_id_path))
 		buffer.push_back(CombatActionPopTurnQueue.new())
 		buffer.push_back(CombatActionAppendToTurnQueue.new(state.current_unit_handle()))
+		var attacking_unit_handle := state.current_unit_handle()
+		var attacking_unit := state.unit(attacking_unit_handle)
+		var attacked_unit := state.find_unit_handle_by_hex(command.attacked_hex)
+		var attacking_hex_id = command.move_id_path[command.move_id_path.size() - 1]
+		var attacking_hex := services.navigation.hex(attacking_hex_id)
+		# TODO: Proper damage calculation
+		var damage := attacking_unit.unit.combat_stats.damage_range.y 
+		buffer.push_back(CombatActions.melee_attack(
+			attacking_unit_handle,
+			attacked_unit,
+			attacking_hex,
+			damage
+		))
 		return
 
 
