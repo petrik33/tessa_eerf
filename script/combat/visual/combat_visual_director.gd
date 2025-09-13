@@ -6,7 +6,7 @@ class_name CombatVisualDirector extends Node
 @export var hex_layout: HexLayout
 
 
-func get_unit(unit_handle: CombatUnitHandle) -> CombatVisualUnit:
+func get_unit(unit_handle: CombatUnitHandle) -> CombatVisualUnitBase:
 	return _units[unit_handle.id()]
 
 
@@ -41,9 +41,9 @@ func play(queue: CombatVisualActionsQueue):
 
 var _is_playing: bool
 var _is_setup: bool
-var _units: Dictionary[String, CombatVisualUnit]
+var _units: Dictionary[String, CombatVisualUnitBase]
 
 
-func _instantiate_unit_visuals(unit: Unit) -> CombatVisualUnit:
+func _instantiate_unit_visuals(unit: Unit) -> CombatVisualUnitBase:
 	var unit_scene = units_map.units[unit.uid]
 	return unit_scene.instantiate()
