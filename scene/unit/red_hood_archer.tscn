@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://bqq7xa1o1e1io"]
 
-[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit.gd" id="1_thga5"]
+[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit_deprecated.gd" id="1_thga5"]
 [ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_8x6yu"]
 [ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_thga5"]
 [ext_resource type="Texture2D" uid="uid://cyr5endd10o6h" path="res://asset/texture/unit/red_hood_archer/spr_ArcherAttack_strip_NoBkg.png" id="4_2ehl4"]

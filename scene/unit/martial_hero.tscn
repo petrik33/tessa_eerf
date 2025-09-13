@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://djblfmp6cwiwq"]
 
-[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit.gd" id="1_fftru"]
+[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit_deprecated.gd" id="1_fftru"]
 [ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_qb0rn"]
 [ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_02ptm"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="5_qb0rn"]
@@ -19,16 +19,16 @@ performer = NodePath("Resolvers/Idle")
 effects = Array[NodePath]([])
 metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
 
-[sub_resource type="Resource" id="Resource_iy3cg"]
-script = ExtResource("2_qb0rn")
-performer = NodePath("Resolvers/Walk")
-effects = Array[NodePath]([NodePath("Effects/FaceWalkDirection"), NodePath("Effects/PlayWalkAnimation")])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
-
 [sub_resource type="Resource" id="Resource_qb0rn"]
 script = ExtResource("2_qb0rn")
 performer = NodePath("Resolvers/Melee")
 effects = Array[NodePath]([])
+metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+
+[sub_resource type="Resource" id="Resource_iy3cg"]
+script = ExtResource("2_qb0rn")
+performer = NodePath("Resolvers/Walk")
+effects = Array[NodePath]([NodePath("Effects/FaceWalkDirection"), NodePath("Effects/PlayWalkAnimation")])
 metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
 
 [sub_resource type="Resource" id="Resource_tx6bj"]
