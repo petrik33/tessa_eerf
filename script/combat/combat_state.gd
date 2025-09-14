@@ -92,7 +92,21 @@ func apply_action(action: CombatActionBase):
 		defending_unit.hp -= hp_damaged
 		defending_unit.stack_size -= stacks_died
 		return
+	if action is CombatActionMeleeAttack:
+		apply_damage(action.defending, action.damage)
+		return
+	if action is CombatActionRangedAttack:
+		apply_damage(action.target, action.damage)
+		return
 
 
 func append_to_turn_queue(unit_handle: CombatUnitHandle):
 	turn_queue.append(unit_handle)
+
+
+func apply_damage(unit_handle: CombatUnitHandle, damage: int):
+	var defending_unit := unit(unit_handle)
+	var stacks_died = damage / defending_unit.unit.combat_stats.hp
+	var hp_damaged = damage % defending_unit.unit.combat_stats.hp
+	defending_unit.hp -= hp_damaged
+	defending_unit.stack_size -= stacks_died

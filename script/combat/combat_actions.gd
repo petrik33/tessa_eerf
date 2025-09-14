@@ -25,3 +25,15 @@ static func melee_attack(
 	action.from_hex = from_hex
 	action.damage = damage
 	return action
+
+
+static func ranged_attack(
+	attacking: CombatUnitHandle, 
+	target: CombatUnitHandle,
+	damage: int
+) -> CombatActionRangedAttack:
+	var action := CombatActionRangedAttack.new()
+	action.attacking = attacking
+	action.target = target
+	action.damage = damage
+	return action

@@ -43,3 +43,11 @@ static func hurt(unit_handle: CombatUnitHandle) -> CombatVisualUnitActionHurt:
 	action.unit_handle = unit_handle
 	action.id = HURT
 	return action
+
+
+static func ranged(unit_handle: CombatUnitHandle, target: Vector2) -> CombatVisualUnitActionRanged:
+	var action := CombatVisualUnitActionRanged.new()
+	action.unit_handle = unit_handle
+	action.id = RANGED
+	action.target = target
+	return action

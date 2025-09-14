@@ -38,7 +38,7 @@ func update_turn_context(turn_context: CombatTurnContext) -> void:
 
 
 func update_potential_command(turn_context: CombatTurnContext, command: CombatCommandBase) -> void:
-	if command == null:
+	if command == null or command is CombatCommandRangedAttackUnit:
 		mouse_pick_outline.hide()
 		move_path_outline.hide()
 		return
@@ -46,10 +46,10 @@ func update_potential_command(turn_context: CombatTurnContext, command: CombatCo
 	mouse_pick_outline.show()
 	move_path_outline.show()
 
-	if command is CombatCommandAttackUnit:
-		move_path_outline.grid = HexGrids.points(
-			turn_context.services.navigation.path(command.move_id_path)
-		)
+	if command is CombatCommandMeleeAttackUnit:
+		var path := turn_context.services.navigation.path(command.move_id_path)
+		path.append(command.attacked_hex)
+		move_path_outline.grid = HexGrids.points(path)
 		mouse_pick_outline.grid = HexGrids.point(command.attacked_hex)
 	elif command is CombatCommandMoveUnit:
 		move_path_outline.grid = HexGrids.points(

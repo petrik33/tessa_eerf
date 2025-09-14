@@ -6,6 +6,7 @@ class_name CombatUI extends Node
 @export var cursor_arrow: Texture2D
 @export var cursor_point: Texture2D
 @export var cursor_attack_melee: Texture2D
+@export var cursor_attack_ranged: Texture2D
 
 
 func setup(initial_state: CombatState, visual: CombatVisual):
@@ -48,5 +49,7 @@ func update_cursor(command: CombatCommandBase):
 		Input.set_custom_mouse_cursor(cursor_arrow)
 	elif command is CombatCommandMoveUnit:
 		Input.set_custom_mouse_cursor(cursor_point, Input.CURSOR_ARROW, Vector2(5, 0))
-	elif command is CombatCommandAttackUnit:
-		Input.set_custom_mouse_cursor(cursor_attack_melee, Input.CURSOR_ARROW)
+	elif command is CombatCommandMeleeAttackUnit:
+		Input.set_custom_mouse_cursor(cursor_attack_melee)
+	elif command is CombatCommandRangedAttackUnit:
+		Input.set_custom_mouse_cursor(cursor_attack_ranged)

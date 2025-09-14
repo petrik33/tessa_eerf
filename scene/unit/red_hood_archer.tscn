@@ -17,6 +17,10 @@ script/source = "extends CombatVisualUnit
 
 func idle(action: CombatVisualUnitActionGoIdle):
 	go_idle()
+	animated_sprite.scale = Vector2(
+		abs(animated_sprite.scale.x) if cos(action.enemy_direction) > 0 else -abs(animated_sprite.scale.x),
+		animated_sprite.scale.y
+	)
 
 
 func walk(action: CombatVisualUnitActionWalk):
@@ -33,7 +37,9 @@ func hurt(action: CombatVisualUnitActionHurt):
 	go_idle()
 
 
-func ranged()
+func ranged(action: CombatVisualUnitActionRanged):
+	animated_sprite.play(\"ranged\")
+	return animated_sprite.animation_finished
 
 
 func go_idle():
@@ -234,7 +240,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ur0ki")
 }],
-"loop": true,
+"loop": false,
 "name": &"ranged",
 "speed": 5.0
 }, {
@@ -268,19 +274,27 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="RedHoodArcher" type="Node2D"]
+[node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = SubResource("GDScript_5yi5y")
+physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_qu5vg")
-animation = &"idle"
+animation = &"ranged"
+frame = 13
 offset = Vector2(-1, -3)
 
 [node name="Components" type="Node" parent="."]
 
-[node name="FaceWalkDirection" parent="Components" instance=ExtResource("7_ql1wo")]
+[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("7_ql1wo")]
+unique_name_in_owner = true
+physical = NodePath("../../Physical")
+sprite = NodePath("../../Physical/AnimatedSprite2D")
 
-[node name="WalkAlongPath" parent="Components" instance=ExtResource("8_2ehl4")]
+[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("8_2ehl4")]
+unique_name_in_owner = true
+moved_node = NodePath("../../Physical")

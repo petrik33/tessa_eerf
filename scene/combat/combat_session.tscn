@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://cjqerd1pwwpv1"]
+[gd_scene load_steps=37 format=4 uid="uid://cjqerd1pwwpv1"]
 
 [ext_resource type="Script" uid="uid://cat4m8lo70qu3" path="res://script/combat/combat_session.gd" id="1_rdbvd"]
 [ext_resource type="Script" uid="uid://3bxue3cl0qjn" path="res://script/combat/dbg_combat_controller.gd" id="2_1ioox"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://dce88q3ja7wu" path="res://script/combat/visual/combat_visual_director.gd" id="12_ppt2y"]
 [ext_resource type="Resource" uid="uid://cop36n7ulsjs4" path="res://resource/combat_visual/combat_visual_unit_map.tres" id="13_3jy7r"]
 [ext_resource type="Texture2D" uid="uid://d1u8ho7e010r2" path="res://asset/texture/battle_background/homm3_swamp/Combat_Swamp.png" id="14_5r77e"]
+[ext_resource type="Texture2D" uid="uid://b6ksxv6834hrv" path="res://asset/texture/ui/cursor/cursor_attack_ranged.tres" id="14_jre1e"]
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="15_s1x26"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="16_w8ypk"]
 [ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="17_xyeuu"]
@@ -802,6 +803,7 @@ unit_markers = NodePath("UnitsLeftMarkers")
 cursor_arrow = ExtResource("5_ah1oa")
 cursor_point = ExtResource("6_7x530")
 cursor_attack_melee = ExtResource("7_kjvss")
+cursor_attack_ranged = ExtResource("14_jre1e")
 metadata/_custom_type_script = "uid://ulh2ys5y8bdo"
 
 [node name="UnitsLeftMarkers" type="Node" parent="UI"]

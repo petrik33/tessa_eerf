@@ -21,3 +21,7 @@ func is_an_ally(ally_army_handle: CombatArmyHandle) -> bool:
 
 func is_an_enemy(ally_army_handle: CombatArmyHandle) -> bool:
 	return not army_handle.is_equal(ally_army_handle)
+
+
+func is_ranged() -> bool:
+	return stats().range > 1

@@ -10,5 +10,4 @@ class_name UnitCombatStats extends Resource
 @export var speed := 5 # movement points
 @export var initiative := 10 # determines turn order
 
-enum RangeType {NONE, HALF, MAX}
-@export var range_type := RangeType.NONE
+@export var range := 1
