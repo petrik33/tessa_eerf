@@ -1,35 +1,44 @@
-[gd_scene load_steps=45 format=3 uid="uid://bqq7xa1o1e1io"]
+[gd_scene load_steps=38 format=3 uid="uid://bqq7xa1o1e1io"]
 
-[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit_deprecated.gd" id="1_thga5"]
-[ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_8x6yu"]
-[ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_thga5"]
 [ext_resource type="Texture2D" uid="uid://cyr5endd10o6h" path="res://asset/texture/unit/red_hood_archer/spr_ArcherAttack_strip_NoBkg.png" id="4_2ehl4"]
 [ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="6_mtyab"]
 [ext_resource type="Texture2D" uid="uid://bfvqi3iwbixhb" path="res://asset/texture/unit/red_hood_archer/spr_ArcherRun_strip_NoBkg.png" id="7_hncd6"]
-[ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk.tscn" id="8_i4cgt"]
-[ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="9_rqjpj"]
-[ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="10_nqpyj"]
-[ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="11_xpkhi"]
+[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="7_ql1wo"]
+[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="8_2ehl4"]
 
-[sub_resource type="Resource" id="Resource_hg1j5"]
-script = ExtResource("2_8x6yu")
-performer = NodePath("Idle")
-effects = Array[NodePath]([])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+[sub_resource type="GDScript" id="GDScript_5yi5y"]
+script/source = "extends CombatVisualUnit
 
-[sub_resource type="Resource" id="Resource_hmb3u"]
-script = ExtResource("2_8x6yu")
-performer = NodePath("Walk")
-effects = Array[NodePath]([NodePath("FaceWalkDirection"), NodePath("PlayWalkAnimation")])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
 
-[sub_resource type="Resource" id="Resource_fg625"]
-script = ExtResource("3_thga5")
-resolvers = Dictionary[StringName, ExtResource("2_8x6yu")]({
-&"idle": SubResource("Resource_hg1j5"),
-&"walk": SubResource("Resource_hmb3u")
-})
-metadata/_custom_type_script = "uid://bk6djqwqor3ka"
+@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
+@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
+
+
+func idle(action: CombatVisualUnitActionGoIdle):
+	go_idle()
+
+
+func walk(action: CombatVisualUnitActionWalk):
+	animated_sprite.play(\"walk\")
+	face_walk_direction.set_process(true)
+	await walk_along_path.walk(action)
+	face_walk_direction.set_process(false)
+	go_idle()
+
+
+func hurt(action: CombatVisualUnitActionHurt):
+	animated_sprite.play(\"hurt\")
+	await animated_sprite.animation_finished
+	go_idle()
+
+
+func ranged()
+
+
+func go_idle():
+	animated_sprite.play(\"idle\")
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qykq"]
 atlas = ExtResource("6_mtyab")
@@ -259,11 +268,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("physical_node")]
-script = ExtResource("1_thga5")
-config = SubResource("Resource_fg625")
-physical_node = NodePath("Physical")
-metadata/_custom_type_script = "uid://br5qv3kv304kl"
+[node name="RedHoodArcher" type="Node2D"]
+script = SubResource("GDScript_5yi5y")
+metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
@@ -272,15 +279,8 @@ sprite_frames = SubResource("SpriteFrames_qu5vg")
 animation = &"idle"
 offset = Vector2(-1, -3)
 
-[node name="Walk" parent="." node_paths=PackedStringArray("moved_node") instance=ExtResource("8_i4cgt")]
-moved_node = NodePath("../Physical")
+[node name="Components" type="Node" parent="."]
 
-[node name="FaceWalkDirection" parent="." node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("9_rqjpj")]
-physical = NodePath("../Physical")
-sprite = NodePath("../Physical/AnimatedSprite2D")
+[node name="FaceWalkDirection" parent="Components" instance=ExtResource("7_ql1wo")]
 
-[node name="Idle" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("10_nqpyj")]
-animated_sprite = NodePath("../Physical/AnimatedSprite2D")
-
-[node name="PlayWalkAnimation" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("11_xpkhi")]
-animated_sprite = NodePath("../Physical/AnimatedSprite2D")
+[node name="WalkAlongPath" parent="Components" instance=ExtResource("8_2ehl4")]
