@@ -20,7 +20,7 @@ script/source = "extends CombatVisualUnit
 
 
 func idle(action: CombatVisualUnitActionGoIdle):
-	animated_sprite.play(\"idle\")
+	go_idle()
 
 
 func walk(action: CombatVisualUnitActionWalk):
@@ -28,6 +28,16 @@ func walk(action: CombatVisualUnitActionWalk):
 	face_walk_direction.set_process(true)
 	await walk_along_path.walk(action)
 	face_walk_direction.set_process(false)
+	go_idle()
+
+
+func hurt(action: CombatVisualUnitActionHurt):
+	animated_sprite.play(\"hurt\")
+	await animated_sprite.animation_finished
+	go_idle()
+
+
+func go_idle():
 	animated_sprite.play(\"idle\")
 "
 
