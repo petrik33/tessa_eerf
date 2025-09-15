@@ -868,6 +868,7 @@ metadata/_custom_type_script = "uid://dtavfh04dvr10"
 visible = false
 
 [node name="Coordinates" type="Node2D" parent="HexSpace"]
+visible = false
 script = ExtResource("21_iml5j")
 use_cube_format = false
 font = SubResource("FontFile_sxbbk")
