@@ -14,16 +14,10 @@ script/source = "extends CombatVisualProjectile
 func reach_target():
 	super.reach_target()
 	sprite.hide()
-	hit_animation.rotation = sprite.rotation
 	hit_animation.show()
 	hit_animation.play()
 	await hit_animation.animation_finished
 	queue_free()
-
-
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-	sprite.rotation = (target - position).angle()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_buiht"]
@@ -81,8 +75,7 @@ offset = Vector2(-11.5, 0)
 [node name="HitAnimation" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
-position = Vector2(-78.5, 10.5)
 sprite_frames = SubResource("SpriteFrames_wncif")
 frame = 4
-frame_progress = 0.423373
-offset = Vector2(-11.5, 0)
+frame_progress = 1.0
+offset = Vector2(-90, 10.5)

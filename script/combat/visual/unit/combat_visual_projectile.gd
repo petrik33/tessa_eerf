@@ -4,21 +4,24 @@ class_name CombatVisualProjectile extends Node2D
 signal target_reached()
 
 
-@export var target: Vector2
 @export var speed := 10.0
 
+var target: Vector2
 
-var reached := false
 
-
-func is_target_reached() -> bool:
-	return reached
+func fire_at(pos: Vector2):
+	target = pos
+	rotation = (target - position).angle()
+	set_physics_process(true)
 
 
 func reach_target() -> void:
 	position = target
-	reached = true
 	target_reached.emit()
+	set_physics_process(false)
+
+
+func _ready() -> void:
 	set_physics_process(false)
 
 

@@ -2,6 +2,9 @@
 class_name CombatVisualUnitBase extends Node2D
 
 
+signal executed()
+
+
 func get_physical_node() -> Node2D:
 	assert(false, "not implemented")
 	return null

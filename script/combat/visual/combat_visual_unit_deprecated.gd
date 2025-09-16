@@ -52,6 +52,8 @@ func get_effect_stop_method_name(id: StringName) -> String:
 
 
 func execute(action: CombatVisualUnitActionBase):
+	if not config.resolvers.has(action.id):
+		return
 	var resolver := get_resolver(action.id)
 	var executed = get_performer(resolver).call(action.id, action)
 	var effects = get_effects(resolver)

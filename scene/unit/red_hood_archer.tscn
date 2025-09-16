@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bqq7xa1o1e1io"]
+[gd_scene load_steps=42 format=3 uid="uid://bqq7xa1o1e1io"]
 
 [ext_resource type="PackedScene" uid="uid://heav05t7i22v" path="res://scene/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="1_t3x1p"]
 [ext_resource type="Texture2D" uid="uid://32nuvepknjse" path="res://asset/texture/unit/red_hood_archer/ArcherAttackNoArrow.png" id="2_5yi5y"]
@@ -14,6 +14,10 @@ script/source = "extends CombatVisualUnit
 @export var arrow_pscene: PackedScene
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+
+@onready var arrow_origin: Marker2D = %ArrowOrigin
+
 @onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
 @onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
 
@@ -21,6 +25,9 @@ script/source = "extends CombatVisualUnit
 const IDLE_SPRITE_OFFSET := Vector2(-1.0, -3.0)
 const RANGED_SPRITE_OFFSET := Vector2(2.5, -10.5)
 const ARROW_OFFSET := Vector2(11.0, -13.5)
+
+
+var shooting_target: Vector2
 
 
 func idle(action: CombatVisualUnitActionGoIdle):
@@ -46,14 +53,20 @@ func hurt(action: CombatVisualUnitActionHurt):
 
 
 func ranged(action: CombatVisualUnitActionRanged):
-	animated_sprite.play(\"ranged\")
+	shooting_target = action.target
 	animated_sprite.offset = RANGED_SPRITE_OFFSET
-	await animated_sprite.animation_finished
+	animation_player.play(\"ranged\")
+	await executed
+
+
+func shoot_arrow():
 	var arrow = arrow_pscene.instantiate() as CombatVisualProjectile
-	arrow.position = physical_node.position + ARROW_OFFSET
-	arrow.target = action.target
 	add_sibling(arrow)
+	arrow.position = physical_node.position + arrow_origin.position
+	arrow.z_index = 1
+	arrow.fire_at(shooting_target)
 	await arrow.target_reached
+	executed.emit()
 
 
 func go_idle():
@@ -289,6 +302,80 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_t3x1p"]
+resource_name = "ranged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Physical/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 13]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.633333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_arrow"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Physical/AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ranged"]
+}
+
+[sub_resource type="Animation" id="Animation_vmw4n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Physical/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Physical/AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ranged"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ql1wo"]
+_data = {
+&"RESET": SubResource("Animation_vmw4n"),
+&"ranged": SubResource("Animation_t3x1p")
+}
+
 [node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = SubResource("GDScript_5yi5y")
 arrow_pscene = ExtResource("1_t3x1p")
@@ -301,8 +388,11 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_qu5vg")
 animation = &"ranged"
-frame = 8
 offset = Vector2(2.5, -10.5)
+
+[node name="ArrowOrigin" type="Marker2D" parent="Physical/AnimatedSprite2D"]
+unique_name_in_owner = true
+position = Vector2(8, -13.5)
 
 [node name="Components" type="Node" parent="."]
 
@@ -314,3 +404,9 @@ sprite = NodePath("../../Physical/AnimatedSprite2D")
 [node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("8_2ehl4")]
 unique_name_in_owner = true
 moved_node = NodePath("../../Physical")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ql1wo")
+}
