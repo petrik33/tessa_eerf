@@ -106,7 +106,11 @@ func append_to_turn_queue(unit_handle: CombatUnitHandle):
 
 func apply_damage(unit_handle: CombatUnitHandle, damage: int):
 	var defending_unit := unit(unit_handle)
-	var stacks_died = damage / defending_unit.unit.combat_stats.hp
-	var hp_damaged = damage % defending_unit.unit.combat_stats.hp
-	defending_unit.hp -= hp_damaged
-	defending_unit.stack_size -= stacks_died
+	var stacks_killed := damage / defending_unit.unit.combat_stats.hp
+	var hp_damage := damage % defending_unit.unit.combat_stats.hp
+	var hp_left = defending_unit.hp - hp_damage
+	if hp_left <= 0:
+		stacks_killed += 1
+		hp_left += defending_unit.unit.combat_stats.hp
+	defending_unit.hp = hp_left
+	defending_unit.stack_size -= stacks_killed
