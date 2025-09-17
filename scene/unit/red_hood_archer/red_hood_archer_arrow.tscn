@@ -70,7 +70,7 @@ speed = 1000.0
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = ExtResource("2_n6upi")
-offset = Vector2(-11.5, 0)
+offset = Vector2(-10, 0)
 
 [node name="HitAnimation" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
