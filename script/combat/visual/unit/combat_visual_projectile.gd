@@ -32,5 +32,6 @@ func _physics_process(delta: float) -> void:
 	
 	if dist <= physics_speed:
 		reach_target()
+		return
 	
 	position += to_target.normalized() * physics_speed
