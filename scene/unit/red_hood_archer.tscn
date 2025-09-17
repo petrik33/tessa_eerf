@@ -12,19 +12,17 @@ script/source = "extends CombatVisualUnit
 
 
 @export var arrow_pscene: PackedScene
+@export var shooting_yoffset: float
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 @onready var arrow_origin: Marker2D = %ArrowOrigin
+@onready var idle_offset: Marker2D = %IdleOffset
+@onready var ranged_offset: Marker2D = %RangedOffset
 
 @onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
 @onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
-
-
-const IDLE_SPRITE_OFFSET := Vector2(-1.0, -3.0)
-const RANGED_SPRITE_OFFSET := Vector2(2.5, -10.5)
-const ARROW_OFFSET := Vector2(11.0, -13.5)
 
 
 var shooting_target: Vector2
@@ -54,7 +52,8 @@ func hurt(action: CombatVisualUnitActionHurt):
 
 func ranged(action: CombatVisualUnitActionRanged):
 	shooting_target = action.target
-	animated_sprite.offset = RANGED_SPRITE_OFFSET
+	shooting_target.y += arrow_origin.position.y + shooting_yoffset
+	animated_sprite.offset = -ranged_offset.position
 	animation_player.play(\"ranged\")
 	await executed
 
@@ -62,7 +61,7 @@ func ranged(action: CombatVisualUnitActionRanged):
 func shoot_arrow():
 	var arrow = arrow_pscene.instantiate() as CombatVisualProjectile
 	add_sibling(arrow)
-	arrow.position = physical_node.position + arrow_origin.position
+	arrow.global_position = arrow_origin.global_position
 	arrow.z_index = 1
 	arrow.fire_at(shooting_target)
 	await arrow.target_reached
@@ -71,7 +70,7 @@ func shoot_arrow():
 
 func go_idle():
 	animated_sprite.play(\"idle\")
-	animated_sprite.offset = IDLE_SPRITE_OFFSET
+	animated_sprite.offset = -idle_offset.position
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qykq"]
@@ -302,6 +301,33 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_vmw4n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Physical/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Physical/AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"ranged"]
+}
+
 [sub_resource type="Animation" id="Animation_t3x1p"]
 resource_name = "ranged"
 tracks/0/type = "value"
@@ -343,33 +369,6 @@ tracks/2/keys = {
 "values": [&"ranged"]
 }
 
-[sub_resource type="Animation" id="Animation_vmw4n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Physical/AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Physical/AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"ranged"]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ql1wo"]
 _data = {
 &"RESET": SubResource("Animation_vmw4n"),
@@ -379,6 +378,7 @@ _data = {
 [node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = SubResource("GDScript_5yi5y")
 arrow_pscene = ExtResource("1_t3x1p")
+shooting_yoffset = 4.0
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
@@ -388,11 +388,20 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_qu5vg")
 animation = &"ranged"
-offset = Vector2(2.5, -10.5)
+offset = Vector2(4.5, -10.5)
 
 [node name="ArrowOrigin" type="Marker2D" parent="Physical/AnimatedSprite2D"]
 unique_name_in_owner = true
-position = Vector2(8, -13.5)
+position = Vector2(10, -13.5)
+
+[node name="IdleOffset" type="Marker2D" parent="Physical/AnimatedSprite2D"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-1, 3)
+
+[node name="RangedOffset" type="Marker2D" parent="Physical/AnimatedSprite2D"]
+unique_name_in_owner = true
+position = Vector2(-4.5, 10.5)
 
 [node name="Components" type="Node" parent="."]
 
