@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cqhbrul7iip6p" path="res://script/combat/combat.gd" id="2_wubw6"]
 [ext_resource type="Resource" uid="uid://b7rh5anph2oyf" path="res://resource/combat/combat_rules.tres" id="3_ah1oa"]
 [ext_resource type="Script" uid="uid://bb1ghxsvc6cag" path="res://script/combat/combat_turn_system.gd" id="3_j1ahj"]
-[ext_resource type="Resource" uid="uid://cu7i7k7yynmmt" path="res://resource/combat/combat_definition_test.tres" id="3_kjvss"]
+[ext_resource type="Resource" uid="uid://cu7i7k7yynmmt" path="res://resource/combat/definition/combat_definition_test.tres" id="3_kjvss"]
 [ext_resource type="Script" uid="uid://ulh2ys5y8bdo" path="res://script/combat/ui/combat_ui.gd" id="4_wubw6"]
 [ext_resource type="Script" uid="uid://dn6u3kh4wtkny" path="res://script/combat/combat_hot_seat_controller.gd" id="5_7x530"]
 [ext_resource type="Texture2D" uid="uid://bxqocpjtikd83" path="res://asset/texture/ui/cursor/cursor_arrow.tres" id="5_ah1oa"]
