@@ -281,7 +281,8 @@ moved_node = NodePath("../../Physical")
 [node name="Idle" parent="Resolvers" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("8_vas6a")]
 animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
 
-[node name="Melee" parent="Resolvers" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("11_pjkb0")]
+[node name="Melee" parent="Resolvers" node_paths=PackedStringArray("physical_node", "animated_sprite") instance=ExtResource("11_pjkb0")]
+physical_node = NodePath("../../Physical")
 animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
 
 [node name="Effects" type="Node" parent="."]

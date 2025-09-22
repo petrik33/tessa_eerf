@@ -32,7 +32,8 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 			))
 			continue
 		if action is CombatActionMeleeAttack:
-			queue.push_back(CombatVisualActions.melee(action.attacking, hex_layout.hex_to_pixel(action.from_hex)))
+			var attacked_position := hex_layout.hex_to_pixel(state.unit(action.defending).placement)
+			queue.push_back(CombatVisualActions.melee(action.attacking, attacked_position))
 			queue.push_back(CombatVisualActions.hurt(action.defending))
 			queue.push_back(CombatVisualActions.idle(
 				action.attacking,
@@ -41,7 +42,7 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 			))
 			queue.push_back(CombatVisualActions.idle(
 				action.defending,
-				hex_layout.hex_to_pixel(state.unit(action.defending).placement),
+				attacked_position,
 				_get_unit_enemy_direction(state.unit(action.defending))
 			))
 		if action is CombatActionRangedAttack:
@@ -61,6 +62,6 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 	return queue
 
 
-func _get_unit_enemy_direction(unit: CombatUnit) -> float:
+func _get_unit_enemy_direction(unit: CombatUnit) -> Vector2:
 	# TODO: Solve properly
-	return 0.0 if unit.placement.x < 5 else PI
+	return Vector2.RIGHT if unit.army_handle.id() == "army:0" else Vector2.LEFT

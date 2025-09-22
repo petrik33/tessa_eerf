@@ -21,7 +21,7 @@ static func walk(unit_handle: CombatUnitHandle, path: Array[Vector2]) -> CombatV
 	return action
 
 
-static func idle(unit_handle: CombatUnitHandle, position: Vector2, direction: float) -> CombatVisualUnitActionGoIdle:
+static func idle(unit_handle: CombatUnitHandle, position: Vector2, direction: Vector2) -> CombatVisualUnitActionGoIdle:
 	var action = CombatVisualUnitActionGoIdle.new()
 	action.unit_handle = unit_handle
 	action.position = position

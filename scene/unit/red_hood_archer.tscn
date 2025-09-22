@@ -13,6 +13,7 @@ script/source = "extends CombatVisualUnit
 
 @export var arrow_pscene: PackedScene
 @export var shooting_yoffset: float
+@export_range(0, 360, 0.1, \"radians_as_degrees\") var max_shooting_rotation: float
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
@@ -30,10 +31,8 @@ var shooting_target: Vector2
 
 func idle(action: CombatVisualUnitActionGoIdle):
 	go_idle()
-	animated_sprite.scale = Vector2(
-		abs(animated_sprite.scale.x) if cos(action.enemy_direction) > 0 else -abs(animated_sprite.scale.x),
-		animated_sprite.scale.y
-	)
+	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
+	animated_sprite.rotation = 0
 
 
 func walk(action: CombatVisualUnitActionWalk):
@@ -53,9 +52,19 @@ func hurt(action: CombatVisualUnitActionHurt):
 func ranged(action: CombatVisualUnitActionRanged):
 	shooting_target = action.target
 	shooting_target.y += arrow_origin.position.y + shooting_yoffset
+	
+	var direction = (shooting_target - physical_node.position).normalized()
+	var target_rotation = atan2(direction.y, abs(direction.x))
+	target_rotation = clamp(target_rotation, -max_shooting_rotation, max_shooting_rotation)
+	CombatVisualUtils.node_face_hdirection(animated_sprite, direction)
+	animated_sprite.rotation = target_rotation * animated_sprite.scale.x
+	
 	animated_sprite.offset = -ranged_offset.position
 	animation_player.play(\"ranged\")
+	
 	await executed
+	
+	animated_sprite.rotation = 0
 
 
 func shoot_arrow():
@@ -379,6 +388,7 @@ _data = {
 script = SubResource("GDScript_5yi5y")
 arrow_pscene = ExtResource("1_t3x1p")
 shooting_yoffset = 4.0
+max_shooting_rotation = 0.261799
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
