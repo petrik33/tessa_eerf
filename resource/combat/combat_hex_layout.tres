@@ -5,6 +5,5 @@
 [resource]
 script = ExtResource("1_wt8n2")
 base_hex_rotation = 0.523599
-size = 20
-offset = Vector2(82, 164)
+size = 18
 metadata/_custom_type_script = "uid://bwitt2ghi4geg"

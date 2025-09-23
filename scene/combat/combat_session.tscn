@@ -24,12 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://b6ksxv6834hrv" path="res://asset/texture/ui/cursor/cursor_attack_ranged.tres" id="14_jre1e"]
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="15_s1x26"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="16_w8ypk"]
-[ext_resource type="Resource" uid="uid://b2feo8yu360oc" path="res://resource/combat/combat_hex_grid.tres" id="17_xyeuu"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="18_v1qqa"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="19_8fv3r"]
 [ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/combat_ui_outlines.tscn" id="20_5plje"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="21_iml5j"]
 [ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="22_oomfw"]
+[ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="25_4yhjs"]
 
 [sub_resource type="Resource" id="Resource_4yhjs"]
 script = ExtResource("8_jre1e")
@@ -834,7 +834,7 @@ texture = ExtResource("14_5r77e")
 expand_mode = 1
 
 [node name="HexSpace" type="Node2D" parent="."]
-position = Vector2(82, 164)
+position = Vector2(156, 112)
 script = ExtResource("15_s1x26")
 layout = ExtResource("10_jre1e")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
@@ -846,14 +846,14 @@ physics_interpolation_mode = 2
 material = SubResource("CanvasItemMaterial_fk7f4")
 script = ExtResource("16_w8ypk")
 hex_color = Color(0.7704, 0.9, 0.468, 0.196078)
-grid = ExtResource("17_xyeuu")
+grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://pjy55ieuvcl5"
 
 [node name="Outline" type="Node2D" parent="HexSpace/Map"]
 physics_interpolation_mode = 2
 script = ExtResource("18_v1qqa")
 outline_color = Color(0.462, 0.55, 0.11, 1)
-grid = ExtResource("17_xyeuu")
+grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
 [node name="Perimeter" type="Node2D" parent="HexSpace/Map"]
@@ -861,18 +861,17 @@ physics_interpolation_mode = 2
 visible = false
 script = ExtResource("19_8fv3r")
 color = Color(0.392157, 0.588235, 1, 0.490196)
-grid = ExtResource("17_xyeuu")
+grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://dtavfh04dvr10"
 
 [node name="Outlines" parent="HexSpace" instance=ExtResource("20_5plje")]
 visible = false
 
 [node name="Coordinates" type="Node2D" parent="HexSpace"]
-visible = false
 script = ExtResource("21_iml5j")
 use_cube_format = false
 font = SubResource("FontFile_sxbbk")
-grid = ExtResource("17_xyeuu")
+grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 
 [node name="Units" type="Node2D" parent="HexSpace"]
@@ -880,15 +879,15 @@ metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -35.074
-offset_top = -20.25
-offset_right = 502.728
-offset_bottom = 290.25
-pivot_offset = Vector2(35.074, 20.25)
+offset_left = -19.0179
+offset_top = -20.5201
+offset_right = 330.787
+offset_bottom = 236.52
+pivot_offset = Vector2(19.0179, 20.5201)
 mouse_filter = 1
 script = ExtResource("22_oomfw")
-bbox_scale = 1.15
-grid = ExtResource("17_xyeuu")
+bbox_scale = 1.02
+grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://bpsuuaaepbib7"
 
 [connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]

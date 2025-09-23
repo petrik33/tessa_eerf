@@ -22,7 +22,7 @@ func exact_pixel_bounds(layout: HexLayout) -> Rect2:
 	var bounds := layout.hex_pixel_bounds(hex)
 	while it._iter_next(null):
 		hex = it._iter_get(null)
-		bounds.merge(layout.hex_pixel_bounds(hex))
+		bounds = bounds.merge(layout.hex_pixel_bounds(hex))
 	return bounds
 
 func is_layout_compatible(layout: HexLayout) -> bool:
