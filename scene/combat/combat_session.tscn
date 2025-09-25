@@ -834,7 +834,7 @@ texture = ExtResource("14_5r77e")
 expand_mode = 1
 
 [node name="HexSpace" type="Node2D" parent="."]
-position = Vector2(156, 100)
+position = Vector2(78, 107)
 script = ExtResource("15_s1x26")
 layout = ExtResource("10_jre1e")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
@@ -880,15 +880,29 @@ metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -19.0179
-offset_top = -20.5201
-offset_right = 330.787
-offset_bottom = 236.52
-pivot_offset = Vector2(19.0179, 20.5201)
+offset_left = -29.5834
+offset_top = -18.24
+offset_right = 514.558
+offset_bottom = 210.24
+pivot_offset = Vector2(29.5834, 18.24)
 mouse_filter = 1
 script = ExtResource("22_oomfw")
 bbox_scale = 1.02
 grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://bpsuuaaepbib7"
+
+[node name="ControlUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="ControlUI"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]
