@@ -834,7 +834,7 @@ texture = ExtResource("14_5r77e")
 expand_mode = 1
 
 [node name="HexSpace" type="Node2D" parent="."]
-position = Vector2(156, 112)
+position = Vector2(156, 100)
 script = ExtResource("15_s1x26")
 layout = ExtResource("10_jre1e")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
@@ -868,6 +868,7 @@ metadata/_custom_type_script = "uid://dtavfh04dvr10"
 visible = false
 
 [node name="Coordinates" type="Node2D" parent="HexSpace"]
+visible = false
 script = ExtResource("21_iml5j")
 use_cube_format = false
 font = SubResource("FontFile_sxbbk")
