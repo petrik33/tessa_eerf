@@ -24,6 +24,6 @@ func _draw_impl(grid: HexGridBase, layout: HexLayout):
 func _draw_hex_coordinates(layout: HexLayout, hex: Vector2i):
 	var offset := layout.hex_to_pixel(hex)
 	var format := HexUtils.cube_format(hex) if use_cube_format else HexUtils.axial_format(hex)
-	var pos := offset - Vector2(layout.size, float(-font_size) / 2.0)
-	var width := layout.size * 2
+	var pos := offset - Vector2(layout.size.x, float(-font_size) / 2.0)
+	var width := layout.size.x * 2
 	draw_string(font, pos, format, HORIZONTAL_ALIGNMENT_CENTER, width, font_size)
