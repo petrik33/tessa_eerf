@@ -884,25 +884,33 @@ offset_left = -29.5834
 offset_top = -18.24
 offset_right = 514.558
 offset_bottom = 210.24
-pivot_offset = Vector2(29.5834, 18.24)
+pivot_offset = Vector2(29.5834, 18.2401)
 mouse_filter = 1
 script = ExtResource("22_oomfw")
 bbox_scale = 1.02
 grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://bpsuuaaepbib7"
 
-[node name="ControlUI" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ControlUI"]
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Panel" type="Panel" parent="HUD/MarginContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]
