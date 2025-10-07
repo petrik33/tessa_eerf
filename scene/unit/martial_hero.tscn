@@ -17,7 +17,6 @@ extends CombatVisualUnit
 @export var melee_hit_frame: int
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 @onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
 @onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
