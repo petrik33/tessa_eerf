@@ -5,6 +5,10 @@ func set_point_disabled(hex: Vector2i, disabled: bool = true):
 	_hex_astar.set_point_disabled(_context.id(hex), disabled)
 
 
+func is_point_disabled(hex: Vector2i) -> bool:
+	return _hex_astar.is_point_disabled(_context.id(hex))
+
+
 func clear_disabled_points():
 	for id in _hex_astar.get_point_ids():
 		_hex_astar.set_point_disabled(id, false)

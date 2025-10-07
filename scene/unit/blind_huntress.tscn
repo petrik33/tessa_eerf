@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dx0g014t166re"]
+[gd_scene load_steps=60 format=3 uid="uid://dx0g014t166re"]
 
 [ext_resource type="Texture2D" uid="uid://bxcj0cp6dvrys" path="res://asset/texture/unit/blind_huntress/6. Dash 112 x 56.png" id="5_0v5xn"]
 [ext_resource type="Texture2D" uid="uid://f2f0q3n320d7" path="res://asset/texture/unit/blind_huntress/1. Idle 48 x 48.png" id="5_q2b0d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="9_0v5xn"]
 [ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="9_q2b0d"]
 [ext_resource type="Texture2D" uid="uid://b2j8n4ggbxtxi" path="res://asset/texture/unit/blind_huntress/5. Attack 131 x 56.png" id="9_u4sfu"]
+[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_rvcoe"]
 
 [sub_resource type="GDScript" id="GDScript_ro02e"]
 script/source = "extends CombatVisualUnit
@@ -424,7 +425,7 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ll718")
 animation = &"hurt"
-offset = Vector2(-1, -9)
+offset = Vector2(-1, -15)
 
 [node name="Components" type="Node" parent="."]
 
@@ -437,3 +438,6 @@ moved_node = NodePath("../../Physical")
 unique_name_in_owner = true
 physical = NodePath("../../Physical")
 sprite = NodePath("../../Physical/AnimatedSprite2D")
+
+[node name="DbgCombatVisualHex" parent="." instance=ExtResource("10_rvcoe")]
+visible = false

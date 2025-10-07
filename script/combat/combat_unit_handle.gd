@@ -5,7 +5,7 @@ class_name CombatUnitHandle extends CombatHandle
 
 
 func id() -> String:
-	return "unit:%d_%d" % [idx, army_idx]
+	return "unit:%d_army%d" % [idx, army_idx]
 
 
 func _init(_idx := -1, _army_idx := -1) -> void:

@@ -72,5 +72,4 @@ metadata/_custom_type_script = "uid://ni5u100avrmg"
 script = ExtResource("2_omq7q")
 grid = ExtResource("8_dstjy")
 armies = Array[ExtResource("1_wpchj")]([SubResource("Resource_15l3s"), SubResource("Resource_nnrcw")])
-seed = 42
 metadata/_custom_type_script = "uid://sewp0x4jip31"

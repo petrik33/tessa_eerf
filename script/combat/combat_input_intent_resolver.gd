@@ -23,7 +23,7 @@ func get_potential_command(
 			return null
 		
 		return CombatCommands.move_unit(
-			context.services.pathfinding.id_path(
+			context.services.unit_move_path(
 				current_unit.placement, target_hex
 			)
 		)
@@ -45,7 +45,7 @@ func get_potential_command(
 		if not HexMath.are_neighbors(attack_hex, target_hex):
 			return null
 
-		var move_path = context.services.pathfinding.id_path(
+		var move_path = context.services.unit_move_path(
 			current_unit.placement,
 			attack_hex
 		)

@@ -31,6 +31,12 @@ func enemy_units(army_handle: CombatArmyHandle) -> Array[CombatUnit]:
 	)
 
 
+func place_in_turn_queue(unit_handle: CombatUnitHandle) -> int:
+	return turn_queue.find_custom(
+		func (aUnit_handle: CombatUnitHandle): return aUnit_handle.is_equal(unit_handle)
+	)
+
+
 func find_unit_handle_by_hex(hex: Vector2i) -> CombatUnitHandle:
 	var unit_handles := all_unit_handles()
 	var idx := unit_handles.find_custom(

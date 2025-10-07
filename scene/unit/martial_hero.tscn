@@ -1,44 +1,75 @@
-[gd_scene load_steps=46 format=3 uid="uid://djblfmp6cwiwq"]
+[gd_scene load_steps=43 format=3 uid="uid://djblfmp6cwiwq"]
 
-[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit_deprecated.gd" id="1_fftru"]
-[ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_qb0rn"]
-[ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_02ptm"]
+[ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="1_cnduq"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="5_qb0rn"]
-[ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk.tscn" id="6_02ptm"]
+[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="5_vvmx4"]
+[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="6_cnduq"]
 [ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="6_qb0rn"]
 [ext_resource type="Texture2D" uid="uid://fl5y7toxft2e" path="res://asset/texture/unit/martial_hero/Run.png" id="6_qr1lv"]
 [ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="7_02ptm"]
-[ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="7_tx6bj"]
-[ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="8_vas6a"]
-[ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="9_r0mm1"]
-[ext_resource type="PackedScene" uid="uid://bcca6somsn7b5" path="res://scene/unit_components/melee.tscn" id="11_pjkb0"]
+[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_qr1lv"]
 
-[sub_resource type="Resource" id="Resource_4qykq"]
-script = ExtResource("2_qb0rn")
-performer = NodePath("Resolvers/Idle")
-effects = Array[NodePath]([])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+[sub_resource type="GDScript" id="GDScript_onfqa"]
+script/source = "@tool
+extends CombatVisualUnit
 
-[sub_resource type="Resource" id="Resource_qb0rn"]
-script = ExtResource("2_qb0rn")
-performer = NodePath("Resolvers/Melee")
-effects = Array[NodePath]([])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
 
-[sub_resource type="Resource" id="Resource_iy3cg"]
-script = ExtResource("2_qb0rn")
-performer = NodePath("Resolvers/Walk")
-effects = Array[NodePath]([NodePath("Effects/FaceWalkDirection"), NodePath("Effects/PlayWalkAnimation")])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
+@export var melee_hit_frame: int
 
-[sub_resource type="Resource" id="Resource_tx6bj"]
-script = ExtResource("3_02ptm")
-resolvers = Dictionary[StringName, ExtResource("2_qb0rn")]({
-&"idle": SubResource("Resource_4qykq"),
-&"melee": SubResource("Resource_qb0rn"),
-&"walk": SubResource("Resource_iy3cg")
-})
-metadata/_custom_type_script = "uid://bk6djqwqor3ka"
+@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+
+@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
+@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
+
+
+func idle(action: CombatVisualUnitActionGoIdle):
+	go_idle()
+	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
+
+
+func walk(action: CombatVisualUnitActionWalk):
+	animated_sprite.play(\"walk\")
+	face_walk_direction.set_process(true)
+	await walk_along_path.walk(action)
+	face_walk_direction.set_process(false)
+	go_idle()
+
+
+func hurt(_action: CombatVisualUnitActionHurt):
+	animated_sprite.play(\"hurt\")
+	await animated_sprite.animation_finished
+	go_idle()
+
+
+func melee(_action: CombatVisualUnitActionMelee):
+	animated_sprite.play(\"melee\")
+	while animated_sprite.frame != melee_hit_frame:
+		await animated_sprite.frame_changed
+	executed.emit()
+	await animated_sprite.animation_finished
+	go_idle()
+
+
+func go_idle():
+	animated_sprite.play(\"idle\")
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onfqa"]
+atlas = ExtResource("1_cnduq")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr1lv"]
+atlas = ExtResource("1_cnduq")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eerro"]
+atlas = ExtResource("1_cnduq")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5lml"]
+atlas = ExtResource("1_cnduq")
+region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_blpkp"]
 atlas = ExtResource("5_qb0rn")
@@ -156,6 +187,23 @@ region = Rect2(1400, 0, 200, 200)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_onfqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr1lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eerro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5lml")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_blpkp")
 }, {
 "duration": 1.0,
@@ -260,36 +308,30 @@ animations = [{
 }]
 
 [node name="MartialHero" type="Node2D" node_paths=PackedStringArray("physical_node")]
-script = ExtResource("1_fftru")
-config = SubResource("Resource_tx6bj")
+script = SubResource("GDScript_onfqa")
+melee_hit_frame = 4
 physical_node = NodePath("Physical")
-metadata/_custom_type_script = "uid://br5qv3kv304kl"
+metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"melee"
-offset = Vector2(0, -14)
+frame = 4
+offset = Vector2(0, -18)
 
-[node name="Resolvers" type="Node" parent="."]
+[node name="Components" type="Node" parent="."]
 
-[node name="Walk" parent="Resolvers" node_paths=PackedStringArray("moved_node") instance=ExtResource("6_02ptm")]
-walk_animation = "slow"
-moved_node = NodePath("../../Physical")
-
-[node name="Idle" parent="Resolvers" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("8_vas6a")]
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="Melee" parent="Resolvers" node_paths=PackedStringArray("physical_node", "animated_sprite") instance=ExtResource("11_pjkb0")]
-physical_node = NodePath("../../Physical")
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="Effects" type="Node" parent="."]
-
-[node name="FaceWalkDirection" parent="Effects" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("7_tx6bj")]
+[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("5_vvmx4")]
+unique_name_in_owner = true
 physical = NodePath("../../Physical")
 sprite = NodePath("../../Physical/AnimatedSprite2D")
 
-[node name="PlayWalkAnimation" parent="Effects" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("9_r0mm1")]
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
+[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("6_cnduq")]
+unique_name_in_owner = true
+moved_node = NodePath("../../Physical")
+
+[node name="DbgCombatVisualHex" parent="." instance=ExtResource("10_qr1lv")]
+visible = false

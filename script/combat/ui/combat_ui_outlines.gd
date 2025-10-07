@@ -55,4 +55,5 @@ func update_potential_command(turn_context: CombatTurnContext, command: CombatCo
 		move_path_outline.grid = HexGrids.points(
 			turn_context.services.navigation.path(command.id_path)
 		)
-		mouse_pick_outline.grid = HexGrids.point(turn_context.services.navigation.hex(command.id_path[-1]))
+		var last_path_hex = command.id_path.get(command.id_path.size() - 1)
+		mouse_pick_outline.grid = HexGrids.point(turn_context.services.navigation.hex(last_path_hex))

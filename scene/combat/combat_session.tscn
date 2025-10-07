@@ -17,12 +17,12 @@
 [ext_resource type="Script" uid="uid://cyg3pjgbmf1vv" path="res://script/combat/combat_visual.gd" id="9_m5d3p"]
 [ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="10_jre1e"]
 [ext_resource type="Script" uid="uid://bd84dh3vdcgpd" path="res://script/combat/visual/combat_visual_writer.gd" id="11_4yhjs"]
-[ext_resource type="PackedScene" uid="uid://bhbh5qgpou0uk" path="res://scene/combat_ui/combat_ui_units_left_marker.tscn" id="11_ah1oa"]
 [ext_resource type="Script" uid="uid://dce88q3ja7wu" path="res://script/combat/visual/combat_visual_director.gd" id="12_ppt2y"]
 [ext_resource type="Resource" uid="uid://cop36n7ulsjs4" path="res://resource/combat_visual/combat_visual_unit_map.tres" id="13_3jy7r"]
 [ext_resource type="Texture2D" uid="uid://d1u8ho7e010r2" path="res://asset/texture/battle_background/homm3_swamp/Combat_Swamp.png" id="14_5r77e"]
 [ext_resource type="Texture2D" uid="uid://b6ksxv6834hrv" path="res://asset/texture/ui/cursor/cursor_attack_ranged.tres" id="14_jre1e"]
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="15_s1x26"]
+[ext_resource type="PackedScene" uid="uid://dlllyceo4rdoi" path="res://scene/combat_ui/combat_ui_unit_marker.tscn" id="16_jre1e"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="16_w8ypk"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="18_v1qqa"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="19_8fv3r"]
@@ -808,7 +808,7 @@ metadata/_custom_type_script = "uid://ulh2ys5y8bdo"
 
 [node name="UnitsLeftMarkers" type="Node" parent="UI"]
 script = ExtResource("8_a81rf")
-units_left_marker = ExtResource("11_ah1oa")
+units_left_marker = ExtResource("16_jre1e")
 metadata/_custom_type_script = "uid://dy2tluo30mpc6"
 
 [node name="Visual" type="Node" parent="." node_paths=PackedStringArray("director")]

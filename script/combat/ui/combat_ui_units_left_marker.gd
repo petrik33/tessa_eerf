@@ -1,4 +1,4 @@
-class_name CombatUiUnitsLeftMarker extends Control
+class_name CombatUiLeftMarker extends Control
 
 
 @export var stack_size_label: Label

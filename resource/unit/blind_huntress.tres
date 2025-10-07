@@ -5,20 +5,11 @@
 
 [sub_resource type="Resource" id="Resource_1v221"]
 script = ExtResource("1_2guh3")
-attack = 10
-defense = 10
-damage_range = Vector2i(5, 10)
 hp = 5
-morale = 0
-luck = 0
-speed = 5
-initiative = 10
-range = 1
 metadata/_custom_type_script = "uid://docn60vvfh160"
 
 [resource]
 script = ExtResource("2_84yw3")
 uid = &"blind_huntress"
 combat_stats = SubResource("Resource_1v221")
-description_uid = &""
 metadata/_custom_type_script = "uid://b4cqksp55xbh0"

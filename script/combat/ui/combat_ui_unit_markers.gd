@@ -10,6 +10,7 @@ func create_units_left_markers(visual: CombatVisual, state: CombatState):
 		var marker = units_left_marker.instantiate() as CombatUiUnitsLeftMarker
 		attach_node.add_child(marker)
 		_markers[unit_handle.id()] = marker
+		marker.army_id = state.unit(unit_handle).army_handle.id()
 	update(state)
 
 
@@ -24,6 +25,8 @@ func update(state: CombatState):
 		var unit := state.unit(unit_handle)
 		var marker := _markers[unit_handle.id()]
 		marker.set_stack_size(unit.stack_size)
+		var turn_place := state.place_in_turn_queue(unit_handle)
+		marker.next_turn_progress = float(turn_place) / state.turn_queue.size()
 
 
 var _markers: Dictionary[String, CombatUiUnitsLeftMarker] = {}

@@ -14,7 +14,10 @@ class_name HexLayout extends Resource
 		emit_changed()
 
 func hex_corner(corner: int) -> Vector2:
-	return _hex_corner_offset[corner]
+	var corner_idx := corner % HexLayoutMath.CORNER_NUM
+	if corner_idx < 0:
+		corner_idx = HexLayoutMath.CORNER_NUM + corner_idx
+	return _hex_corner_offset[corner_idx]
 
 func hex_pixel_bounds(hex := Vector2i.ZERO) -> Rect2:
 	var bounds = _hex_pixel_bounds
@@ -38,6 +41,14 @@ func hex_to_pixel(hex: Vector2i) -> Vector2:
 
 func pixel_to_hex(point: Vector2) -> Vector2i:
 	return HexMath.nearest(_inverse_axial_basis * point)
+
+func point_on_outline(angle: float) -> Vector2:
+	var radial_progress := angle / HexLayoutMath.HEX_ANGLE_STEP
+	var corner_radial_progress = floor(radial_progress)
+	var corner_idx := int(corner_radial_progress) % HexLayoutMath.CORNER_NUM
+	var next_corner_idx := (corner_idx + 1) % HexLayoutMath.CORNER_NUM
+	var line_progress = radial_progress - corner_radial_progress
+	return lerp(hex_corner(corner_idx), hex_corner(next_corner_idx), line_progress)
 
 var _hex_corner_offset := PackedVector2Array()
 var _hex_pixel_bounds: Rect2
