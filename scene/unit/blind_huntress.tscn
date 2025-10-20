@@ -12,7 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_rvcoe"]
 
 [sub_resource type="GDScript" id="GDScript_ro02e"]
-script/source = "extends CombatVisualUnit
+script/source = "@tool
+extends CombatVisualUnit
 
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
@@ -22,6 +23,7 @@ script/source = "extends CombatVisualUnit
 
 func idle(action: CombatVisualUnitActionGoIdle):
 	go_idle()
+	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
 
 
 func walk(action: CombatVisualUnitActionWalk):
@@ -32,7 +34,7 @@ func walk(action: CombatVisualUnitActionWalk):
 	go_idle()
 
 
-func hurt(action: CombatVisualUnitActionHurt):
+func hurt(_action: CombatVisualUnitActionHurt):
 	animated_sprite.play(\"hurt\")
 	await animated_sprite.animation_finished
 	go_idle()
@@ -357,7 +359,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6g8r2")
 }],
-"loop": true,
+"loop": false,
 "name": &"melee",
 "speed": 5.0
 }, {
@@ -425,6 +427,8 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ll718")
 animation = &"hurt"
+frame = 3
+frame_progress = 1.0
 offset = Vector2(-1, -15)
 
 [node name="Components" type="Node" parent="."]

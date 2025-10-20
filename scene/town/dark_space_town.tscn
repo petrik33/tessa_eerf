@@ -1,0 +1,210 @@
+[gd_scene load_steps=30 format=3 uid="uid://boxre1turcgmv"]
+
+[ext_resource type="Texture2D" uid="uid://cwphchra48xb8" path="res://asset/texture/bg/Space Background3.png" id="1_nsuu1"]
+[ext_resource type="Texture2D" uid="uid://bvj7ldmuanhu1" path="res://asset/texture/props/Agis.png" id="2_0fj02"]
+[ext_resource type="Texture2D" uid="uid://5j4n1t5uilv" path="res://asset/texture/props/masked_man.png" id="3_nsuu1"]
+[ext_resource type="Texture2D" uid="uid://c7i1vdnelkaiw" path="res://asset/texture/bg/DarkSpaceGround.png" id="3_sa63i"]
+[ext_resource type="Texture2D" uid="uid://bae7h31533l82" path="res://asset/texture/props/Rocks.png" id="4_7n4ik"]
+[ext_resource type="Texture2D" uid="uid://crsosmlqpqmin" path="res://asset/texture/props/SpaceTree.png" id="4_nrd8r"]
+[ext_resource type="Texture2D" uid="uid://bh8ptxw60y7og" path="res://asset/texture/props/SpaceRing.png" id="4_sa63i"]
+[ext_resource type="Texture2D" uid="uid://dfocrrjeyv44b" path="res://asset/texture/props/SmallRock.png" id="5_get50"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa63i"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(0, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrd8r"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(224, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrs33"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(448, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n4ik"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(672, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_get50"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(896, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_extic"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(1120, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5at0"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(1344, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c0f1"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(1568, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erxa8"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(1792, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_so4bd"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(2016, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0754"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(2240, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aagwi"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(2464, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p7fy"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(2688, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhrq6"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(2912, 0, 224, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt2bd"]
+atlas = ExtResource("2_0fj02")
+region = Rect2(3136, 0, 224, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pmk4x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa63i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrd8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrs33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n4ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_get50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_extic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5at0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c0f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erxa8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_so4bd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0754")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aagwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p7fy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhrq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt2bd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it034"]
+atlas = ExtResource("3_nsuu1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hxhf"]
+atlas = ExtResource("3_nsuu1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02j4i"]
+atlas = ExtResource("3_nsuu1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5u7h"]
+atlas = ExtResource("3_nsuu1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hbbhx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_it034")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hxhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02j4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5u7h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="DarkSpaceTown" type="Node2D"]
+
+[node name="Bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_nsuu1")
+centered = false
+
+[node name="Agis" type="AnimatedSprite2D" parent="."]
+position = Vector2(320, 160)
+sprite_frames = SubResource("SpriteFrames_pmk4x")
+autoplay = "default"
+frame = 4
+frame_progress = 0.776449
+
+[node name="SpaceTree" type="Sprite2D" parent="."]
+position = Vector2(77, 188)
+texture = ExtResource("4_nrd8r")
+
+[node name="Rocks" type="Sprite2D" parent="."]
+position = Vector2(216, 245)
+texture = ExtResource("4_7n4ik")
+
+[node name="Rocks2" type="Sprite2D" parent="."]
+position = Vector2(446, 248)
+scale = Vector2(-1, 0.9)
+texture = ExtResource("4_7n4ik")
+
+[node name="SmallRock" type="Sprite2D" parent="."]
+position = Vector2(235, 251)
+texture = ExtResource("5_get50")
+
+[node name="Ground" type="Sprite2D" parent="."]
+position = Vector2(0, 260)
+texture = ExtResource("3_sa63i")
+centered = false
+
+[node name="Floor" type="Line2D" parent="."]
+points = PackedVector2Array(0, 260, 640, 260)
+width = 2.0
+default_color = Color(0.1764706, 0.11372549, 0.35686275, 1)
+
+[node name="SpaceRing" type="Sprite2D" parent="."]
+position = Vector2(530, 208)
+texture = ExtResource("4_sa63i")
+
+[node name="MaskedMan" type="AnimatedSprite2D" parent="."]
+position = Vector2(531, 207)
+sprite_frames = SubResource("SpriteFrames_hbbhx")
+autoplay = "default"
+frame = 2
+frame_progress = 0.7071517

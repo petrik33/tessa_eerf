@@ -66,8 +66,8 @@ func _on_combat_turn_started(turn_handle: CombatHandle):
 	)
 	if not turn_controlled:
 		return
-	controller.enable(turn_context)
 	ui.start_turn(turn_context)
+	controller.enable(turn_context)
 
 
 func _on_combat_turn_finished(turn_handle: CombatHandle):

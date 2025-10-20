@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://cjqerd1pwwpv1"]
+[gd_scene load_steps=38 format=4 uid="uid://cjqerd1pwwpv1"]
 
 [ext_resource type="Script" uid="uid://cat4m8lo70qu3" path="res://script/combat/combat_session.gd" id="1_rdbvd"]
 [ext_resource type="Script" uid="uid://3bxue3cl0qjn" path="res://script/combat/dbg_combat_controller.gd" id="2_1ioox"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="21_iml5j"]
 [ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="22_oomfw"]
 [ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="25_4yhjs"]
+[ext_resource type="PackedScene" uid="uid://cjrxcgyr1d7pe" path="res://scene/combat_ui/combat_ui_hud.tscn" id="31_4yhjs"]
 
 [sub_resource type="Resource" id="Resource_4yhjs"]
 script = ExtResource("8_jre1e")
@@ -834,7 +835,7 @@ texture = ExtResource("14_5r77e")
 expand_mode = 1
 
 [node name="HexSpace" type="Node2D" parent="."]
-position = Vector2(78, 107)
+position = Vector2(78, 96)
 script = ExtResource("15_s1x26")
 layout = ExtResource("10_jre1e")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
@@ -880,37 +881,17 @@ metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -29.5834
-offset_top = -18.24
-offset_right = 514.558
-offset_bottom = 210.24
-pivot_offset = Vector2(29.5834, 18.2401)
+offset_left = -29.583405
+offset_top = -18.240067
+offset_right = 514.55774
+offset_bottom = 210.23999
+pivot_offset = Vector2(29.583405, 18.240067)
 mouse_filter = 1
 script = ExtResource("22_oomfw")
 bbox_scale = 1.02
 grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://bpsuuaaepbib7"
 
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="Panel" parent="HUD/MarginContainer"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+[node name="HUD" parent="." instance=ExtResource("31_4yhjs")]
 
 [connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]

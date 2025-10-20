@@ -1,38 +1,14 @@
-[gd_scene load_steps=61 format=3 uid="uid://c8asf4s1t6aie"]
+[gd_scene load_steps=54 format=3 uid="uid://c8asf4s1t6aie"]
 
-[ext_resource type="Script" uid="uid://br5qv3kv304kl" path="res://script/combat/visual/combat_visual_unit_deprecated.gd" id="1_yb0an"]
-[ext_resource type="Script" uid="uid://dsie8p6ndbmtv" path="res://script/combat/visual/combat_visual_action_resolver.gd" id="2_r7y2t"]
-[ext_resource type="Script" uid="uid://bk6djqwqor3ka" path="res://script/combat/visual/combat_visual_unit_config.gd" id="3_65xch"]
+[ext_resource type="Script" uid="uid://j32cf0ohhocr" path="res://scene/unit/blue_witch.gd" id="1_xiho1"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="6_7nox7"]
 [ext_resource type="Texture2D" uid="uid://bf2vulfaopn3j" path="res://asset/texture/unit/blue_witch/B_witch_idle.png" id="6_hebk6"]
 [ext_resource type="Texture2D" uid="uid://cjig7lus2c3md" path="res://asset/texture/unit/blue_witch/B_witch_run.png" id="7_ax8xb"]
 [ext_resource type="Texture2D" uid="uid://bp7m052ako0f0" path="res://asset/texture/unit/blue_witch/B_witch_death.png" id="7_fhnv6"]
 [ext_resource type="Texture2D" uid="uid://bwsqy5a30oova" path="res://asset/texture/unit/blue_witch/B_witch_take_damage.png" id="8_ddj48"]
-[ext_resource type="PackedScene" uid="uid://r2ihovciwhb4" path="res://scene/unit_components/walk.tscn" id="10_2in28"]
+[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="10_hebk6"]
+[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="11_ax8xb"]
 [ext_resource type="Texture2D" uid="uid://dyqct1n7poe7j" path="res://asset/texture/unit/blue_witch/B_witch_attack.png" id="11_qjius"]
-[ext_resource type="PackedScene" uid="uid://can5qjgklcphp" path="res://scene/unit_components/face_walk_direction.tscn" id="11_tt52y"]
-[ext_resource type="PackedScene" uid="uid://dserqrwva583k" path="res://scene/unit_components/idle.tscn" id="12_uyugg"]
-[ext_resource type="PackedScene" uid="uid://dttxs1nlqrdes" path="res://scene/unit_components/play_walk_animation.tscn" id="13_vdl7i"]
-
-[sub_resource type="Resource" id="Resource_7nox7"]
-script = ExtResource("2_r7y2t")
-performer = NodePath("Idle")
-effects = Array[NodePath]([])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
-
-[sub_resource type="Resource" id="Resource_fhnv6"]
-script = ExtResource("2_r7y2t")
-performer = NodePath("Walk")
-effects = Array[NodePath]([NodePath("FaceWalkDirection"), NodePath("PlayWalkAnimation")])
-metadata/_custom_type_script = "uid://dsie8p6ndbmtv"
-
-[sub_resource type="Resource" id="Resource_ddj48"]
-script = ExtResource("3_65xch")
-resolvers = Dictionary[StringName, ExtResource("2_r7y2t")]({
-&"idle": SubResource("Resource_7nox7"),
-&"walk": SubResource("Resource_fhnv6")
-})
-metadata/_custom_type_script = "uid://bk6djqwqor3ka"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyjtx"]
 atlas = ExtResource("6_7nox7")
@@ -279,7 +255,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x1rwd")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 5.0
 }, {
@@ -369,28 +345,26 @@ animations = [{
 }]
 
 [node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("physical_node")]
-script = ExtResource("1_yb0an")
-config = SubResource("Resource_ddj48")
+script = ExtResource("1_xiho1")
 physical_node = NodePath("Physical")
-metadata/_custom_type_script = "uid://br5qv3kv304kl"
+metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"walk"
+animation = &"hurt"
 offset = Vector2(0, -12)
 
-[node name="Walk" parent="." node_paths=PackedStringArray("moved_node") instance=ExtResource("10_2in28")]
+[node name="Components" type="Node" parent="."]
+
+[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("10_hebk6")]
+unique_name_in_owner = true
 walk_animation = "fast"
-moved_node = NodePath("../Physical")
+moved_node = NodePath("../../Physical")
 
-[node name="FaceWalkDirection" parent="." node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("11_tt52y")]
-physical = NodePath("../Physical")
-sprite = NodePath("../Physical/AnimatedSprite2D")
-
-[node name="Idle" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("12_uyugg")]
-animated_sprite = NodePath("../Physical/AnimatedSprite2D")
-
-[node name="PlayWalkAnimation" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("13_vdl7i")]
-animated_sprite = NodePath("../Physical/AnimatedSprite2D")
+[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("11_ax8xb")]
+unique_name_in_owner = true
+physical = NodePath("../../Physical")
+sprite = NodePath("../../Physical/AnimatedSprite2D")

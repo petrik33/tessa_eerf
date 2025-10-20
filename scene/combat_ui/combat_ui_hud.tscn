@@ -1,0 +1,178 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjrxcgyr1d7pe"]
+
+[ext_resource type="Theme" uid="uid://bc0wdxvvq0x04" path="res://ui/theme/ui_main_theme.tres" id="1_p7bld"]
+[ext_resource type="Texture2D" uid="uid://bsa5cmcdxbu27" path="res://asset/texture/ui/icon/hud/ui_hud_system.tres" id="2_myhjq"]
+[ext_resource type="Texture2D" uid="uid://do3dmvx5g2iw5" path="res://asset/texture/ui/icon/hud/ui_hud_attack.tres" id="2_sustb"]
+[ext_resource type="Texture2D" uid="uid://bk1lvi4hduc24" path="res://asset/texture/ui/icon/hud/ui_hud_forfeit.tres" id="3_2gk53"]
+[ext_resource type="Texture2D" uid="uid://del2fa8lhnn7" path="res://asset/texture/ui/icon/hud/ui_hud_runaway.tres" id="4_c4ylk"]
+[ext_resource type="Texture2D" uid="uid://b8ibn08tcm7ud" path="res://asset/texture/ui/icon/hud/ui_hud_defend.tres" id="4_xkbiv"]
+[ext_resource type="Texture2D" uid="uid://ctw1i41jp0ypd" path="res://asset/texture/ui/icon/hud/ui_hud_spellbook.tres" id="6_pq82f"]
+[ext_resource type="Texture2D" uid="uid://bney4jmvo4t7j" path="res://asset/texture/ui/icon/hud/ui_hud_wait.tres" id="7_4aibv"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_p7bld")
+
+[node name="BottomPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"BottomBar"
+
+[node name="Content" type="HBoxContainer" parent="BottomPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -1
+
+[node name="LeftGroup" type="HBoxContainer" parent="BottomPanel/Content"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="System" type="Button" parent="BottomPanel/Content/LeftGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("2_myhjq")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Forfeit" type="Button" parent="BottomPanel/Content/LeftGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("3_2gk53")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RunAway" type="Button" parent="BottomPanel/Content/LeftGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("4_c4ylk")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Fight" type="Button" parent="BottomPanel/Content/LeftGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("2_sustb")
+icon_alignment = 1
+expand_icon = true
+
+[node name="CenterGroup" type="HBoxContainer" parent="BottomPanel/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="LogsScrollContainer" type="ScrollContainer" parent="BottomPanel/Content/CenterGroup"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BottomPanel/Content/CenterGroup/LogsScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"HudLog"
+theme_override_font_sizes/normal_font_size = 32
+text = "Tessa & Eerf"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollButtons" type="VBoxContainer" parent="BottomPanel/Content/CenterGroup"]
+visible = false
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Up" type="Button" parent="BottomPanel/Content/CenterGroup/ScrollButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"BottomBarButton"
+
+[node name="Label" type="Label" parent="BottomPanel/Content/CenterGroup/ScrollButtons/Up"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 4.712389
+theme_override_font_sizes/font_size = 12
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Down" type="Button" parent="BottomPanel/Content/CenterGroup/ScrollButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"BottomBarButton"
+
+[node name="Label" type="Label" parent="BottomPanel/Content/CenterGroup/ScrollButtons/Down"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 1.0
+offset_right = 17.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+theme_override_font_sizes/font_size = 12
+text = ">"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightGroup" type="HBoxContainer" parent="BottomPanel/Content"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="SpellBook" type="Button" parent="BottomPanel/Content/RightGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("6_pq82f")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Wait" type="Button" parent="BottomPanel/Content/RightGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("7_4aibv")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Defend" type="Button" parent="BottomPanel/Content/RightGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("4_xkbiv")
+icon_alignment = 1
+expand_icon = true

@@ -1,34 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlllyceo4rdoi"]
+[gd_scene load_steps=5 format=3 uid="uid://dlllyceo4rdoi"]
 
 [ext_resource type="Script" uid="uid://dp57w2ehogv67" path="res://script/combat/ui/combat_ui_unit_marker.gd" id="1_qii44"]
-[ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="2_a6nes"]
-[ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="3_bo8yn"]
-[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="3_ggxln"]
-[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="4_ggxln"]
 [ext_resource type="Script" uid="uid://bwitt2ghi4geg" path="res://script/hex/hex_layout.gd" id="6_874g2"]
-[ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="7_kf2bl"]
 
 [sub_resource type="Resource" id="Resource_874g2"]
 script = ExtResource("6_874g2")
 base_hex_rotation = 0.523599
-size = Vector2(12, 12)
-metadata/_custom_type_script = "uid://bwitt2ghi4geg"
-
-[sub_resource type="Resource" id="Resource_d08tj"]
-script = ExtResource("4_ggxln")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
-
-[sub_resource type="Resource" id="Resource_qmwec"]
-script = ExtResource("6_874g2")
-base_hex_rotation = 0.523599
 size = Vector2(10, 10)
 metadata/_custom_type_script = "uid://bwitt2ghi4geg"
-
-[sub_resource type="Resource" id="Resource_hgvf3"]
-script = ExtResource("4_ggxln")
-radius = 0
-metadata/_custom_type_script = "uid://6riqabamogrw"
 
 [sub_resource type="LabelSettings" id="LabelSettings_874g2"]
 font_size = 14
@@ -46,33 +25,8 @@ army_colors = Dictionary[String, Color]({
 })
 default_color = Color(0.694118, 0, 0, 1)
 hex_layout = SubResource("Resource_874g2")
+next_turn_progress = 0.715
 army_id = "army:1"
-
-[node name="HexSpace" type="Node2D" parent="."]
-visible = false
-position = Vector2(0, -16)
-script = ExtResource("3_ggxln")
-layout = ExtResource("2_a6nes")
-metadata/_custom_type_script = "uid://bs1nban30c83i"
-
-[node name="HexOutlineRenderer" type="Node2D" parent="HexSpace"]
-script = ExtResource("3_bo8yn")
-outline_color = Color(1, 1, 1, 1)
-grid = SubResource("Resource_d08tj")
-metadata/_custom_type_script = "uid://k7hs7m35gx78"
-
-[node name="MarkerSpace" type="Node2D" parent="."]
-visible = false
-script = ExtResource("3_ggxln")
-layout = SubResource("Resource_qmwec")
-metadata/_custom_type_script = "uid://bs1nban30c83i"
-
-[node name="HexFilledRenderer" type="Node2D" parent="MarkerSpace"]
-position = Vector2(0, 16)
-script = ExtResource("7_kf2bl")
-hex_color = Color(1, 0, 0, 1)
-grid = SubResource("Resource_hgvf3")
-metadata/_custom_type_script = "uid://pjy55ieuvcl5"
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true

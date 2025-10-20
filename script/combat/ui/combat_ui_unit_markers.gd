@@ -7,7 +7,7 @@ class_name CombatUiUnitMarkers extends Node
 func create_units_left_markers(visual: CombatVisual, state: CombatState):
 	for unit_handle in state.all_unit_handles():
 		var attach_node = visual.get_unit(unit_handle).get_physical_node()
-		var marker = units_left_marker.instantiate() as CombatUiUnitsLeftMarker
+		var marker = units_left_marker.instantiate() as CombatUiUnitMarker
 		attach_node.add_child(marker)
 		_markers[unit_handle.id()] = marker
 		marker.army_id = state.unit(unit_handle).army_handle.id()
@@ -29,4 +29,4 @@ func update(state: CombatState):
 		marker.next_turn_progress = float(turn_place) / state.turn_queue.size()
 
 
-var _markers: Dictionary[String, CombatUiUnitsLeftMarker] = {}
+var _markers: Dictionary[String, CombatUiUnitMarker] = {}

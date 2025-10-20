@@ -1,5 +1,5 @@
 @tool
-class_name CombatUiUnitsLeftMarker extends Control
+class_name CombatUiUnitMarker extends Control
 
 
 @export var army_colors: Dictionary[String, Color]:
@@ -43,6 +43,16 @@ class_name CombatUiUnitsLeftMarker extends Control
 		inverse_turn_progress_fill = value
 		queue_redraw()
 
+@export var progress_outline_color := Color.WHITE:
+	set(value):
+		progress_outline_color = value
+		queue_redraw()
+
+@export var progress_outline_width := 1.0:
+	set(value):
+		progress_outline_width = value
+		queue_redraw()
+
 @onready var label: Label = %Label
 
 
@@ -57,7 +67,8 @@ func _draw() -> void:
 	if army_id != "":
 		assert(army_colors.has(army_id), "No army color exists in marker for id %s" % [army_id])
 		color = army_colors[army_id]
-	_draw_hex_progress(hex_layout, next_turn_progress, color)
+	_draw_hexagon_panel(hex_layout, color)
+	_draw_hex_progress(hex_layout, next_turn_progress)
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -73,16 +84,19 @@ func _update():
 	update_configuration_warnings()
 
 
-func _draw_hex_progress(layout: HexLayout, progress: float, fill_color: Color, background_color: Color = Color.TRANSPARENT) -> void:
-	if background_color != Color.TRANSPARENT:
-		draw_polygon(layout.hex_polygon(), [background_color])
+func _draw_hexagon_panel(layout: HexLayout, fill_color: Color):
+	if fill_color != Color.TRANSPARENT:
+		draw_polygon(layout.hex_polygon(), [fill_color])
+
+
+func _draw_hex_progress(layout: HexLayout, progress: float) -> void:
 	if progress <= 0.0:
 		return
 	if progress >= 1.0:
-		draw_polygon(layout.hex_polygon(), [fill_color])
+		draw_polyline(layout.hex_polygon(), progress_outline_color, progress_outline_width)
 		return
 	
-	var polygon := PackedVector2Array()
+	var polyline := PackedVector2Array()
 	
 	var corner_offset := next_turn_progress_corner_idx_offset % HexLayoutMath.CORNER_NUM
 	
@@ -93,14 +107,12 @@ func _draw_hex_progress(layout: HexLayout, progress: float, fill_color: Color, b
 	
 	for idx in range(segments_filled + 1):
 		var corner_idx := corner_offset - idx if inverse_turn_progress_fill else corner_offset + idx
-		polygon.append(layout.hex_corner(corner_idx))
+		polyline.append(layout.hex_corner(corner_idx))
 	
 	var last_corner_idx := corner_offset - segments_filled if inverse_turn_progress_fill else corner_offset + segments_filled
 	var next_corner_idx := last_corner_idx -1 if inverse_turn_progress_fill else last_corner_idx + 1
 	var line_progress = radial_progress - corner_radial_progress
 	
-	polygon.append(lerp(layout.hex_corner(last_corner_idx), layout.hex_corner(next_corner_idx), line_progress))
-	polygon.append(Vector2.ZERO)
-	polygon.append(hex_layout.hex_corner(corner_offset))
+	polyline.append(lerp(layout.hex_corner(last_corner_idx), layout.hex_corner(next_corner_idx), line_progress))
 	
-	draw_polygon(polygon, [fill_color])	
+	draw_polyline(polyline, progress_outline_color, progress_outline_width)	
