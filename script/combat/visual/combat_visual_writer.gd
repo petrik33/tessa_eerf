@@ -47,7 +47,9 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 			))
 		if action is CombatActionRangedAttack:
 			var target_pos := hex_layout.hex_to_pixel(state.unit(action.target).placement)
-			queue.push_back(CombatVisualActions.ranged(action.attacking, target_pos))
+			queue.push_back(CombatVisualActions.ranged_unit_projectile(
+				action.attacking, target_pos
+			))
 			queue.push_back(CombatVisualActions.hurt(action.target))
 			queue.push_back(CombatVisualActions.idle(
 				action.attacking,

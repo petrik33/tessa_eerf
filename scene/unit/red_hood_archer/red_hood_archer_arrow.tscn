@@ -66,6 +66,7 @@ animations = [{
 [node name="RedHoodArcherArrow" type="Node2D"]
 script = SubResource("GDScript_kkhx2")
 speed = 1000.0
+metadata/_custom_type_script = "uid://dwy6mols26t3p"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

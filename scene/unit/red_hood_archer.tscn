@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="8_2ehl4"]
 
 [sub_resource type="GDScript" id="GDScript_5yi5y"]
-script/source = "extends CombatVisualUnit
+script/source = "@tool
+extends CombatVisualUnit
 
 
 @export var arrow_pscene: PackedScene
@@ -24,9 +25,6 @@ script/source = "extends CombatVisualUnit
 
 @onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
 @onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
-
-
-var shooting_target: Vector2
 
 
 func idle(action: CombatVisualUnitActionGoIdle):
@@ -50,7 +48,7 @@ func hurt(action: CombatVisualUnitActionHurt):
 
 
 func ranged(action: CombatVisualUnitActionRanged):
-	shooting_target = action.target
+	var shooting_target = action.target
 	shooting_target.y += arrow_origin.position.y + shooting_yoffset
 	
 	var direction = (shooting_target - physical_node.position).normalized()
@@ -61,25 +59,19 @@ func ranged(action: CombatVisualUnitActionRanged):
 	
 	animated_sprite.offset = -ranged_offset.position
 	animation_player.play(\"ranged\")
-	
-	await executed
-	
-	animated_sprite.rotation = 0
 
 
-func shoot_arrow():
+func projectile(_id: StringName) -> CombatVisualProjectile:
 	var arrow = arrow_pscene.instantiate() as CombatVisualProjectile
 	add_sibling(arrow)
 	arrow.global_position = arrow_origin.global_position
-	arrow.z_index = 1
-	arrow.fire_at(shooting_target)
-	await arrow.target_reached
-	executed.emit()
+	return arrow
 
 
 func go_idle():
 	animated_sprite.play(\"idle\")
 	animated_sprite.offset = -idle_offset.position
+	animated_sprite.rotation = 0
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qykq"]
@@ -362,7 +354,7 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"shoot_arrow"
+"method": &"_emit_executed"
 }]
 }
 tracks/2/type = "value"

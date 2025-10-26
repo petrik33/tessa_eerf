@@ -1,6 +1,11 @@
 class_name CombatVisualDirector extends Node
 
 
+signal started(action: CombatVisualActionBase)
+signal played(action: CombatVisualActionBase)
+signal finished()
+
+
 @export var units_map: CombatVisualUnitsMap
 @export var units_node: Node2D
 @export var hex_layout: HexLayout
@@ -29,17 +34,61 @@ func clear_scene():
 	_is_setup = false
 
 
-func play(queue: CombatVisualActionsQueue):
-	#assert(not _is_playing, "Already playing")
-	_is_playing = true
-	for action in queue.actions:
-		if action is CombatVisualUnitActionBase:
-			await get_unit(action.unit_handle).execute(action)
-			continue
-	_is_playing = false
+func playing() -> bool:
+	return _playing > 0
 
 
-var _is_playing: bool
+func queue_empty() -> bool:
+	return _queue.is_empty()
+
+
+func play(sequence: CombatVisualActionsQueue): 
+	enqueue(sequence)
+	if not playing():
+		play_next()
+
+
+func enqueue(sequence: CombatVisualActionsQueue):
+	for action in sequence.actions:
+		_queue.push_back(action)
+
+
+func play_next():
+	await play_action(_queue.pop_front())
+
+
+func play_action(action: CombatVisualActionBase):
+	_playing += 1
+	await execute_action(action)
+	_playing -= 1
+	if not playing() and not queue_empty():
+		play_next()
+	else:
+		finished.emit()
+
+
+func execute_action(action: CombatVisualActionBase):
+	if action is CombatVisualUnitActionBase:
+		await get_unit(action.unit_handle).execute(action)
+	if action is CombatParallelVisualActions:
+		for sub_action in action.actions:
+			play_action(sub_action)
+	if action is CombatVisualActionsSubSequence:
+		for sub_action in action.actions:
+			await play_action(sub_action)
+	if action is CombatVisualActionWaitUnitTrigger:
+		await get_unit(action.unit_handle).executed
+	if action is CombatVisualActionShootUnitProjectile:
+		var shooter := get_unit(action.shooting_unit)
+		var projectile = shooter.call("projectile", "ranged") as CombatVisualProjectile
+		projectile.fire_at(action.target)
+		await projectile.target_reached
+		projectile.queue_free()
+		
+
+
+var _queue: Array[CombatVisualActionBase]
+var _playing: int
 var _is_setup: bool
 var _units: Dictionary[String, CombatVisualUnitBase]
 

@@ -51,3 +51,46 @@ static func ranged(unit_handle: CombatUnitHandle, target: Vector2) -> CombatVisu
 	action.id = RANGED
 	action.target = target
 	return action
+
+
+static func parallel(... actions: Array) -> CombatParallelVisualActions:
+	var action := CombatParallelVisualActions.new()
+	action.actions = []
+	for sub_action in actions:
+		action.actions.push_back(sub_action)
+	return action
+
+
+static func sub_sequence(... actions: Array) -> CombatVisualActionsSubSequence:
+	var action := CombatVisualActionsSubSequence.new()
+	action.actions = []
+	for sub_action in actions:
+		action.actions.push_back(sub_action)
+	return action
+
+
+static func projectile(unit_handle: CombatUnitHandle, target: Vector2) -> CombatVisualActionShootUnitProjectile:
+	var action := CombatVisualActionShootUnitProjectile.new()
+	action.shooting_unit = unit_handle
+	action.target = target
+	return action
+
+
+static func wait_unit_trigger(unit_handle: CombatUnitHandle) -> CombatVisualActionWaitUnitTrigger:
+	var action := CombatVisualActionWaitUnitTrigger.new()
+	action.unit_handle = unit_handle
+	return action
+
+
+static func unit_trigger(unit_action: CombatVisualUnitActionBase, post_trigger: CombatVisualActionBase):
+	return parallel(
+		sub_sequence(wait_unit_trigger(unit_action.unit_handle), post_trigger),
+		unit_action
+	)
+
+
+static func ranged_unit_projectile(unit: CombatUnitHandle, target: Vector2) -> CombatVisualActionBase:
+	return unit_trigger(
+		ranged(unit, target),
+		projectile(unit, target)
+	)

@@ -12,3 +12,7 @@ func get_physical_node() -> Node2D:
 
 func execute(action: CombatVisualUnitActionBase):
 	assert(false, "not implemented")
+
+
+func _emit_executed():
+	executed.emit()
