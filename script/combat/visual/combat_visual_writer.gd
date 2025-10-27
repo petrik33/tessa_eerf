@@ -33,34 +33,46 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 			continue
 		if action is CombatActionMeleeAttack:
 			var attacked_position := hex_layout.hex_to_pixel(state.unit(action.defending).placement)
-			queue.push_back(CombatVisualActions.melee(action.attacking, attacked_position))
-			queue.push_back(CombatVisualActions.hurt(action.defending))
-			queue.push_back(CombatVisualActions.idle(
-				action.attacking,
-				hex_layout.hex_to_pixel(action.from_hex),
-				_get_unit_enemy_direction(state.unit(action.attacking))
-			))
-			queue.push_back(CombatVisualActions.idle(
-				action.defending,
-				attacked_position,
-				_get_unit_enemy_direction(state.unit(action.defending))
-			))
+			queue.push_back(
+				CombatVisualActions.unit_trigger(
+					CombatVisualActions.melee(action.attacking, attacked_position),
+					CombatVisualActions.hurt(action.defending)
+				)
+			)
+			queue.push_back(
+				CombatVisualActions.parallel(
+					CombatVisualActions.idle(
+						action.attacking,
+						hex_layout.hex_to_pixel(action.from_hex),
+						_get_unit_enemy_direction(state.unit(action.attacking))
+					),
+					CombatVisualActions.idle(
+						action.defending,
+						attacked_position,
+						_get_unit_enemy_direction(state.unit(action.defending))
+					)
+				)
+			)
 		if action is CombatActionRangedAttack:
 			var target_pos := hex_layout.hex_to_pixel(state.unit(action.target).placement)
 			queue.push_back(CombatVisualActions.ranged_unit_projectile(
 				action.attacking, target_pos
 			))
 			queue.push_back(CombatVisualActions.hurt(action.target))
-			queue.push_back(CombatVisualActions.idle(
-				action.attacking,
-				hex_layout.hex_to_pixel(state.unit(action.attacking).placement),
-				_get_unit_enemy_direction(state.unit(action.attacking))
-			))
-			queue.push_back(CombatVisualActions.idle(
-				action.target,
-				hex_layout.hex_to_pixel(state.unit(action.target).placement),
-				_get_unit_enemy_direction(state.unit(action.target))
-			))
+			queue.push_back(
+				CombatVisualActions.parallel(
+					CombatVisualActions.idle(
+						action.attacking,
+						hex_layout.hex_to_pixel(state.unit(action.attacking).placement),
+						_get_unit_enemy_direction(state.unit(action.attacking))
+					),
+					CombatVisualActions.idle(
+						action.target,
+						hex_layout.hex_to_pixel(state.unit(action.target).placement),
+						_get_unit_enemy_direction(state.unit(action.target))
+					)
+				)
+			)
 	return queue
 
 
