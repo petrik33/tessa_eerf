@@ -58,7 +58,6 @@ func ranged(action: CombatVisualUnitActionRanged):
 	CombatVisualUtils.node_face_hdirection(animated_sprite, direction)
 	animated_sprite.rotation = target_rotation * animated_sprite.scale.x
 	animated_sprite.position = -ranged_offset.position * animated_sprite.scale 
-	animation_player.speed_scale = 0.25
 	
 	animation_player.play(\"ranged\")
 
@@ -396,55 +395,13 @@ animation = &"ranged"
 unique_name_in_owner = true
 position = Vector2(5.5, -3)
 
-[node name="ColorRect" type="ColorRect" parent="Physical/AnimatedSprite2D/ArrowOrigin"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.35395226, 0.7221661, 0.37200487, 1)
-
 [node name="IdleOffset" type="Marker2D" parent="Physical/AnimatedSprite2D"]
 unique_name_in_owner = true
 position = Vector2(-1, 8)
 
-[node name="ColorRect" type="ColorRect" parent="Physical/AnimatedSprite2D/IdleOffset"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.7892849, 0.4701311, 0.9249382, 1)
-
 [node name="RangedOffset" type="Marker2D" parent="Physical/AnimatedSprite2D"]
 unique_name_in_owner = true
 position = Vector2(-4.5, 15.5)
-
-[node name="ColorRect" type="ColorRect" parent="Physical/AnimatedSprite2D/RangedOffset"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.87204075, 0.4962808, 0.57367986, 1)
 
 [node name="Components" type="Node" parent="."]
 
