@@ -62,7 +62,9 @@ func play_action(action: CombatVisualActionBase):
 	_playing += 1
 	await execute_action(action)
 	_playing -= 1
-	if not playing() and not queue_empty():
+	if playing():
+		return
+	if not queue_empty():
 		play_next()
 	else:
 		finished.emit()
