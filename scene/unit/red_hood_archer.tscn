@@ -28,8 +28,8 @@ extends CombatVisualUnit
 
 
 func idle(action: CombatVisualUnitActionGoIdle):
-	go_idle()
 	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
+	go_idle()
 	animated_sprite.rotation = 0
 
 
@@ -54,23 +54,24 @@ func ranged(action: CombatVisualUnitActionRanged):
 	var direction = (shooting_target - physical_node.position).normalized()
 	var target_rotation = atan2(direction.y, abs(direction.x))
 	target_rotation = clamp(target_rotation, -max_shooting_rotation, max_shooting_rotation)
+	
 	CombatVisualUtils.node_face_hdirection(animated_sprite, direction)
 	animated_sprite.rotation = target_rotation * animated_sprite.scale.x
+	animated_sprite.position = -ranged_offset.position * animated_sprite.scale 
+	animation_player.speed_scale = 0.25
 	
-	animated_sprite.offset = -ranged_offset.position
 	animation_player.play(\"ranged\")
 
 
 func projectile(_id: StringName) -> CombatVisualProjectile:
 	var arrow = arrow_pscene.instantiate() as CombatVisualProjectile
-	add_sibling(arrow)
 	arrow.global_position = arrow_origin.global_position
 	return arrow
 
 
 func go_idle():
 	animated_sprite.play(\"idle\")
-	animated_sprite.offset = -idle_offset.position
+	animated_sprite.position = -idle_offset.position * animated_sprite.scale
 	animated_sprite.rotation = 0
 "
 
@@ -350,7 +351,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.633333),
+"times": PackedFloat32Array(0.66),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -390,19 +391,60 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_qu5vg")
 animation = &"ranged"
-offset = Vector2(4.5, -6.5)
 
 [node name="ArrowOrigin" type="Marker2D" parent="Physical/AnimatedSprite2D"]
 unique_name_in_owner = true
-position = Vector2(10, -8.5)
+position = Vector2(5.5, -3)
+
+[node name="ColorRect" type="ColorRect" parent="Physical/AnimatedSprite2D/ArrowOrigin"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.35395226, 0.7221661, 0.37200487, 1)
 
 [node name="IdleOffset" type="Marker2D" parent="Physical/AnimatedSprite2D"]
 unique_name_in_owner = true
 position = Vector2(-1, 8)
 
+[node name="ColorRect" type="ColorRect" parent="Physical/AnimatedSprite2D/IdleOffset"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.7892849, 0.4701311, 0.9249382, 1)
+
 [node name="RangedOffset" type="Marker2D" parent="Physical/AnimatedSprite2D"]
 unique_name_in_owner = true
 position = Vector2(-4.5, 15.5)
+
+[node name="ColorRect" type="ColorRect" parent="Physical/AnimatedSprite2D/RangedOffset"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.87204075, 0.4962808, 0.57367986, 1)
 
 [node name="Components" type="Node" parent="."]
 

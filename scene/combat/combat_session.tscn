@@ -818,10 +818,11 @@ writer = SubResource("Resource_445t5")
 director = NodePath("Director")
 metadata/_custom_type_script = "uid://cyg3pjgbmf1vv"
 
-[node name="Director" type="Node" parent="Visual" node_paths=PackedStringArray("units_node")]
+[node name="Director" type="Node" parent="Visual" node_paths=PackedStringArray("units_node", "projectiles_node")]
 script = ExtResource("12_ppt2y")
 units_map = ExtResource("13_3jy7r")
 units_node = NodePath("../../HexSpace/Units")
+projectiles_node = NodePath("../../HexSpace/Projectiles")
 hex_layout = ExtResource("10_jre1e")
 metadata/_custom_type_script = "uid://dce88q3ja7wu"
 
@@ -877,6 +878,8 @@ grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 
 [node name="Units" type="Node2D" parent="HexSpace"]
+
+[node name="Projectiles" type="Node2D" parent="HexSpace"]
 
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3

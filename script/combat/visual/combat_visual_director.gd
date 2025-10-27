@@ -8,6 +8,7 @@ signal finished()
 
 @export var units_map: CombatVisualUnitsMap
 @export var units_node: Node2D
+@export var projectiles_node: Node2D
 @export var hex_layout: HexLayout
 
 
@@ -81,8 +82,11 @@ func execute_action(action: CombatVisualActionBase):
 	if action is CombatVisualActionShootUnitProjectile:
 		var shooter := get_unit(action.shooting_unit)
 		var projectile = shooter.call("projectile", "ranged") as CombatVisualProjectile
+		projectiles_node.add_child(projectile)
+		projectile.global_position -= projectiles_node.global_position
 		projectile.fire_at(action.target)
 		await projectile.target_reached
+		projectiles_node.remove_child(projectile)
 		projectile.queue_free()
 		
 
