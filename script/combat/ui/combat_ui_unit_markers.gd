@@ -25,8 +25,8 @@ func update(state: CombatState):
 		var unit := state.unit(unit_handle)
 		var marker := _markers[unit_handle.id()]
 		marker.set_stack_size(unit.stack_size)
-		var turn_place := state.place_in_turn_queue(unit_handle)
-		marker.next_turn_progress = float(turn_place) / state.turn_queue.size()
+		# var turn_place := state.place_in_turn_queue(unit_handle)
+		marker.fill_percentage = float(unit.hp) / float(unit.stats().hp)
 
 
 var _markers: Dictionary[String, CombatUiUnitMarker] = {}

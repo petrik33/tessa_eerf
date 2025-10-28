@@ -53,3 +53,31 @@ static func magnitude(vec: Vector2i) -> int:
 	var dr = abs(vec.y)
 	var ds = abs(-vec.x - vec.y)
 	return max(dq, dr, ds)
+
+
+static func hex_perimeter_polygon_by_percent(layout: HexLayout, percent: float, corner_idx_offset := 0, inverse := false) -> PackedVector2Array:
+	if percent <= 0.0:
+		return PackedVector2Array()
+	if percent >= 1.0:
+		return layout.hex_polygon()
+	
+	var polygon := PackedVector2Array()
+	
+	var corner_offset := corner_idx_offset % HexLayoutMath.CORNER_NUM
+	
+	var radial_angle := percent * PI * 2
+	var radial_progress := radial_angle / HexLayoutMath.HEX_ANGLE_STEP
+	var corner_radial_progress = floor(radial_progress)
+	var segments_filled := (int(corner_radial_progress) % HexLayoutMath.CORNER_NUM) 
+	
+	for idx in range(segments_filled + 1):
+		var corner_idx := corner_offset - idx if inverse else corner_offset + idx
+		polygon.append(layout.hex_corner(corner_idx))
+	
+	var last_corner_idx := corner_offset - segments_filled if inverse else corner_offset + segments_filled
+	var next_corner_idx := last_corner_idx -1 if inverse else last_corner_idx + 1
+	var line_progress = radial_progress - corner_radial_progress
+	
+	polygon.append(lerp(layout.hex_corner(last_corner_idx), layout.hex_corner(next_corner_idx), line_progress))
+	
+	return polygon
