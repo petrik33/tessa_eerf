@@ -22,15 +22,15 @@
 [ext_resource type="Texture2D" uid="uid://d1u8ho7e010r2" path="res://asset/texture/battle_background/homm3_swamp/Combat_Swamp.png" id="14_5r77e"]
 [ext_resource type="Texture2D" uid="uid://b6ksxv6834hrv" path="res://asset/texture/ui/cursor/cursor_attack_ranged.tres" id="14_jre1e"]
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="15_s1x26"]
-[ext_resource type="PackedScene" uid="uid://dlllyceo4rdoi" path="res://scene/combat_ui/combat_ui_unit_marker.tscn" id="16_jre1e"]
+[ext_resource type="PackedScene" uid="uid://dlllyceo4rdoi" path="res://scene/combat_ui/unit_marker.tscn" id="16_jre1e"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="16_w8ypk"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="18_v1qqa"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="19_8fv3r"]
-[ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/combat_ui_outlines.tscn" id="20_5plje"]
+[ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/outlines.tscn" id="20_5plje"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="21_iml5j"]
 [ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="22_oomfw"]
 [ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="25_4yhjs"]
-[ext_resource type="PackedScene" uid="uid://cjrxcgyr1d7pe" path="res://scene/combat_ui/combat_ui_hud.tscn" id="31_4yhjs"]
+[ext_resource type="PackedScene" uid="uid://cjrxcgyr1d7pe" path="res://scene/combat_ui/hud.tscn" id="31_4yhjs"]
 
 [sub_resource type="Resource" id="Resource_4yhjs"]
 script = ExtResource("8_jre1e")
