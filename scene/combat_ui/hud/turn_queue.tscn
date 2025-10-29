@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://cliiapojuvw34"]
+
+[ext_resource type="PackedScene" uid="uid://3frcjsf64t58" path="res://scene/combat_ui/hud/turn_queue/unit_entry.tscn" id="1_6apj7"]
+
+[node name="TurnQueue" type="Control"]
+custom_minimum_size = Vector2(600, 24)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Bg" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 4
+
+[node name="UnitEntry2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+layout_mode = 2
+
+[node name="UnitEntry5" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+layout_mode = 2
+
+[node name="UnitEntry6" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+layout_mode = 2
+
+[node name="UnitEntry7" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+layout_mode = 2
+
+[node name="UnitEntry3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+layout_mode = 2
