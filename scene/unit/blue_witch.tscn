@@ -1,6 +1,5 @@
 [gd_scene load_steps=54 format=3 uid="uid://c8asf4s1t6aie"]
 
-[ext_resource type="Script" uid="uid://j32cf0ohhocr" path="res://scene/unit/blue_witch.gd" id="1_xiho1"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="6_7nox7"]
 [ext_resource type="Texture2D" uid="uid://bf2vulfaopn3j" path="res://asset/texture/unit/blue_witch/B_witch_idle.png" id="6_hebk6"]
 [ext_resource type="Texture2D" uid="uid://cjig7lus2c3md" path="res://asset/texture/unit/blue_witch/B_witch_run.png" id="7_ax8xb"]
@@ -9,6 +8,39 @@
 [ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="10_hebk6"]
 [ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="11_ax8xb"]
 [ext_resource type="Texture2D" uid="uid://dyqct1n7poe7j" path="res://asset/texture/unit/blue_witch/B_witch_attack.png" id="11_qjius"]
+
+[sub_resource type="GDScript" id="GDScript_wgj7g"]
+script/source = "@tool
+extends CombatVisualUnit
+
+
+@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
+@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
+
+
+func idle(action: CombatVisualUnitActionGoIdle):
+	go_idle()
+	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
+
+
+func walk(action: CombatVisualUnitActionWalk):
+	animated_sprite.play(\"walk\")
+	face_walk_direction.set_process(true)
+	await walk_along_path.walk(action)
+	face_walk_direction.set_process(false)
+	go_idle()
+
+
+func hurt(_action: CombatVisualUnitActionHurt):
+	animated_sprite.play(\"hurt\")
+	await animated_sprite.animation_finished
+	go_idle()
+
+
+func go_idle():
+	animated_sprite.play(\"idle\")
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyjtx"]
 atlas = ExtResource("6_7nox7")
@@ -345,7 +377,7 @@ animations = [{
 }]
 
 [node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("physical_node")]
-script = ExtResource("1_xiho1")
+script = SubResource("GDScript_wgj7g")
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 

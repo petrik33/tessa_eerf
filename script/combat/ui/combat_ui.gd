@@ -2,6 +2,7 @@ class_name CombatUI extends Node
 
 @export var outlines: CombatUiOutlines
 @export var unit_markers: CombatUiUnitMarkers
+@export var hud: CombatUiHud
 
 @export var cursor_arrow: Texture2D
 @export var cursor_point: Texture2D
@@ -11,6 +12,7 @@ class_name CombatUI extends Node
 
 func setup(initial_state: CombatState, visual: CombatVisual):
 	unit_markers.create_units_left_markers(visual, initial_state)
+	hud.update(initial_state)
 
 
 func reset():
@@ -37,6 +39,7 @@ func disable_turn_outlines():
 
 func update_observed_state(state: CombatState):
 	unit_markers.update(state)
+	hud.update(state)
 
 
 func update_potential_command(turn_context: CombatTurnContext, command: CombatCommandBase):

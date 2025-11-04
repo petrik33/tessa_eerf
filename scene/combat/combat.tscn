@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://d0hb52hvfmvgx"]
+[gd_scene load_steps=29 format=4 uid="uid://y0xxj66fqnl5"]
 
 [ext_resource type="Script" uid="uid://cqhbrul7iip6p" path="res://script/combat/combat.gd" id="1_rlkjv"]
 [ext_resource type="Resource" uid="uid://b7rh5anph2oyf" path="res://resource/combat/combat_rules.tres" id="3_6vbif"]
@@ -763,9 +763,10 @@ metadata/_custom_type_script = "uid://3bxue3cl0qjn"
 script = ExtResource("4_md4tn")
 metadata/_custom_type_script = "uid://bb1ghxsvc6cag"
 
-[node name="UI" type="Node" parent="." node_paths=PackedStringArray("outlines")]
+[node name="UI" type="Node" parent="." node_paths=PackedStringArray("outlines", "unit_markers")]
 script = ExtResource("10_m8dvu")
 outlines = NodePath("../HexSpace/Outlines")
+unit_markers = NodePath("UnitsLeftMarkers")
 cursor_arrow = ExtResource("8_md4tn")
 cursor_point = ExtResource("11_md4tn")
 cursor_attack_melee = ExtResource("10_58tkr")
@@ -843,11 +844,11 @@ metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -35.074
-offset_top = -20.25
-offset_right = 502.728
-offset_bottom = 290.25
-pivot_offset = Vector2(35.074, 20.25)
+offset_left = -49.103638
+offset_top = -16.19999
+offset_right = 703.819
+offset_bottom = 232.19989
+pivot_offset = Vector2(49.103638, 16.19999)
 mouse_filter = 1
 script = ExtResource("27_jccvw")
 bbox_scale = 1.15

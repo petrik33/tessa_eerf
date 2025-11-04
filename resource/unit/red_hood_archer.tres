@@ -11,5 +11,6 @@ metadata/_custom_type_script = "uid://docn60vvfh160"
 [resource]
 script = ExtResource("1_x16dm")
 uid = &"red_hood_archer"
+name = "Red Hood Archer"
 combat_stats = SubResource("Resource_1v221")
 metadata/_custom_type_script = "uid://b4cqksp55xbh0"

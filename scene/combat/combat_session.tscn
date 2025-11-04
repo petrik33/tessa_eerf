@@ -797,10 +797,11 @@ combat = NodePath("../Combat")
 coordinates = NodePath("../HexSpace/Coordinates")
 metadata/_custom_type_script = "uid://3bxue3cl0qjn"
 
-[node name="UI" type="Node" parent="." node_paths=PackedStringArray("outlines", "unit_markers")]
+[node name="UI" type="Node" parent="." node_paths=PackedStringArray("outlines", "unit_markers", "hud")]
 script = ExtResource("4_wubw6")
 outlines = NodePath("../HexSpace/Outlines")
 unit_markers = NodePath("UnitsLeftMarkers")
+hud = NodePath("../HUD")
 cursor_arrow = ExtResource("5_ah1oa")
 cursor_point = ExtResource("6_7x530")
 cursor_attack_melee = ExtResource("7_kjvss")

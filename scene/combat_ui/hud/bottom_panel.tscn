@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://capk8dh577m0s"]
+
+[ext_resource type="Theme" uid="uid://bc0wdxvvq0x04" path="res://ui/theme/ui_main_theme.tres" id="1_dcebw"]
+[ext_resource type="Texture2D" uid="uid://del2fa8lhnn7" path="res://asset/texture/ui/icon/hud/ui_hud_runaway.tres" id="3_h64me"]
+[ext_resource type="Texture2D" uid="uid://ctw1i41jp0ypd" path="res://asset/texture/ui/icon/hud/ui_hud_spellbook.tres" id="5_bul0n"]
+[ext_resource type="Texture2D" uid="uid://bney4jmvo4t7j" path="res://asset/texture/ui/icon/hud/ui_hud_wait.tres" id="6_un4ge"]
+[ext_resource type="Texture2D" uid="uid://b8ibn08tcm7ud" path="res://asset/texture/ui/icon/hud/ui_hud_defend.tres" id="7_3rt5d"]
+
+[node name="BottomPanel" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+offset_right = 139.0
+offset_bottom = 16.0
+mouse_filter = 2
+theme = ExtResource("1_dcebw")
+
+[node name="LeftGroup" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Defend" type="Button" parent="LeftGroup"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("7_3rt5d")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Wait" type="Button" parent="LeftGroup"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("6_un4ge")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "Tessa & Eerf"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightGroup" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SpellBook" type="Button" parent="RightGroup"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("5_bul0n")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RunAway" type="Button" parent="RightGroup"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("3_h64me")
+icon_alignment = 1
+expand_icon = true

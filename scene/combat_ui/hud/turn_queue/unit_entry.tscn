@@ -1,70 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://3frcjsf64t58"]
+[gd_scene load_steps=5 format=3 uid="uid://d3or7rpcg6wcr"]
 
-[ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="1_nvwxa"]
+[ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="1_keny7"]
+[ext_resource type="Script" uid="uid://cy2xl7ospws6b" path="res://script/combat/ui/combat_ui_turn_queue_unit_entry.gd" id="2_0jddo"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lv5fk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l57g7"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_c7n8e"]
-font = ExtResource("1_nvwxa")
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_me2it"]
-color = Color(0.6039, 0.61, 0.6056283, 1)
-grow_begin = -1.0
-grow_end = -1.0
-vertical = true
-
-[sub_resource type="LabelSettings" id="LabelSettings_ajtc7"]
-font = ExtResource("1_nvwxa")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3wyy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l57g7"]
 draw_center = false
 border_width_bottom = 1
 border_color = Color(0.27466258, 0.47614032, 0.7872053, 1)
 border_blend = true
 
-[node name="UnitEntry" type="Button"]
-custom_minimum_size = Vector2(112, 20)
-size_flags_horizontal = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lv5fk")
-
-[node name="Content" type="HBoxContainer" parent="."]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="Name" type="Label" parent="Content"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
+[node name="UnitEntry" type="Button" node_paths=PackedStringArray("underline")]
+custom_minimum_size = Vector2(40, 0)
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_keny7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l57g7")
 text = "Martial Heroes"
-label_settings = SubResource("LabelSettings_c7n8e")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="Content"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 12
-theme_override_styles/separator = SubResource("StyleBoxLine_me2it")
-
-[node name="StackSize" type="Label" parent="Content"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "12"
-label_settings = SubResource("LabelSettings_ajtc7")
-horizontal_alignment = 1
-vertical_alignment = 1
+alignment = 0
+script = ExtResource("2_0jddo")
+underline = NodePath("SideUnderline")
 
 [node name="SideUnderline" type="Panel" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_g3wyy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_l57g7")

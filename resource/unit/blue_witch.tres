@@ -10,5 +10,6 @@ metadata/_custom_type_script = "uid://docn60vvfh160"
 [resource]
 script = ExtResource("2_o0wsn")
 uid = &"blue_witch"
+name = "Blue Witch"
 combat_stats = SubResource("Resource_1v221")
 metadata/_custom_type_script = "uid://b4cqksp55xbh0"

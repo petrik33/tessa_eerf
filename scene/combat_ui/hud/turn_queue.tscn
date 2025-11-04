@@ -1,11 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cliiapojuvw34"]
+[gd_scene load_steps=4 format=3 uid="uid://cliiapojuvw34"]
 
-[ext_resource type="PackedScene" uid="uid://3frcjsf64t58" path="res://scene/combat_ui/hud/turn_queue/unit_entry.tscn" id="1_6apj7"]
+[ext_resource type="Script" uid="uid://d2h1vp1t1kh33" path="res://script/combat/ui/turn_queue.gd" id="1_6apj7"]
+[ext_resource type="PackedScene" uid="uid://d3or7rpcg6wcr" path="res://scene/combat_ui/hud/turn_queue/unit_entry.tscn" id="2_m137q"]
+[ext_resource type="PackedScene" uid="uid://bx532ij35x5p7" path="res://scene/combat_ui/hud/turn_queue/separator.tscn" id="3_jhw1r"]
 
-[node name="TurnQueue" type="Control"]
-custom_minimum_size = Vector2(600, 24)
+[node name="TurnQueue" type="Control" node_paths=PackedStringArray("container")]
+clip_contents = true
+custom_minimum_size = Vector2(450, 18)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 450.0
+offset_bottom = 18.0
+script = ExtResource("1_6apj7")
+army_colors = Dictionary[String, Color]({
+"army:0": Color(0.694118, 0, 0, 1),
+"army:1": Color(0, 0, 0.694118, 1)
+})
+container = NodePath("HBoxContainer")
+unit_entry_scene = ExtResource("2_m137q")
+separator_scene = ExtResource("3_jhw1r")
 
 [node name="Bg" type="Panel" parent="."]
 layout_mode = 1
@@ -15,34 +28,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 2.0
+offset_left = 4.0
 offset_top = 2.0
-offset_right = -2.0
 offset_bottom = -2.0
-grow_horizontal = 2
 grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
 theme_override_constants/separation = 4
 
-[node name="UnitEntry2" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+[node name="UnitEntry" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
 layout_mode = 2
 
-[node name="UnitEntry5" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+[node name="UnitEntry2" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
 layout_mode = 2
 
-[node name="UnitEntry6" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+[node name="UnitEntry3" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
 layout_mode = 2
 
-[node name="UnitEntry7" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+[node name="UnitEntry4" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
 layout_mode = 2
 
-[node name="UnitEntry3" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_6apj7")]
+[node name="UnitEntry5" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
+layout_mode = 2
+
+[node name="UnitEntry6" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
+layout_mode = 2
+
+[node name="UnitEntry7" parent="HBoxContainer" instance=ExtResource("2_m137q")]
+visible = false
 layout_mode = 2
