@@ -1,0 +1,36 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://ba14f0prbm8ai"]
+
+[ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="1_dgp6s"]
+[ext_resource type="StyleBox" uid="uid://deqg5ry4fhlcq" path="res://ui/theme/hud_bottom_panel/sbox_hover.tres" id="1_gi16d"]
+[ext_resource type="StyleBox" uid="uid://cprvfos7o3y0i" path="res://ui/theme/hud_bottom_panel/sbox_disabled.tres" id="1_nm6yy"]
+[ext_resource type="StyleBox" uid="uid://esmu4803bgna" path="res://ui/theme/hud_bottom_panel/sbox_normal.tres" id="2_lskyj"]
+[ext_resource type="StyleBox" uid="uid://h3q7medh4ou1" path="res://ui/theme/hud_bottom_panel/sbox_pressed.tres" id="3_lskyj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lskyj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm6yy"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.05490196, 0.16862746, 0.15294118, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.7294118, 0.63529414, 0.48235294, 0.6)
+border_blend = true
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
+
+[resource]
+default_font = ExtResource("1_dgp6s")
+Button/styles/disabled = ExtResource("1_nm6yy")
+Button/styles/focus = SubResource("StyleBoxEmpty_lskyj")
+Button/styles/hover = ExtResource("1_gi16d")
+Button/styles/normal = ExtResource("2_lskyj")
+Button/styles/pressed = ExtResource("3_lskyj")
+HBoxContainer/constants/separation = -1
+Panel/styles/panel = ExtResource("2_lskyj")
+Title/base_type = &"Label"
+Title/styles/normal = SubResource("StyleBoxFlat_nm6yy")

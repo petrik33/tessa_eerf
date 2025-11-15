@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bajxpyh1d0rye"]
+
+[ext_resource type="Script" uid="uid://c8o4cdjj133rm" path="res://scene/combat_ui/unit_marker/olden_era/olden_era_like.gd" id="1_i22c7"]
+[ext_resource type="StyleBox" uid="uid://chfrp31y8bh8f" path="res://scene/combat_ui/unit_marker/olden_era/ally_style_box_flat.tres" id="2_m6vnj"]
+[ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="2_rcxig"]
+
+[node name="UnitMarker" type="Control" node_paths=PackedStringArray("label", "panel")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 18.0
+script = ExtResource("1_i22c7")
+label = NodePath("Label")
+panel = NodePath("Panel")
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_m6vnj")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_rcxig")
+theme_override_font_sizes/font_size = 12
+text = "231"
+horizontal_alignment = 1
+vertical_alignment = 1

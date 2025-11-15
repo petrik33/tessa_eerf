@@ -1,56 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlllyceo4rdoi"]
+[gd_scene load_steps=4 format=3 uid="uid://dlllyceo4rdoi"]
 
 [ext_resource type="Script" uid="uid://dp57w2ehogv67" path="res://script/combat/ui/combat_ui_unit_marker.gd" id="1_qii44"]
 [ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="3_nf34c"]
-[ext_resource type="Script" uid="uid://bwitt2ghi4geg" path="res://script/hex/hex_layout.gd" id="6_874g2"]
 
-[sub_resource type="Resource" id="Resource_874g2"]
-script = ExtResource("6_874g2")
-base_hex_rotation = 0.0
-size = Vector2(10, 10)
-metadata/_custom_type_script = "uid://bwitt2ghi4geg"
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as70w"]
+bg_color = Color(0.6, 0.10800001, 0.10800001, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27, 0.11070001, 0.11070001, 1)
+border_blend = true
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+anti_aliasing = false
+anti_aliasing_size = 2.0
 
-[sub_resource type="Gradient" id="Gradient_a6nes"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(0.95686275, 0.2627451, 0.21176471, 1, 1, 0.59607846, 0, 1, 1, 0.92156863, 0.23137255, 1, 0.8039216, 0.8627451, 0.22352941, 1, 0.23650001, 0.55, 0.24695, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_874g2"]
-font = ExtResource("3_nf34c")
-shadow_color = Color(0, 0, 0, 1)
-
-[node name="CombatUiUnitMarker" type="Control"]
+[node name="UnitMarker" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_top = 16.0
-offset_bottom = 16.0
-mouse_filter = 2
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 18.0
 script = ExtResource("1_qii44")
-army_colors = Dictionary[String, Color]({
-"army:0": Color(0.694118, 0, 0, 1),
-"army:1": Color(0, 0, 0.694118, 1)
-})
-bg_color = Color(0.30323294, 0.3032328, 0.30323282, 1)
-default_color = Color(0.694118, 0, 0, 1)
-hex_layout = SubResource("Resource_874g2")
-fill_percentage = 1.0
-fill_gradient = SubResource("Gradient_a6nes")
-army_id = "army:1"
+army_colors = Dictionary[String, Color]({})
+bg_color = Color(0, 0, 0, 1)
+default_color = Color(0, 0, 0, 1)
+hex_layout = null
+fill_percentage = 0.75
+fill_gradient = null
+outline_width = 1.0
+army_id = ""
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_as70w")
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 9.0
-offset_bottom = 7.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "33"
-label_settings = SubResource("LabelSettings_874g2")
+theme_override_fonts/font = ExtResource("3_nf34c")
+theme_override_font_sizes/font_size = 12
+text = "231"
 horizontal_alignment = 1
 vertical_alignment = 1

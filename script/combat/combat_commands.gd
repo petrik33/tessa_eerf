@@ -24,3 +24,11 @@ static func ranged_attack_unit(from: Vector2i, to: Vector2i) -> CombatCommandRan
 	command.from = from
 	command.to = to
 	return command
+
+
+static func defend() -> CombatCommandUnitDefend:
+	return CombatCommandUnitDefend.new()
+
+
+static func wait() -> CombatCommandUnitWait:
+	return CombatCommandUnitWait.new()

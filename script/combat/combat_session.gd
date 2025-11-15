@@ -37,8 +37,8 @@ func _on_combat_started():
 	services = CombatServices.new(combat.definition)
 	if wait_visual:
 		combat.add_auto_wait(VISUAL_WAIT_REASON)
-	controller.potential_command_changed.connect(_on_controller_potential_command_changed)
-	controller.command_requested.connect(_on_controller_command_requested)
+	ui.potential_command_changed.connect(_on_potential_command_changed)
+	ui.command_requested.connect(_on_command_requested)
 	controller.setup()
 	var initial_observed_state = combat.observe_state()
 	visual.setup(initial_observed_state)
@@ -49,8 +49,8 @@ func _on_combat_finished():
 	ui.reset()
 	visual.reset()
 	controller.reset()
-	controller.command_requested.disconnect(_on_controller_command_requested)
-	controller.potential_command_changed.disconnect(_on_controller_potential_command_changed)
+	ui.command_requested.disconnect(_on_command_requested)
+	ui.potential_command_changed.disconnect(_on_potential_command_changed)
 	if wait_visual:
 		combat.remove_auto_wait(VISUAL_WAIT_REASON)
 
@@ -67,14 +67,12 @@ func _on_combat_turn_started(turn_handle: CombatHandle):
 	if not turn_controlled:
 		return
 	ui.start_turn(turn_context)
-	controller.enable(turn_context)
 
 
 func _on_combat_turn_finished(turn_handle: CombatHandle):
 	if not controller.is_turn_controlled(turn_handle):
 		return
 	ui.finish_turn()
-	controller.disable()
 
 
 func _on_combat_command_processed(command: CombatCommandBase, actions: CombatActionsBuffer):
@@ -84,11 +82,11 @@ func _on_combat_command_processed(command: CombatCommandBase, actions: CombatAct
 	combat.remove_wait(VISUAL_WAIT_REASON)
 
 
-func _on_controller_potential_command_changed(command: CombatCommandBase):
-	ui.update_potential_command(turn_context, command)
+func _on_potential_command_changed(command: CombatCommandBase):
+	pass
 
 
-func _on_controller_command_requested(command: CombatCommandBase):
+func _on_command_requested(command: CombatCommandBase):
 	combat.request_command(command)
 	
 	

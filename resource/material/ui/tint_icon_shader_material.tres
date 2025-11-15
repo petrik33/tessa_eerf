@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://821ho2wmv3s4"]
+
+[ext_resource type="Shader" uid="uid://cgqgeaj5e8pr4" path="res://shader/tint_icon.gdshader" id="1_fbauq"]
+
+[resource]
+shader = ExtResource("1_fbauq")
+shader_parameter/accent_color = Color(0.7294118, 0.63529414, 0.48235294, 1)

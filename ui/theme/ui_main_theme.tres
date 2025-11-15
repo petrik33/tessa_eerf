@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bc0wdxvvq0x04"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bc0wdxvvq0x04"]
 
 [ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="1_cg4y4"]
 
@@ -10,54 +10,6 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.0627451, 0.1254902, 0.101960786, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3y1b"]
-bg_color = Color(0.09019608, 0.13333334, 0.12156863, 1)
-border_color = Color(0.043137256, 0.08627451, 0.078431375, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l6lmn"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loyd6"]
-bg_color = Color(0.05882353, 0.36862746, 0.30588236, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.05882353, 0.36862746, 0.30588236, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4m13"]
-bg_color = Color(0.0544, 0.17, 0.15073332, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.05490196, 0.16862746, 0.14901961, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmvyi"]
-bg_color = Color(0.043137256, 0.28235295, 0.23529412, 1)
-border_color = Color(0.023529412, 0.18431373, 0.15686275, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
 [resource]
-BottomBar/base_type = &"Panel"
-BottomBar/styles/panel = SubResource("StyleBoxFlat_cg4y4")
-BottomBarButton/base_type = &"Button"
-BottomBarButton/styles/disabled = SubResource("StyleBoxFlat_q3y1b")
-BottomBarButton/styles/focus = SubResource("StyleBoxEmpty_l6lmn")
-BottomBarButton/styles/hover = SubResource("StyleBoxFlat_loyd6")
-BottomBarButton/styles/normal = SubResource("StyleBoxFlat_q4m13")
-BottomBarButton/styles/pressed = SubResource("StyleBoxFlat_mmvyi")
-HudLog/base_type = &"RichTextLabel"
-HudLog/fonts/normal_font = ExtResource("1_cg4y4")
 Label/fonts/font = ExtResource("1_cg4y4")
 Panel/styles/panel = SubResource("StyleBoxFlat_cg4y4")

@@ -1,4 +1,4 @@
-class_name CombatUiTurnQueue extends Control
+class_name CombatUiTurnQueue extends CombatUiModuleBase
 
 
 @export var army_colors: Dictionary[String, Color]:
@@ -12,6 +12,7 @@ class_name CombatUiTurnQueue extends Control
 
 
 func update(state: CombatState):
+	super.update(state)
 	for entry in entries:
 		entry.queue_free()
 	for separator in separators:

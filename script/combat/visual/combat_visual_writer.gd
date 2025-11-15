@@ -73,6 +73,7 @@ func sequence(state: CombatState, _command: CombatCommandBase, buffer: CombatAct
 					)
 				)
 			)
+	
 	return queue
 
 

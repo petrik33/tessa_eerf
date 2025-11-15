@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cjqerd1pwwpv1"]
+[gd_scene load_steps=42 format=4 uid="uid://cjqerd1pwwpv1"]
 
 [ext_resource type="Script" uid="uid://cat4m8lo70qu3" path="res://script/combat/combat_session.gd" id="1_rdbvd"]
 [ext_resource type="Script" uid="uid://3bxue3cl0qjn" path="res://script/combat/dbg_combat_controller.gd" id="2_1ioox"]
@@ -24,13 +24,17 @@
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="15_s1x26"]
 [ext_resource type="PackedScene" uid="uid://dlllyceo4rdoi" path="res://scene/combat_ui/unit_marker.tscn" id="16_jre1e"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="16_w8ypk"]
+[ext_resource type="PackedScene" uid="uid://bsob77rx34xsl" path="res://scene/combat_ui/unit_marker/olden_era/olden_era_like_module.tscn" id="17_ppt2y"]
+[ext_resource type="PackedScene" uid="uid://bajxpyh1d0rye" path="res://scene/combat_ui/unit_marker/olden_era/olden_era_like.tscn" id="18_3jy7r"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="18_v1qqa"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="19_8fv3r"]
+[ext_resource type="StyleBox" uid="uid://chfrp31y8bh8f" path="res://scene/combat_ui/unit_marker/olden_era/ally_style_box_flat.tres" id="19_s1x26"]
 [ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/outlines.tscn" id="20_5plje"]
+[ext_resource type="StyleBox" uid="uid://cbqrj3r75cf50" path="res://scene/combat_ui/unit_marker/olden_era/enemy_style_box_flat.tres" id="20_w8ypk"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="21_iml5j"]
 [ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="22_oomfw"]
 [ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="25_4yhjs"]
-[ext_resource type="PackedScene" uid="uid://cjrxcgyr1d7pe" path="res://scene/combat_ui/hud.tscn" id="31_4yhjs"]
+[ext_resource type="PackedScene" uid="uid://c5tsw41wpkabs" path="res://scene/combat_ui/hud.tscn" id="31_4yhjs"]
 
 [sub_resource type="Resource" id="Resource_4yhjs"]
 script = ExtResource("8_jre1e")
@@ -779,10 +783,9 @@ metadata/_custom_type_script = "uid://cqhbrul7iip6p"
 script = ExtResource("3_j1ahj")
 metadata/_custom_type_script = "uid://bb1ghxsvc6cag"
 
-[node name="HotSeatController" type="Node" parent="." node_paths=PackedStringArray("input")]
+[node name="HotSeatController" type="Node" parent="."]
 script = ExtResource("5_7x530")
 controlled_armies = Array[String](["army:0", "army:1"])
-input = NodePath("Input")
 metadata/_custom_type_script = "uid://dn6u3kh4wtkny"
 
 [node name="Input" type="Node" parent="HotSeatController" node_paths=PackedStringArray("hex_picking")]
@@ -796,22 +799,6 @@ script = ExtResource("2_1ioox")
 combat = NodePath("../Combat")
 coordinates = NodePath("../HexSpace/Coordinates")
 metadata/_custom_type_script = "uid://3bxue3cl0qjn"
-
-[node name="UI" type="Node" parent="." node_paths=PackedStringArray("outlines", "unit_markers", "hud")]
-script = ExtResource("4_wubw6")
-outlines = NodePath("../HexSpace/Outlines")
-unit_markers = NodePath("UnitsLeftMarkers")
-hud = NodePath("../HUD")
-cursor_arrow = ExtResource("5_ah1oa")
-cursor_point = ExtResource("6_7x530")
-cursor_attack_melee = ExtResource("7_kjvss")
-cursor_attack_ranged = ExtResource("14_jre1e")
-metadata/_custom_type_script = "uid://ulh2ys5y8bdo"
-
-[node name="UnitsLeftMarkers" type="Node" parent="UI"]
-script = ExtResource("8_a81rf")
-units_left_marker = ExtResource("16_jre1e")
-metadata/_custom_type_script = "uid://dy2tluo30mpc6"
 
 [node name="Visual" type="Node" parent="." node_paths=PackedStringArray("director")]
 script = ExtResource("9_m5d3p")
@@ -896,6 +883,29 @@ bbox_scale = 1.02
 grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://bpsuuaaepbib7"
 
-[node name="HUD" parent="." instance=ExtResource("31_4yhjs")]
+[node name="UI" type="Node" parent="." node_paths=PackedStringArray("input", "outlines", "unit_markers", "modules")]
+script = ExtResource("4_wubw6")
+input = NodePath("../HotSeatController/Input")
+outlines = NodePath("../HexSpace/Outlines")
+unit_markers = NodePath("UnitsLeftMarkers")
+cursor_arrow = ExtResource("5_ah1oa")
+cursor_point = ExtResource("6_7x530")
+cursor_attack_melee = ExtResource("7_kjvss")
+cursor_attack_ranged = ExtResource("14_jre1e")
+modules = [NodePath("OldenEraLikeModule"), NodePath("Hud")]
+metadata/_custom_type_script = "uid://ulh2ys5y8bdo"
+
+[node name="UnitsLeftMarkers" type="Node" parent="UI"]
+script = ExtResource("8_a81rf")
+units_left_marker = ExtResource("16_jre1e")
+metadata/_custom_type_script = "uid://dy2tluo30mpc6"
+
+[node name="OldenEraLikeModule" parent="UI" instance=ExtResource("17_ppt2y")]
+marker_scene = ExtResource("18_3jy7r")
+ally_panel_sbox = ExtResource("19_s1x26")
+enemy_panel_sbox = ExtResource("20_w8ypk")
+ally_army_id = "army:0"
+
+[node name="Hud" parent="UI" instance=ExtResource("31_4yhjs")]
 
 [connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]

@@ -11,7 +11,10 @@ func setup(state: CombatState):
 
 
 func visualize(state: CombatState, command: CombatCommandBase, buffer: CombatActionsBuffer):
-	director.play(writer.sequence(state, command, buffer))
+	var sequence := writer.sequence(state, command, buffer)
+	if sequence.is_empty():
+		return
+	director.play(sequence)
 	await director.finished
 
 

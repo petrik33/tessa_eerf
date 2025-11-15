@@ -1,50 +1,62 @@
 class_name CombatUI extends Node
 
+
+signal potential_command_changed(command: CombatCommandBase)
+signal command_requested(command: CombatCommandBase)
+
+
+@export var input: CombatInput
 @export var outlines: CombatUiOutlines
 @export var unit_markers: CombatUiUnitMarkers
-@export var hud: CombatUiHud
 
 @export var cursor_arrow: Texture2D
 @export var cursor_point: Texture2D
 @export var cursor_attack_melee: Texture2D
 @export var cursor_attack_ranged: Texture2D
 
+@export var modules: Array[CombatUiModuleBase]
+
+
+var turn_context: CombatTurnContext
+
 
 func setup(initial_state: CombatState, visual: CombatVisual):
-	unit_markers.create_units_left_markers(visual, initial_state)
-	hud.update(initial_state)
+	input.potential_command_changed.connect(_on_potential_command_changed)
+	input.command_requested.connect(_on_command_requested)
+	for module in modules:
+		module.command_requested.connect(_on_command_requested)
+		module.setup(initial_state, visual)
+		module.update(initial_state)
 
 
 func reset():
-	unit_markers.destroy_units_left_markers()
+	for module in modules:
+		module.reset()
+		module.command_requested.disconnect(_on_command_requested)
+	input.potential_command_changed.disconnect(_on_potential_command_changed)
+	input.command_requested.disconnect(_on_command_requested)
 
 
-func start_turn(turn_context: CombatTurnContext):
-	enable_turn_outlines(turn_context)
+func start_turn(_turn_context: CombatTurnContext):
+	turn_context = _turn_context
+	outlines.show()
+	outlines.update_turn_context(turn_context)
+	input.enable(turn_context)
+	for module in modules:
+		module.start_turn(_turn_context)
 
 
 func finish_turn():
-	disable_turn_outlines()
+	for module in modules:
+		module.finish_turn()
 	Input.set_custom_mouse_cursor(cursor_arrow)
-
-
-func enable_turn_outlines(turn_context: CombatTurnContext):
-	outlines.show()
-	outlines.update_turn_context(turn_context)
-
-
-func disable_turn_outlines():
+	input.disable()
 	outlines.hide()
 
 
 func update_observed_state(state: CombatState):
-	unit_markers.update(state)
-	hud.update(state)
-
-
-func update_potential_command(turn_context: CombatTurnContext, command: CombatCommandBase):
-	update_cursor(command)
-	outlines.update_potential_command(turn_context, command)
+	for module in modules:
+		module.update(state)
 
 
 func update_cursor(command: CombatCommandBase):
@@ -56,3 +68,13 @@ func update_cursor(command: CombatCommandBase):
 		Input.set_custom_mouse_cursor(cursor_attack_melee)
 	elif command is CombatCommandRangedAttackUnit:
 		Input.set_custom_mouse_cursor(cursor_attack_ranged)
+
+
+func _on_potential_command_changed(command: CombatCommandBase):
+	update_cursor(command)
+	outlines.update_potential_command(turn_context, command)
+	potential_command_changed.emit(command)
+
+
+func _on_command_requested(command: CombatCommandBase):
+	command_requested.emit(command)

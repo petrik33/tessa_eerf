@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://njahvnwphfwi"]
+
+[ext_resource type="StyleBox" uid="uid://esmu4803bgna" path="res://ui/theme/hud_bottom_panel/sbox_normal.tres" id="1_h3v45"]
+
+[resource]
+Panel/styles/panel = ExtResource("1_h3v45")

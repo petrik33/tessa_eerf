@@ -33,6 +33,10 @@ func start():
 
 
 func request_command(command: CombatCommandBase):
+	if turn_system.is_waiting():
+		_on_command_requested_while_turn_system_is_waiting()
+		return
+	
 	if not rules.validate_command(command, _state, _services):
 		_on_invalid_command_requested()
 		return
@@ -91,6 +95,10 @@ var _state: CombatState
 
 
 func _on_invalid_command_requested():
+	pass
+
+
+func _on_command_requested_while_turn_system_is_waiting():
 	pass
 
 

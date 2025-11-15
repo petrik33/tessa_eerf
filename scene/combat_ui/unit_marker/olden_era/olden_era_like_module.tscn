@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsob77rx34xsl"]
+
+[sub_resource type="GDScript" id="GDScript_bo3i4"]
+script/source = "extends CombatUiModuleBase
+
+
+@export var marker_scene: PackedScene
+@export var ally_panel_sbox: StyleBox
+@export var enemy_panel_sbox: StyleBox
+
+
+# TODO: Reimplement cleaner
+@export var ally_army_id: String
+
+
+func setup(state: CombatState, visual: CombatVisual):
+	super.setup(state, visual)
+	for unit_handle in state.all_unit_handles():
+		var attach_node = visual.get_unit(unit_handle).get_physical_node()
+		var marker = marker_scene.instantiate() as OldenEraLikeUnitMarker
+		var army_handle := CombatArmyHandle.from_id(ally_army_id)
+		var marker_panel_sbox := ally_panel_sbox \\
+			if state.unit(unit_handle).is_an_ally(army_handle) \\
+			else enemy_panel_sbox
+		marker.set_panel_sbox(marker_panel_sbox)
+		attach_node.add_child(marker)
+		_markers[unit_handle.id()] = marker
+	update(state)
+
+
+func reset():
+	for marker in _markers.values():
+		marker.queue_free()
+	_markers.clear()
+	super.reset()
+
+
+func update(state: CombatState):
+	super.update(state)
+	for unit_handle in state.all_unit_handles():
+		var unit := state.unit(unit_handle)
+		var marker := _markers[unit_handle.id()]
+		marker.set_stack_size(unit.stack_size)
+
+
+var _markers: Dictionary[String, OldenEraLikeUnitMarker]
+"
+
+[node name="OldenEraLikeModule" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = SubResource("GDScript_bo3i4")

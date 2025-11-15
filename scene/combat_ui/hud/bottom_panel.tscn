@@ -1,72 +1,251 @@
-[gd_scene load_steps=6 format=3 uid="uid://capk8dh577m0s"]
+[gd_scene load_steps=14 format=3 uid="uid://capk8dh577m0s"]
 
-[ext_resource type="Theme" uid="uid://bc0wdxvvq0x04" path="res://ui/theme/ui_main_theme.tres" id="1_dcebw"]
+[ext_resource type="Theme" uid="uid://ba14f0prbm8ai" path="res://ui/theme/ui_hud_bottom_panel.tres" id="1_dcebw"]
+[ext_resource type="Script" uid="uid://b5q3p4ecr2la8" path="res://script/ui/button_with_padding.gd" id="3_8uwir"]
 [ext_resource type="Texture2D" uid="uid://del2fa8lhnn7" path="res://asset/texture/ui/icon/hud/ui_hud_runaway.tres" id="3_h64me"]
+[ext_resource type="Material" uid="uid://821ho2wmv3s4" path="res://resource/material/ui/tint_icon_shader_material.tres" id="4_kuveh"]
 [ext_resource type="Texture2D" uid="uid://ctw1i41jp0ypd" path="res://asset/texture/ui/icon/hud/ui_hud_spellbook.tres" id="5_bul0n"]
+[ext_resource type="Texture2D" uid="uid://bqgq7yaaq8847" path="res://asset/texture/portrait/test_portrait.tres" id="5_kuveh"]
 [ext_resource type="Texture2D" uid="uid://bney4jmvo4t7j" path="res://asset/texture/ui/icon/hud/ui_hud_wait.tres" id="6_un4ge"]
 [ext_resource type="Texture2D" uid="uid://b8ibn08tcm7ud" path="res://asset/texture/ui/icon/hud/ui_hud_defend.tres" id="7_3rt5d"]
+[ext_resource type="Texture2D" uid="uid://dnijfvc50d348" path="res://asset/texture/ui/icon/skills/skill_icon4.tres" id="7_bul0n"]
+[ext_resource type="Texture2D" uid="uid://dm2t2m3rjxjcv" path="res://asset/texture/ui/icon/skills/skill_icon2.tres" id="8_un4ge"]
+[ext_resource type="Texture2D" uid="uid://b28p8uq0x7gu" path="res://asset/texture/ui/icon/skills/skill_icon6.tres" id="8_xpx1x"]
+[ext_resource type="Texture2D" uid="uid://bk1lvi4hduc24" path="res://asset/texture/ui/icon/hud/ui_hud_forfeit.tres" id="11_un4ge"]
 
-[node name="BottomPanel" type="HBoxContainer"]
-custom_minimum_size = Vector2(0, 28)
-offset_right = 139.0
-offset_bottom = 16.0
+[sub_resource type="GDScript" id="GDScript_un4ge"]
+script/source = "extends CombatUiModuleBase
+
+
+func _on_defend_pressed() -> void:
+	command_requested.emit(CombatCommands.defend())
+
+
+func _on_wait_pressed() -> void:
+	command_requested.emit(CombatCommands.wait())
+"
+
+[node name="BottomPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 mouse_filter = 2
 theme = ExtResource("1_dcebw")
+script = SubResource("GDScript_un4ge")
 
-[node name="LeftGroup" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.0
+offset_top = -28.0
+offset_right = 274.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftGroup" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+size_flags_vertical = 8
 
-[node name="Defend" type="Button" parent="LeftGroup"]
-custom_minimum_size = Vector2(28, 0)
+[node name="Defend" type="Button" parent="HBoxContainer/LeftGroup"]
+custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
-theme_type_variation = &"BottomBarButton"
-icon = ExtResource("7_3rt5d")
-icon_alignment = 1
-expand_icon = true
+script = ExtResource("3_8uwir")
+metadata/_custom_type_script = "uid://b5q3p4ecr2la8"
 
-[node name="Wait" type="Button" parent="LeftGroup"]
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-theme_type_variation = &"BottomBarButton"
-icon = ExtResource("6_un4ge")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="Panel"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LeftGroup/Defend"]
+material = ExtResource("4_kuveh")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_3rt5d")
+expand_mode = 1
+
+[node name="Wait" type="Button" parent="HBoxContainer/LeftGroup"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+script = ExtResource("3_8uwir")
+metadata/_custom_type_script = "uid://b5q3p4ecr2la8"
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/LeftGroup/Wait"]
+material = ExtResource("4_kuveh")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_un4ge")
+expand_mode = 1
+
+[node name="CharacterPortrait" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_type_variation = &"BottomBarButton"
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/CharacterPortrait"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 89.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("5_kuveh")
+
+[node name="UnitSkills" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Slot1" type="Button" parent="HBoxContainer/UnitSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+theme_type_variation = &"BottomBarButton"
+icon = ExtResource("7_bul0n")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot2" type="Button" parent="HBoxContainer/UnitSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+disabled = true
+icon = ExtResource("8_un4ge")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot3" type="Button" parent="HBoxContainer/UnitSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+icon = ExtResource("8_xpx1x")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot4" type="Button" parent="HBoxContainer/UnitSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 28)
+layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_type_variation = &"Title"
 text = "Tessa & Eerf"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RightGroup" type="HBoxContainer" parent="."]
+[node name="CharacterSkills" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 4
+size_flags_vertical = 8
 
-[node name="SpellBook" type="Button" parent="RightGroup"]
-custom_minimum_size = Vector2(28, 0)
+[node name="Slot1" type="Button" parent="HBoxContainer/CharacterSkills"]
+custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
-theme_type_variation = &"BottomBarButton"
-icon = ExtResource("5_bul0n")
 icon_alignment = 1
 expand_icon = true
 
-[node name="RunAway" type="Button" parent="RightGroup"]
-custom_minimum_size = Vector2(28, 0)
+[node name="Slot2" type="Button" parent="HBoxContainer/CharacterSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot3" type="Button" parent="HBoxContainer/CharacterSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot4" type="Button" parent="HBoxContainer/CharacterSkills"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="SpellBook" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 8
+icon_alignment = 1
+script = ExtResource("3_8uwir")
+metadata/_custom_type_script = "uid://b5q3p4ecr2la8"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SpellBook"]
+material = ExtResource("4_kuveh")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+texture = ExtResource("5_bul0n")
+expand_mode = 1
+
+[node name="RightGroup" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="SpellBook" type="Button" parent="HBoxContainer/RightGroup"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+script = ExtResource("3_8uwir")
+metadata/_custom_type_script = "uid://b5q3p4ecr2la8"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/RightGroup/SpellBook"]
+material = ExtResource("4_kuveh")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+texture = ExtResource("11_un4ge")
+expand_mode = 1
+
+[node name="RunAway" type="Button" parent="HBoxContainer/RightGroup"]
+custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"BottomBarButton"
-icon = ExtResource("3_h64me")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("3_8uwir")
+metadata/_custom_type_script = "uid://b5q3p4ecr2la8"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/RightGroup/RunAway"]
+material = ExtResource("4_kuveh")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+texture = ExtResource("3_h64me")
+expand_mode = 1
+
+[connection signal="pressed" from="HBoxContainer/LeftGroup/Defend" to="." method="_on_defend_pressed"]
+[connection signal="pressed" from="HBoxContainer/LeftGroup/Wait" to="." method="_on_wait_pressed"]

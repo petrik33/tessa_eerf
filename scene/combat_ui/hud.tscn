@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjrxcgyr1d7pe"]
+[gd_scene load_steps=5 format=3 uid="uid://c5tsw41wpkabs"]
 
-[ext_resource type="Theme" uid="uid://bc0wdxvvq0x04" path="res://ui/theme/ui_main_theme.tres" id="1_p7bld"]
-[ext_resource type="Script" uid="uid://cwc6bkeaflmgi" path="res://script/combat/ui/hud.gd" id="2_wdxvb"]
+[ext_resource type="Script" uid="uid://cjcsf1f30v6fv" path="res://script/combat/ui/combat_ui_module_base.gd" id="1_8cn47"]
+[ext_resource type="Theme" uid="uid://bc0wdxvvq0x04" path="res://ui/theme/ui_main_theme.tres" id="1_vkc05"]
 [ext_resource type="PackedScene" uid="uid://capk8dh577m0s" path="res://scene/combat_ui/hud/bottom_panel.tscn" id="4_vkc05"]
 [ext_resource type="PackedScene" uid="uid://cliiapojuvw34" path="res://scene/combat_ui/hud/turn_queue.tscn" id="9_06g3n"]
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("turn_queue")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("submodules")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,29 +13,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("1_p7bld")
-script = ExtResource("2_wdxvb")
-turn_queue = NodePath("TurnQueue")
-
-[node name="TurnQueue" parent="." instance=ExtResource("9_06g3n")]
-custom_minimum_size = Vector2(0, 18)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.25
-anchor_right = 0.75
-offset_top = 10.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
+theme = ExtResource("1_vkc05")
+script = ExtResource("1_8cn47")
+submodules = [NodePath("BottomPanel"), NodePath("TurnQueue")]
+metadata/_custom_type_script = "uid://cjcsf1f30v6fv"
 
 [node name="BottomPanel" parent="." instance=ExtResource("4_vkc05")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.33
 anchor_top = 1.0
-anchor_right = 0.66
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = -10.0
+offset_top = -80.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="TurnQueue" parent="." instance=ExtResource("9_06g3n")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -225.0
+offset_top = 8.0
+offset_right = 225.0
+grow_horizontal = 2

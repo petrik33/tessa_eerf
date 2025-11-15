@@ -50,7 +50,14 @@ func fill_actions_buffer(command: CombatCommandBase, state: CombatState, service
 			damage
 		))
 		return
-		
+	if command is CombatCommandUnitWait:
+		# TODO: Implement initiative queue or rounds
+		_update_turn_queue_position(state, buffer)
+		return
+	if command is CombatCommandUnitDefend:
+		# TODO: Implement defence increase
+		_update_turn_queue_position(state, buffer)
+		return
 	
 
 
