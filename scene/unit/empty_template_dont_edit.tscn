@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt5aphkwaueib"]
+
+[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="1_aq44c"]
+[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="2_dnqob"]
+
+[sub_resource type="GDScript" id="GDScript_wgj7g"]
+script/source = "@tool
+extends CombatVisualUnit
+
+
+@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
+@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
+
+
+func idle(action: CombatVisualUnitActionGoIdle):
+	go_idle()
+	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
+
+
+func walk(action: CombatVisualUnitActionWalk):
+	animated_sprite.play(\"walk\")
+	face_walk_direction.set_process(true)
+	await walk_along_path.walk(action)
+	face_walk_direction.set_process(false)
+	go_idle()
+
+
+func hurt(_action: CombatVisualUnitActionHurt):
+	animated_sprite.play(\"hurt\")
+	await animated_sprite.animation_finished
+	go_idle()
+
+
+func go_idle():
+	animated_sprite.play(\"idle\")
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eyjtx"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[node name="EmptyTemplateDontEdit" type="Node2D" node_paths=PackedStringArray("physical_node")]
+script = SubResource("GDScript_wgj7g")
+physical_node = NodePath("Physical")
+metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+
+[node name="Physical" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_eyjtx")
+animation = &"walk"
+
+[node name="Components" type="Node" parent="."]
+
+[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("1_aq44c")]
+unique_name_in_owner = true
+moved_node = NodePath("../../Physical")
+
+[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("2_dnqob")]
+unique_name_in_owner = true
+physical = NodePath("../../Physical")
+sprite = NodePath("../../Physical/AnimatedSprite2D")

@@ -317,8 +317,7 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_wlhx3")
-animation = &"melee"
-frame = 4
+animation = &"idle"
 offset = Vector2(0, -18)
 
 [node name="Components" type="Node" parent="."]

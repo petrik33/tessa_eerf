@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Unit" load_steps=4 format=3 uid="uid://cds7umt3grtxf"]
+
+[ext_resource type="Script" uid="uid://docn60vvfh160" path="res://script/unit/unit_combat_stats.gd" id="1_tbysu"]
+[ext_resource type="Script" uid="uid://b4cqksp55xbh0" path="res://script/unit/unit.gd" id="2_e6mq5"]
+
+[sub_resource type="Resource" id="Resource_1v221"]
+script = ExtResource("1_tbysu")
+speed = 6
+metadata/_custom_type_script = "uid://docn60vvfh160"
+
+[resource]
+script = ExtResource("2_e6mq5")
+uid = &"knight"
+name = "Knight"
+combat_stats = SubResource("Resource_1v221")
+metadata/_custom_type_script = "uid://b4cqksp55xbh0"

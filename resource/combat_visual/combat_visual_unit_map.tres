@@ -1,17 +1,29 @@
-[gd_resource type="Resource" script_class="CombatVisualUnitsMap" load_steps=6 format=3 uid="uid://cop36n7ulsjs4"]
+[gd_resource type="Resource" script_class="CombatVisualUnitsMap" load_steps=12 format=3 uid="uid://cop36n7ulsjs4"]
 
 [ext_resource type="Script" uid="uid://ifvvd3g24jhv" path="res://script/combat/visual/combat_visual_units_map.gd" id="1_yfwx4"]
 [ext_resource type="PackedScene" uid="uid://djblfmp6cwiwq" path="res://scene/unit/martial_hero.tscn" id="3_2dlc5"]
 [ext_resource type="PackedScene" uid="uid://dx0g014t166re" path="res://scene/unit/blind_huntress.tscn" id="4_8kobq"]
 [ext_resource type="PackedScene" uid="uid://bqq7xa1o1e1io" path="res://scene/unit/red_hood_archer.tscn" id="4_gonuo"]
 [ext_resource type="PackedScene" uid="uid://c8asf4s1t6aie" path="res://scene/unit/blue_witch.tscn" id="5_gonuo"]
+[ext_resource type="PackedScene" uid="uid://mp8skhi6kel5" path="res://scene/unit/ground_monk.tscn" id="6_8kobq"]
+[ext_resource type="PackedScene" uid="uid://cbiv0wqblwiry" path="res://scene/unit/hammerman.tscn" id="7_srr6n"]
+[ext_resource type="PackedScene" uid="uid://etmutxwu6b1u" path="res://scene/unit/paladin.tscn" id="8_nb72d"]
+[ext_resource type="PackedScene" uid="uid://bt8nnisinio00" path="res://scene/unit/necromancer.tscn" id="9_l10pf"]
+[ext_resource type="PackedScene" uid="uid://h0thwa0ygr5m" path="res://scene/unit/samurai.tscn" id="10_30ms2"]
+[ext_resource type="PackedScene" uid="uid://gvwf5aobsna0" path="res://scene/unit/knight.tscn" id="11_clnpr"]
 
 [resource]
 script = ExtResource("1_yfwx4")
 units = Dictionary[StringName, PackedScene]({
 &"blind_huntress": ExtResource("4_8kobq"),
 &"blue_witch": ExtResource("5_gonuo"),
+&"ground_monk": ExtResource("6_8kobq"),
+&"hammerman": ExtResource("7_srr6n"),
+&"knight": ExtResource("11_clnpr"),
 &"martial_hero": ExtResource("3_2dlc5"),
-&"red_hood_archer": ExtResource("4_gonuo")
+&"necromancer": ExtResource("9_l10pf"),
+&"paladin": ExtResource("8_nb72d"),
+&"red_hood_archer": ExtResource("4_gonuo"),
+&"samurai": ExtResource("10_30ms2")
 })
 metadata/_custom_type_script = "uid://ifvvd3g24jhv"

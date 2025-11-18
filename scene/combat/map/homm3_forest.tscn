@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://fho1ske3u0ag"]
+
+[ext_resource type="Texture2D" uid="uid://d1u8ho7e010r2" path="res://asset/texture/battle_background/homm3_swamp/Combat_Swamp.png" id="1_wf1rj"]
+
+[node name="Homm3Forest" type="Node2D"]
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("1_wf1rj")
+expand_mode = 1
