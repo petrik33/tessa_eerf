@@ -1,11 +1,15 @@
 class_name CombatUiOutlines extends Node2D
 
+
+@export var layout: HexLayout
+
+
 @onready var unit_outline: HexGridRendererBase = %CurrentUnit
 @onready var move_range_outline: HexGridRendererBase = %MoveRange
 @onready var mouse_pick_outline: HexGridRendererBase = %MouseHover
 @onready var enemies_outline: HexGridRendererBase = %Enemies
 @onready var allies_outline: HexGridRendererBase = %Allies
-@onready var move_path_outline: HexGridRendererBase = %MovePath
+@onready var move_path_renderer: PathRenderer = %MovePathRenderer
 
 
 func update_turn_context(turn_context: CombatTurnContext) -> void:
@@ -38,19 +42,18 @@ func update_turn_context(turn_context: CombatTurnContext) -> void:
 func update_potential_command(turn_context: CombatTurnContext, command: CombatCommandBase) -> void:
 	if command == null or command is CombatCommandRangedAttackUnit:
 		mouse_pick_outline.hide()
-		move_path_outline.hide()
+		move_path_renderer.hide()
 		return
 
 	mouse_pick_outline.show()
-	move_path_outline.show()
+	move_path_renderer.show()
 
 	if command is CombatCommandMeleeAttackUnit:
 		var path := turn_context.services.navigation.path(command.move_id_path)
-		path.append(command.attacked_hex)
-		move_path_outline.grid = HexGrids.points(path)
+		move_path_renderer.path = layout.hex_path_to_pixel(path)
 		mouse_pick_outline.grid = HexGrids.point(command.attacked_hex)
 	elif command is CombatCommandMoveUnit:
-		move_path_outline.grid = HexGrids.points(
+		move_path_renderer.path = layout.hex_path_to_pixel(
 			turn_context.services.navigation.path(command.id_path)
 		)
 		var last_path_hex = command.id_path.get(command.id_path.size() - 1)

@@ -42,6 +42,9 @@ func hex_to_pixel(hex: Vector2i) -> Vector2:
 func pixel_to_hex(point: Vector2) -> Vector2i:
 	return HexMath.nearest(_inverse_axial_basis * point)
 
+func hex_path_to_pixel(hex: Array[Vector2i]) -> Array[Vector2]:
+	return Utils.to_typed(TYPE_VECTOR2, hex.map(func (point: Vector2i): return hex_to_pixel(point)))
+
 func point_on_outline(angle: float) -> Vector2:
 	var radial_progress := angle / HexLayoutMath.HEX_ANGLE_STEP
 	var corner_radial_progress = floor(radial_progress)
