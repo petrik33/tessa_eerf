@@ -10,4 +10,7 @@ func get_physical_node() -> Node2D:
 
 
 func execute(action: CombatVisualUnitActionBase):
+	if not has_method(action.id):
+		executed.emit()
+		return
 	await call(action.id, action)

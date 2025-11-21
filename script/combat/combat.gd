@@ -82,14 +82,6 @@ func remove_wait(reason: StringName):
 	turn_system.remove_wait(reason)
 
 
-func add_auto_wait(reason: StringName):
-	turn_system.add_auto_wait(reason)
-
-
-func remove_auto_wait(reason: StringName):
-	turn_system.remove_auto_wait(reason)
-
-
 var _services: CombatServices
 var _state: CombatState
 

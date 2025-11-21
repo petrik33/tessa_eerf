@@ -35,8 +35,6 @@ func _exit_tree() -> void:
 
 func _on_combat_started():
 	services = CombatServices.new(combat.definition)
-	if wait_visual:
-		combat.add_auto_wait(VISUAL_WAIT_REASON)
 	ui.potential_command_changed.connect(_on_potential_command_changed)
 	ui.command_requested.connect(_on_command_requested)
 	controller.setup()
@@ -51,8 +49,6 @@ func _on_combat_finished():
 	controller.reset()
 	ui.command_requested.disconnect(_on_command_requested)
 	ui.potential_command_changed.disconnect(_on_potential_command_changed)
-	if wait_visual:
-		combat.remove_auto_wait(VISUAL_WAIT_REASON)
 
 
 func _on_combat_turn_started(turn_handle: CombatHandle):
@@ -76,10 +72,13 @@ func _on_combat_turn_finished(turn_handle: CombatHandle):
 
 
 func _on_combat_command_processed(command: CombatCommandBase, actions: CombatActionsBuffer):
+	if wait_visual:
+		combat.add_wait(VISUAL_WAIT_REASON)
 	await visual.visualize(turn_context.observed_state, command, actions)
 	# TODO: Pass proper handle to observe state
 	ui.update_observed_state(combat.observe_state())
-	combat.remove_wait(VISUAL_WAIT_REASON)
+	if wait_visual:
+		combat.remove_wait(VISUAL_WAIT_REASON)
 
 
 func _on_potential_command_changed(command: CombatCommandBase):

@@ -43,7 +43,7 @@ func queue_empty() -> bool:
 	return _queue.is_empty()
 
 
-func play(sequence: CombatVisualActionsQueue): 
+func play(sequence: CombatVisualActionsQueue):
 	enqueue(sequence)
 	if not playing():
 		play_next()
@@ -90,7 +90,7 @@ func execute_action(action: CombatVisualActionBase):
 		await projectile.target_reached
 		projectiles_node.remove_child(projectile)
 		projectile.queue_free()
-		
+
 
 
 var _queue: Array[CombatVisualActionBase]
