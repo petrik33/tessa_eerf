@@ -41,12 +41,6 @@ func walk(action: CombatVisualUnitActionWalk):
 	go_idle()
 
 
-func hurt(action: CombatVisualUnitActionHurt):
-	animated_sprite.play(\"hurt\")
-	await animated_sprite.animation_finished
-	go_idle()
-
-
 func ranged(action: CombatVisualUnitActionRanged):
 	var shooting_target = action.target
 	shooting_target.y += arrow_origin.position.y + shooting_yoffset
