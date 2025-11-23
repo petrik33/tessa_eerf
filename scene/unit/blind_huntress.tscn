@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dx0g014t166re"]
+[gd_scene load_steps=56 format=3 uid="uid://dx0g014t166re"]
 
 [ext_resource type="Texture2D" uid="uid://b1h0gsc1tojhk" path="res://asset/texture/unit/blind_huntress/6 - dash.png" id="1_ff1j4"]
 [ext_resource type="Texture2D" uid="uid://bhe5asrlyfto2" path="res://asset/texture/unit/blind_huntress/12 - dash attack.png" id="1_q2b0d"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="9_0v5xn"]
 [ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="9_q2b0d"]
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_rvcoe"]
+[ext_resource type="Script" uid="uid://u2da7sdv4ily" path="res://script/combat/visual/unit/components/combat_visual_unit_melee_attack_with_hit_frame.gd" id="11_ro02e"]
 
 [sub_resource type="GDScript" id="GDScript_ro02e"]
 script/source = "@tool
@@ -20,6 +21,7 @@ extends CombatVisualUnit
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
 @onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
+@onready var melee_component: CombatVisualUnitMeleeAttackWithHitFrame = %Melee
 
 
 func idle(action: CombatVisualUnitActionGoIdle):
@@ -42,7 +44,8 @@ func hurt(_action: CombatVisualUnitActionHurt):
 
 
 func melee(action: CombatVisualUnitActionMelee):
-	pass
+	await melee_component.melee(action)
+	go_idle()
 
 
 func go_idle():
@@ -379,9 +382,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("physical_node")]
+[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("physical_node", "action_components")]
 script = SubResource("GDScript_ro02e")
 physical_node = NodePath("Physical")
+action_components = [NodePath("Components/Melee")]
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
@@ -389,8 +393,7 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ll718")
-animation = &"melee_2"
-frame = 4
+animation = &"idle"
 offset = Vector2(-1, -15)
 
 [node name="Components" type="Node" parent="."]
@@ -404,6 +407,15 @@ moved_node = NodePath("../../Physical")
 unique_name_in_owner = true
 physical = NodePath("../../Physical")
 sprite = NodePath("../../Physical/AnimatedSprite2D")
+
+[node name="Melee" type="Node" parent="Components" node_paths=PackedStringArray("animated_sprite", "physical")]
+unique_name_in_owner = true
+script = ExtResource("11_ro02e")
+animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
+animation_name = "melee_2"
+hit_frame = 1
+physical = NodePath("../../Physical")
+metadata/_custom_type_script = "uid://u2da7sdv4ily"
 
 [node name="DbgCombatVisualHex" parent="." instance=ExtResource("10_rvcoe")]
 visible = false
