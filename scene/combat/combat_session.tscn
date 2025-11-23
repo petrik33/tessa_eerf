@@ -818,7 +818,7 @@ metadata/_custom_type_script = "uid://dce88q3ja7wu"
 [node name="Minimalistic" parent="." instance=ExtResource("36_w8ypk")]
 
 [node name="HexSpace" type="Node2D" parent="."]
-position = Vector2(78, 76)
+position = Vector2(94, 96)
 script = ExtResource("15_s1x26")
 layout = ExtResource("10_jre1e")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
@@ -867,11 +867,11 @@ metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -29.583405
-offset_top = -18.240067
-offset_right = 514.55774
-offset_bottom = 210.23999
-pivot_offset = Vector2(29.583405, 18.240067)
+offset_left = -27.470306
+offset_top = -15.96006
+offset_right = 477.80365
+offset_bottom = 183.95999
+pivot_offset = Vector2(27.470306, 15.96006)
 mouse_filter = 1
 script = ExtResource("22_oomfw")
 bbox_scale = 1.02
