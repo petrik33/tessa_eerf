@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_1v221"]
 script = ExtResource("1_rktdv")
-speed = 6
+speed = 11
 metadata/_custom_type_script = "uid://docn60vvfh160"
 
 [resource]
