@@ -16,7 +16,7 @@ func _update_child():
 	var stylebox := _current_stylebox()
 	if not stylebox:
 		return
-	
+
 	var child_control := child as Control
 
 	var margin_left = stylebox.get_margin(SIDE_LEFT)
@@ -30,7 +30,7 @@ func _update_child():
 		size.x - margin_left - margin_right,
 		size.y - margin_top - margin_bottom
 	)
-	
+
 	child_control.position = available_rect.position
 	child_control.size = available_rect.size
 

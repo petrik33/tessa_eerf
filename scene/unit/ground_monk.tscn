@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://mp8skhi6kel5"]
+[gd_scene load_steps=40 format=3 uid="uid://mp8skhi6kel5"]
 
 [ext_resource type="Texture2D" uid="uid://c0yimws0ka4vf" path="res://asset/texture/unit/ground_monk/idle/idle_1.png" id="1_jfj7e"]
 [ext_resource type="Texture2D" uid="uid://4kw26tpq5bke" path="res://asset/texture/unit/ground_monk/death/death_1.png" id="1_kx1g0"]
@@ -182,6 +182,42 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="Animation" id="Animation_q3vih"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Physical/AnimatedSprite2D:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_kx1g0"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Physical/AnimatedSprite2D:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3vih"]
+_data = {
+&"RESET": SubResource("Animation_q3vih"),
+&"hurt": SubResource("Animation_kx1g0")
+}
+
 [node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("physical_node")]
 script = SubResource("GDScript_wgj7g")
 physical_node = NodePath("Physical")
@@ -192,9 +228,7 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"death"
-frame = 17
-frame_progress = 1.0
+animation = &"idle"
 offset = Vector2(0, -53)
 
 [node name="Components" type="Node" parent="."]
@@ -208,3 +242,8 @@ moved_node = NodePath("../../Physical")
 unique_name_in_owner = true
 physical = NodePath("../../Physical")
 sprite = NodePath("../../Physical/AnimatedSprite2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_q3vih")
+}

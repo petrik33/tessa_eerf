@@ -3,6 +3,7 @@ class_name CombatVisualUnit extends CombatVisualUnitBase
 
 
 @export var physical_node: Node2D
+@export var action_components: Array[CombatVisualUnitActionComponent]
 
 
 func get_physical_node() -> Node2D:
@@ -14,3 +15,17 @@ func execute(action: CombatVisualUnitActionBase):
 		executed.emit()
 		return
 	await call(action.id, action)
+
+
+func _enter_tree() -> void:
+	for component in action_components:
+		component.executed.connect(_handle_action_executed)
+
+
+func _exit_tree() -> void:
+	for component in action_components:
+		component.executed.disconnect(_handle_action_executed)
+
+
+func _handle_action_executed():
+	executed.emit()
