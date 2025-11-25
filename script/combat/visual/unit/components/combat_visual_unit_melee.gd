@@ -1,4 +1,4 @@
-class_name CombatVisualUnitMeleeAttackWithHitFrame extends CombatVisualUnitActionComponent
+class_name CombatVisualUnitMelee extends CombatVisualUnitActionComponent
 
 
 @export var animated_sprite: AnimatedSprite2D

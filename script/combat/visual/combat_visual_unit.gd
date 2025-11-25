@@ -17,14 +17,9 @@ func execute(action: CombatVisualUnitActionBase):
 	await call(action.id, action)
 
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	for component in action_components:
 		component.executed.connect(_handle_action_executed)
-
-
-func _exit_tree() -> void:
-	for component in action_components:
-		component.executed.disconnect(_handle_action_executed)
 
 
 func _handle_action_executed():

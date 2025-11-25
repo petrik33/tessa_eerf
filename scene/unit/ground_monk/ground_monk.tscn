@@ -1,5 +1,6 @@
-[gd_scene load_steps=82 format=3 uid="uid://mp8skhi6kel5"]
+[gd_scene load_steps=80 format=3 uid="uid://mp8skhi6kel5"]
 
+[ext_resource type="Script" uid="uid://3uurkyp7jry0" path="res://scene/unit/ground_monk/ground_monk.gd" id="1_ey5rh"]
 [ext_resource type="Texture2D" uid="uid://c0yimws0ka4vf" path="res://asset/texture/unit/ground_monk/idle/idle_1.png" id="1_jfj7e"]
 [ext_resource type="Texture2D" uid="uid://4kw26tpq5bke" path="res://asset/texture/unit/ground_monk/death/death_1.png" id="1_kx1g0"]
 [ext_resource type="Texture2D" uid="uid://c4px1srj70vx3" path="res://asset/texture/unit/ground_monk/idle/idle_2.png" id="2_fl3gq"]
@@ -75,45 +76,8 @@
 [ext_resource type="Texture2D" uid="uid://deo3afmrbefhy" path="res://asset/texture/unit/ground_monk/3_atk/3_atk_21.png" id="63_eyheg"]
 [ext_resource type="Texture2D" uid="uid://bqjb00rbh1snj" path="res://asset/texture/unit/ground_monk/3_atk/3_atk_22.png" id="64_sqy61"]
 [ext_resource type="Texture2D" uid="uid://cc3rw1f4dmrh5" path="res://asset/texture/unit/ground_monk/3_atk/3_atk_23.png" id="65_iktw6"]
-[ext_resource type="Script" uid="uid://u2da7sdv4ily" path="res://script/combat/visual/unit/components/combat_visual_unit_melee_attack_with_hit_frame.gd" id="76_00xtp"]
-
-[sub_resource type="GDScript" id="GDScript_wgj7g"]
-script/source = "@tool
-extends CombatVisualUnit
-
-
-@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
-@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
-@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
-@onready var melee_component: CombatVisualUnitMeleeAttackWithHitFrame = %Melee
-
-func idle(action: CombatVisualUnitActionGoIdle):
-	go_idle()
-	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
-
-
-func walk(action: CombatVisualUnitActionWalk):
-	animated_sprite.play(\"walk\")
-	face_walk_direction.set_process(true)
-	await walk_along_path.walk(action)
-	face_walk_direction.set_process(false)
-	go_idle()
-
-
-func hurt(_action: CombatVisualUnitActionHurt):
-	animated_sprite.play(\"hurt\")
-	await animated_sprite.animation_finished
-	go_idle()
-
-
-func melee(action: CombatVisualUnitActionMelee):
-	await melee_component.melee(action)
-	go_idle()
-
-
-func go_idle():
-	animated_sprite.play(\"idle\")
-"
+[ext_resource type="Script" uid="uid://nkfoqc5si4vd" path="res://script/combat/visual/unit/components/combat_visual_unit_melee.gd" id="76_00xtp"]
+[ext_resource type="PackedScene" uid="uid://dt8yagxbiu6us" path="res://scene/component/combat_visual_unit_hit_flash.tscn" id="78_x8a18"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eyjtx"]
 animations = [{
@@ -367,45 +331,8 @@ animations = [{
 "speed": 24.0
 }]
 
-[sub_resource type="Animation" id="Animation_q3vih"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Physical/AnimatedSprite2D:self_modulate:a")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1.0]
-}
-
-[sub_resource type="Animation" id="Animation_kx1g0"]
-resource_name = "hurt"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Physical/AnimatedSprite2D:self_modulate:a")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 0.0, 1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3vih"]
-_data = {
-&"RESET": SubResource("Animation_q3vih"),
-&"hurt": SubResource("Animation_kx1g0")
-}
-
 [node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("physical_node", "action_components")]
-script = SubResource("GDScript_wgj7g")
+script = ExtResource("1_ey5rh")
 physical_node = NodePath("Physical")
 action_components = [NodePath("Components/Melee")]
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
@@ -416,7 +343,6 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"melee"
-frame = 1
 offset = Vector2(0, -53)
 
 [node name="Components" type="Node" parent="."]
@@ -437,9 +363,9 @@ script = ExtResource("76_00xtp")
 animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
 hit_frame = 1
 physical = NodePath("../../Physical")
-metadata/_custom_type_script = "uid://u2da7sdv4ily"
+metadata/_custom_type_script = "uid://nkfoqc5si4vd"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_q3vih")
-}
+[node name="HurtFlash" parent="Components" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("78_x8a18")]
+unique_name_in_owner = true
+animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
+duration = 0.2

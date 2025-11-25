@@ -1,72 +1,12 @@
 [gd_scene load_steps=42 format=3 uid="uid://bqq7xa1o1e1io"]
 
+[ext_resource type="Script" uid="uid://cl0e287b6165u" path="res://scene/unit/red_hood_archer/red_hood_archer.gd" id="1_rfsyt"]
 [ext_resource type="PackedScene" uid="uid://heav05t7i22v" path="res://scene/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="1_t3x1p"]
 [ext_resource type="Texture2D" uid="uid://32nuvepknjse" path="res://asset/texture/unit/red_hood_archer/ArcherAttackNoArrow.png" id="2_5yi5y"]
 [ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="6_mtyab"]
 [ext_resource type="Texture2D" uid="uid://bfvqi3iwbixhb" path="res://asset/texture/unit/red_hood_archer/spr_ArcherRun_strip_NoBkg.png" id="7_hncd6"]
 [ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="7_ql1wo"]
 [ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="8_2ehl4"]
-
-[sub_resource type="GDScript" id="GDScript_5yi5y"]
-script/source = "@tool
-extends CombatVisualUnit
-
-
-@export var arrow_pscene: PackedScene
-@export var shooting_yoffset: float
-@export_range(0, 360, 0.1, \"radians_as_degrees\") var max_shooting_rotation: float
-
-@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
-
-@onready var arrow_origin: Marker2D = %ArrowOrigin
-@onready var idle_offset: Marker2D = %IdleOffset
-@onready var ranged_offset: Marker2D = %RangedOffset
-
-@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
-@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
-
-
-func idle(action: CombatVisualUnitActionGoIdle):
-	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
-	go_idle()
-	animated_sprite.rotation = 0
-
-
-func walk(action: CombatVisualUnitActionWalk):
-	animated_sprite.play(\"walk\")
-	face_walk_direction.set_process(true)
-	await walk_along_path.walk(action)
-	face_walk_direction.set_process(false)
-	go_idle()
-
-
-func ranged(action: CombatVisualUnitActionRanged):
-	var shooting_target = action.target
-	shooting_target.y += arrow_origin.position.y + shooting_yoffset
-	
-	var direction = (shooting_target - physical_node.position).normalized()
-	var target_rotation = atan2(direction.y, abs(direction.x))
-	target_rotation = clamp(target_rotation, -max_shooting_rotation, max_shooting_rotation)
-	
-	CombatVisualUtils.node_face_hdirection(animated_sprite, direction)
-	animated_sprite.rotation = target_rotation * animated_sprite.scale.x
-	animated_sprite.position = -ranged_offset.position * animated_sprite.scale 
-	
-	animation_player.play(\"ranged\")
-
-
-func projectile(_id: StringName) -> CombatVisualProjectile:
-	var arrow = arrow_pscene.instantiate() as CombatVisualProjectile
-	arrow.global_position = arrow_origin.global_position
-	return arrow
-
-
-func go_idle():
-	animated_sprite.play(\"idle\")
-	animated_sprite.position = -idle_offset.position * animated_sprite.scale
-	animated_sprite.rotation = 0
-"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qykq"]
 atlas = ExtResource("6_mtyab")
@@ -371,10 +311,8 @@ _data = {
 }
 
 [node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("physical_node")]
-script = SubResource("GDScript_5yi5y")
+script = ExtResource("1_rfsyt")
 arrow_pscene = ExtResource("1_t3x1p")
-shooting_yoffset = 4.0
-max_shooting_rotation = 0.261799
 physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 

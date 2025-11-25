@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt8yagxbiu6us"]
+
+[ext_resource type="Script" uid="uid://dfph8f14wp4hk" path="res://script/combat/visual/unit/components/combat_visual_unit_flash.gd" id="1_uaxcw"]
+[ext_resource type="Shader" uid="uid://c54qr4feu3qpu" path="res://scene/component/combat_visual_unit_hit_flash_shader.gdshader" id="2_yli8s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yli8s"]
+shader = ExtResource("2_yli8s")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_factor = 0.0
+
+[node name="HurtFlash" type="Node"]
+script = ExtResource("1_uaxcw")
+shader_material = SubResource("ShaderMaterial_yli8s")
+metadata/_custom_type_script = "uid://dfph8f14wp4hk"

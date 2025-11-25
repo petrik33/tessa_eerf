@@ -1,5 +1,6 @@
 [gd_scene load_steps=47 format=3 uid="uid://h0thwa0ygr5m"]
 
+[ext_resource type="Script" uid="uid://d0a2nm7xcvfij" path="res://scene/unit/samurai/samurai.gd" id="1_8ettu"]
 [ext_resource type="Texture2D" uid="uid://bpna3e6tujqrj" path="res://asset/texture/unit/samurai/HURT.png" id="1_ggff2"]
 [ext_resource type="Texture2D" uid="uid://b22v3buy1aljn" path="res://asset/texture/unit/samurai/IDLE.png" id="2_g5gcs"]
 [ext_resource type="Texture2D" uid="uid://bh0jkjs2cjijt" path="res://asset/texture/unit/samurai/ATTACK 1.png" id="3_g5gcs"]
@@ -7,51 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="6_hy51x"]
 [ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="7_g75jr"]
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="8_m7u8l"]
-
-[sub_resource type="GDScript" id="GDScript_onfqa"]
-script/source = "@tool
-extends CombatVisualUnit
-
-
-@export var melee_hit_frame: int
-
-@onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
-
-@onready var walk_along_path: CombatVisualUnitWalkAlongPath = %WalkAlongPath
-@onready var face_walk_direction: CombatVisualUnitFaceWalkDirection = %FaceWalkDirection
-
-
-func idle(action: CombatVisualUnitActionGoIdle):
-	go_idle()
-	CombatVisualUtils.node_face_hdirection(animated_sprite, action.enemy_direction)
-
-
-func walk(action: CombatVisualUnitActionWalk):
-	animated_sprite.play(\"walk\")
-	face_walk_direction.set_process(true)
-	await walk_along_path.walk(action)
-	face_walk_direction.set_process(false)
-	go_idle()
-
-
-func hurt(_action: CombatVisualUnitActionHurt):
-	animated_sprite.play(\"hurt\")
-	await animated_sprite.animation_finished
-	go_idle()
-
-
-func melee(_action: CombatVisualUnitActionMelee):
-	animated_sprite.play(\"melee\")
-	while animated_sprite.frame != melee_hit_frame:
-		await animated_sprite.frame_changed
-	executed.emit()
-	await animated_sprite.animation_finished
-	go_idle()
-
-
-func go_idle():
-	animated_sprite.play(\"idle\")
-"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5gcs"]
 atlas = ExtResource("1_ggff2")
@@ -336,9 +292,8 @@ animations = [{
 }]
 
 [node name="Samurai" type="Node2D" node_paths=PackedStringArray("physical_node")]
-script = SubResource("GDScript_onfqa")
-melee_hit_frame = 4
-physical_node = NodePath("Physical")
+script = ExtResource("1_8ettu")
+physical_node = NodePath(".")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
