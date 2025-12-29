@@ -686,7 +686,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [node name="Hammerman" type="Node2D" node_paths=PackedStringArray("physical_node")]
@@ -695,13 +695,14 @@ physical_node = NodePath("Physical")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
+position = Vector2(274.1123, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"melee"
-frame = 29
-frame_progress = 1.0
+animation = &"walk"
+frame = 7
+frame_progress = 0.61145675
 offset = Vector2(6, -24)
 
 [node name="Components" type="Node" parent="."]

@@ -275,7 +275,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 8.0
+"speed": 14.0
 }]
 
 [node name="Knight" type="Node2D" node_paths=PackedStringArray("physical_node")]
@@ -288,7 +288,9 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_wlhx3")
-animation = &"idle"
+animation = &"walk"
+frame = 5
+frame_progress = 0.57234657
 offset = Vector2(0, -8)
 
 [node name="Components" type="Node" parent="."]

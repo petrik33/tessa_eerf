@@ -263,9 +263,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("physical_node")]
+[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("physical_node", "action_components")]
 script = ExtResource("1_2bpca")
 physical_node = NodePath("Physical")
+action_components = [NodePath("Components/Melee")]
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]

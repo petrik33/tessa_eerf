@@ -212,12 +212,15 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_ea563")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_ajifw")
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -355,7 +358,9 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ll718")
-animation = &"melee_2"
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.4516711
 offset = Vector2(-1, -15)
 
 [node name="Components" type="Node" parent="."]
