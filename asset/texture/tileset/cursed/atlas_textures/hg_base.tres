@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dstqheodwiv10"]
+
+[ext_resource type="Texture2D" uid="uid://dtevxdhqyjfnn" path="res://asset/texture/tileset/cursed/Ground.png" id="1_jcd5n"]
+
+[resource]
+atlas = ExtResource("1_jcd5n")
+region = Rect2(48, 32, 16, 16)

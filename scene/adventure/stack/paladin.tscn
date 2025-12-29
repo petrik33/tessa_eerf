@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dur2smd6mcjdb"]
+
+[ext_resource type="PackedScene" uid="uid://83xfl2uk6icf" path="res://scene/adventure/stack/adventure_map_stack_base.tscn" id="1_07dtv"]
+[ext_resource type="PackedScene" uid="uid://etmutxwu6b1u" path="res://scene/unit/paladin/paladin.tscn" id="2_t1agc"]
+
+[node name="AdventureMapStackBase" instance=ExtResource("1_07dtv")]
+
+[node name="Paladin" parent="." index="3" instance=ExtResource("2_t1agc")]
+position = Vector2(0, -2)
+scale = Vector2(0.5, 0.5)

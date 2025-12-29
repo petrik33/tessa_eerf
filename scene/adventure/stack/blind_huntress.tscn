@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2i32xrb2m76v"]
+
+[ext_resource type="PackedScene" uid="uid://83xfl2uk6icf" path="res://scene/adventure/stack/adventure_map_stack_base.tscn" id="1_nuemp"]
+[ext_resource type="PackedScene" uid="uid://dx0g014t166re" path="res://scene/unit/blind_huntress/blind_huntress.tscn" id="2_6aup8"]
+
+[node name="AdventureMapStackBase" instance=ExtResource("1_nuemp")]
+
+[node name="BlindHuntress" parent="." index="3" instance=ExtResource("2_6aup8")]
+position = Vector2(1, 0)
+scale = Vector2(0.5, 0.5)

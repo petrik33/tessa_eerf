@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgvlyo0baeaq0"]
+
+[ext_resource type="PackedScene" uid="uid://83xfl2uk6icf" path="res://scene/adventure/stack/adventure_map_stack_base.tscn" id="1_datmx"]
+[ext_resource type="PackedScene" uid="uid://bt8nnisinio00" path="res://scene/unit/necromancer/necromancer.tscn" id="2_opeip"]
+
+[node name="AdventureMapStackBase" instance=ExtResource("1_datmx")]
+
+[node name="Necromancer" parent="." index="3" instance=ExtResource("2_opeip")]
+position = Vector2(0, -2)
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimatedSprite2D" parent="Necromancer/Physical" index="0"]
+autoplay = "idle"
+
+[editable path="Necromancer"]

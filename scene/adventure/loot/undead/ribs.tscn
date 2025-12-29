@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://olgt5uqilp2s"]
+
+[ext_resource type="PackedScene" uid="uid://dio32d63snwnq" path="res://scene/adventure/loot/loot_artifact_base.tscn" id="1_ly3sy"]
+[ext_resource type="Texture2D" uid="uid://d07hc24hepuce" path="res://asset/texture/ui/icon/undead_loot/PNG/Transperent/Icon7.png" id="2_q8dyw"]
+
+[node name="LootArtifactBase" instance=ExtResource("1_ly3sy")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Content" index="0"]
+texture = ExtResource("2_q8dyw")
