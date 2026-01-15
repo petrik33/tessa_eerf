@@ -6,11 +6,9 @@
 [node name="AdventureMapStackBase" instance=ExtResource("1_csosi")]
 
 [node name="RedHoodArcher" parent="." index="3" instance=ExtResource("2_csosi")]
-position = Vector2(0, -6)
-scale = Vector2(0.5, 0.5)
+position = Vector2(0, -12)
 
 [node name="AnimatedSprite2D" parent="RedHoodArcher/Physical" index="0"]
-position = Vector2(4, -8)
 autoplay = "idle"
 
 [node name="ArrowOrigin" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="0"]

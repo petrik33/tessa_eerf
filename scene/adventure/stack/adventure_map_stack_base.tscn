@@ -3,23 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://bvsfglgr8166x" path="res://asset/texture/light/32x32/32x32 textures (38).png" id="1_18by5"]
 [ext_resource type="Texture2D" uid="uid://bn5wuwxu3pklw" path="res://asset/texture/light/32x32/32x32 textures (52).png" id="1_cufyb"]
 
-[sub_resource type="Animation" id="Animation_e2nys"]
-resource_name = "wave"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PointLight2D:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 12.0, 1.0]
-}
-
 [sub_resource type="Animation" id="Animation_l2gla"]
 length = 0.001
 tracks/0/type = "value"
@@ -35,6 +18,23 @@ tracks/0/keys = {
 "values": [1.0]
 }
 
+[sub_resource type="Animation" id="Animation_e2nys"]
+resource_name = "wave"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [2.0, 1.0, 2.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_18by5"]
 _data = {
 &"RESET": SubResource("Animation_l2gla"),
@@ -44,11 +44,11 @@ _data = {
 [node name="AdventureMapStackBase" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.75, 0.3)
+scale = Vector2(1, 0.4)
 texture = ExtResource("1_18by5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(0.75, 0.3)
+scale = Vector2(1, 0.3)
 color = Color(0.9, 0, 0.014999771, 1)
 texture = ExtResource("1_cufyb")
 

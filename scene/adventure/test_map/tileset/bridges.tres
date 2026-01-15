@@ -1,0 +1,15 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cbsfsmm8ty2lj"]
+
+[ext_resource type="Texture2D" uid="uid://dixdtjf5c4ef6" path="res://asset/texture/tileset/cursed/bridges.png" id="1_486oe"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wse7"]
+texture = ExtResource("1_486oe")
+34:6/size_in_atlas = Vector2i(4, 5)
+34:6/0 = 0
+3:11/size_in_atlas = Vector2i(3, 7)
+3:11/0 = 0
+21:6/size_in_atlas = Vector2i(7, 5)
+21:6/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_1wse7")

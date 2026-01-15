@@ -1,0 +1,224 @@
+[gd_resource type="TileSet" load_steps=24 format=3 uid="uid://bb1r35lbq6t4g"]
+
+[ext_resource type="Texture2D" uid="uid://c44qk2m72n4aw" path="res://asset/texture/tileset/undead/Objects.png" id="1_ffuah"]
+[ext_resource type="Texture2D" uid="uid://dtevxdhqyjfnn" path="res://asset/texture/tileset/cursed/Ground.png" id="2_0y1id"]
+[ext_resource type="Texture2D" uid="uid://ds0bqvstq5i1j" path="res://asset/texture/tileset/cursed/Objects.png" id="3_5o70r"]
+[ext_resource type="PackedScene" uid="uid://dkoioldwtqar" path="res://scene/adventure/resource/mineral.tscn" id="4_e4feq"]
+[ext_resource type="PackedScene" uid="uid://8kxl5xcn8ga3" path="res://scene/adventure/resource/eyes.tscn" id="5_koqdg"]
+[ext_resource type="PackedScene" uid="uid://b8602v5j0q0xg" path="res://scene/adventure/resource/heart.tscn" id="6_ly41h"]
+[ext_resource type="PackedScene" uid="uid://dqpvta0gd4fp1" path="res://scene/adventure/resource/jewelry.tscn" id="7_tf0j7"]
+[ext_resource type="PackedScene" uid="uid://dgvlyo0baeaq0" path="res://scene/adventure/stack/necromancer.tscn" id="8_qngrk"]
+[ext_resource type="PackedScene" uid="uid://dur2smd6mcjdb" path="res://scene/adventure/stack/paladin.tscn" id="9_j5cvx"]
+[ext_resource type="PackedScene" uid="uid://2e8fa6xvkcyf" path="res://scene/adventure/stack/monk.tscn" id="10_43mgx"]
+[ext_resource type="PackedScene" uid="uid://d2i32xrb2m76v" path="res://scene/adventure/stack/blind_huntress.tscn" id="11_ritty"]
+[ext_resource type="PackedScene" uid="uid://d4gof611uv0yt" path="res://scene/adventure/loot/undead/brain.tscn" id="12_qr007"]
+[ext_resource type="PackedScene" uid="uid://olgt5uqilp2s" path="res://scene/adventure/loot/undead/ribs.tscn" id="13_lf4sh"]
+[ext_resource type="PackedScene" uid="uid://cplyyqx5istk7" path="res://scene/adventure/loot/chest/chest.tscn" id="14_kf0gp"]
+[ext_resource type="PackedScene" uid="uid://dc8m4ivr8bapn" path="res://scene/adventure/town/apocalypse.tscn" id="15_fuhcf"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kmutc"]
+texture = ExtResource("1_ffuah")
+20:0/size_in_atlas = Vector2i(10, 7)
+20:0/0 = 0
+38:7/size_in_atlas = Vector2i(4, 4)
+38:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ptubw"]
+texture = ExtResource("2_0y1id")
+38:21/size_in_atlas = Vector2i(3, 3)
+38:21/0 = 0
+26:21/size_in_atlas = Vector2i(2, 2)
+26:21/0 = 0
+26:23/size_in_atlas = Vector2i(2, 1)
+26:23/0 = 0
+26:24/size_in_atlas = Vector2i(2, 2)
+26:24/0 = 0
+28:21/size_in_atlas = Vector2i(2, 2)
+28:21/0 = 0
+28:23/size_in_atlas = Vector2i(2, 1)
+28:23/0 = 0
+28:24/size_in_atlas = Vector2i(2, 2)
+28:24/0 = 0
+0:0/size_in_atlas = Vector2i(3, 8)
+0:0/0 = 0
+4:0/size_in_atlas = Vector2i(3, 8)
+4:0/0 = 0
+3:0/size_in_atlas = Vector2i(1, 8)
+3:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ai4hu"]
+texture = ExtResource("3_5o70r")
+47:20/size_in_atlas = Vector2i(2, 3)
+47:20/next_alternative_id = 2
+47:20/0 = 0
+47:20/1 = 1
+42:20/size_in_atlas = Vector2i(3, 3)
+42:20/next_alternative_id = 2
+42:20/0 = 0
+42:20/1 = 1
+30:20/size_in_atlas = Vector2i(3, 3)
+30:20/0 = 0
+30:20/0/y_sort_origin = 6
+27:20/size_in_atlas = Vector2i(3, 3)
+27:20/0 = 0
+27:20/0/y_sort_origin = 8
+24:20/size_in_atlas = Vector2i(3, 3)
+24:20/0 = 0
+24:20/0/y_sort_origin = 10
+46:26/0 = 0
+46:26/0/texture_origin = Vector2i(-4, -8)
+46:27/size_in_atlas = Vector2i(3, 3)
+46:27/0 = 0
+46:27/0/y_sort_origin = 6
+44:30/size_in_atlas = Vector2i(5, 5)
+44:30/0 = 0
+44:30/0/texture_origin = Vector2i(0, 8)
+44:30/0/y_sort_origin = 16
+40:6/size_in_atlas = Vector2i(2, 2)
+40:6/0 = 0
+7:19/0 = 0
+7:18/0 = 0
+8:18/0 = 0
+8:19/0 = 0
+9:18/0 = 0
+9:17/0 = 0
+8:17/0 = 0
+7:17/0 = 0
+6:17/0 = 0
+5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
+8:15/0 = 0
+7:15/0 = 0
+6:15/0 = 0
+5:15/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+14:26/size_in_atlas = Vector2i(4, 4)
+14:26/0 = 0
+0:32/size_in_atlas = Vector2i(5, 5)
+0:32/0 = 0
+29:42/size_in_atlas = Vector2i(2, 2)
+29:42/0 = 0
+31:42/size_in_atlas = Vector2i(2, 2)
+31:42/0 = 0
+33:42/size_in_atlas = Vector2i(2, 2)
+33:42/0 = 0
+39:42/size_in_atlas = Vector2i(2, 2)
+39:42/0 = 0
+18:26/size_in_atlas = Vector2i(5, 4)
+18:26/0 = 0
+18:26/0/y_sort_origin = 12
+28:26/size_in_atlas = Vector2i(4, 4)
+28:26/0 = 0
+28:26/0/y_sort_origin = 10
+45:23/size_in_atlas = Vector2i(2, 3)
+45:23/0 = 0
+36:23/size_in_atlas = Vector2i(3, 3)
+36:23/0 = 0
+39:23/size_in_atlas = Vector2i(3, 3)
+39:23/0 = 0
+43:35/size_in_atlas = Vector2i(4, 4)
+43:35/0 = 0
+25:42/size_in_atlas = Vector2i(2, 2)
+25:42/0 = 0
+17:39/size_in_atlas = Vector2i(4, 4)
+17:39/0 = 0
+39:35/size_in_atlas = Vector2i(2, 4)
+39:35/0 = 0
+39:35/0/texture_origin = Vector2i(0, 10)
+14:8/size_in_atlas = Vector2i(5, 5)
+14:8/0 = 0
+16:6/size_in_atlas = Vector2i(2, 2)
+16:6/0 = 0
+12:6/size_in_atlas = Vector2i(2, 2)
+12:6/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+0:7/size_in_atlas = Vector2i(2, 2)
+0:7/0 = 0
+0:20/size_in_atlas = Vector2i(7, 6)
+0:20/0 = 0
+0:26/size_in_atlas = Vector2i(5, 6)
+0:26/0 = 0
+0:37/size_in_atlas = Vector2i(4, 4)
+0:37/0 = 0
+0:41/size_in_atlas = Vector2i(3, 3)
+0:41/0 = 0
+3:41/size_in_atlas = Vector2i(2, 2)
+3:41/0 = 0
+5:41/size_in_atlas = Vector2i(2, 2)
+5:41/0 = 0
+10:40/size_in_atlas = Vector2i(3, 3)
+10:40/0 = 0
+10:35/size_in_atlas = Vector2i(3, 5)
+10:35/0 = 0
+10:30/size_in_atlas = Vector2i(4, 5)
+10:30/0 = 0
+13:35/size_in_atlas = Vector2i(4, 4)
+13:35/0 = 0
+21:35/size_in_atlas = Vector2i(4, 4)
+21:35/0 = 0
+23:30/size_in_atlas = Vector2i(5, 5)
+23:30/0 = 0
+41:26/size_in_atlas = Vector2i(5, 4)
+41:26/0 = 0
+29:35/size_in_atlas = Vector2i(5, 4)
+29:35/0 = 0
+28:39/size_in_atlas = Vector2i(3, 3)
+28:39/0 = 0
+43:39/size_in_atlas = Vector2i(3, 3)
+43:39/0 = 0
+43:39/0/texture_origin = Vector2i(0, 8)
+14:20/size_in_atlas = Vector2i(5, 6)
+14:20/0 = 0
+14:20/0/y_sort_origin = 28
+35:8/size_in_atlas = Vector2i(4, 4)
+35:8/0 = 0
+46:7/size_in_atlas = Vector2i(3, 3)
+46:7/0 = 0
+46:13/size_in_atlas = Vector2i(3, 3)
+46:13/0 = 0
+40:12/size_in_atlas = Vector2i(3, 4)
+40:12/0 = 0
+28:30/size_in_atlas = Vector2i(4, 5)
+28:30/0 = 0
+28:30/0/y_sort_origin = 20
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ai4hu"]
+resource_name = "Resources"
+scenes/1/scene = ExtResource("4_e4feq")
+scenes/2/scene = ExtResource("5_koqdg")
+scenes/3/scene = ExtResource("6_ly41h")
+scenes/4/scene = ExtResource("7_tf0j7")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4cbny"]
+resource_name = "Stacks"
+scenes/1/scene = ExtResource("8_qngrk")
+scenes/2/scene = ExtResource("9_j5cvx")
+scenes/3/scene = ExtResource("10_43mgx")
+scenes/4/scene = ExtResource("11_ritty")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hlij3"]
+resource_name = "Artifacts"
+scenes/1/scene = ExtResource("12_qr007")
+scenes/2/scene = ExtResource("13_lf4sh")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ptubw"]
+resource_name = "Specials"
+scenes/1/scene = ExtResource("14_kf0gp")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_cd03o"]
+resource_name = "Towns"
+scenes/1/scene = ExtResource("15_fuhcf")
+
+[resource]
+sources/1 = SubResource("TileSetAtlasSource_ptubw")
+sources/3 = SubResource("TileSetAtlasSource_ai4hu")
+sources/4 = SubResource("TileSetScenesCollectionSource_ai4hu")
+sources/5 = SubResource("TileSetScenesCollectionSource_4cbny")
+sources/6 = SubResource("TileSetScenesCollectionSource_hlij3")
+sources/7 = SubResource("TileSetScenesCollectionSource_ptubw")
+sources/0 = SubResource("TileSetAtlasSource_kmutc")
+sources/8 = SubResource("TileSetScenesCollectionSource_cd03o")

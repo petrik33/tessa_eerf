@@ -6,5 +6,4 @@
 [node name="AdventureMapStackBase" instance=ExtResource("1_nuemp")]
 
 [node name="BlindHuntress" parent="." index="3" instance=ExtResource("2_6aup8")]
-position = Vector2(1, 0)
-scale = Vector2(0.5, 0.5)
+position = Vector2(2, -1)
