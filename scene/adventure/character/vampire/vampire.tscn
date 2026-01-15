@@ -1,96 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bffj561dobuyj"]
+[gd_scene load_steps=2 format=3 uid="uid://bffj561dobuyj"]
 
-[ext_resource type="Texture2D" uid="uid://dxs2yrjonelkv" path="res://asset/texture/top_down_character/Vampires1/Idle/Vampires1_Idle_full.png" id="1_mtxmx"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6f7ac"]
-atlas = ExtResource("1_mtxmx")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_020jy"]
-atlas = ExtResource("1_mtxmx")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_biufk"]
-atlas = ExtResource("1_mtxmx")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_brftv"]
-atlas = ExtResource("1_mtxmx")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8igsv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6f7ac")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_020jy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_biufk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_brftv")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6f7ac")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_020jy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_biufk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_brftv")
-}],
-"loop": true,
-"name": &"idle_1",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6f7ac")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_020jy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_biufk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_brftv")
-}],
-"loop": true,
-"name": &"idle_2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6f7ac")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_020jy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_biufk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_brftv")
-}],
-"loop": true,
-"name": &"idle_3",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://bb46nlt6we8i8" path="res://scene/adventure/character/vampire/sprite_frames.tres" id="1_mtxmx"]
 
 [node name="Vampire" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_8igsv")
-animation = &"idle"
+sprite_frames = ExtResource("1_mtxmx")
+animation = &"walk_s"
+frame = 3
+frame_progress = 0.97209173
