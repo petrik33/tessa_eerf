@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqx6ptc1lh2pe"]
+
+[ext_resource type="PackedScene" uid="uid://83xfl2uk6icf" path="res://scene/adventure/stack/adventure_map_stack_base.tscn" id="1_csosi"]
+[ext_resource type="PackedScene" uid="uid://bqq7xa1o1e1io" path="res://scene/unit/red_hood_archer/red_hood_archer.tscn" id="2_csosi"]
+
+[node name="AdventureMapStackBase" instance=ExtResource("1_csosi")]
+
+[node name="RedHoodArcher" parent="." index="3" instance=ExtResource("2_csosi")]
+position = Vector2(0, -6)
+scale = Vector2(0.5, 0.5)
+
+[node name="AnimatedSprite2D" parent="RedHoodArcher/Physical" index="0"]
+position = Vector2(4, -8)
+autoplay = "idle"
+
+[node name="ArrowOrigin" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="0"]
+visible = false
+
+[node name="IdleOffset" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="1"]
+visible = false
+
+[node name="RangedOffset" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="2"]
+visible = false
+
+[editable path="RedHoodArcher"]

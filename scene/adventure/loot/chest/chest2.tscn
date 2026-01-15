@@ -1,17 +1,133 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxo1slrh7l23l"]
+[gd_scene load_steps=19 format=3 uid="uid://brjfqtno48e6o"]
 
+[ext_resource type="Texture2D" uid="uid://cm02ff74tou7s" path="res://asset/texture/light/32x32/32x32 textures (48).png" id="1_onk1k"]
 [ext_resource type="Texture2D" uid="uid://d7fnwmap81xq" path="res://asset/texture/tileset/top_down_basic/atlas_textures/chest.tres" id="1_tg7tt"]
-[ext_resource type="Texture2D" uid="uid://bn5wuwxu3pklw" path="res://asset/texture/light/32x32/32x32 textures (52).png" id="2_66c15"]
+[ext_resource type="Texture2D" uid="uid://claijevib272m" path="res://asset/texture/light/32x32/animation/1.png" id="2_hy2nq"]
+[ext_resource type="Texture2D" uid="uid://dxqolgkqho3uf" path="res://asset/texture/light/32x32/32x32 textures (1).png" id="3_qii1j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qii1j"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qe7u"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aj18g"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kafhx"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xpmf"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u42cy"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jketu"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoqbh"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgn8w"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acdsp"]
+atlas = ExtResource("2_hy2nq")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqa8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qii1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qe7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aj18g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kafhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xpmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u42cy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jketu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uoqbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgn8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acdsp")
+}],
+"loop": true,
+"name": &"light1",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_dj7rh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/path = NodePath("Outline:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -25,14 +141,50 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/path = NodePath("Outline:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5, 3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1.0, 10.0, 1.0]
+"values": [Color(1, 1, 1, 1), Color(1.6287985, 1.8247963, 0.64880997, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.9148333, 1, 0.26999998, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dj7rh"]
@@ -43,15 +195,29 @@ _data = {
 
 [node name="Chest" type="Node2D"]
 
+[node name="Outline" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1, 0.5)
+texture = ExtResource("1_onk1k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(1, 0.5)
+sprite_frames = SubResource("SpriteFrames_gqa8c")
+animation = &"light1"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1, 0.5)
+color = Color(0.942, 1, 0.42000002, 1)
+range_item_cull_mask = 2
+texture = ExtResource("3_qii1j")
+height = 10.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 3
 position = Vector2(0, -4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_tg7tt")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(0.75, 0.3)
-color = Color(0.6666667, 0.7019608, 0, 1)
-texture = ExtResource("2_66c15")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

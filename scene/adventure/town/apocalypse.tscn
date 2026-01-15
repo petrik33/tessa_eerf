@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc8m4ivr8bapn"]
+
+[ext_resource type="Texture2D" uid="uid://d36xiy0f00e62" path="res://asset/texture/tileset/cursed/Objects_separetely/Bones_shadow1_1.png" id="1_gpdd7"]
+
+[node name="Apocalypse" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -33)
+texture = ExtResource("1_gpdd7")
