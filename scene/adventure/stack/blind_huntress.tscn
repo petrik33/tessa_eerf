@@ -1,9 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2i32xrb2m76v"]
+[gd_scene load_steps=16 format=3 uid="uid://d2i32xrb2m76v"]
 
 [ext_resource type="PackedScene" uid="uid://83xfl2uk6icf" path="res://scene/adventure/stack/adventure_map_stack_base.tscn" id="1_nuemp"]
-[ext_resource type="PackedScene" uid="uid://dx0g014t166re" path="res://scene/unit/blind_huntress/blind_huntress.tscn" id="2_6aup8"]
+[ext_resource type="Texture2D" uid="uid://jubwdb40vg33" path="res://asset/texture/unit/blind_huntress/1 - Idle.png" id="2_nuemp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6aup8"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(0, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vroly"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(240, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsi0r"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(480, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqg7p"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(720, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmlv2"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(960, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3k38"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(1200, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbawk"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(1440, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcqno"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(1680, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6idg"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(1920, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0clv"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(2160, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g64vn"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(2400, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjo6j"]
+atlas = ExtResource("2_nuemp")
+region = Rect2(2640, 0, 240, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sjecx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6aup8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vroly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsi0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqg7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmlv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3k38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbawk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcqno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6idg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0clv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g64vn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjo6j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
 
 [node name="AdventureMapStackBase" instance=ExtResource("1_nuemp")]
 
-[node name="BlindHuntress" parent="." index="3" instance=ExtResource("2_6aup8")]
-position = Vector2(2, -1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Content" index="0"]
+sprite_frames = SubResource("SpriteFrames_sjecx")
+autoplay = "default"
+frame = 3
+frame_progress = 0.46318427
+offset = Vector2(1, -16)

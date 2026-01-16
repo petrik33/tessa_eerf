@@ -57,3 +57,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_18by5")
 }
 autoplay = "wave"
+
+[node name="Content" type="Node2D" parent="."]

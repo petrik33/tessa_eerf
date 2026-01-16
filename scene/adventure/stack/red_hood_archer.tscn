@@ -1,23 +1,76 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqx6ptc1lh2pe"]
+[gd_scene load_steps=12 format=3 uid="uid://cqx6ptc1lh2pe"]
 
 [ext_resource type="PackedScene" uid="uid://83xfl2uk6icf" path="res://scene/adventure/stack/adventure_map_stack_base.tscn" id="1_csosi"]
-[ext_resource type="PackedScene" uid="uid://bqq7xa1o1e1io" path="res://scene/unit/red_hood_archer/red_hood_archer.tscn" id="2_csosi"]
+[ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="2_csosi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyxm8"]
+atlas = ExtResource("2_csosi")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ievo"]
+atlas = ExtResource("2_csosi")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10wlc"]
+atlas = ExtResource("2_csosi")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w00f3"]
+atlas = ExtResource("2_csosi")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vh1t"]
+atlas = ExtResource("2_csosi")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqj2m"]
+atlas = ExtResource("2_csosi")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kol2a"]
+atlas = ExtResource("2_csosi")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pydeg"]
+atlas = ExtResource("2_csosi")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rh2on"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyxm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ievo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10wlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w00f3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vh1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqj2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kol2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pydeg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [node name="AdventureMapStackBase" instance=ExtResource("1_csosi")]
 
-[node name="RedHoodArcher" parent="." index="3" instance=ExtResource("2_csosi")]
-position = Vector2(0, -12)
-
-[node name="AnimatedSprite2D" parent="RedHoodArcher/Physical" index="0"]
-autoplay = "idle"
-
-[node name="ArrowOrigin" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="0"]
-visible = false
-
-[node name="IdleOffset" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="1"]
-visible = false
-
-[node name="RangedOffset" parent="RedHoodArcher/Physical/AnimatedSprite2D" index="2"]
-visible = false
-
-[editable path="RedHoodArcher"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Content" index="0"]
+sprite_frames = SubResource("SpriteFrames_rh2on")
+autoplay = "default"
+frame_progress = 0.2939019
+offset = Vector2(0, -12)
