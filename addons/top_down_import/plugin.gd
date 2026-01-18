@@ -22,10 +22,9 @@ func _enter_tree():
 
 	texture_picker = EditorResourcePicker.new()
 	texture_picker.base_type = "Texture2D"
-	#texture_picker.label = "Spritesheet"
 
 	output_path = LineEdit.new()
-	output_path.placeholder_text = "res://art/generated.frames"
+	output_path.placeholder_text = "res://art/generated.tres"
 
 	frame_w = _spin(1, 512, 64)
 	frame_h = _spin(1, 512, 64)
@@ -97,8 +96,11 @@ func _generate():
 	var states := states_edit.text.split(",", false)
 	var dirs := directions_edit.text.split(",", false)
 
-	var sprite_frames := SpriteFrames.new()
-	sprite_frames.remove_animation("default")
+	var sprite_frames := load(out_path)
+	
+	if sprite_frames == null:
+		sprite_frames = SpriteFrames.new()
+		sprite_frames.remove_animation("default")
 	
 	var row := start_row.value
 
