@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=24 format=3 uid="uid://bb1r35lbq6t4g"]
+[gd_resource type="TileSet" load_steps=26 format=3 uid="uid://bb1r35lbq6t4g"]
 
 [ext_resource type="Texture2D" uid="uid://c44qk2m72n4aw" path="res://asset/texture/tileset/undead/Objects.png" id="1_ffuah"]
 [ext_resource type="Texture2D" uid="uid://dtevxdhqyjfnn" path="res://asset/texture/tileset/cursed/Ground.png" id="2_0y1id"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://olgt5uqilp2s" path="res://scene/adventure/loot/undead/ribs.tscn" id="13_lf4sh"]
 [ext_resource type="PackedScene" uid="uid://cplyyqx5istk7" path="res://scene/adventure/loot/chest/chest.tscn" id="14_kf0gp"]
 [ext_resource type="PackedScene" uid="uid://dc8m4ivr8bapn" path="res://scene/adventure/town/apocalypse.tscn" id="15_fuhcf"]
+[ext_resource type="PackedScene" uid="uid://bffj561dobuyj" path="res://scene/adventure/hero/vampire/vampire.tscn" id="16_0y1id"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kmutc"]
 texture = ExtResource("1_ffuah")
@@ -213,6 +214,10 @@ scenes/1/scene = ExtResource("14_kf0gp")
 resource_name = "Towns"
 scenes/1/scene = ExtResource("15_fuhcf")
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ffuah"]
+resource_name = "Heroes"
+scenes/1/scene = ExtResource("16_0y1id")
+
 [resource]
 sources/1 = SubResource("TileSetAtlasSource_ptubw")
 sources/3 = SubResource("TileSetAtlasSource_ai4hu")
@@ -222,3 +227,4 @@ sources/6 = SubResource("TileSetScenesCollectionSource_hlij3")
 sources/7 = SubResource("TileSetScenesCollectionSource_ptubw")
 sources/0 = SubResource("TileSetAtlasSource_kmutc")
 sources/8 = SubResource("TileSetScenesCollectionSource_cd03o")
+sources/9 = SubResource("TileSetScenesCollectionSource_ffuah")
