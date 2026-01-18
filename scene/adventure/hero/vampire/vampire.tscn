@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bffj561dobuyj"]
 
-[ext_resource type="SpriteFrames" uid="uid://bb46nlt6we8i8" path="res://scene/adventure/character/vampire/sprite_frames.tres" id="1_mtxmx"]
+[ext_resource type="SpriteFrames" uid="uid://bb46nlt6we8i8" path="res://scene/adventure/hero/vampire/sprite_frames.tres" id="1_mtxmx"]
 
 [node name="Vampire" type="Node2D"]
 
