@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ckuewwmnre7c"]
+[gd_scene load_steps=10 format=4 uid="uid://ckuewwmnre7c"]
 
 [ext_resource type="TileSet" uid="uid://bhm3yg0oyd1av" path="res://scene/adventure/test_map/tileset/water_detalization.tres" id="1_we4oo"]
 [ext_resource type="TileSet" uid="uid://c2jiu62dwtdoh" path="res://scene/adventure/test_map/tileset/ground.tres" id="2_vhomd"]
@@ -7,6 +7,7 @@
 [ext_resource type="TileSet" uid="uid://cbsfsmm8ty2lj" path="res://scene/adventure/test_map/tileset/bridges.tres" id="5_30aci"]
 [ext_resource type="TileSet" uid="uid://bb1r35lbq6t4g" path="res://scene/adventure/test_map/tileset/objects.tres" id="6_8wx8x"]
 [ext_resource type="TileSet" uid="uid://cat1u1hftiimp" path="res://scene/adventure/test_map/tileset/collision.tres" id="7_30aci"]
+[ext_resource type="Script" uid="uid://brg8sute2rmte" path="res://script/adventure/camera_controller.gd" id="9_8wx8x"]
 [ext_resource type="Script" uid="uid://3bxue3cl0qjn" path="res://script/combat/dbg_combat_controller.gd" id="14_k5xsn"]
 
 [node name="TestMap" type="Node2D"]
@@ -14,6 +15,7 @@
 [node name="Water" type="ColorRect" parent="."]
 offset_right = 1536.0
 offset_bottom = 1536.0
+mouse_filter = 2
 color = Color(0.20392157, 0.21176471, 0.2901961, 1)
 
 [node name="Tilemap" type="Node2D" parent="."]
@@ -49,14 +51,18 @@ tile_set = ExtResource("7_30aci")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(320, 540)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.8
-drag_top_margin = 0.8
-drag_right_margin = 0.8
-drag_bottom_margin = 0.8
-editor_draw_drag_margin = true
+limit_left = 0
+limit_top = 0
+limit_right = 1536
+limit_bottom = 1536
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 12.0
 
 [node name="DbgCombatController" type="Node" parent="."]
 script = ExtResource("14_k5xsn")
 metadata/_custom_type_script = "uid://3bxue3cl0qjn"
+
+[node name="CameraController" type="Node" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("9_8wx8x")
+camera = NodePath("../Camera2D")
