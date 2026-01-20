@@ -3,7 +3,7 @@ class_name RowLengthHexGridIterator extends HexGridIteratorBase
 
 var row_lengths: Array[int]
 var row_offsets: Array[int]
-var offset_hex_math: OffsetHexMathRes
+var offset_hex_math: OffsetHexMathBase
 var current_row := 0
 var current_col := 0
 

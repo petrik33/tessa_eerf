@@ -42,8 +42,7 @@ func _iter_next(arg) -> bool:
 				return false
 			_current_iterator = _iteratorB
 			_iterated_overA = true
-			if not _iteratorB._iter_init(arg):
-				return false
+			return _iteratorB._iter_init(arg)
 	
 	# Unreachable
 	return false

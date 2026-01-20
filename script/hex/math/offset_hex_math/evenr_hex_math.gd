@@ -1,5 +1,5 @@
 @tool
-class_name EvenrHexMathImpl extends OffsetHexMathImplBase
+class_name EvenrHexMath extends OffsetHexMathBase
 
 func neighbor(hex: Vector2i, direction: int) -> Vector2i:
 	return OffsetHexMath.evenr_neighbor(hex, direction)

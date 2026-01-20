@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EvenrHexMathImpl" load_steps=2 format=3 uid="uid://bjrrw0roimlon"]
+
+[ext_resource type="Script" uid="uid://bvqhsghj8cg4v" path="res://script/hex/math/offset_hex_math/evenr_hex_math.gd" id="1_i6oih"]
+
+[resource]
+script = ExtResource("1_i6oih")
+metadata/_custom_type_script = "uid://nc5jwgjtmijj"

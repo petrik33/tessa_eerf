@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="UnionHexGrid" load_steps=4 format=3 uid="uid://dlt3o4v3xg6w8"]
+
+[ext_resource type="Script" uid="uid://3aqlsliq85v1" path="res://script/hex/grid/set_operations/union_hex_grid.gd" id="1_4tbee"]
+[ext_resource type="Resource" uid="uid://tb4gpbq4bm3k" path="res://scene/auto_chess/grid/ally_grid.tres" id="1_f3t3t"]
+[ext_resource type="Resource" uid="uid://cst7r5k4ctr8a" path="res://scene/auto_chess/grid/enemy_grid.tres" id="2_3h5j1"]
+
+[resource]
+script = ExtResource("1_4tbee")
+gridA = ExtResource("1_f3t3t")
+gridB = ExtResource("2_3h5j1")
+metadata/_custom_type_script = "uid://3aqlsliq85v1"

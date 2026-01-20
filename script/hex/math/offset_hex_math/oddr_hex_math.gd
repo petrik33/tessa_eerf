@@ -1,5 +1,5 @@
 @tool
-class_name OddrHexMathImpl extends OffsetHexMathImplBase
+class_name OddrHexMath extends OffsetHexMathBase
 
 func neighbor(hex: Vector2i, direction: int) -> Vector2i:
 	return OffsetHexMath.oddr_neighbor(hex, direction)

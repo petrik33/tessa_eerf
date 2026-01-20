@@ -1,142 +1,142 @@
-[gd_scene load_steps=44 format=3 uid="uid://djblfmp6cwiwq"]
+[gd_scene load_steps=44 format=3 uid="uid://yjvuahf7wrno"]
 
-[ext_resource type="Script" uid="uid://dl4hcluc07egi" path="res://scene/unit/martial_hero/martial_hero.gd" id="1_2bpca"]
-[ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="1_cnduq"]
-[ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="5_qb0rn"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="5_vvmx4"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="6_cnduq"]
-[ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="6_qb0rn"]
-[ext_resource type="Texture2D" uid="uid://fl5y7toxft2e" path="res://asset/texture/unit/martial_hero/Run.png" id="6_qr1lv"]
-[ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="7_02ptm"]
-[ext_resource type="Script" uid="uid://nkfoqc5si4vd" path="res://script/combat/visual/unit/components/combat_visual_unit_melee.gd" id="8_onfqa"]
-[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_qr1lv"]
+[ext_resource type="Script" uid="uid://6lccoq6ep83" path="res://scene/auto_chess/unit/martial_hero/martial_hero.gd" id="1_18ghs"]
+[ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="2_k2j33"]
+[ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="3_nrrws"]
+[ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="4_jo824"]
+[ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="5_qo6r1"]
+[ext_resource type="Texture2D" uid="uid://fl5y7toxft2e" path="res://asset/texture/unit/martial_hero/Run.png" id="6_xbrv6"]
+[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="7_sqt6t"]
+[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="8_myojn"]
+[ext_resource type="Script" uid="uid://nkfoqc5si4vd" path="res://script/combat/visual/unit/components/combat_visual_unit_melee.gd" id="9_oatl6"]
+[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_i78f3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onfqa"]
-atlas = ExtResource("1_cnduq")
+atlas = ExtResource("2_k2j33")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qr1lv"]
-atlas = ExtResource("1_cnduq")
+atlas = ExtResource("2_k2j33")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eerro"]
-atlas = ExtResource("1_cnduq")
+atlas = ExtResource("2_k2j33")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f5lml"]
-atlas = ExtResource("1_cnduq")
+atlas = ExtResource("2_k2j33")
 region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_blpkp"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8pc05"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jyxmc"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpvot"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q1t23"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(800, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mj70l"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_earvx"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(1200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrwfs"]
-atlas = ExtResource("5_qb0rn")
+atlas = ExtResource("3_nrrws")
 region = Rect2(1400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aitgv"]
-atlas = ExtResource("6_qb0rn")
+atlas = ExtResource("4_jo824")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ek85"]
-atlas = ExtResource("6_qb0rn")
+atlas = ExtResource("4_jo824")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8irq"]
-atlas = ExtResource("6_qb0rn")
+atlas = ExtResource("4_jo824")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_usw4d"]
-atlas = ExtResource("6_qb0rn")
+atlas = ExtResource("4_jo824")
 region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kgi5j"]
-atlas = ExtResource("6_qb0rn")
+atlas = ExtResource("4_jo824")
 region = Rect2(800, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7tocn"]
-atlas = ExtResource("6_qb0rn")
+atlas = ExtResource("4_jo824")
 region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sedt8"]
-atlas = ExtResource("7_02ptm")
+atlas = ExtResource("5_qo6r1")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y2q32"]
-atlas = ExtResource("7_02ptm")
+atlas = ExtResource("5_qo6r1")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tcqqb"]
-atlas = ExtResource("7_02ptm")
+atlas = ExtResource("5_qo6r1")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xaeg"]
-atlas = ExtResource("7_02ptm")
+atlas = ExtResource("5_qo6r1")
 region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qg18"]
-atlas = ExtResource("7_02ptm")
+atlas = ExtResource("5_qo6r1")
 region = Rect2(800, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p18cq"]
-atlas = ExtResource("7_02ptm")
+atlas = ExtResource("5_qo6r1")
 region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjkb0"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb0rn"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02ptm"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(400, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tx6bj"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(600, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vas6a"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(800, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0mm1"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aojjl"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(1200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wlhx3"]
-atlas = ExtResource("6_qr1lv")
+atlas = ExtResource("6_xbrv6")
 region = Rect2(1400, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wlhx3"]
@@ -264,7 +264,7 @@ animations = [{
 }]
 
 [node name="MartialHero" type="Node2D" node_paths=PackedStringArray("physical_node", "action_components")]
-script = ExtResource("1_2bpca")
+script = ExtResource("1_18ghs")
 physical_node = NodePath("Physical")
 action_components = [NodePath("Components/Melee")]
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
@@ -279,22 +279,22 @@ offset = Vector2(0, -18)
 
 [node name="Components" type="Node" parent="."]
 
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("5_vvmx4")]
+[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("7_sqt6t")]
 unique_name_in_owner = true
 physical = NodePath("../../Physical")
 sprite = NodePath("../../Physical/AnimatedSprite2D")
 
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("6_cnduq")]
+[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("8_myojn")]
 unique_name_in_owner = true
 moved_node = NodePath("../../Physical")
 
 [node name="Melee" type="Node" parent="Components" node_paths=PackedStringArray("animated_sprite", "physical")]
 unique_name_in_owner = true
-script = ExtResource("8_onfqa")
+script = ExtResource("9_oatl6")
 animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
 hit_frame = 4
 physical = NodePath("../../Physical")
 metadata/_custom_type_script = "uid://nkfoqc5si4vd"
 
-[node name="DbgCombatVisualHex" parent="." instance=ExtResource("10_qr1lv")]
+[node name="DbgCombatVisualHex" parent="." instance=ExtResource("10_i78f3")]
 visible = false

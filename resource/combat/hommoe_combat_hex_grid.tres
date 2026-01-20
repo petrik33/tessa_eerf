@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RowLengthHexGrid" load_steps=3 format=3 uid="uid://4n3cj4ten407"]
 
 [ext_resource type="Script" uid="uid://bkch0ceqimtur" path="res://script/hex/grid/row_length_hex_grid.gd" id="1_51o8v"]
-[ext_resource type="Resource" uid="uid://cymfk6o15evoq" path="res://resource/combat/combat_offset_hex_math_res.tres" id="1_tc04s"]
+[ext_resource type="Resource" uid="uid://bjrrw0roimlon" path="res://resource/combat/combat_offset_hex_math.tres" id="1_tc04s"]
 
 [resource]
 script = ExtResource("1_51o8v")

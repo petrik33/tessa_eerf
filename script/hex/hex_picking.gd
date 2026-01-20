@@ -2,6 +2,7 @@
 class_name HexPicking extends Control
 
 signal updated(previous_hex: Vector2i, new_hex: Vector2i)
+signal clicked(hex: Vector2i, event: InputEventMouseButton)
 
 
 @export var bbox_scale := 1.05:
@@ -30,9 +31,11 @@ var _hex_space: HexSpace
 
 
 func _gui_input(event: InputEvent) -> void:
-	if not event is InputEventMouseMotion:
-		return
-	_on_mouse_motion(event)
+	if event is InputEventMouseMotion:
+		_on_mouse_motion(event)
+	if event is InputEventMouseButton:
+		clicked.emit(mouse_hex, event)
+		
 
 
 func _enter_tree() -> void:

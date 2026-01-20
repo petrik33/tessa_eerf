@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpgqkndjdfbx5"]
+
+[ext_resource type="Texture2D" uid="uid://bbj8owy3a30es" path="res://asset/texture/unit/red_hood_archer/RedHoodArcherArrow.png" id="1_5xiut"]
+[ext_resource type="Texture2D" uid="uid://cq855qaohtbn3" path="res://asset/texture/unit/red_hood_archer/ArcherArrowHitAnimation.png" id="2_emtgb"]
+
+[sub_resource type="GDScript" id="GDScript_kkhx2"]
+script/source = "extends CombatVisualProjectile
+
+
+@onready var sprite: Sprite2D = %Sprite
+@onready var hit_animation: AnimatedSprite2D = %HitAnimation
+
+
+func reach_target():
+	super.reach_target()
+	sprite.hide()
+	hit_animation.show()
+	hit_animation.play()
+	await hit_animation.animation_finished
+	queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buiht"]
+atlas = ExtResource("2_emtgb")
+region = Rect2(0, 0, 180, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nupp2"]
+atlas = ExtResource("2_emtgb")
+region = Rect2(180, 0, 180, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyiam"]
+atlas = ExtResource("2_emtgb")
+region = Rect2(360, 0, 180, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_devdv"]
+atlas = ExtResource("2_emtgb")
+region = Rect2(540, 0, 180, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnkdf"]
+atlas = ExtResource("2_emtgb")
+region = Rect2(720, 0, 180, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wncif"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buiht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nupp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyiam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_devdv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnkdf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RedHoodArcherArrow" type="Node2D"]
+script = SubResource("GDScript_kkhx2")
+speed = 1000.0
+metadata/_custom_type_script = "uid://dwy6mols26t3p"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("1_5xiut")
+offset = Vector2(-10, 0)
+
+[node name="HitAnimation" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+sprite_frames = SubResource("SpriteFrames_wncif")
+frame = 4
+frame_progress = 1.0
+offset = Vector2(-90, 10.5)

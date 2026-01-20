@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RectangleHexGrid" load_steps=3 format=3 uid="uid://b2feo8yu360oc"]
 
-[ext_resource type="Resource" uid="uid://cymfk6o15evoq" path="res://resource/combat/combat_offset_hex_math_res.tres" id="1_won3r"]
+[ext_resource type="Resource" uid="uid://bjrrw0roimlon" path="res://resource/combat/combat_offset_hex_math.tres" id="1_won3r"]
 [ext_resource type="Script" uid="uid://b602cf0tvj4sj" path="res://script/hex/grid/rectangle_hex_grid.gd" id="2_awbiu"]
 
 [resource]

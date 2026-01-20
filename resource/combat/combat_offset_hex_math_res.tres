@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="OffsetHexMathRes" load_steps=3 format=3 uid="uid://cymfk6o15evoq"]
-
-[ext_resource type="Script" uid="uid://bvqhsghj8cg4v" path="res://script/hex/math/offset_hex_math_impl/evenr_hex_math_impl.gd" id="1_2pyym"]
-[ext_resource type="Script" uid="uid://s3y3b6g5utvc" path="res://script/hex/math/offset_hex_math_res.gd" id="2_cungk"]
-
-[resource]
-script = ExtResource("2_cungk")
-impl_script = ExtResource("1_2pyym")
-metadata/_custom_type_script = "uid://s3y3b6g5utvc"

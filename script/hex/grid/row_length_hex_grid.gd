@@ -11,7 +11,7 @@ class_name RowLengthHexGrid extends HexGridBase
 		row_offsets = value
 		emit_changed()
 
-@export var offset_hex_math: OffsetHexMathRes:
+@export var offset_hex_math: OffsetHexMathBase:
 	set(value):
 		if offset_hex_math != null:
 			offset_hex_math.changed.disconnect(emit_changed)

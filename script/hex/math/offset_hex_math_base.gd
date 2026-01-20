@@ -1,5 +1,5 @@
 @tool
-class_name OffsetHexMathImplBase
+class_name OffsetHexMathBase extends Resource
 
 func neighbor(_hex: Vector2i, _direction: int) -> Vector2i:
 	assert(false, "neighbor() must be implemented")
