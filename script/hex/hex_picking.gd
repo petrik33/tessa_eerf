@@ -33,7 +33,7 @@ var _hex_space: HexSpace
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_on_mouse_motion(event)
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.pressed:
 		clicked.emit(mouse_hex, event)
 		
 

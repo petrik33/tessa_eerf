@@ -2,11 +2,16 @@
 
 [ext_resource type="Script" uid="uid://c8kwwh2ionnon" path="res://scene/auto_chess/unit/necromancer/necromancer.gd" id="1_dbpx2"]
 [ext_resource type="Texture2D" uid="uid://cpn7mgk06wapm" path="res://asset/texture/unit/necromancer/Death/spr_NecromancerDeath_strip52.png" id="2_7peko"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_g2s3a"]
 [ext_resource type="Texture2D" uid="uid://bnncycbmoiqrb" path="res://asset/texture/unit/necromancer/GetHit/spr_NecromancerGetHit_strip9.png" id="3_k8ix8"]
 [ext_resource type="Texture2D" uid="uid://cijh65uuruk8s" path="res://asset/texture/unit/necromancer/Idle/spr_NecromancerIdle_strip50.png" id="4_c2ho6"]
 [ext_resource type="Texture2D" uid="uid://c8nfjljcham1d" path="res://asset/texture/unit/necromancer/Walk/spr_NecromancerWalk_strip10.png" id="5_ewrj2"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="6_5fpi0"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="7_xnm4u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbpx2"]
+shader = ExtResource("2_g2s3a")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jyoc5"]
 atlas = ExtResource("2_7peko")
@@ -878,27 +883,16 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Necromancer" type="Node2D" node_paths=PackedStringArray("physical_node")]
+[node name="Necromancer" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_dbpx2")
-physical_node = NodePath("Physical")
+glow_node = NodePath("Physical/AnimatedSprite2D")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_dbpx2")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 offset = Vector2(0, -12)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("6_5fpi0")]
-unique_name_in_owner = true
-walk_animation = "slow"
-moved_node = NodePath("../../Physical")
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("7_xnm4u")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")

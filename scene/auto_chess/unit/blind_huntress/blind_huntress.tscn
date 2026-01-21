@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://nsv5gf4ggrlj"]
+[gd_scene load_steps=53 format=3 uid="uid://nsv5gf4ggrlj"]
 
 [ext_resource type="Script" uid="uid://ftu0iscejih1" path="res://scene/auto_chess/unit/blind_huntress/blind_huntress.gd" id="1_ckjw2"]
 [ext_resource type="Texture2D" uid="uid://b1h0gsc1tojhk" path="res://asset/texture/unit/blind_huntress/6 - dash.png" id="2_3cent"]
+[ext_resource type="Material" uid="uid://4yf7wxi4xm3a" path="res://resource/material/auto_chess/unit_pixel_art_glow.tres" id="2_iibb2"]
 [ext_resource type="Texture2D" uid="uid://bhe5asrlyfto2" path="res://asset/texture/unit/blind_huntress/12 - dash attack.png" id="3_p4wr8"]
 [ext_resource type="Texture2D" uid="uid://bnkk6aiv11d2v" path="res://asset/texture/unit/blind_huntress/14 - hit.png" id="4_fcxq4"]
 [ext_resource type="Texture2D" uid="uid://jubwdb40vg33" path="res://asset/texture/unit/blind_huntress/1 - Idle.png" id="5_1cbxe"]
@@ -9,10 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bf8rgsqh8o0w6" path="res://asset/texture/unit/blind_huntress/11 - attack 3.png" id="7_pgcah"]
 [ext_resource type="Texture2D" uid="uid://xheg6w5n510c" path="res://asset/texture/unit/blind_huntress/13 - spetial dash.png" id="8_siya4"]
 [ext_resource type="Texture2D" uid="uid://bmqu8jp46ajib" path="res://asset/texture/unit/blind_huntress/2 - Run.png" id="9_s0y6n"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="10_2h18h"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="11_r7aeh"]
-[ext_resource type="Script" uid="uid://nkfoqc5si4vd" path="res://script/combat/visual/unit/components/combat_visual_unit_melee.gd" id="12_f34qx"]
-[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="13_vcmxf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8idou"]
 atlas = ExtResource("2_3cent")
@@ -347,40 +344,18 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node2D"]
+[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_ckjw2")
+glow_node = NodePath("Physical/AnimatedSprite2D")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = ExtResource("2_iibb2")
 sprite_frames = SubResource("SpriteFrames_ll718")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.4516711
 offset = Vector2(-1, -15)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("10_2h18h")]
-unique_name_in_owner = true
-walk_animation = "fast"
-moved_node = NodePath("../../Physical")
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("11_r7aeh")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="Melee" type="Node" parent="Components" node_paths=PackedStringArray("animated_sprite", "physical")]
-unique_name_in_owner = true
-script = ExtResource("12_f34qx")
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
-animation_name = "melee_2"
-hit_frame = 1
-physical = NodePath("../../Physical")
-metadata/_custom_type_script = "uid://nkfoqc5si4vd"
-
-[node name="DbgCombatVisualHex" parent="." instance=ExtResource("13_vcmxf")]
-visible = false

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://4yf7wxi4xm3a"]
+
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="1_xiyrx"]
+
+[resource]
+shader = ExtResource("1_xiyrx")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0

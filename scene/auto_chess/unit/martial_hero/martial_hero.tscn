@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://yjvuahf7wrno"]
+[gd_scene load_steps=40 format=3 uid="uid://yjvuahf7wrno"]
 
 [ext_resource type="Script" uid="uid://6lccoq6ep83" path="res://scene/auto_chess/unit/martial_hero/martial_hero.gd" id="1_18ghs"]
 [ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="2_k2j33"]
@@ -6,10 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="4_jo824"]
 [ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="5_qo6r1"]
 [ext_resource type="Texture2D" uid="uid://fl5y7toxft2e" path="res://asset/texture/unit/martial_hero/Run.png" id="6_xbrv6"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="7_sqt6t"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="8_myojn"]
-[ext_resource type="Script" uid="uid://nkfoqc5si4vd" path="res://script/combat/visual/unit/components/combat_visual_unit_melee.gd" id="9_oatl6"]
-[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="10_i78f3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onfqa"]
 atlas = ExtResource("2_k2j33")
@@ -263,10 +259,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("physical_node", "action_components")]
+[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_18ghs")
-physical_node = NodePath("Physical")
-action_components = [NodePath("Components/Melee")]
+glow_node = NodePath("Physical/AnimatedSprite2D")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
@@ -276,25 +271,3 @@ unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"idle"
 offset = Vector2(0, -18)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("7_sqt6t")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("8_myojn")]
-unique_name_in_owner = true
-moved_node = NodePath("../../Physical")
-
-[node name="Melee" type="Node" parent="Components" node_paths=PackedStringArray("animated_sprite", "physical")]
-unique_name_in_owner = true
-script = ExtResource("9_oatl6")
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
-hit_frame = 4
-physical = NodePath("../../Physical")
-metadata/_custom_type_script = "uid://nkfoqc5si4vd"
-
-[node name="DbgCombatVisualHex" parent="." instance=ExtResource("10_i78f3")]
-visible = false

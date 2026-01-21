@@ -81,6 +81,10 @@ func try_select_unit(unit: acUnitState):
 
 func try_issue_move_or_select(clicked_unit: acUnitState, hex: Vector2i):
 	var selected = state.units[selected_unit_uid]
+	
+	if clicked_unit == selected:
+		clear_selection()
+		return
 
 	if clicked_unit and clicked_unit.team == ALLY_TEAM:
 		clear_selection()
@@ -119,3 +123,4 @@ func _on_hex_clicked(hex: Vector2i, event: InputEventMouseButton):
 			try_select_unit(clicked_unit)
 		else:
 			try_issue_move_or_select(clicked_unit, hex)
+				

@@ -974,172 +974,172 @@ script = ExtResource("21_210om")
 display_name = "Red Hood Archer"
 metadata/_custom_type_script = "uid://lrtljpwp6k1a"
 
-[sub_resource type="Resource" id="Resource_dysoj"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_ly8n8"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_wga13"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_pf1sh"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_2i6jo"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_rfd31"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_u1pff"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_1cich"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_v00kj"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_noyeb"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_r537n"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_k7sbl"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_s2m1a"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_7hp53"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_ey1yv"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_237nr"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_wxowx"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_80lgx"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_ve2su"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_cexly"]
-script = ExtResource("23_kvk50")
-
 [sub_resource type="Resource" id="Resource_m1yvn"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_akjw4"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_tabvb"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_pr6mw"]
 script = ExtResource("23_kvk50")
 
 [sub_resource type="Resource" id="Resource_rwmr7"]
 script = ExtResource("23_kvk50")
 
+[sub_resource type="Resource" id="Resource_s2m1a"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_wxowx"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_akjw4"]
+script = ExtResource("23_kvk50")
+
 [sub_resource type="Resource" id="Resource_oaesk"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_2i6jo"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_v00kj"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_7hp53"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_80lgx"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_tabvb"]
 script = ExtResource("23_kvk50")
 
 [sub_resource type="Resource" id="Resource_2j6cw"]
 script = ExtResource("23_kvk50")
 
+[sub_resource type="Resource" id="Resource_dysoj"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_rfd31"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_noyeb"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_ey1yv"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_ve2su"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_pr6mw"]
+script = ExtResource("23_kvk50")
+
 [sub_resource type="Resource" id="Resource_3fgak"]
 script = ExtResource("23_kvk50")
 
-[sub_resource type="Resource" id="Resource_7natf"]
+[sub_resource type="Resource" id="Resource_ly8n8"]
 script = ExtResource("23_kvk50")
 
-[sub_resource type="Resource" id="Resource_1aepu"]
+[sub_resource type="Resource" id="Resource_u1pff"]
 script = ExtResource("23_kvk50")
 
-[sub_resource type="Resource" id="Resource_rm6aa"]
+[sub_resource type="Resource" id="Resource_r537n"]
 script = ExtResource("23_kvk50")
 
-[sub_resource type="Resource" id="Resource_8uu7v"]
+[sub_resource type="Resource" id="Resource_237nr"]
 script = ExtResource("23_kvk50")
 
-[sub_resource type="Resource" id="Resource_gj2qd"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_6mavh"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_jihg8"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_7q2tp"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_5hofj"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_4nb87"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_imqcc"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_hqiyi"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_vb4bq"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_alph6"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_foadv"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_ve627"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_fjqlb"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_tvlel"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_eangp"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_d7ksj"]
+[sub_resource type="Resource" id="Resource_cexly"]
 script = ExtResource("23_kvk50")
 
 [sub_resource type="Resource" id="Resource_pxf7t"]
 script = ExtResource("23_kvk50")
 
-[sub_resource type="Resource" id="Resource_jeynm"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_cctvb"]
-script = ExtResource("23_kvk50")
-
-[sub_resource type="Resource" id="Resource_g4niv"]
-script = ExtResource("23_kvk50")
-
 [sub_resource type="Resource" id="Resource_mbtt2"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_wga13"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_1cich"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_k7sbl"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_vb4bq"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_fjqlb"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_jeynm"]
 script = ExtResource("23_kvk50")
 
 [sub_resource type="Resource" id="Resource_y3ss5"]
 script = ExtResource("23_kvk50")
 
+[sub_resource type="Resource" id="Resource_pf1sh"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_gj2qd"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_5hofj"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_alph6"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_tvlel"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_cctvb"]
+script = ExtResource("23_kvk50")
+
 [sub_resource type="Resource" id="Resource_limj3"]
 script = ExtResource("23_kvk50")
 
+[sub_resource type="Resource" id="Resource_7natf"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_6mavh"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_4nb87"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_foadv"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_eangp"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_g4niv"]
+script = ExtResource("23_kvk50")
+
 [sub_resource type="Resource" id="Resource_u61dt"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_1aepu"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_jihg8"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_imqcc"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_ve627"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_d7ksj"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_rm6aa"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_7q2tp"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_hqiyi"]
+script = ExtResource("23_kvk50")
+
+[sub_resource type="Resource" id="Resource_8uu7v"]
 script = ExtResource("23_kvk50")
 
 [sub_resource type="Resource" id="Resource_e1y4b"]
@@ -1147,17 +1147,17 @@ script = ExtResource("23_210om")
 definition = SubResource("Resource_rcwtf")
 hex = Vector2i(-1, 2)
 
-[sub_resource type="Resource" id="Resource_gnfwm"]
-script = ExtResource("23_210om")
-uid = 1
-definition = SubResource("Resource_7u63a")
-hex = Vector2i(1, 3)
-
 [sub_resource type="Resource" id="Resource_niwtp"]
 script = ExtResource("23_210om")
 uid = 2
 definition = SubResource("Resource_kvk50")
 hex = Vector2i(1, 2)
+
+[sub_resource type="Resource" id="Resource_gnfwm"]
+script = ExtResource("23_210om")
+uid = 1
+definition = SubResource("Resource_7u63a")
+hex = Vector2i(1, 3)
 
 [sub_resource type="Resource" id="Resource_po260"]
 script = ExtResource("23_210om")
@@ -1167,20 +1167,20 @@ team = 1
 hex = Vector2i(2, 3)
 facing = 1
 
-[sub_resource type="Resource" id="Resource_cj17k"]
-script = ExtResource("23_210om")
-uid = 4
-definition = SubResource("Resource_fjy2x")
-team = 1
-hex = Vector2i(6, 1)
-facing = 1
-
 [sub_resource type="Resource" id="Resource_ls0at"]
 script = ExtResource("23_210om")
 uid = 5
 definition = SubResource("Resource_78l6t")
 team = 1
 hex = Vector2i(2, 4)
+facing = 1
+
+[sub_resource type="Resource" id="Resource_cj17k"]
+script = ExtResource("23_210om")
+uid = 4
+definition = SubResource("Resource_fjy2x")
+team = 1
+hex = Vector2i(6, 1)
 facing = 1
 
 [sub_resource type="Resource" id="Resource_vsg6q"]

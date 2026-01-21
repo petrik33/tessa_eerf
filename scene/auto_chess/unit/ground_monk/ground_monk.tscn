@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dtv1foq10jp1x"]
+[gd_scene load_steps=76 format=3 uid="uid://dtv1foq10jp1x"]
 
 [ext_resource type="Script" uid="uid://2f7k803dkosd" path="res://scene/auto_chess/unit/ground_monk/ground_monk.gd" id="1_3bch3"]
 [ext_resource type="Texture2D" uid="uid://4kw26tpq5bke" path="res://asset/texture/unit/ground_monk/death/death_1.png" id="2_pvd21"]
@@ -74,10 +74,6 @@
 [ext_resource type="Texture2D" uid="uid://csmoolahr3vc" path="res://asset/texture/unit/ground_monk/run/run_6.png" id="72_ddb3a"]
 [ext_resource type="Texture2D" uid="uid://6ymmloxmjvrl" path="res://asset/texture/unit/ground_monk/run/run_7.png" id="73_vu13m"]
 [ext_resource type="Texture2D" uid="uid://baqrxop0pb7mi" path="res://asset/texture/unit/ground_monk/run/run_8.png" id="74_u2n7b"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="75_1appn"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="76_o0fl7"]
-[ext_resource type="Script" uid="uid://nkfoqc5si4vd" path="res://script/combat/visual/unit/components/combat_visual_unit_melee.gd" id="77_pqxbt"]
-[ext_resource type="PackedScene" uid="uid://dt8yagxbiu6us" path="res://scene/component/combat_visual_unit_hit_flash.tscn" id="78_gkniw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eyjtx"]
 animations = [{
@@ -331,10 +327,9 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("physical_node", "action_components")]
+[node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_3bch3")
-physical_node = NodePath("Physical")
-action_components = [NodePath("Components/Melee")]
+glow_node = NodePath("Physical/AnimatedSprite2D")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
@@ -345,28 +340,3 @@ sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -53)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("75_1appn")]
-unique_name_in_owner = true
-walk_animation = "very fast"
-moved_node = NodePath("../../Physical")
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("76_o0fl7")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="Melee" type="Node" parent="Components" node_paths=PackedStringArray("animated_sprite", "physical")]
-unique_name_in_owner = true
-script = ExtResource("77_pqxbt")
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
-hit_frame = 1
-physical = NodePath("../../Physical")
-metadata/_custom_type_script = "uid://nkfoqc5si4vd"
-
-[node name="HurtFlash" parent="Components" node_paths=PackedStringArray("animated_sprite") instance=ExtResource("78_gkniw")]
-unique_name_in_owner = true
-animated_sprite = NodePath("../../Physical/AnimatedSprite2D")
-duration = 0.2

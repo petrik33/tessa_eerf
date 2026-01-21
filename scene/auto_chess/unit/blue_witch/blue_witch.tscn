@@ -1,14 +1,13 @@
-[gd_scene load_steps=54 format=3 uid="uid://bwmnqm1sucmio"]
+[gd_scene load_steps=53 format=3 uid="uid://bwmnqm1sucmio"]
 
 [ext_resource type="Script" uid="uid://bwgpd3telbmiu" path="res://scene/auto_chess/unit/blue_witch/blue_witch.gd" id="1_r1hv6"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="2_07wnq"]
+[ext_resource type="Material" uid="uid://4yf7wxi4xm3a" path="res://resource/material/auto_chess/unit_pixel_art_glow.tres" id="2_xffag"]
 [ext_resource type="Texture2D" uid="uid://bp7m052ako0f0" path="res://asset/texture/unit/blue_witch/B_witch_death.png" id="3_8qk2b"]
 [ext_resource type="Texture2D" uid="uid://bwsqy5a30oova" path="res://asset/texture/unit/blue_witch/B_witch_take_damage.png" id="4_l7a1l"]
 [ext_resource type="Texture2D" uid="uid://bf2vulfaopn3j" path="res://asset/texture/unit/blue_witch/B_witch_idle.png" id="5_qukpn"]
 [ext_resource type="Texture2D" uid="uid://dyqct1n7poe7j" path="res://asset/texture/unit/blue_witch/B_witch_attack.png" id="6_8qnhm"]
 [ext_resource type="Texture2D" uid="uid://cjig7lus2c3md" path="res://asset/texture/unit/blue_witch/B_witch_run.png" id="7_pgtxr"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="8_wcn4p"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="9_b22pr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eyjtx"]
 atlas = ExtResource("2_07wnq")
@@ -344,27 +343,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("physical_node")]
+[node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_r1hv6")
-physical_node = NodePath("Physical")
+glow_node = NodePath("Physical/AnimatedSprite2D")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = ExtResource("2_xffag")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"hurt"
 offset = Vector2(0, -12)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("8_wcn4p")]
-unique_name_in_owner = true
-walk_animation = "fast"
-moved_node = NodePath("../../Physical")
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("9_b22pr")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")

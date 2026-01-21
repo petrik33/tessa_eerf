@@ -829,9 +829,9 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Paladin" type="Node2D" node_paths=PackedStringArray("physical_node")]
+[node name="Paladin" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_iwm8b")
-physical_node = NodePath("Physical")
+glow_node = NodePath("Physical/AnimatedSprite2D")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
