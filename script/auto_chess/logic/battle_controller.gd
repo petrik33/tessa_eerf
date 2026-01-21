@@ -22,8 +22,10 @@ const ENEMY_TEAM := 1
 
 
 func _ready():
-	hex_picking.updated.connect(_on_hovered_hex)
+	hex_picking.hovered.connect(_on_hovered_hex)
 	hex_picking.clicked.connect(_on_hex_clicked)
+	hex_picking.left_grid.connect(_on_hex_grid_left)
+	hex_picking.entered_grid.connect(_on_hex_grid_entered)
 
 
 func sync_views():
@@ -97,6 +99,11 @@ func try_issue_move_or_select(clicked_unit: acUnitState, hex: Vector2i):
 		clear_selection()
 
 
+func clear_hover():
+	for unit_view in board_view.unit_views:
+		unit_view.set_hovered(false)
+
+
 func clear_selection():
 	if selected_unit_uid == -1:
 		return
@@ -104,9 +111,8 @@ func clear_selection():
 	selected_unit_uid = -1
 
 
-func _on_hovered_hex(_previous: Vector2i, hex: Vector2i):
-	for unit_view in board_view.unit_views:
-		unit_view.set_hovered(false)
+func _on_hovered_hex(hex: Vector2i, _previous: Vector2i):
+	clear_hover()
 
 	var unit = state.get_unit_at_hex(hex)
 	if unit:
@@ -123,4 +129,12 @@ func _on_hex_clicked(hex: Vector2i, event: InputEventMouseButton):
 			try_select_unit(clicked_unit)
 		else:
 			try_issue_move_or_select(clicked_unit, hex)
-				
+
+
+func _on_hex_grid_left(_last_hex: Vector2i):
+	clear_hover()
+	hover_ui.hide()
+
+
+func _on_hex_grid_entered(_hex: Vector2i):
+	hover_ui.show()

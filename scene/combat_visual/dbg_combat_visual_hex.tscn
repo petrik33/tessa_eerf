@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ogedwonbrora"]
 
-[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="1_20r5m"]
+[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="1_20r5m"]
 [ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="2_l68ev"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="3_20r5m"]
 [ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="4_5iuqh"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=4 uid="uid://bfh463ahxljhh"]
 
 [ext_resource type="TileSet" uid="uid://dcfj7obpo1x2v" path="res://scene/combat/map/tiny_swords_ground.tres" id="1_emck8"]
-[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="2_yy2gr"]
+[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="2_yy2gr"]
 [ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="3_0hpqa"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="4_5ypbg"]
 [ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="5_mwj7b"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="7_l0yrd"]
 [ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/outlines.tscn" id="8_d7r5b"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="9_oqdwo"]
-[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="10_637bt"]
+[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/node/hex_picking_control.gd" id="10_637bt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7kaew"]
 blend_mode = 3

@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=4 uid="uid://bfnufcrxjo4n5"]
 
-[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="1_pr45e"]
+[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="1_pr45e"]
 [ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="2_y4hf1"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="3_1fvu6"]
 [ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="4_gt2c6"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="5_4up7s"]
 [ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/outlines.tscn" id="6_igl1q"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="7_uhukp"]
-[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="8_x1q43"]
+[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/node/hex_picking_control.gd" id="8_x1q43"]
 [ext_resource type="Texture2D" uid="uid://dd2hw67ykl12i" path="res://asset/texture/bg/orig_big.png" id="9_y4hf1"]
 
 [sub_resource type="Image" id="Image_xyeuu"]

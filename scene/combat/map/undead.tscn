@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=4 uid="uid://bewanf8l7sil0"]
 
 [ext_resource type="TileSet" uid="uid://78jxteyhfucj" path="res://scene/combat/map/undead_tileset.tres" id="1_sfrf1"]
-[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="2_01j70"]
+[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="2_01j70"]
 [ext_resource type="Resource" uid="uid://dqy4qrx5gvxy1" path="res://resource/combat/combat_hex_layout.tres" id="3_n51ba"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="4_3w5mn"]
 [ext_resource type="Resource" uid="uid://4n3cj4ten407" path="res://resource/combat/hommoe_combat_hex_grid.tres" id="5_tlyuk"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="7_gqw0w"]
 [ext_resource type="PackedScene" uid="uid://ceo6axggrq01l" path="res://scene/combat_ui/outlines.tscn" id="8_m1dcu"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="9_8562i"]
-[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="10_05qnl"]
+[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/node/hex_picking_control.gd" id="10_05qnl"]
 [ext_resource type="Texture2D" uid="uid://c44qk2m72n4aw" path="res://asset/texture/tileset/undead/Objects.png" id="11_h3fk8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cjh2h"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=106 format=4 uid="uid://5xoe7idhw6u8"]
 
-[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/hex_space.gd" id="1_6n50m"]
+[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="1_6n50m"]
 [ext_resource type="PackedScene" uid="uid://bfnufcrxjo4n5" path="res://scene/combat/map/minimalistic.tscn" id="1_vh3vx"]
 [ext_resource type="Script" uid="uid://bwitt2ghi4geg" path="res://script/hex/hex_layout.gd" id="2_f3wjl"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="3_vwjup"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="5_3vxh0"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="7_7e7rw"]
 [ext_resource type="Resource" uid="uid://cst7r5k4ctr8a" path="res://scene/auto_chess/grid/enemy_grid.tres" id="7_qhmlf"]
-[ext_resource type="Script" uid="uid://bpsuuaaepbib7" path="res://script/hex/hex_picking.gd" id="7_vwjup"]
 [ext_resource type="Script" uid="uid://b3kuj58myv8xi" path="res://script/hex/grid/point_list_hex_grid.gd" id="10_yiu7x"]
 [ext_resource type="Script" uid="uid://bmsveo17ae018" path="res://script/auto_chess/view/board_view.gd" id="11_36g3h"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="11_gtray"]
@@ -26,6 +25,7 @@
 [ext_resource type="Script" uid="uid://bqr147noqrb4l" path="res://script/auto_chess/team_state.gd" id="22_fbchy"]
 [ext_resource type="Script" uid="uid://dqyh6w1wj641d" path="res://script/auto_chess/unit_state.gd" id="23_210om"]
 [ext_resource type="Script" uid="uid://copbpdwrt21m" path="res://script/auto_chess/tile_state.gd" id="23_kvk50"]
+[ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="26_7u63a"]
 
 [sub_resource type="Resource" id="Resource_f06md"]
 script = ExtResource("2_f3wjl")
@@ -34,14 +34,6 @@ metadata/_custom_type_script = "uid://bwitt2ghi4geg"
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0nnwc"]
 blend_mode = 3
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yiu7x"]
-blend_mode = 1
-
-[sub_resource type="Resource" id="Resource_pjaya"]
-script = ExtResource("10_yiu7x")
-points = Array[Vector2i]([Vector2i(1, 3)])
-metadata/_custom_type_script = "uid://b3kuj58myv8xi"
 
 [sub_resource type="Image" id="Image_fxu0a"]
 data = {
@@ -944,6 +936,14 @@ cache/0/10/0/glyphs/402653212/size = Vector2(8, 10)
 cache/0/10/0/glyphs/402653212/uv_rect = Rect2(179, 13, 8, 10)
 cache/0/10/0/glyphs/402653212/texture_idx = 0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yiu7x"]
+blend_mode = 1
+
+[sub_resource type="Resource" id="Resource_pjaya"]
+script = ExtResource("10_yiu7x")
+points = Array[Vector2i]([Vector2i(1, 3)])
+metadata/_custom_type_script = "uid://b3kuj58myv8xi"
+
 [sub_resource type="Resource" id="Resource_7u63a"]
 script = ExtResource("21_210om")
 display_name = "Blind Huntress"
@@ -1345,15 +1345,6 @@ color = Color(0.392157, 0.588235, 1, 0.490196)
 grid = ExtResource("4_vwjup")
 metadata/_custom_type_script = "uid://dtavfh04dvr10"
 
-[node name="Outline" type="Node2D" parent="HexSpace/Map"]
-
-[node name="Selected" type="Node2D" parent="HexSpace/Map/Outline"]
-material = SubResource("CanvasItemMaterial_yiu7x")
-script = ExtResource("3_vwjup")
-hex_color = Color(1, 1, 1, 0.19607843)
-grid = SubResource("Resource_pjaya")
-metadata/_custom_type_script = "uid://pjy55ieuvcl5"
-
 [node name="Coordinates" type="Node2D" parent="HexSpace/Map"]
 visible = false
 script = ExtResource("11_gtray")
@@ -1361,6 +1352,17 @@ use_cube_format = false
 font = SubResource("FontFile_fbchy")
 grid = ExtResource("4_3vxh0")
 metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
+
+[node name="Outline" type="Node2D" parent="HexSpace"]
+
+[node name="Selected" type="Node2D" parent="HexSpace/Outline"]
+visible = false
+material = SubResource("CanvasItemMaterial_yiu7x")
+script = ExtResource("5_3vxh0")
+outline_color = Color(1, 1, 1, 0.30980393)
+outline_width = 4.0
+grid = SubResource("Resource_pjaya")
+metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
 [node name="Board" type="Node2D" parent="HexSpace" node_paths=PackedStringArray("hex_space", "unit_views")]
 script = ExtResource("11_36g3h")
@@ -1392,24 +1394,14 @@ scale = Vector2(-1, 1)
 position = Vector2(219, 108)
 scale = Vector2(-1, 1)
 
-[node name="HexPicking" type="Control" parent="HexSpace"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 387.97937
-offset_bottom = 162.0
-script = ExtResource("7_vwjup")
-bbox_scale = 1.0
-grid = ExtResource("4_3vxh0")
-metadata/_custom_type_script = "uid://bpsuuaaepbib7"
-
 [node name="Controller" type="Node" parent="." node_paths=PackedStringArray("board_view", "hex_picking", "hex_space", "hover_ui")]
 script = ExtResource("18_pjaya")
 board_view = NodePath("../HexSpace/Board")
-hex_picking = NodePath("../HexSpace/HexPicking")
+hex_picking = NodePath("HexPicking")
 hex_space = NodePath("../HexSpace")
 combined_grid = ExtResource("4_3vxh0")
 ally_grid = ExtResource("4_vwjup")
-hover_ui = NodePath("../HexSpace/Map/Outline/Selected")
+hover_ui = NodePath("../HexSpace/Outline/Selected")
 unit_view_scenes = Dictionary[StringName, PackedScene]({
 &"blind_huntress": ExtResource("13_ldndk"),
 &"ground_monk": ExtResource("14_yiu7x"),
@@ -1427,3 +1419,9 @@ unit_definitions = Dictionary[StringName, ExtResource("21_210om")]({
 &"red_hood_archer": SubResource("Resource_fjy2x")
 })
 state = SubResource("Resource_bnssj")
+
+[node name="HexPicking" type="Node" parent="Controller" node_paths=PackedStringArray("space")]
+script = ExtResource("26_7u63a")
+space = NodePath("../../HexSpace")
+grid = ExtResource("4_3vxh0")
+metadata/_custom_type_script = "uid://cry7o5rka2bla"

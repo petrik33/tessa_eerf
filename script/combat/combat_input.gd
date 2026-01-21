@@ -6,7 +6,7 @@ signal command_requested(command: CombatCommandBase)
 
 
 @export var intent_resolver: CombatInputIntentResolver
-@export var hex_picking: HexPicking
+@export var hex_picking: HexPickingControl
 
 
 var potential_command: CombatCommandBase

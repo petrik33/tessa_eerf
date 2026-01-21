@@ -1,13 +1,29 @@
 @tool
-class_name HexPicking extends Control
+class_name HexPickingControl extends Control
 
-signal updated(previous_hex: Vector2i, new_hex: Vector2i)
+
+signal hovered(previous_hex: Vector2i, hex: Vector2i)
 signal clicked(hex: Vector2i, event: InputEventMouseButton)
+signal left(last_hex: Vector2i)
 
-
-@export var bbox_scale := 1.05:
+@export var bbox_expand_left := 0.0:
 	set(value):
-		bbox_scale = value
+		bbox_expand_left = value
+		_update()
+
+@export var bbox_expand_top := 0.0:
+	set(value):
+		bbox_expand_top = value
+		_update()
+
+@export var bbox_expand_right := 0.0:
+	set(value):
+		bbox_expand_right = value
+		_update()
+
+@export var bbox_expand_bottom := 0.0:
+	set(value):
+		bbox_expand_bottom = value
 		_update()
 
 @export var grid: HexGridBase:
@@ -33,9 +49,8 @@ var _hex_space: HexSpace
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_on_mouse_motion(event)
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and grid.has_point(mouse_hex):
 		clicked.emit(mouse_hex, event)
-		
 
 
 func _enter_tree() -> void:
@@ -48,9 +63,9 @@ func _exit_tree() -> void:
 
 func _on_mouse_motion(event: InputEventMouseMotion):
 	var hex = _hex_space.layout.pixel_to_hex(event.position - pivot_offset)
-	if mouse_hex == hex or not grid.has_point(hex):
+	if mouse_hex == hex:
 		return
-	updated.emit(mouse_hex, hex)
+	hovered.emit(mouse_hex, hex)
 	mouse_hex = hex
 
 
@@ -74,11 +89,13 @@ func _update_size_and_pivot():
 		pivot_offset = Vector2.ZERO
 		return
 	var bounds := grid.approx_pixel_bounds(_hex_space.layout)
-	var scaled_bounds_size := bounds.size * bbox_scale
-	bounds = Rect2(
-		bounds.get_center() - (scaled_bounds_size * 0.5),
-		scaled_bounds_size
-	)
+	bounds.position -= Vector2(bbox_expand_left, bbox_expand_top)
+	bounds.size += Vector2(bbox_expand_left + bbox_expand_right, bbox_expand_bottom + bbox_expand_top)
+	#var scaled_bounds_size := bounds.size * bbox_scale
+	#bounds = Rect2(
+		#bounds.get_center() - (scaled_bounds_size * 0.5),
+		#scaled_bounds_size
+	#)
 	# TODO: Implement pivot point getter for hex grids
 	var pivot_point = _hex_space.layout.hex_to_pixel(Vector2i.ZERO)
 	position = bounds.position
