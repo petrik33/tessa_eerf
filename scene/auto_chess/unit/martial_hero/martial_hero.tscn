@@ -1,11 +1,18 @@
-[gd_scene load_steps=40 format=3 uid="uid://yjvuahf7wrno"]
+[gd_scene load_steps=42 format=3 uid="uid://yjvuahf7wrno"]
 
 [ext_resource type="Script" uid="uid://6lccoq6ep83" path="res://scene/auto_chess/unit/martial_hero/martial_hero.gd" id="1_18ghs"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_242u6"]
 [ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="2_k2j33"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="3_nrrws"]
 [ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="4_jo824"]
 [ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="5_qo6r1"]
 [ext_resource type="Texture2D" uid="uid://fl5y7toxft2e" path="res://asset/texture/unit/martial_hero/Run.png" id="6_xbrv6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkf35"]
+shader = ExtResource("2_242u6")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onfqa"]
 atlas = ExtResource("2_k2j33")
@@ -268,6 +275,8 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jkf35")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"idle"
+autoplay = "idle"
 offset = Vector2(0, -18)

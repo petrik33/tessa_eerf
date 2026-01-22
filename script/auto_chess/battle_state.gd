@@ -12,8 +12,7 @@ class_name acBattleState extends Resource
 var rng: RandomNumberGenerator
 
 
-func issue_move(unit_uid: int, target_hex: Vector2i):
-	var unit = units[unit_uid]
+func issue_move(unit: acUnitState, target_hex: Vector2i):
 	if not is_valid_move(unit, target_hex):
 		return
 	board.units.erase(unit.hex)

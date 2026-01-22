@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cijh65uuruk8s" path="res://asset/texture/unit/necromancer/Idle/spr_NecromancerIdle_strip50.png" id="4_c2ho6"]
 [ext_resource type="Texture2D" uid="uid://c8nfjljcham1d" path="res://asset/texture/unit/necromancer/Walk/spr_NecromancerWalk_strip10.png" id="5_ewrj2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbpx2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g2s3a"]
 shader = ExtResource("2_g2s3a")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -892,7 +892,8 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_dbpx2")
+material = SubResource("ShaderMaterial_g2s3a")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
+autoplay = "idle"
 offset = Vector2(0, -12)

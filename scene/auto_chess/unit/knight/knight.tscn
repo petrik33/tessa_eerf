@@ -1,9 +1,16 @@
-[gd_scene load_steps=42 format=3 uid="uid://dyasiijlf44t3"]
+[gd_scene load_steps=44 format=3 uid="uid://dyasiijlf44t3"]
 
 [ext_resource type="Script" uid="uid://cjthgelpdgj8b" path="res://scene/auto_chess/unit/knight/knight.gd" id="1_yanop"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_babos"]
 [ext_resource type="Texture2D" uid="uid://cr7dubsl41gu7" path="res://asset/texture/unit/knight/noBKG_KnightIdle_strip.png" id="2_igcx5"]
 [ext_resource type="Texture2D" uid="uid://b1uwsgi5soeme" path="res://asset/texture/unit/knight/noBKG_KnightAttack_strip.png" id="3_gc2ox"]
 [ext_resource type="Texture2D" uid="uid://0i2gcwl5atkt" path="res://asset/texture/unit/knight/noBKG_KnightRun_strip.png" id="4_pgq5f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_koi4l"]
+shader = ExtResource("2_babos")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgub0"]
 atlas = ExtResource("2_igcx5")
@@ -284,8 +291,10 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_koi4l")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
-animation = &"walk"
-frame = 5
-frame_progress = 0.57234657
+animation = &"idle"
+autoplay = "idle"
+frame = 6
+frame_progress = 0.15415938
 offset = Vector2(0, -8)

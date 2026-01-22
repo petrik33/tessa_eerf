@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgxwb0b5svmxs"]
+
+[ext_resource type="Texture2D" uid="uid://6uritlv7afk7" path="res://asset/texture/bg/nature/nature_2/orig.png" id="1_rv1xe"]
+
+[node name="BgNature" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.29411766)
+custom_minimum_size = Vector2(640, 360)
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("1_rv1xe")
+expand_mode = 1

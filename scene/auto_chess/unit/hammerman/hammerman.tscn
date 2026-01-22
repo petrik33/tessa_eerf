@@ -692,12 +692,10 @@ script = ExtResource("1_siouf")
 metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="Physical" type="Node2D" parent="."]
-position = Vector2(274.1123, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"walk"
-frame = 7
-frame_progress = 0.61145675
+animation = &"idle"
+autoplay = "idle"
 offset = Vector2(6, -24)

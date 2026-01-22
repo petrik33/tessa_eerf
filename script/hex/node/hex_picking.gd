@@ -2,7 +2,6 @@ class_name HexPicking extends Node
 
 
 signal hovered(hex: Vector2i, previous: Vector2i)
-signal entered_grid(hex: Vector2i)
 signal left_grid(last_hex: Vector2i)
 signal clicked(hex: Vector2i, event: InputEventMouseButton)
 
@@ -42,7 +41,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return []
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		var hex = space.layout.pixel_to_hex(space.to_local(event.position))
 		
@@ -50,8 +49,6 @@ func _input(event: InputEvent) -> void:
 			return
 			
 		if grid.has_point(hex):
-			if not grid.has_point(current_hex):
-				entered_grid.emit(hex)
 			hovered.emit(hex, current_hex)
 		else:
 			if grid.has_point(current_hex):

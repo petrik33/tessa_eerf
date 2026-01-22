@@ -1,11 +1,16 @@
 [gd_scene load_steps=41 format=3 uid="uid://djuq8uvyt7eg7"]
 
 [ext_resource type="Script" uid="uid://ds3v4wm30l3d0" path="res://scene/auto_chess/unit/red_hood_archer/red_hood_archer.gd" id="1_20jmh"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_8bwd6"]
 [ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="3_xvsw2"]
 [ext_resource type="Texture2D" uid="uid://32nuvepknjse" path="res://asset/texture/unit/red_hood_archer/ArcherAttackNoArrow.png" id="4_hfuun"]
 [ext_resource type="Texture2D" uid="uid://bfvqi3iwbixhb" path="res://asset/texture/unit/red_hood_archer/spr_ArcherRun_strip_NoBkg.png" id="5_41mr0"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="6_gs3rf"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="7_of4y7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bwd6"]
+shader = ExtResource("2_8bwd6")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qykq"]
 atlas = ExtResource("3_xvsw2")
@@ -276,27 +281,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [0, 13]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("Physical/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.66),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_emit_executed"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Physical/AnimatedSprite2D:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -318,8 +309,10 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_8bwd6")
 sprite_frames = SubResource("SpriteFrames_qu5vg")
 animation = &"ranged"
+autoplay = "idle"
 
 [node name="Markers" type="Node2D" parent="Physical/AnimatedSprite2D"]
 visible = false
@@ -335,17 +328,6 @@ position = Vector2(-1, 8)
 [node name="RangedOffset" type="Marker2D" parent="Physical/AnimatedSprite2D/Markers"]
 unique_name_in_owner = true
 position = Vector2(-4.5, 15.5)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("6_gs3rf")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("7_of4y7")]
-unique_name_in_owner = true
-moved_node = NodePath("../../Physical")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

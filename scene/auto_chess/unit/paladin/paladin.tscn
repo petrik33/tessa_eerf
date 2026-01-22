@@ -1,12 +1,17 @@
 [gd_scene load_steps=123 format=3 uid="uid://dcodu6m78irl5"]
 
 [ext_resource type="Script" uid="uid://bkbxkkk0gsynj" path="res://scene/auto_chess/unit/paladin/paladin.gd" id="1_iwm8b"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_7dxyx"]
 [ext_resource type="Texture2D" uid="uid://bl66x02ft5ao8" path="res://asset/texture/unit/paladin/Death/spr_PaladinDeathWithEffect_strip65.png" id="2_m5qpd"]
 [ext_resource type="Texture2D" uid="uid://b4w6ntbutqxqv" path="res://asset/texture/unit/paladin/GetHit/spr_PaladinGetHitWithEffect_strip12.png" id="3_nhrqh"]
 [ext_resource type="Texture2D" uid="uid://c0m4rhm8h5x5j" path="res://asset/texture/unit/paladin/Idle/spr_PaladinIdle_strip27.png" id="4_joini"]
 [ext_resource type="Texture2D" uid="uid://du5xat00r5iyy" path="res://asset/texture/unit/paladin/Walk/spr_PaladinWalk_strip10.png" id="5_sgn53"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="6_2675f"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="7_ef32m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwm8b"]
+shader = ExtResource("2_7dxyx")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_colx0"]
 atlas = ExtResource("2_m5qpd")
@@ -838,19 +843,8 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_iwm8b")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, 4)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("6_2675f")]
-unique_name_in_owner = true
-walk_animation = "slow"
-moved_node = NodePath("../../Physical")
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("7_ef32m")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")

@@ -1,13 +1,17 @@
-[gd_scene load_steps=47 format=3 uid="uid://ctw481wh1icf0"]
+[gd_scene load_steps=46 format=3 uid="uid://ctw481wh1icf0"]
 
 [ext_resource type="Script" uid="uid://pxeory3ke3ls" path="res://scene/auto_chess/unit/samurai/samurai.gd" id="1_g02p1"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_r7hv2"]
 [ext_resource type="Texture2D" uid="uid://bpna3e6tujqrj" path="res://asset/texture/unit/samurai/HURT.png" id="2_w3ej2"]
 [ext_resource type="Texture2D" uid="uid://b22v3buy1aljn" path="res://asset/texture/unit/samurai/IDLE.png" id="3_jrydv"]
 [ext_resource type="Texture2D" uid="uid://bh0jkjs2cjijt" path="res://asset/texture/unit/samurai/ATTACK 1.png" id="4_cvive"]
 [ext_resource type="Texture2D" uid="uid://ckyj7arax4yd8" path="res://asset/texture/unit/samurai/RUN.png" id="5_e5sc3"]
-[ext_resource type="PackedScene" uid="uid://bqytium2kohc1" path="res://scene/combat_visual/unit_components/face_walk_direction.tscn" id="6_6vl8q"]
-[ext_resource type="PackedScene" uid="uid://kpek0koq3qoh" path="res://scene/combat_visual/unit_components/walk_along_path.tscn" id="7_2pphi"]
-[ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="8_f1cnc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7hv2"]
+shader = ExtResource("2_r7hv2")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5gcs"]
 atlas = ExtResource("2_w3ej2")
@@ -157,7 +161,7 @@ region = Rect2(1344, 0, 96, 96)
 atlas = ExtResource("5_e5sc3")
 region = Rect2(1440, 0, 96, 96)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wlhx3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_8gi48"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -291,29 +295,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Samurai" type="Node2D" node_paths=PackedStringArray("physical_node")]
+[node name="Samurai" type="Node2D" node_paths=PackedStringArray("glow_node")]
 script = ExtResource("1_g02p1")
-physical_node = NodePath(".")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+glow_node = NodePath("Physical/AnimatedSprite2D")
 
 [node name="Physical" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
-sprite_frames = SubResource("SpriteFrames_wlhx3")
+material = SubResource("ShaderMaterial_r7hv2")
+sprite_frames = SubResource("SpriteFrames_8gi48")
 animation = &"idle"
+autoplay = "idle"
 offset = Vector2(0, -29)
-
-[node name="Components" type="Node" parent="."]
-
-[node name="FaceWalkDirection" parent="Components" node_paths=PackedStringArray("physical", "sprite") instance=ExtResource("6_6vl8q")]
-unique_name_in_owner = true
-physical = NodePath("../../Physical")
-sprite = NodePath("../../Physical/AnimatedSprite2D")
-
-[node name="WalkAlongPath" parent="Components" node_paths=PackedStringArray("moved_node") instance=ExtResource("7_2pphi")]
-unique_name_in_owner = true
-moved_node = NodePath("../../Physical")
-
-[node name="DbgCombatVisualHex" parent="." instance=ExtResource("8_f1cnc")]
-visible = false
