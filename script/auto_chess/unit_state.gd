@@ -16,4 +16,16 @@ class_name acUnitState extends Resource
 @export var stunned_until := 0.0
 @export var last_attack_time := 0.0
 
+@export var move_duration := 50.0
+@export var moving := false
+@export var movement_target_hex: Vector2i
+@export var movement_progress := 0.0
+
+
+func is_stunned() -> bool:
+	return false
+
+func is_casting() -> bool:
+	return false
+
 #var status_effects: Array[StatusEffectState]

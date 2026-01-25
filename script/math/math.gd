@@ -5,6 +5,9 @@ func _init() -> void:
 	assert(false, "Static lib shouldn't be constructed")
 
 
+const INT_MAX := 9223372036854775807 
+
+
 static func clip_polygon_bottom_percent_halfplane(polygon: PackedVector2Array, percent: float) -> PackedVector2Array:
 	var top_y := 1e9
 	var bottom_y := -1e9

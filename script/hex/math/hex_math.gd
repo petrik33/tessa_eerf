@@ -4,7 +4,7 @@ class_name HexMath
 func _init() -> void:
 	assert(false, "Static lib shouldn't be constructed")
 
-const NEIGHBOR_DIRECTION = [
+const NEIGHBOR_DIRECTION: Array[Vector2i] = [
 	Vector2i(+1, 0),
 	Vector2i(+1, -1),
 	Vector2i(0, -1),

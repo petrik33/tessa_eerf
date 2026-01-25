@@ -20,7 +20,7 @@ const ALLY_TEAM := 0
 const ENEMY_TEAM := 1
 
 
-func sync_views():
+func sync_view():
 	board_view.sync_unit_positions_from_state(state)
 	for unit in state.units.values():
 		var view = board_view.get_unit_view(unit.uid)
@@ -89,7 +89,7 @@ func try_issue_move(hex: Vector2i) -> bool:
 		return false
 	
 	state.issue_move(selected_unit, hex)
-	sync_views()
+	sync_view()
 	hover_unit(selected_unit)
 	clear_unit_selection()
 	
