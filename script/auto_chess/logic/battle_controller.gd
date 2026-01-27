@@ -10,7 +10,12 @@ class_name acBattleController extends Node
 @export var unit_definitions: Dictionary[StringName, acUnit]
 
 @export var selected_unit: acUnitState
+
+@export var initial_state: acBattleState
 @export var state: acBattleState
+@export var simulations_node: Node
+@export var simulation_scene: PackedScene
+@export var dbg_battle_simulation: acBattleSimulation
 
 @export_tool_button("Fill State")
 var fill_state_button = fill_state_from_view
@@ -18,6 +23,28 @@ var fill_state_button = fill_state_from_view
 
 const ALLY_TEAM := 0
 const ENEMY_TEAM := 1
+
+
+func is_battle_live() -> bool:
+	return dbg_battle_simulation != null
+
+
+func start_battle():
+	dbg_battle_simulation = simulation_scene.instantiate()
+	simulations_node.add_child(dbg_battle_simulation)
+	dbg_battle_simulation.start(initial_state)
+	dbg_battle_simulation.tick.connect(_on_simulation_tick)
+	state = initial_state.duplicate(true)
+	sync_view()
+
+
+func stop_battle():
+	dbg_battle_simulation.tick.disconnect(_on_simulation_tick)
+	dbg_battle_simulation.stop()
+	simulations_node.remove_child(dbg_battle_simulation)
+	dbg_battle_simulation.queue_free()
+	state = initial_state.duplicate(true)
+	sync_view()
 
 
 func sync_view():
@@ -53,6 +80,8 @@ func fill_state_from_view():
 	
 	for hex in combined_grid.iterator():
 		state.board.tiles[hex] = acTileState.new()
+	
+	initial_state = state.duplicate(true)
 
 
 func try_find_unit_definition_uid_by_view(unit_view: acUnitView) -> StringName:
@@ -136,3 +165,8 @@ func _on_hex_clicked(hex: Vector2i, event: InputEventMouseButton):
 func _on_hex_grid_left(_last_hex: Vector2i):
 	clear_units_hover()
 	hover_ui.grid = null
+
+
+func _on_simulation_tick(updated_state: acBattleState):
+	state = updated_state.duplicate(true)
+	sync_view()

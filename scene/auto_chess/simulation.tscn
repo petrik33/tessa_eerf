@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwbb03gygs75m"]
+
+[ext_resource type="Script" uid="uid://dvnk3jj517bf3" path="res://script/auto_chess/logic/battle_simulation.gd" id="1_ehbhn"]
+[ext_resource type="Script" uid="uid://c1w0nyudapgtn" path="res://script/auto_chess/logic/battle_rules.gd" id="2_8cat2"]
+
+[sub_resource type="Resource" id="Resource_emxyx"]
+script = ExtResource("2_8cat2")
+metadata/_custom_type_script = "uid://c1w0nyudapgtn"
+
+[node name="Simulation" type="Node"]
+script = ExtResource("1_ehbhn")
+rules = SubResource("Resource_emxyx")
+metadata/_custom_type_script = "uid://dvnk3jj517bf3"

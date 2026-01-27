@@ -15,4 +15,4 @@ func release_hex(hex: Vector2i):
 
 
 func is_walkable(hex: Vector2i) -> bool:
-	return true
+	return not units.has(hex)

@@ -25,8 +25,7 @@ static func find(unit: acUnitState, battle: acBattleState) -> acUnitState:
 		if not other.alive:
 			continue
 		var d := HexMath.distance(unit.hex, other.hex)
-		if d <= unit.definition.attack_range:
-			if d < best_score:
-				best_score = d
-				best = other
+		if d < best_score:
+			best_score = d
+			best = other
 	return best

@@ -6,11 +6,6 @@ class_name acBattleState extends Resource
 @export var units: Dictionary[int, acUnitState] = {}
 @export var teams: Dictionary[int, acTeamState] = {}
 
-@export var time := 0.0
-@export var phase := 0
-
-var rng: RandomNumberGenerator
-
 
 func issue_move(unit: acUnitState, target_hex: Vector2i):
 	if not is_valid_move(unit, target_hex):
