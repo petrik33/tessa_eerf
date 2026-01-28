@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=4 uid="uid://cc44fwlovmg0c"]
+[gd_scene load_steps=124 format=4 uid="uid://cc44fwlovmg0c"]
 
 [ext_resource type="PackedScene" uid="uid://bgxwb0b5svmxs" path="res://scene/auto_chess/arena/bg_nature.tscn" id="1_m6vwx"]
 [ext_resource type="Script" uid="uid://c3jv41ot5jjt7" path="res://script/auto_chess/logic/battle_controller.gd" id="1_m33rq"]
@@ -77,172 +77,172 @@ script = ExtResource("10_lllsj")
 display_name = "Samurai"
 metadata/_custom_type_script = "uid://lrtljpwp6k1a"
 
-[sub_resource type="Resource" id="Resource_igoqh"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_530rv"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_w65l4"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_llgs4"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_opjyq"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_uv6nj"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_v6kqf"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_mwqjp"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_srtte"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_eepoq"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_56ofq"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_uveid"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_8t7oe"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_p4bg8"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ggfic"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_l7x7w"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_p3vxm"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ao2gl"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_d2jwd"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_clhos"]
-script = ExtResource("15_ljpow")
-
 [sub_resource type="Resource" id="Resource_h4ubq"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_hqjfu"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_wqlsy"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_bp5ye"]
 script = ExtResource("15_ljpow")
 
 [sub_resource type="Resource" id="Resource_vx1j4"]
 script = ExtResource("15_ljpow")
 
+[sub_resource type="Resource" id="Resource_8t7oe"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_p3vxm"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_hqjfu"]
+script = ExtResource("15_ljpow")
+
 [sub_resource type="Resource" id="Resource_rlifn"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_opjyq"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_srtte"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_p4bg8"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_ao2gl"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_wqlsy"]
 script = ExtResource("15_ljpow")
 
 [sub_resource type="Resource" id="Resource_udd4f"]
 script = ExtResource("15_ljpow")
 
+[sub_resource type="Resource" id="Resource_igoqh"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_uv6nj"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_eepoq"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_ggfic"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_d2jwd"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_bp5ye"]
+script = ExtResource("15_ljpow")
+
 [sub_resource type="Resource" id="Resource_ssiba"]
 script = ExtResource("15_ljpow")
 
-[sub_resource type="Resource" id="Resource_j8v6v"]
+[sub_resource type="Resource" id="Resource_530rv"]
 script = ExtResource("15_ljpow")
 
-[sub_resource type="Resource" id="Resource_kiq77"]
+[sub_resource type="Resource" id="Resource_v6kqf"]
 script = ExtResource("15_ljpow")
 
-[sub_resource type="Resource" id="Resource_t1jbr"]
+[sub_resource type="Resource" id="Resource_56ofq"]
 script = ExtResource("15_ljpow")
 
-[sub_resource type="Resource" id="Resource_n44p3"]
+[sub_resource type="Resource" id="Resource_l7x7w"]
 script = ExtResource("15_ljpow")
 
-[sub_resource type="Resource" id="Resource_oy2su"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_2qqe3"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_cvl5e"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ntd00"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ehpql"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_2llmb"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_80gpr"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_p80k1"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_yxdeu"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ou6dt"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_8lucm"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_5ax8b"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_srwtu"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_s8eak"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_0bfvi"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_fxkrd"]
+[sub_resource type="Resource" id="Resource_clhos"]
 script = ExtResource("15_ljpow")
 
 [sub_resource type="Resource" id="Resource_0j7xo"]
 script = ExtResource("15_ljpow")
 
-[sub_resource type="Resource" id="Resource_l0853"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_w6ki4"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_xde74"]
-script = ExtResource("15_ljpow")
-
 [sub_resource type="Resource" id="Resource_mscut"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_w65l4"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_mwqjp"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_uveid"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_yxdeu"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_srwtu"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_l0853"]
 script = ExtResource("15_ljpow")
 
 [sub_resource type="Resource" id="Resource_54r2f"]
 script = ExtResource("15_ljpow")
 
+[sub_resource type="Resource" id="Resource_llgs4"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_oy2su"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_ehpql"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_ou6dt"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_s8eak"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_w6ki4"]
+script = ExtResource("15_ljpow")
+
 [sub_resource type="Resource" id="Resource_8wrrg"]
 script = ExtResource("15_ljpow")
 
+[sub_resource type="Resource" id="Resource_j8v6v"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_2qqe3"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_2llmb"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_8lucm"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_0bfvi"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_xde74"]
+script = ExtResource("15_ljpow")
+
 [sub_resource type="Resource" id="Resource_7q2py"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_kiq77"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_cvl5e"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_80gpr"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_5ax8b"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_fxkrd"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_t1jbr"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_ntd00"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_p80k1"]
+script = ExtResource("15_ljpow")
+
+[sub_resource type="Resource" id="Resource_n44p3"]
 script = ExtResource("15_ljpow")
 
 [sub_resource type="Resource" id="Resource_r44sk"]
@@ -266,17 +266,6 @@ uid = 1
 definition = SubResource("Resource_87duj")
 hex = Vector2i(1, 3)
 
-[sub_resource type="Resource" id="Resource_1ilxn"]
-script = ExtResource("10_lllsj")
-display_name = "Paladin"
-metadata/_custom_type_script = "uid://lrtljpwp6k1a"
-
-[sub_resource type="Resource" id="Resource_y1bn4"]
-script = ExtResource("16_d7wx6")
-uid = 2
-definition = SubResource("Resource_1ilxn")
-hex = Vector2i(2, 2)
-
 [sub_resource type="Resource" id="Resource_537k5"]
 script = ExtResource("10_lllsj")
 display_name = "Ground Monk"
@@ -287,6 +276,17 @@ script = ExtResource("16_d7wx6")
 uid = 3
 definition = SubResource("Resource_537k5")
 hex = Vector2i(1, 4)
+
+[sub_resource type="Resource" id="Resource_1ilxn"]
+script = ExtResource("10_lllsj")
+display_name = "Paladin"
+metadata/_custom_type_script = "uid://lrtljpwp6k1a"
+
+[sub_resource type="Resource" id="Resource_y1bn4"]
+script = ExtResource("16_d7wx6")
+uid = 2
+definition = SubResource("Resource_1ilxn")
+hex = Vector2i(2, 2)
 
 [sub_resource type="Resource" id="Resource_wcckx"]
 script = ExtResource("10_lllsj")
@@ -299,19 +299,6 @@ uid = 4
 definition = SubResource("Resource_wcckx")
 team = 1
 hex = Vector2i(2, 3)
-facing = 1
-
-[sub_resource type="Resource" id="Resource_53rof"]
-script = ExtResource("10_lllsj")
-display_name = "Blue Witch"
-metadata/_custom_type_script = "uid://lrtljpwp6k1a"
-
-[sub_resource type="Resource" id="Resource_1qomb"]
-script = ExtResource("16_d7wx6")
-uid = 5
-definition = SubResource("Resource_53rof")
-team = 1
-hex = Vector2i(4, 4)
 facing = 1
 
 [sub_resource type="Resource" id="Resource_btovw"]
@@ -338,6 +325,19 @@ uid = 7
 definition = SubResource("Resource_y4gd6")
 team = 1
 hex = Vector2i(3, 2)
+facing = 1
+
+[sub_resource type="Resource" id="Resource_53rof"]
+script = ExtResource("10_lllsj")
+display_name = "Blue Witch"
+metadata/_custom_type_script = "uid://lrtljpwp6k1a"
+
+[sub_resource type="Resource" id="Resource_1qomb"]
+script = ExtResource("16_d7wx6")
+uid = 5
+definition = SubResource("Resource_53rof")
+team = 1
+hex = Vector2i(4, 4)
 facing = 1
 
 [sub_resource type="Resource" id="Resource_xs2xn"]
@@ -435,326 +435,6 @@ units = Dictionary[int, ExtResource("16_d7wx6")]({
 teams = Dictionary[int, ExtResource("18_530rv")]({
 0: SubResource("Resource_4kh5o"),
 1: SubResource("Resource_mad0v")
-})
-
-[sub_resource type="Resource" id="Resource_5c1db"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_lppf5"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_v2w4d"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_3omqb"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_w0a8o"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_xewmu"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_760ht"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_8wk1g"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ak36t"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_56nyy"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_bxqqm"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_svkin"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_aptnt"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_uhwiu"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_51r48"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_egyy1"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_4ic1m"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_f6qyy"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_xuk4u"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_qqsm6"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ertwr"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_hbekr"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_325b7"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ix5uj"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_5klrx"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_qe6sa"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_kt3an"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_mft4i"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_b8wax"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_yiq6w"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ik35g"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_8gdvb"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_2qsjx"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_d0aw2"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_7tbmo"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_6rtg3"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_eiteh"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_l4spt"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_u58y2"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_sq573"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_s11ef"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_oryo5"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_wc1li"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_h2f1n"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_tef6a"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_3u1s4"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_armlm"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_vyu6c"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_pwtxx"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_v5c38"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_5xbvb"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_ql25j"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_g37wf"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_witef"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_lw273"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_rb1l1"]
-script = ExtResource("15_ljpow")
-
-[sub_resource type="Resource" id="Resource_amcw7"]
-script = ExtResource("16_d7wx6")
-definition = SubResource("Resource_rcwtf")
-hex = Vector2i(0, 1)
-
-[sub_resource type="Resource" id="Resource_ly6xh"]
-script = ExtResource("16_d7wx6")
-uid = 1
-definition = SubResource("Resource_7u63a")
-hex = Vector2i(1, 3)
-
-[sub_resource type="Resource" id="Resource_8vigq"]
-script = ExtResource("16_d7wx6")
-uid = 2
-definition = SubResource("Resource_210om")
-hex = Vector2i(2, 2)
-
-[sub_resource type="Resource" id="Resource_usljs"]
-script = ExtResource("16_d7wx6")
-uid = 3
-definition = SubResource("Resource_kvk50")
-hex = Vector2i(1, 4)
-
-[sub_resource type="Resource" id="Resource_xxkeq"]
-script = ExtResource("16_d7wx6")
-uid = 4
-definition = SubResource("Resource_78l6t")
-team = 1
-hex = Vector2i(2, 3)
-facing = 1
-
-[sub_resource type="Resource" id="Resource_h8ned"]
-script = ExtResource("16_d7wx6")
-uid = 5
-definition = SubResource("Resource_lllsj")
-team = 1
-hex = Vector2i(4, 4)
-facing = 1
-
-[sub_resource type="Resource" id="Resource_f7bf7"]
-script = ExtResource("16_d7wx6")
-uid = 6
-definition = SubResource("Resource_g5kd6")
-team = 1
-hex = Vector2i(2, 4)
-facing = 1
-
-[sub_resource type="Resource" id="Resource_n2q82"]
-script = ExtResource("16_d7wx6")
-uid = 7
-definition = SubResource("Resource_fvema")
-team = 1
-hex = Vector2i(3, 2)
-facing = 1
-
-[sub_resource type="Resource" id="Resource_hva0v"]
-script = ExtResource("14_ykwx6")
-tiles = Dictionary[Vector2i, ExtResource("15_ljpow")]({
-Vector2i(-3, 5): SubResource("Resource_ertwr"),
-Vector2i(-3, 6): SubResource("Resource_5klrx"),
-Vector2i(-2, 3): SubResource("Resource_aptnt"),
-Vector2i(-2, 4): SubResource("Resource_4ic1m"),
-Vector2i(-2, 5): SubResource("Resource_hbekr"),
-Vector2i(-2, 6): SubResource("Resource_qe6sa"),
-Vector2i(-1, 1): SubResource("Resource_w0a8o"),
-Vector2i(-1, 2): SubResource("Resource_ak36t"),
-Vector2i(-1, 3): SubResource("Resource_uhwiu"),
-Vector2i(-1, 4): SubResource("Resource_f6qyy"),
-Vector2i(-1, 5): SubResource("Resource_325b7"),
-Vector2i(-1, 6): SubResource("Resource_kt3an"),
-Vector2i(0, 0): SubResource("Resource_5c1db"),
-Vector2i(0, 1): SubResource("Resource_xewmu"),
-Vector2i(0, 2): SubResource("Resource_56nyy"),
-Vector2i(0, 3): SubResource("Resource_51r48"),
-Vector2i(0, 4): SubResource("Resource_xuk4u"),
-Vector2i(0, 5): SubResource("Resource_ix5uj"),
-Vector2i(0, 6): SubResource("Resource_mft4i"),
-Vector2i(1, 0): SubResource("Resource_lppf5"),
-Vector2i(1, 1): SubResource("Resource_760ht"),
-Vector2i(1, 2): SubResource("Resource_bxqqm"),
-Vector2i(1, 3): SubResource("Resource_egyy1"),
-Vector2i(1, 4): SubResource("Resource_qqsm6"),
-Vector2i(1, 5): SubResource("Resource_pwtxx"),
-Vector2i(1, 6): SubResource("Resource_g37wf"),
-Vector2i(2, 0): SubResource("Resource_v2w4d"),
-Vector2i(2, 1): SubResource("Resource_8wk1g"),
-Vector2i(2, 2): SubResource("Resource_svkin"),
-Vector2i(2, 3): SubResource("Resource_s11ef"),
-Vector2i(2, 4): SubResource("Resource_tef6a"),
-Vector2i(2, 5): SubResource("Resource_v5c38"),
-Vector2i(2, 6): SubResource("Resource_witef"),
-Vector2i(3, 0): SubResource("Resource_3omqb"),
-Vector2i(3, 1): SubResource("Resource_2qsjx"),
-Vector2i(3, 2): SubResource("Resource_eiteh"),
-Vector2i(3, 3): SubResource("Resource_oryo5"),
-Vector2i(3, 4): SubResource("Resource_3u1s4"),
-Vector2i(3, 5): SubResource("Resource_5xbvb"),
-Vector2i(3, 6): SubResource("Resource_lw273"),
-Vector2i(4, 0): SubResource("Resource_b8wax"),
-Vector2i(4, 1): SubResource("Resource_d0aw2"),
-Vector2i(4, 2): SubResource("Resource_l4spt"),
-Vector2i(4, 3): SubResource("Resource_wc1li"),
-Vector2i(4, 4): SubResource("Resource_armlm"),
-Vector2i(4, 5): SubResource("Resource_ql25j"),
-Vector2i(4, 6): SubResource("Resource_rb1l1"),
-Vector2i(5, 0): SubResource("Resource_yiq6w"),
-Vector2i(5, 1): SubResource("Resource_7tbmo"),
-Vector2i(5, 2): SubResource("Resource_u58y2"),
-Vector2i(5, 3): SubResource("Resource_h2f1n"),
-Vector2i(5, 4): SubResource("Resource_vyu6c"),
-Vector2i(6, 0): SubResource("Resource_ik35g"),
-Vector2i(6, 1): SubResource("Resource_6rtg3"),
-Vector2i(6, 2): SubResource("Resource_sq573"),
-Vector2i(7, 0): SubResource("Resource_8gdvb")
-})
-units = Dictionary[Vector2i, ExtResource("16_d7wx6")]({
-Vector2i(0, 1): SubResource("Resource_amcw7"),
-Vector2i(1, 3): SubResource("Resource_ly6xh"),
-Vector2i(1, 4): SubResource("Resource_usljs"),
-Vector2i(2, 2): SubResource("Resource_8vigq"),
-Vector2i(2, 3): SubResource("Resource_xxkeq"),
-Vector2i(2, 4): SubResource("Resource_f7bf7"),
-Vector2i(3, 2): SubResource("Resource_n2q82"),
-Vector2i(4, 4): SubResource("Resource_h8ned")
-})
-
-[sub_resource type="Resource" id="Resource_iiv8i"]
-script = ExtResource("18_530rv")
-units = Array[ExtResource("16_d7wx6")]([SubResource("Resource_amcw7"), SubResource("Resource_ly6xh"), SubResource("Resource_8vigq"), SubResource("Resource_usljs")])
-
-[sub_resource type="Resource" id="Resource_8y1cj"]
-script = ExtResource("18_530rv")
-units = Array[ExtResource("16_d7wx6")]([SubResource("Resource_xxkeq"), SubResource("Resource_h8ned"), SubResource("Resource_f7bf7"), SubResource("Resource_n2q82")])
-
-[sub_resource type="Resource" id="Resource_fcd87"]
-script = ExtResource("17_igoqh")
-board = SubResource("Resource_hva0v")
-units = Dictionary[int, ExtResource("16_d7wx6")]({
-0: SubResource("Resource_amcw7"),
-1: SubResource("Resource_ly6xh"),
-2: SubResource("Resource_8vigq"),
-3: SubResource("Resource_usljs"),
-4: SubResource("Resource_xxkeq"),
-5: SubResource("Resource_h8ned"),
-6: SubResource("Resource_f7bf7"),
-7: SubResource("Resource_n2q82")
-})
-teams = Dictionary[int, ExtResource("18_530rv")]({
-0: SubResource("Resource_iiv8i"),
-1: SubResource("Resource_8y1cj")
 })
 
 [sub_resource type="Resource" id="Resource_j28sf"]
@@ -1706,7 +1386,6 @@ unit_definitions = Dictionary[StringName, ExtResource("10_lllsj")]({
 &"samurai": SubResource("Resource_fvema")
 })
 initial_state = SubResource("Resource_xfqcf")
-state = SubResource("Resource_fcd87")
 simulations_node = NodePath("Simulations")
 simulation_scene = ExtResource("19_igoqh")
 metadata/_custom_type_script = "uid://c3jv41ot5jjt7"

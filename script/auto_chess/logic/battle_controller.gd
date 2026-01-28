@@ -12,7 +12,6 @@ class_name acBattleController extends Node
 @export var selected_unit: acUnitState
 
 @export var initial_state: acBattleState
-@export var state: acBattleState
 @export var simulations_node: Node
 @export var simulation_scene: PackedScene
 @export var dbg_battle_simulation: acBattleSimulation
@@ -21,8 +20,20 @@ class_name acBattleController extends Node
 var fill_state_button = fill_state_from_view
 
 
+var prev_state: acBattleState
+var curr_state: acBattleState
+
+
 const ALLY_TEAM := 0
 const ENEMY_TEAM := 1
+
+
+func _process(_delta: float):
+	if prev_state == null or curr_state == null:
+		return
+	var alpha := Engine.get_physics_interpolation_fraction()
+	board_view.interpolate(prev_state, curr_state, alpha)
+	
 
 
 func is_battle_live() -> bool:
@@ -34,8 +45,8 @@ func start_battle():
 	simulations_node.add_child(dbg_battle_simulation)
 	dbg_battle_simulation.start(initial_state)
 	dbg_battle_simulation.tick.connect(_on_simulation_tick)
-	state = initial_state.duplicate(true)
-	sync_view()
+	curr_state = initial_state.duplicate(true)
+	board_view.sync(initial_state)
 
 
 func stop_battle():
@@ -43,22 +54,16 @@ func stop_battle():
 	dbg_battle_simulation.stop()
 	simulations_node.remove_child(dbg_battle_simulation)
 	dbg_battle_simulation.queue_free()
-	state = initial_state.duplicate(true)
-	sync_view()
-
-
-func sync_view():
-	board_view.sync_unit_positions_from_state(state)
-	for unit in state.units.values():
-		var view = board_view.get_unit_view(unit.uid)
-		view.sync_from_state(unit)
+	curr_state = null
+	prev_state = null
+	board_view.sync(initial_state)
 
 
 func fill_state_from_view():
-	state = acBattleState.new()
-	state.board = acBoardState.new()
-	state.teams[ALLY_TEAM] = acTeamState.new()
-	state.teams[ENEMY_TEAM] = acTeamState.new()
+	initial_state = acBattleState.new()
+	initial_state.board = acBoardState.new()
+	initial_state.teams[ALLY_TEAM] = acTeamState.new()
+	initial_state.teams[ENEMY_TEAM] = acTeamState.new()
 	
 	var unit_next_uid := 0
 	
@@ -73,15 +78,13 @@ func fill_state_from_view():
 		unit.hp = unit.definition.max_hp
 		unit.mana = 0
 		unit.facing = unit.team
-		state.units[unit.uid] = unit
-		state.board.units[unit.hex] = unit
-		state.teams[unit.team].units.append(unit)
+		initial_state.units[unit.uid] = unit
+		initial_state.board.units[unit.hex] = unit
+		initial_state.teams[unit.team].units.append(unit)
 		unit_next_uid += 1
 	
 	for hex in combined_grid.iterator():
-		state.board.tiles[hex] = acTileState.new()
-	
-	initial_state = state.duplicate(true)
+		initial_state.board.tiles[hex] = acTileState.new()
 
 
 func try_find_unit_definition_uid_by_view(unit_view: acUnitView) -> StringName:
@@ -114,11 +117,11 @@ func try_select_unit(unit: acUnitState) -> bool:
 func try_issue_move(hex: Vector2i) -> bool:
 	if selected_unit == null:
 		return false
-	if not state.is_valid_move(selected_unit, hex):
+	if not initial_state.is_valid_move(selected_unit, hex):
 		return false
 	
-	state.issue_move(selected_unit, hex)
-	sync_view()
+	initial_state.issue_move(selected_unit, hex)
+	board_view.sync(initial_state)
 	hover_unit(selected_unit)
 	clear_unit_selection()
 	
@@ -144,7 +147,7 @@ func clear_unit_selection():
 func _on_hex_hovered(hex: Vector2i, _previous: Vector2i):
 	clear_units_hover()
 
-	var unit = state.get_unit_at_hex(hex)
+	var unit = initial_state.get_unit_at_hex(hex)
 	if unit:
 		hover_unit(unit)
 	
@@ -153,7 +156,7 @@ func _on_hex_hovered(hex: Vector2i, _previous: Vector2i):
 
 func _on_hex_clicked(hex: Vector2i, event: InputEventMouseButton):
 	if event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
-		var clicked_unit = state.get_unit_at_hex(hex)
+		var clicked_unit = initial_state.get_unit_at_hex(hex)
 		if clicked_unit == null:
 			try_issue_move(hex)
 			return
@@ -168,5 +171,5 @@ func _on_hex_grid_left(_last_hex: Vector2i):
 
 
 func _on_simulation_tick(updated_state: acBattleState):
-	state = updated_state.duplicate(true)
-	sync_view()
+	prev_state = curr_state
+	curr_state = updated_state.duplicate(true)
