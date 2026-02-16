@@ -1,0 +1,1 @@
+class_name teCombatCommandBase extends Resource
