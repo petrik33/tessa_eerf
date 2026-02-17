@@ -1,0 +1,1 @@
+class_name teVisualActionBase extends Resource

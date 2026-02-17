@@ -1,0 +1,1 @@
+class_name teVisualActionUnitGetHurt extends teVisualActionBase

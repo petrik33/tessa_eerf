@@ -1,1 +1,0 @@
-class_name teCombatUnitView extends Node2D
