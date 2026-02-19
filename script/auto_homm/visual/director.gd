@@ -1,5 +1,5 @@
 class_name teVisualDirector extends Node
 
 
-func play(sequence: teVisualSequence):
+func play(board: teBoardView, sequence: teVisualSequence):
 	pass

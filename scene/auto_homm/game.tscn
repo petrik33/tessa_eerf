@@ -1,0 +1,79 @@
+[gd_scene load_steps=20 format=3 uid="uid://cxlcpm8jg4s4g"]
+
+[ext_resource type="PackedScene" uid="uid://dpf8b44osbdvd" path="res://scene/auto_homm/board_view.tscn" id="1_7v50o"]
+[ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
+[ext_resource type="Script" uid="uid://cx0e5cbn7xncm" path="res://script/auto_homm/debug/visual_game_config.gd" id="2_ap5p2"]
+[ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/combat_movie.tscn" id="2_da5fy"]
+[ext_resource type="PackedScene" uid="uid://ccar8tgy4pfo8" path="res://scene/auto_chess/unit/necromancer/necromancer.tscn" id="2_pxhk5"]
+[ext_resource type="Resource" uid="uid://ecvihwn81f58" path="res://scene/auto_homm/grid/map.tres" id="2_qr44i"]
+[ext_resource type="Script" uid="uid://bq0btk6pleh5i" path="res://script/auto_homm/game/setup.gd" id="3_58b30"]
+[ext_resource type="PackedScene" uid="uid://nsv5gf4ggrlj" path="res://scene/auto_chess/unit/blind_huntress/blind_huntress.tscn" id="3_ap5p2"]
+[ext_resource type="Resource" uid="uid://bhy432ye7u446" path="res://resource/auto_homm/rule_set.tres" id="3_ycat3"]
+[ext_resource type="PackedScene" uid="uid://dtv1foq10jp1x" path="res://scene/auto_chess/unit/ground_monk/ground_monk.tscn" id="4_da5fy"]
+[ext_resource type="PackedScene" uid="uid://dcodu6m78irl5" path="res://scene/auto_chess/unit/paladin/paladin.tscn" id="5_f57a3"]
+[ext_resource type="Resource" uid="uid://c31cby404a1vn" path="res://resource/auto_homm/skin_set.tres" id="5_m6xp2"]
+[ext_resource type="PackedScene" uid="uid://djuq8uvyt7eg7" path="res://scene/auto_chess/unit/red_hood_archer/red_hood_archer.tscn" id="6_ch6hj"]
+[ext_resource type="PackedScene" uid="uid://yjvuahf7wrno" path="res://scene/auto_chess/unit/martial_hero/martial_hero.tscn" id="7_qr44i"]
+[ext_resource type="PackedScene" uid="uid://blc7d7qhuv7c6" path="res://scene/auto_homm/board_unit_view.tscn" id="7_t034j"]
+[ext_resource type="Script" uid="uid://dqumqp1bdxv8q" path="res://script/auto_homm/combat/node/simulation_runner.gd" id="9_ap5p2"]
+[ext_resource type="Resource" uid="uid://cfvc63jynxb4o" path="res://scene/auto_homm/grid/ally.tres" id="9_g58u6"]
+[ext_resource type="Resource" uid="uid://bamd8hi5bp7wj" path="res://scene/auto_homm/grid/enemy.tres" id="10_t034j"]
+
+[sub_resource type="Resource" id="Resource_ycat3"]
+script = ExtResource("3_58b30")
+grid = ExtResource("2_qr44i")
+skin_set = ExtResource("5_m6xp2")
+rule_set = ExtResource("3_ycat3")
+metadata/_custom_type_script = "uid://bq0btk6pleh5i"
+
+[node name="Game" type="Node" node_paths=PackedStringArray("visual_config", "simulation_runner", "board", "movie")]
+script = ExtResource("1_f57a3")
+visual_config = NodePath("VisualConfig")
+setup = SubResource("Resource_ycat3")
+simulation_runner = NodePath("SimulationRunner")
+board = NodePath("BoardView")
+movie = NodePath("CombatMovie")
+
+[node name="BoardView" parent="." instance=ExtResource("1_7v50o")]
+unit_view_scene = ExtResource("7_t034j")
+
+[node name="CombatMovie" parent="." node_paths=PackedStringArray("board") instance=ExtResource("2_da5fy")]
+board = NodePath("../BoardView")
+
+[node name="VisualConfig" type="Node" parent="." node_paths=PackedStringArray("visuals_parent", "board_view")]
+script = ExtResource("2_ap5p2")
+visuals_parent = NodePath("Units")
+board_view = NodePath("../BoardView")
+skin_set = ExtResource("5_m6xp2")
+ally_grid = ExtResource("9_g58u6")
+enemy_grid = ExtResource("10_t034j")
+metadata/_custom_type_script = "uid://cx0e5cbn7xncm"
+
+[node name="Units" type="Node2D" parent="VisualConfig"]
+y_sort_enabled = true
+position = Vector2(156, 98)
+
+[node name="Necromancer" parent="VisualConfig/Units" instance=ExtResource("2_pxhk5")]
+position = Vector2(0, 56)
+
+[node name="BlindHuntress" parent="VisualConfig/Units" instance=ExtResource("3_ap5p2")]
+position = Vector2(139, 84)
+
+[node name="GroundMonk" parent="VisualConfig/Units" instance=ExtResource("4_da5fy")]
+position = Vector2(110, 56)
+
+[node name="Paladin" parent="VisualConfig/Units" instance=ExtResource("5_f57a3")]
+position = Vector2(192, 84)
+scale = Vector2(-1, 1)
+
+[node name="RedHoodArcher" parent="VisualConfig/Units" instance=ExtResource("6_ch6hj")]
+position = Vector2(353, 14)
+scale = Vector2(-1, 1)
+
+[node name="MartialHero" parent="VisualConfig/Units" instance=ExtResource("7_qr44i")]
+position = Vector2(219, 108)
+scale = Vector2(-1, 1)
+
+[node name="SimulationRunner" type="Node" parent="."]
+script = ExtResource("9_ap5p2")
+metadata/_custom_type_script = "uid://dqumqp1bdxv8q"

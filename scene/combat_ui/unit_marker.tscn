@@ -25,14 +25,6 @@ offset_top = 8.0
 offset_right = 16.0
 offset_bottom = 18.0
 script = ExtResource("1_qii44")
-army_colors = Dictionary[String, Color]({})
-bg_color = Color(0, 0, 0, 1)
-default_color = Color(0, 0, 0, 1)
-hex_layout = null
-fill_percentage = 0.75
-fill_gradient = null
-outline_width = 1.0
-army_id = ""
 
 [node name="Panel" type="Panel" parent="."]
 unique_name_in_owner = true

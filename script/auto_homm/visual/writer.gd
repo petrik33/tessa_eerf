@@ -1,5 +1,9 @@
 class_name teVisualWriter extends Resource
 
 
-func sequence(state: teCombatState, log: teCombatEventLog) -> teVisualSequence:
+func intro(initial_state: teCombatState) -> teVisualSequence:
+	return null
+
+
+func sequence(log: teCombatEventLog) -> teVisualSequence:
 	return null

@@ -4,6 +4,7 @@ class_name HexMath
 func _init() -> void:
 	assert(false, "Static lib shouldn't be constructed")
 
+
 const NEIGHBOR_DIRECTION: Array[Vector2i] = [
 	Vector2i(+1, 0),
 	Vector2i(+1, -1),
@@ -12,6 +13,26 @@ const NEIGHBOR_DIRECTION: Array[Vector2i] = [
 	Vector2i(-1, +1),
 	Vector2i(0, +1)
 ]
+
+
+enum AxisPair {
+	QR,
+	QS,
+	RS
+}
+
+
+static func from_ab(ab: Vector2i, axis_pair: AxisPair) -> Vector2i:
+	return from_cube(ab_to_cube(ab, axis_pair))
+
+static func to_ab(hex: Vector2i, axis_pair: AxisPair) -> Vector2i:
+	return cube_to_ab(to_cube(hex), axis_pair)
+
+static func from_cube(cube: Vector3i) -> Vector2i:
+	return Vector2i(cube.x, cube.y)
+
+static func to_cube(hex: Vector2i) -> Vector3i:
+	return Vector3i(hex.x, hex.y, -hex.x - hex.y)
 
 static func neighbor_direction(direction: int) -> Vector2i:
 	return NEIGHBOR_DIRECTION[direction]
@@ -81,3 +102,23 @@ static func hex_perimeter_polygon_by_percent(layout: HexLayout, percent: float, 
 	polygon.append(lerp(layout.hex_corner(last_corner_idx), layout.hex_corner(next_corner_idx), line_progress))
 	
 	return polygon
+
+static func ab_to_cube(ab: Vector2i, axis_pair: AxisPair) -> Vector3i:
+	match axis_pair:
+		HexMath.AxisPair.QR:
+			return Vector3i(ab.x, ab.y, -ab.x - ab.y)
+		HexMath.AxisPair.QS:
+			return Vector3i(ab.x, -ab.x - ab.y, ab.y)
+		HexMath.AxisPair.RS:
+			return Vector3i(-ab.x - ab.y, ab.x, ab.y)
+	return Vector3i.ZERO
+
+static func cube_to_ab(cube: Vector3i, axis_pair: AxisPair) -> Vector2i:
+	match axis_pair:
+		HexMath.AxisPair.QR:
+			return Vector2i(cube.x, cube.y)
+		HexMath.AxisPair.QS:
+			return Vector2i(cube.x, cube.z)
+		HexMath.AxisPair.RS:
+			return Vector2i(cube.y, cube.z)
+	return Vector2i.ZERO

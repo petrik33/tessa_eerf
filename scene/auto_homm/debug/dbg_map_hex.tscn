@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://csaw8p1ew42kd"]
+
+[ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="1_u1iqo"]
+[ext_resource type="Resource" uid="uid://bpiu83sab63yc" path="res://scene/auto_homm/hex/combat_layout.tres" id="2_u1iqo"]
+[ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="3_ys6vi"]
+[ext_resource type="Script" uid="uid://6riqabamogrw" path="res://script/hex/grid/hexagonal_hex_grid.gd" id="4_lkh6n"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lotvj"]
+blend_mode = 1
+
+[sub_resource type="Resource" id="Resource_ivld2"]
+script = ExtResource("4_lkh6n")
+radius = 0
+metadata/_custom_type_script = "uid://6riqabamogrw"
+
+[node name="DbgMapHex" type="Node2D"]
+
+[node name="HexSpace" type="Node2D" parent="."]
+script = ExtResource("1_u1iqo")
+layout = ExtResource("2_u1iqo")
+metadata/_custom_type_script = "uid://bs1nban30c83i"
+
+[node name="HexFilledRenderer" type="Node2D" parent="HexSpace"]
+material = SubResource("CanvasItemMaterial_lotvj")
+script = ExtResource("3_ys6vi")
+hex_color = Color(0.2, 0.4, 0, 0.588235)
+grid = SubResource("Resource_ivld2")
+metadata/_custom_type_script = "uid://pjy55ieuvcl5"

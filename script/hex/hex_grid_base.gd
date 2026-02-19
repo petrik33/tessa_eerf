@@ -5,7 +5,7 @@ func iterator() -> HexGridIteratorBase:
 	assert(false, "not implemented")
 	return null
 
-func has_point(_hex: Vector2i) -> bool:
+func has_point(hex: Vector2i) -> bool:
 	assert(false, "not implemented")
 	return false
 	

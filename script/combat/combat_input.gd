@@ -16,12 +16,12 @@ var turn_context: CombatTurnContext
 func enable(context: CombatTurnContext):
 	turn_context = context
 	set_process_unhandled_input(true)
-	hex_picking.updated.connect(_on_hex_picking_updated)
+	hex_picking.hovered.connect(_on_hex_picking_updated)
 	_on_hex_picking_updated(Vector2.ZERO, hex_picking.mouse_hex)
 
 
 func disable():
-	hex_picking.updated.disconnect(_on_hex_picking_updated)
+	hex_picking.hovered.disconnect(_on_hex_picking_updated)
 	set_process_unhandled_input(false)
 	turn_context = null
 

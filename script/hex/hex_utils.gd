@@ -11,7 +11,8 @@ static func axial_format(hex: Vector2i) -> String:
 	return HEX_AXIAL_FORMAT % [hex.x, hex.y]
 	
 static func cube_format(hex: Vector2i) -> String:
-	return HEX_CUBE_FORMAT % [hex.x, hex.y, -hex.x - hex.y]
+	var cube := HexMath.to_cube(hex)
+	return HEX_CUBE_FORMAT % [cube.x, cube.y, cube.z]
 
 static func find_hex_space(node: Node) -> HexSpace:
 	var hex_space: HexSpace = null

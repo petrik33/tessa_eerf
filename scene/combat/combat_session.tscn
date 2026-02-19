@@ -867,14 +867,13 @@ metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 [node name="HexPicking" type="Control" parent="HexSpace"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -27.470306
-offset_top = -15.96006
-offset_right = 477.80365
-offset_bottom = 183.95999
-pivot_offset = Vector2(27.470306, 15.96006)
+offset_left = -22.516647
+offset_top = -14.00006
+offset_right = 472.84998
+offset_bottom = 181.99998
+pivot_offset = Vector2(22.516647, 14.00006)
 mouse_filter = 1
 script = ExtResource("22_oomfw")
-bbox_scale = 1.02
 grid = ExtResource("25_4yhjs")
 metadata/_custom_type_script = "uid://bpsuuaaepbib7"
 metadata/_edit_use_anchors_ = true
@@ -903,5 +902,3 @@ enemy_panel_sbox = ExtResource("20_w8ypk")
 ally_army_id = "army:0"
 
 [node name="Hud" parent="UI" instance=ExtResource("31_4yhjs")]
-
-[connection signal="updated" from="HexSpace/HexPicking" to="HexSpace/Outlines" method="_on_hex_picking_updated"]
