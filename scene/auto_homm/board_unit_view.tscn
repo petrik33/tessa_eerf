@@ -10,11 +10,12 @@ script = ExtResource("1_rdlfa")
 visuals_attach = NodePath("VisualsAttach")
 
 [node name="DbgCombatVisualHex" parent="." instance=ExtResource("2_jnodn")]
-
-[node name="UnitMarker" parent="." instance=ExtResource("3_a31u8")]
+visible = false
 
 [node name="VisualsAttach" type="Node2D" parent="."]
 position = Vector2(0, 2)
 
 [node name="Necromancer" parent="VisualsAttach" instance=ExtResource("4_nmwjp")]
 visible = false
+
+[node name="UnitMarker" parent="." instance=ExtResource("3_a31u8")]

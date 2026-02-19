@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cxlcpm8jg4s4g"]
+[gd_scene load_steps=21 format=3 uid="uid://cxlcpm8jg4s4g"]
 
 [ext_resource type="PackedScene" uid="uid://dpf8b44osbdvd" path="res://scene/auto_homm/board_view.tscn" id="1_7v50o"]
 [ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://dqumqp1bdxv8q" path="res://script/auto_homm/combat/node/simulation_runner.gd" id="9_ap5p2"]
 [ext_resource type="Resource" uid="uid://cfvc63jynxb4o" path="res://scene/auto_homm/grid/ally.tres" id="9_g58u6"]
 [ext_resource type="Resource" uid="uid://bamd8hi5bp7wj" path="res://scene/auto_homm/grid/enemy.tres" id="10_t034j"]
+[ext_resource type="PackedScene" uid="uid://d3t3qgj2hvca0" path="res://scene/auto_homm/debug/debug.tscn" id="19_bdy12"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -37,43 +38,45 @@ movie = NodePath("CombatMovie")
 [node name="BoardView" parent="." instance=ExtResource("1_7v50o")]
 unit_view_scene = ExtResource("7_t034j")
 
+[node name="Units" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(156, 98)
+
+[node name="Necromancer" parent="Units" instance=ExtResource("2_pxhk5")]
+position = Vector2(0, 56)
+
+[node name="BlindHuntress" parent="Units" instance=ExtResource("3_ap5p2")]
+position = Vector2(139, 84)
+
+[node name="GroundMonk" parent="Units" instance=ExtResource("4_da5fy")]
+position = Vector2(110, 56)
+
+[node name="Paladin" parent="Units" instance=ExtResource("5_f57a3")]
+position = Vector2(192, 84)
+scale = Vector2(-1, 1)
+
+[node name="RedHoodArcher" parent="Units" instance=ExtResource("6_ch6hj")]
+position = Vector2(353, 14)
+scale = Vector2(-1, 1)
+
+[node name="MartialHero" parent="Units" instance=ExtResource("7_qr44i")]
+position = Vector2(219, 108)
+scale = Vector2(-1, 1)
+
 [node name="CombatMovie" parent="." node_paths=PackedStringArray("board") instance=ExtResource("2_da5fy")]
 board = NodePath("../BoardView")
 
 [node name="VisualConfig" type="Node" parent="." node_paths=PackedStringArray("visuals_parent", "board_view")]
 script = ExtResource("2_ap5p2")
-visuals_parent = NodePath("Units")
+visuals_parent = NodePath("../Units")
 board_view = NodePath("../BoardView")
 skin_set = ExtResource("5_m6xp2")
 ally_grid = ExtResource("9_g58u6")
 enemy_grid = ExtResource("10_t034j")
 metadata/_custom_type_script = "uid://cx0e5cbn7xncm"
 
-[node name="Units" type="Node2D" parent="VisualConfig"]
-y_sort_enabled = true
-position = Vector2(156, 98)
-
-[node name="Necromancer" parent="VisualConfig/Units" instance=ExtResource("2_pxhk5")]
-position = Vector2(0, 56)
-
-[node name="BlindHuntress" parent="VisualConfig/Units" instance=ExtResource("3_ap5p2")]
-position = Vector2(139, 84)
-
-[node name="GroundMonk" parent="VisualConfig/Units" instance=ExtResource("4_da5fy")]
-position = Vector2(110, 56)
-
-[node name="Paladin" parent="VisualConfig/Units" instance=ExtResource("5_f57a3")]
-position = Vector2(192, 84)
-scale = Vector2(-1, 1)
-
-[node name="RedHoodArcher" parent="VisualConfig/Units" instance=ExtResource("6_ch6hj")]
-position = Vector2(353, 14)
-scale = Vector2(-1, 1)
-
-[node name="MartialHero" parent="VisualConfig/Units" instance=ExtResource("7_qr44i")]
-position = Vector2(219, 108)
-scale = Vector2(-1, 1)
-
 [node name="SimulationRunner" type="Node" parent="."]
 script = ExtResource("9_ap5p2")
 metadata/_custom_type_script = "uid://dqumqp1bdxv8q"
+
+[node name="Debug" parent="." instance=ExtResource("19_bdy12")]

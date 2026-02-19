@@ -13,7 +13,7 @@ func attach_unit(visuals: Node2D, id: int) -> teBoardUnitView:
 	var unit_view := unit_view_scene.instantiate() as teBoardUnitView
 	units_attach.add_child(unit_view)
 	visuals.position = Vector2.ZERO
-	visuals.reparent(unit_view.visuals_attach)
+	visuals.reparent(unit_view.visuals_attach, false)
 	units[id] = unit_view
 	return unit_view
 
