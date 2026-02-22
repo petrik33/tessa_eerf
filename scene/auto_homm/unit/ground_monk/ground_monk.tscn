@@ -1,6 +1,7 @@
-[gd_scene load_steps=76 format=3 uid="uid://hdsknl3q5dcn"]
+[gd_scene load_steps=78 format=3 uid="uid://hdsknl3q5dcn"]
 
-[ext_resource type="Script" uid="uid://xf357r3pe7oa" path="res://scene/auto_homm/unit/ground_monk/ground_monk.gd" id="1_7yfj6"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_p8yqc"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_35h25"]
 [ext_resource type="Texture2D" uid="uid://4kw26tpq5bke" path="res://asset/texture/unit/ground_monk/death/death_1.png" id="2_p8yqc"]
 [ext_resource type="Texture2D" uid="uid://di6b6d3ocdrur" path="res://asset/texture/unit/ground_monk/death/death_2.png" id="3_35h25"]
 [ext_resource type="Texture2D" uid="uid://bqhraxilpxtvr" path="res://asset/texture/unit/ground_monk/death/death_3.png" id="4_djk20"]
@@ -74,6 +75,12 @@
 [ext_resource type="Texture2D" uid="uid://csmoolahr3vc" path="res://asset/texture/unit/ground_monk/run/run_6.png" id="72_0buw5"]
 [ext_resource type="Texture2D" uid="uid://6ymmloxmjvrl" path="res://asset/texture/unit/ground_monk/run/run_7.png" id="73_41j4e"]
 [ext_resource type="Texture2D" uid="uid://baqrxop0pb7mi" path="res://asset/texture/unit/ground_monk/run/run_8.png" id="74_xi2bq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djk20"]
+shader = ExtResource("2_35h25")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eyjtx"]
 animations = [{
@@ -327,15 +334,14 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("glow_node")]
-script = ExtResource("1_7yfj6")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+[node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
+script = ExtResource("1_p8yqc")
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_djk20")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"

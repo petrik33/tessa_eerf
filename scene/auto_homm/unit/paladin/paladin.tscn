@@ -1,13 +1,13 @@
 [gd_scene load_steps=123 format=3 uid="uid://yeda2nifrlx8"]
 
-[ext_resource type="Script" uid="uid://2r3lhg48mss4" path="res://scene/auto_homm/unit/paladin/paladin.gd" id="1_2b3hv"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_2b3hv"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_h7216"]
 [ext_resource type="Texture2D" uid="uid://bl66x02ft5ao8" path="res://asset/texture/unit/paladin/Death/spr_PaladinDeathWithEffect_strip65.png" id="3_hwx5i"]
 [ext_resource type="Texture2D" uid="uid://b4w6ntbutqxqv" path="res://asset/texture/unit/paladin/GetHit/spr_PaladinGetHitWithEffect_strip12.png" id="4_ppp3q"]
 [ext_resource type="Texture2D" uid="uid://c0m4rhm8h5x5j" path="res://asset/texture/unit/paladin/Idle/spr_PaladinIdle_strip27.png" id="5_m0l6k"]
 [ext_resource type="Texture2D" uid="uid://du5xat00r5iyy" path="res://asset/texture/unit/paladin/Walk/spr_PaladinWalk_strip10.png" id="6_md716"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwm8b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7216"]
 shader = ExtResource("2_h7216")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -834,16 +834,14 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Paladin" type="Node2D" node_paths=PackedStringArray("glow_node")]
+[node name="Paladin" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_2b3hv")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_iwm8b")
+material = SubResource("ShaderMaterial_h7216")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"

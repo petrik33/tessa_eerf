@@ -1,7 +1,7 @@
 class_name teCombatMovie extends Node
 
 
-@export var board: teBoardView
+@export var board: teBoardVisual
 @export var director: teVisualDirector
 @export var writer: teVisualWriter
 

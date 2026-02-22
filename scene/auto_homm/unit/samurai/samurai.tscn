@@ -1,13 +1,12 @@
-[gd_scene load_steps=46 format=3 uid="uid://dvj1nnbudlxri"]
+[gd_scene load_steps=45 format=3 uid="uid://dvj1nnbudlxri"]
 
-[ext_resource type="Script" uid="uid://bbmnwmgckbwmr" path="res://scene/auto_homm/unit/samurai/samurai.gd" id="1_y0d00"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_dts52"]
 [ext_resource type="Texture2D" uid="uid://bpna3e6tujqrj" path="res://asset/texture/unit/samurai/HURT.png" id="3_r8bki"]
 [ext_resource type="Texture2D" uid="uid://b22v3buy1aljn" path="res://asset/texture/unit/samurai/IDLE.png" id="4_3qce6"]
 [ext_resource type="Texture2D" uid="uid://bh0jkjs2cjijt" path="res://asset/texture/unit/samurai/ATTACK 1.png" id="5_0yi1o"]
 [ext_resource type="Texture2D" uid="uid://ckyj7arax4yd8" path="res://asset/texture/unit/samurai/RUN.png" id="6_0p86u"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7hv2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sojgr"]
 shader = ExtResource("2_dts52")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -295,15 +294,12 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Samurai" type="Node2D" node_paths=PackedStringArray("glow_node")]
-script = ExtResource("1_y0d00")
-glow_node = NodePath("Physical/AnimatedSprite2D")
+[node name="Samurai" type="Node2D"]
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_r7hv2")
+material = SubResource("ShaderMaterial_sojgr")
 sprite_frames = SubResource("SpriteFrames_8gi48")
 animation = &"idle"
 autoplay = "idle"

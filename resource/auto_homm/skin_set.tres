@@ -1,21 +1,20 @@
-[gd_resource type="Resource" script_class="teSkinSet" load_steps=8 format=3 uid="uid://c31cby404a1vn"]
+[gd_resource type="Resource" script_class="teSkinSet" load_steps=7 format=3 uid="uid://c31cby404a1vn"]
 
-[ext_resource type="PackedScene" uid="uid://nsv5gf4ggrlj" path="res://scene/auto_chess/unit/blind_huntress/blind_huntress.tscn" id="1_ffarb"]
+[ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="1_ffarb"]
 [ext_resource type="Script" uid="uid://swxv64ugjqfe" path="res://script/auto_homm/combat/skin_set.gd" id="1_rujsr"]
-[ext_resource type="PackedScene" uid="uid://dtv1foq10jp1x" path="res://scene/auto_chess/unit/ground_monk/ground_monk.tscn" id="2_fe01w"]
-[ext_resource type="PackedScene" uid="uid://yjvuahf7wrno" path="res://scene/auto_chess/unit/martial_hero/martial_hero.tscn" id="3_d38f2"]
-[ext_resource type="PackedScene" uid="uid://ccar8tgy4pfo8" path="res://scene/auto_chess/unit/necromancer/necromancer.tscn" id="4_7q6ig"]
-[ext_resource type="PackedScene" uid="uid://dcodu6m78irl5" path="res://scene/auto_chess/unit/paladin/paladin.tscn" id="5_16k4w"]
-[ext_resource type="PackedScene" uid="uid://djuq8uvyt7eg7" path="res://scene/auto_chess/unit/red_hood_archer/red_hood_archer.tscn" id="6_elt51"]
+[ext_resource type="PackedScene" uid="uid://hdsknl3q5dcn" path="res://scene/auto_homm/unit/ground_monk/ground_monk.tscn" id="2_ffarb"]
+[ext_resource type="PackedScene" uid="uid://ba8hm538xfpt6" path="res://scene/auto_homm/unit/martial_hero/martial_hero.tscn" id="3_ffarb"]
+[ext_resource type="PackedScene" uid="uid://yeda2nifrlx8" path="res://scene/auto_homm/unit/paladin/paladin.tscn" id="4_xfgtf"]
+[ext_resource type="PackedScene" uid="uid://des0ux6tte0v1" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer.tscn" id="5_ffarb"]
 
 [resource]
 script = ExtResource("1_rujsr")
 scenes = Dictionary[StringName, PackedScene]({
 &"blind_huntress": ExtResource("1_ffarb"),
-&"ground_monk": ExtResource("2_fe01w"),
-&"martial_hero": ExtResource("3_d38f2"),
-&"necromancer": ExtResource("4_7q6ig"),
-&"paladin": ExtResource("5_16k4w"),
-&"red_hood_archer": ExtResource("6_elt51")
+&"ground_monk": ExtResource("2_ffarb"),
+&"martial_hero": ExtResource("3_ffarb"),
+&"necromancer": ExtResource("1_ffarb"),
+&"paladin": ExtResource("4_xfgtf"),
+&"red_hood_archer": ExtResource("5_ffarb")
 })
 metadata/_custom_type_script = "uid://swxv64ugjqfe"

@@ -1,13 +1,13 @@
 [gd_scene load_steps=130 format=3 uid="uid://clodbolh7jpeq"]
 
-[ext_resource type="Script" uid="uid://dp5qo61qm8mc4" path="res://scene/auto_homm/unit/necromancer/necromancer.gd" id="1_fjbuf"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_fjbuf"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_sgoc5"]
 [ext_resource type="Texture2D" uid="uid://cpn7mgk06wapm" path="res://asset/texture/unit/necromancer/Death/spr_NecromancerDeath_strip52.png" id="3_hsq4q"]
 [ext_resource type="Texture2D" uid="uid://bnncycbmoiqrb" path="res://asset/texture/unit/necromancer/GetHit/spr_NecromancerGetHit_strip9.png" id="4_xs1cl"]
 [ext_resource type="Texture2D" uid="uid://cijh65uuruk8s" path="res://asset/texture/unit/necromancer/Idle/spr_NecromancerIdle_strip50.png" id="5_36n4t"]
 [ext_resource type="Texture2D" uid="uid://c8nfjljcham1d" path="res://asset/texture/unit/necromancer/Walk/spr_NecromancerWalk_strip10.png" id="6_ygipj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g2s3a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgoc5"]
 shader = ExtResource("2_sgoc5")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -883,16 +883,14 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Necromancer" type="Node2D" node_paths=PackedStringArray("glow_node")]
+[node name="Necromancer" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_fjbuf")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_g2s3a")
+material = SubResource("ShaderMaterial_sgoc5")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"

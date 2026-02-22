@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://0xp42fwvcrjf"]
+
+[ext_resource type="Script" uid="uid://t4vfgdopwdxl" path="res://script/auto_homm/visual/unit_view_glow.gd" id="1_2qixt"]
+[ext_resource type="Script" uid="uid://co76bbh2o12p" path="res://script/auto_homm/visual/unit_view.gd" id="1_lx01h"]
+
+[node name="UnitView" type="Node2D" node_paths=PackedStringArray("glow")]
+script = ExtResource("1_lx01h")
+glow = NodePath("Glow")
+
+[node name="Glow" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_2qixt")
+metadata/_custom_type_script = "uid://t4vfgdopwdxl"
+
+[node name="VisualsAttach" type="Node2D" parent="."]

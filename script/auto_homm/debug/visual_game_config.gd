@@ -1,8 +1,8 @@
 class_name teVisualGameConfig extends Node
 
 
-@export var visuals_parent: Node
-@export var board_view: teBoardView
+@export var units_node: Node2D
+@export var hex_space: HexSpace
 @export var skin_set: teSkinSet
 
 @export var ally_grid: HexGridBase
@@ -11,8 +11,8 @@ class_name teVisualGameConfig extends Node
 
 func get_unit_visuals() -> Array[Node2D]:
 	var visuals: Array[Node2D] = []
-	for node in visuals_parent.get_children():
-		if node is Node2D:
+	for node in units_node.get_children():
+		if node is teUnitVisuals:
 			visuals.append(node)
 	return visuals
 
@@ -24,8 +24,7 @@ func read_game_state() -> teGameState:
 		var unit := teCombatUnit.new()
 		unit.definition_uid = try_find_unit_definition_uid_by_visuals(visuals)
 		unit.rank = 1
-		var position = board_view.hex_space.to_local(visuals.global_position)
-		var hex := board_view.hex_space.layout.pixel_to_hex(position)
+		var hex := hex_space.layout.pixel_to_hex(visuals.position)
 		var team := state.current_team if ally_grid.has_point(hex) else state.enemy
 		state.all_units.append(unit)
 		team.units_placement[unit_id] = hex 

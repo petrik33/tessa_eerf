@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://ba8hm538xfpt6"]
 
-[ext_resource type="Script" uid="uid://c20bd1e1ct8xy" path="res://scene/auto_homm/unit/martial_hero/martial_hero.gd" id="1_qs61h"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_qs61h"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_hjl7q"]
 [ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="3_0rfx6"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="4_ij4i7"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="6_iyrry"]
 [ext_resource type="Texture2D" uid="uid://fl5y7toxft2e" path="res://asset/texture/unit/martial_hero/Run.png" id="7_d3afi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkf35"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjl7q"]
 shader = ExtResource("2_hjl7q")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -266,16 +266,14 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("glow_node")]
+[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_qs61h")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_jkf35")
+material = SubResource("ShaderMaterial_hjl7q")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"idle"
 autoplay = "idle"

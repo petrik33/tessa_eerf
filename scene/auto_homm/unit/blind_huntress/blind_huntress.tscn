@@ -1,7 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://dyt6sh81t35pd"]
+[gd_scene load_steps=54 format=3 uid="uid://dyt6sh81t35pd"]
 
-[ext_resource type="Script" uid="uid://yqpw11w2depa" path="res://scene/auto_homm/unit/blind_huntress/blind_huntress.gd" id="1_2u57n"]
-[ext_resource type="Material" uid="uid://4yf7wxi4xm3a" path="res://resource/material/auto_chess/unit_pixel_art_glow.tres" id="2_e28un"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_2u57n"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_e28un"]
 [ext_resource type="Texture2D" uid="uid://b1h0gsc1tojhk" path="res://asset/texture/unit/blind_huntress/6 - dash.png" id="3_efk7q"]
 [ext_resource type="Texture2D" uid="uid://bhe5asrlyfto2" path="res://asset/texture/unit/blind_huntress/12 - dash attack.png" id="4_3s0a1"]
 [ext_resource type="Texture2D" uid="uid://bnkk6aiv11d2v" path="res://asset/texture/unit/blind_huntress/14 - hit.png" id="5_k087a"]
@@ -10,6 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://bf8rgsqh8o0w6" path="res://asset/texture/unit/blind_huntress/11 - attack 3.png" id="8_uut3a"]
 [ext_resource type="Texture2D" uid="uid://xheg6w5n510c" path="res://asset/texture/unit/blind_huntress/13 - spetial dash.png" id="9_xu2r4"]
 [ext_resource type="Texture2D" uid="uid://bmqu8jp46ajib" path="res://asset/texture/unit/blind_huntress/2 - Run.png" id="10_jkbbi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_efk7q"]
+shader = ExtResource("2_e28un")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 2.0
+shader_parameter/glow_strength = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8idou"]
 atlas = ExtResource("3_efk7q")
@@ -344,18 +350,15 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("glow_node")]
+[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_2u57n")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = ExtResource("2_e28un")
+material = SubResource("ShaderMaterial_efk7q")
 sprite_frames = SubResource("SpriteFrames_ll718")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.4516711
 offset = Vector2(-1, -15)

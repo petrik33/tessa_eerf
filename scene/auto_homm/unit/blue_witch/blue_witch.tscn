@@ -1,6 +1,6 @@
 [gd_scene load_steps=54 format=3 uid="uid://b0kv6xupf1dp3"]
 
-[ext_resource type="Script" uid="uid://bdi2s6em0pthq" path="res://scene/auto_homm/unit/blue_witch/blue_witch.gd" id="1_6ksbd"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_6ksbd"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_ubqc5"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="3_q5mfk"]
 [ext_resource type="Texture2D" uid="uid://bp7m052ako0f0" path="res://asset/texture/unit/blue_witch/B_witch_death.png" id="4_d6edi"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dyqct1n7poe7j" path="res://asset/texture/unit/blue_witch/B_witch_attack.png" id="7_6kma7"]
 [ext_resource type="Texture2D" uid="uid://cjig7lus2c3md" path="res://asset/texture/unit/blue_witch/B_witch_run.png" id="8_pphe4"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1hv6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubqc5"]
 shader = ExtResource("2_ubqc5")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -349,16 +349,14 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("glow_node")]
+[node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_6ksbd")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_r1hv6")
+material = SubResource("ShaderMaterial_ubqc5")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"

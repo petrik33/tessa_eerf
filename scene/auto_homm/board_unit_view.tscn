@@ -1,21 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://blc7d7qhuv7c6"]
+[gd_scene load_steps=4 format=3 uid="uid://blc7d7qhuv7c6"]
 
 [ext_resource type="Script" uid="uid://bqjjla6c1xuhe" path="res://script/auto_homm/visual/board_unit_view.gd" id="1_rdlfa"]
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="2_jnodn"]
 [ext_resource type="PackedScene" uid="uid://dlllyceo4rdoi" path="res://scene/combat_ui/unit_marker.tscn" id="3_a31u8"]
-[ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="4_nmwjp"]
 
-[node name="UnitView" type="Node2D" node_paths=PackedStringArray("visuals_attach")]
+[node name="BoardUnitView" type="Node2D" node_paths=PackedStringArray("unit_view_attach")]
 script = ExtResource("1_rdlfa")
-visuals_attach = NodePath("VisualsAttach")
+unit_view_attach = NodePath("UnitAttach")
 
 [node name="DbgCombatVisualHex" parent="." instance=ExtResource("2_jnodn")]
 visible = false
 
-[node name="VisualsAttach" type="Node2D" parent="."]
+[node name="UnitAttach" type="Node2D" parent="."]
 position = Vector2(0, 2)
-
-[node name="Necromancer" parent="VisualsAttach" instance=ExtResource("4_nmwjp")]
-visible = false
 
 [node name="UnitMarker" parent="." instance=ExtResource("3_a31u8")]

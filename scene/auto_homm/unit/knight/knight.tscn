@@ -1,12 +1,12 @@
 [gd_scene load_steps=44 format=3 uid="uid://dcbcfk3u2vj7j"]
 
-[ext_resource type="Script" uid="uid://fvovq4oq7g8g" path="res://scene/auto_homm/unit/knight/knight.gd" id="1_tw2os"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_tw2os"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_26kl8"]
 [ext_resource type="Texture2D" uid="uid://cr7dubsl41gu7" path="res://asset/texture/unit/knight/noBKG_KnightIdle_strip.png" id="3_1r0va"]
 [ext_resource type="Texture2D" uid="uid://b1uwsgi5soeme" path="res://asset/texture/unit/knight/noBKG_KnightAttack_strip.png" id="4_73hoa"]
 [ext_resource type="Texture2D" uid="uid://0i2gcwl5atkt" path="res://asset/texture/unit/knight/noBKG_KnightRun_strip.png" id="5_geahy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_koi4l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26kl8"]
 shader = ExtResource("2_26kl8")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
@@ -282,16 +282,14 @@ animations = [{
 "speed": 14.0
 }]
 
-[node name="Knight" type="Node2D" node_paths=PackedStringArray("glow_node")]
+[node name="Knight" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_tw2os")
-glow_node = NodePath("Physical/AnimatedSprite2D")
-metadata/_custom_type_script = "uid://du8en4n6dn4d6"
+node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://urj01xa8pcy8"
 
-[node name="Physical" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_koi4l")
+material = SubResource("ShaderMaterial_26kl8")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"idle"
 autoplay = "idle"
