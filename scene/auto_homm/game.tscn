@@ -1053,6 +1053,11 @@ metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
 [node name="Units" type="Node2D" parent="HexSpace"]
 
+[node name="MartialHero" parent="HexSpace/Units" instance=ExtResource("13_qdtad")]
+position = Vector2(54, 162)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+
 [node name="Necromancer" parent="HexSpace/Units" instance=ExtResource("8_ycat3")]
 position = Vector2(135, 25)
 
@@ -1068,10 +1073,6 @@ scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" instance=ExtResource("12_3tj1a")]
 position = Vector2(139, 81)
-scale = Vector2(-1, 1)
-
-[node name="MartialHero" parent="HexSpace/Units" instance=ExtResource("13_qdtad")]
-position = Vector2(54, 162)
 scale = Vector2(-1, 1)
 
 [node name="Controllers" type="Node" parent="."]

@@ -316,6 +316,7 @@ animations = [{
 
 [node name="MartialHero" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_qs61h")
+melee_hit_frame = 4
 animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
@@ -324,5 +325,5 @@ metadata/_custom_type_script = "uid://bo2r223i6x8py"
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hjl7q")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
-animation = &"idle"
+animation = &"melee"
 offset = Vector2(0, -18)

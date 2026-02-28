@@ -9,9 +9,10 @@ func melee(act: teVisualActMelee):
 	_windup_start()
 	animated_sprite.play(melee_animation_name)
 	# TODO: reimplement with timers later?
-	if melee_hit_frame != -1:
+	if melee_hit_frame == -1:
 		await animated_sprite.animation_finished
 		_windup_finish()
+		return
 	else:
 		while true:
 			await animated_sprite.frame_changed

@@ -40,8 +40,8 @@ func _input(event: InputEvent) -> void:
 		var next_map := teCombatMap.new()
 		next_map.grid = setup.grid
 		next_combat.map = next_map
-		next_combat.teams.push_back(state.current_team)
 		next_combat.teams.push_back(state.enemy)
+		next_combat.teams.push_back(state.current_team)
 		combat_services = teCombatServices.new(next_combat)
 		var initial_combat_state = setup.rule_set.rules.initialize(
 			next_combat,
