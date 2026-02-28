@@ -1,13 +1,82 @@
-[gd_resource type="Resource" script_class="teCombatRuleSet" load_steps=4 format=3 uid="uid://bhy432ye7u446"]
+[gd_resource type="Resource" script_class="teCombatRuleSet" load_steps=20 format=3 uid="uid://bhy432ye7u446"]
 
 [ext_resource type="Script" uid="uid://b3by6egx2vlst" path="res://script/auto_homm/combat/rule_set.gd" id="1_3dsa1"]
 [ext_resource type="Script" uid="uid://56bdwaw8x0ql" path="res://script/auto_homm/combat/rules.gd" id="1_dnmu3"]
+[ext_resource type="Script" uid="uid://daavssjfuh6c3" path="res://script/auto_homm/combat/unit_set.gd" id="3_l61na"]
+[ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="4_ikphj"]
+[ext_resource type="Script" uid="uid://bmmh4y5p4r5ej" path="res://script/auto_homm/unit/stats.gd" id="5_ikphj"]
 
 [sub_resource type="Resource" id="Resource_d2lcd"]
 script = ExtResource("1_dnmu3")
 metadata/_custom_type_script = "uid://56bdwaw8x0ql"
 
+[sub_resource type="Resource" id="Resource_ikphj"]
+script = ExtResource("5_ikphj")
+metadata/_custom_type_script = "uid://bmmh4y5p4r5ej"
+
+[sub_resource type="Resource" id="Resource_wsd47"]
+script = ExtResource("4_ikphj")
+stats = SubResource("Resource_ikphj")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_le1ug"]
+script = ExtResource("5_ikphj")
+metadata/_custom_type_script = "uid://bmmh4y5p4r5ej"
+
+[sub_resource type="Resource" id="Resource_5lh6l"]
+script = ExtResource("4_ikphj")
+stats = SubResource("Resource_le1ug")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_2wb03"]
+script = ExtResource("5_ikphj")
+
+[sub_resource type="Resource" id="Resource_eqe1j"]
+script = ExtResource("4_ikphj")
+stats = SubResource("Resource_2wb03")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_urxnx"]
+script = ExtResource("5_ikphj")
+metadata/_custom_type_script = "uid://bmmh4y5p4r5ej"
+
+[sub_resource type="Resource" id="Resource_n3uly"]
+script = ExtResource("4_ikphj")
+stats = SubResource("Resource_urxnx")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_deqbk"]
+script = ExtResource("5_ikphj")
+metadata/_custom_type_script = "uid://bmmh4y5p4r5ej"
+
+[sub_resource type="Resource" id="Resource_l6cay"]
+script = ExtResource("4_ikphj")
+stats = SubResource("Resource_deqbk")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_qy02j"]
+script = ExtResource("5_ikphj")
+metadata/_custom_type_script = "uid://bmmh4y5p4r5ej"
+
+[sub_resource type="Resource" id="Resource_0dchg"]
+script = ExtResource("4_ikphj")
+stats = SubResource("Resource_qy02j")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_yaq7i"]
+script = ExtResource("3_l61na")
+units = Dictionary[StringName, ExtResource("4_ikphj")]({
+&"blind_huntress": SubResource("Resource_wsd47"),
+&"ground_monk": SubResource("Resource_5lh6l"),
+&"martial_hero": SubResource("Resource_eqe1j"),
+&"necromancer": SubResource("Resource_n3uly"),
+&"paladin": SubResource("Resource_l6cay"),
+&"red_hood_archer": SubResource("Resource_0dchg")
+})
+metadata/_custom_type_script = "uid://daavssjfuh6c3"
+
 [resource]
 script = ExtResource("1_3dsa1")
 rules = SubResource("Resource_d2lcd")
+units = SubResource("Resource_yaq7i")
 metadata/_custom_type_script = "uid://b3by6egx2vlst"

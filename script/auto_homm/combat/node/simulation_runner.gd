@@ -13,11 +13,11 @@ func get_simulation(id: int) -> teCombatSimulation:
 	return registered[id]
 
 
-func start(rules: teCombatRules, setup: teCombatSetup) -> int:
+func start(rules: teCombatRules, services: teCombatServices, initial_state: teCombatState) -> int:
 	var simulation := teCombatSimulation.new()
 	simulation.rules = rules
-	simulation.services = teCombatServices.new(setup)
-	simulation.current_state = rules.initialize(setup)
+	simulation.services = services
+	simulation.current_state = initial_state
 	var simulation_id := max_id
 	max_id += 1
 	registered[simulation_id] = simulation
@@ -36,7 +36,7 @@ func stop(id: int) -> teCombatSimulation:
 	return simulation
 
 
-func _physics_process(_delta: float):
+func step():
 	for id in registered.keys():
 		if running[id]:
 			var turn_log = registered[id].progress()

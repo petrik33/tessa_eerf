@@ -2,7 +2,7 @@ class_name teCombatTeam extends Resource
 
 
 ## Key is unit id and value is the hex where it's placed
-@export var units_placement: Dictionary[int, Vector2i] 
+@export var units_placement: Dictionary[int, Vector2i]
 
 
 func unit_id_at_hex(hex: Vector2i) -> int:

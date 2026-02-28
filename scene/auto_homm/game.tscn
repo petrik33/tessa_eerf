@@ -1,8 +1,7 @@
-[gd_scene load_steps=38 format=4 uid="uid://cxlcpm8jg4s4g"]
+[gd_scene load_steps=41 format=4 uid="uid://cxlcpm8jg4s4g"]
 
 [ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
 [ext_resource type="Script" uid="uid://cx0e5cbn7xncm" path="res://script/auto_homm/debug/visual_game_config.gd" id="2_ap5p2"]
-[ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/combat_movie.tscn" id="2_da5fy"]
 [ext_resource type="Script" uid="uid://bsj2f5brhxk38" path="res://script/auto_homm/game/rules.gd" id="2_mehdm"]
 [ext_resource type="Resource" uid="uid://ecvihwn81f58" path="res://scene/auto_homm/grid/map.tres" id="2_qr44i"]
 [ext_resource type="Script" uid="uid://bq0btk6pleh5i" path="res://script/auto_homm/game/setup.gd" id="3_58b30"]
@@ -30,6 +29,9 @@
 [ext_resource type="PackedScene" uid="uid://cpb8ao8rhvwuj" path="res://scene/auto_homm/combat_setup.tscn" id="20_6327r"]
 [ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="21_sun1c"]
 [ext_resource type="Script" uid="uid://c7cqwtc2k2l4p" path="res://script/auto_homm/visual/board_visual.gd" id="28_e52gc"]
+[ext_resource type="Script" uid="uid://ddrgqgy0a76hp" path="res://script/auto_homm/visual/combat_movie.gd" id="29_ju7bi"]
+[ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="30_jo8ct"]
+[ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="30_ptjxi"]
 
 [sub_resource type="Resource" id="Resource_ju7bi"]
 script = ExtResource("2_mehdm")
@@ -949,6 +951,10 @@ cache/0/10/0/glyphs/402653212/texture_idx = 0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ntk6u"]
 blend_mode = 1
 
+[sub_resource type="Resource" id="Resource_2p32r"]
+script = ExtResource("30_jo8ct")
+metadata/_custom_type_script = "uid://celv2masnj3io"
+
 [node name="Game" type="Node" node_paths=PackedStringArray("visual_config", "simulation_runner", "board", "movie", "combat_setup", "units_node")]
 script = ExtResource("1_f57a3")
 visual_config = NodePath("Controllers/VisualConfig")
@@ -1031,6 +1037,7 @@ metadata/_custom_type_script = "uid://dtavfh04dvr10"
 [node name="Coordinates" type="Node2D" parent="HexSpace/Map"]
 visible = false
 script = ExtResource("15_2p32r")
+use_cube_format = false
 font = SubResource("FontFile_n1t1l")
 grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
@@ -1047,24 +1054,24 @@ metadata/_custom_type_script = "uid://k7hs7m35gx78"
 [node name="Units" type="Node2D" parent="HexSpace"]
 
 [node name="Necromancer" parent="HexSpace/Units" instance=ExtResource("8_ycat3")]
-position = Vector2(-28, 26)
+position = Vector2(135, 25)
 
 [node name="Paladin" parent="HexSpace/Units" instance=ExtResource("9_6327r")]
-position = Vector2(140, 25)
+position = Vector2(85, 81)
 
 [node name="BlindHuntress" parent="HexSpace/Units" instance=ExtResource("10_sun1c")]
-position = Vector2(113, 57)
+position = Vector2(1, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" instance=ExtResource("11_7g3bp")]
-position = Vector2(356, 10)
+position = Vector2(188, 14)
 scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" instance=ExtResource("12_3tj1a")]
-position = Vector2(305, 76)
+position = Vector2(139, 81)
 scale = Vector2(-1, 1)
 
 [node name="MartialHero" parent="HexSpace/Units" instance=ExtResource("13_qdtad")]
-position = Vector2(167, 55)
+position = Vector2(54, 162)
 scale = Vector2(-1, 1)
 
 [node name="Controllers" type="Node" parent="."]
@@ -1096,7 +1103,16 @@ hex_space = NodePath("../../HexSpace")
 hex_hover_outline = NodePath("../../HexSpace/Outline/Selected")
 metadata/_custom_type_script = "uid://c7cqwtc2k2l4p"
 
-[node name="CombatMovie" parent="Controllers" instance=ExtResource("2_da5fy")]
+[node name="CombatMovie" type="Node" parent="Controllers" node_paths=PackedStringArray("director")]
+script = ExtResource("29_ju7bi")
+director = NodePath("../VisualDirector")
+writer = SubResource("Resource_2p32r")
+metadata/_custom_type_script = "uid://ddrgqgy0a76hp"
+
+[node name="VisualDirector" type="Node" parent="Controllers" node_paths=PackedStringArray("board")]
+script = ExtResource("30_ptjxi")
+board = NodePath("../BoardVisual")
+metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
 [node name="Input" type="Node" parent="."]
 

@@ -26,7 +26,7 @@ func read_game_state() -> teGameState:
 		unit.rank = 1
 		var hex := hex_space.layout.pixel_to_hex(visuals.position)
 		var team := state.current_team if ally_grid.has_point(hex) else state.enemy
-		state.all_units.append(unit)
+		state.unit_roster.all_units.push_back(unit)
 		team.units_placement[unit_id] = hex 
 		if team == state.current_team:
 			state.squad.units_id.append(unit_id)

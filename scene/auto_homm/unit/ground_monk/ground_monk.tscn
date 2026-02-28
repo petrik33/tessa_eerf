@@ -1,6 +1,6 @@
 [gd_scene load_steps=78 format=3 uid="uid://hdsknl3q5dcn"]
 
-[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_p8yqc"]
+[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_p8yqc"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_35h25"]
 [ext_resource type="Texture2D" uid="uid://4kw26tpq5bke" path="res://asset/texture/unit/ground_monk/death/death_1.png" id="2_p8yqc"]
 [ext_resource type="Texture2D" uid="uid://di6b6d3ocdrur" path="res://asset/texture/unit/ground_monk/death/death_2.png" id="3_35h25"]
@@ -334,10 +334,11 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
+[node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_p8yqc")
+animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://urj01xa8pcy8"
+metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

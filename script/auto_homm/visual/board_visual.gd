@@ -65,3 +65,7 @@ func dettach_unit(id: int) -> teUnitView:
 
 func get_unit(id: int) -> teBoardUnitView:
 	return units[id]
+
+
+func get_unit_visuals(id: int) -> teUnitVisuals:
+	return get_unit(id).unit_view.visuals

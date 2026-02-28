@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://ba8hm538xfpt6"]
+[gd_scene load_steps=49 format=3 uid="uid://ba8hm538xfpt6"]
 
-[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_qs61h"]
+[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_qs61h"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_hjl7q"]
 [ext_resource type="Texture2D" uid="uid://cy6nu0w4i7sap" path="res://asset/texture/unit/martial_hero/Take Hit.png" id="3_0rfx6"]
+[ext_resource type="Texture2D" uid="uid://dcj073im848bh" path="res://asset/texture/unit/martial_hero/Death.png" id="3_hjl7q"]
 [ext_resource type="Texture2D" uid="uid://cr0uughts1ayi" path="res://asset/texture/unit/martial_hero/Idle.png" id="4_ij4i7"]
 [ext_resource type="Texture2D" uid="uid://c8gkr0gq11qrg" path="res://asset/texture/unit/martial_hero/Attack1.png" id="5_iable"]
 [ext_resource type="Texture2D" uid="uid://dxjsceru525q3" path="res://asset/texture/unit/martial_hero/Attack2.png" id="6_iyrry"]
@@ -13,6 +14,30 @@ shader = ExtResource("2_hjl7q")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
 shader_parameter/glow_strength = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rfx6"]
+atlas = ExtResource("3_hjl7q")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij4i7"]
+atlas = ExtResource("3_hjl7q")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iable"]
+atlas = ExtResource("3_hjl7q")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyrry"]
+atlas = ExtResource("3_hjl7q")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3afi"]
+atlas = ExtResource("3_hjl7q")
+region = Rect2(800, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5esi"]
+atlas = ExtResource("3_hjl7q")
+region = Rect2(1000, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onfqa"]
 atlas = ExtResource("3_0rfx6")
@@ -146,6 +171,29 @@ region = Rect2(1400, 0, 200, 200)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0rfx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij4i7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iable")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyrry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3afi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5esi")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_onfqa")
 }, {
 "duration": 1.0,
@@ -266,15 +314,15 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
+[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_qs61h")
+animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://urj01xa8pcy8"
+metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hjl7q")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"idle"
-autoplay = "idle"
 offset = Vector2(0, -18)

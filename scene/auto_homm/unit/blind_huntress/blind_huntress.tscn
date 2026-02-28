@@ -1,9 +1,10 @@
-[gd_scene load_steps=54 format=3 uid="uid://dyt6sh81t35pd"]
+[gd_scene load_steps=65 format=3 uid="uid://dyt6sh81t35pd"]
 
-[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_2u57n"]
+[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_2u57n"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_e28un"]
 [ext_resource type="Texture2D" uid="uid://b1h0gsc1tojhk" path="res://asset/texture/unit/blind_huntress/6 - dash.png" id="3_efk7q"]
 [ext_resource type="Texture2D" uid="uid://bhe5asrlyfto2" path="res://asset/texture/unit/blind_huntress/12 - dash attack.png" id="4_3s0a1"]
+[ext_resource type="Texture2D" uid="uid://b7ii2enxq8tfm" path="res://asset/texture/unit/blind_huntress/15 - death.png" id="5_e28un"]
 [ext_resource type="Texture2D" uid="uid://bnkk6aiv11d2v" path="res://asset/texture/unit/blind_huntress/14 - hit.png" id="5_k087a"]
 [ext_resource type="Texture2D" uid="uid://jubwdb40vg33" path="res://asset/texture/unit/blind_huntress/1 - Idle.png" id="6_lg4j8"]
 [ext_resource type="Texture2D" uid="uid://b2gmih54y7317" path="res://asset/texture/unit/blind_huntress/10 - attack 1.png" id="7_qj6pf"]
@@ -44,6 +45,46 @@ region = Rect2(240, 0, 240, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_c3ipx"]
 atlas = ExtResource("4_3s0a1")
 region = Rect2(480, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efk7q"]
+atlas = ExtResource("5_e28un")
+region = Rect2(0, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3s0a1"]
+atlas = ExtResource("5_e28un")
+region = Rect2(240, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k087a"]
+atlas = ExtResource("5_e28un")
+region = Rect2(480, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg4j8"]
+atlas = ExtResource("5_e28un")
+region = Rect2(720, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj6pf"]
+atlas = ExtResource("5_e28un")
+region = Rect2(960, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uut3a"]
+atlas = ExtResource("5_e28un")
+region = Rect2(1200, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu2r4"]
+atlas = ExtResource("5_e28un")
+region = Rect2(1440, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkbbi"]
+atlas = ExtResource("5_e28un")
+region = Rect2(1680, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf2r4"]
+atlas = ExtResource("5_e28un")
+region = Rect2(1920, 0, 240, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kj8c2"]
+atlas = ExtResource("5_e28un")
+region = Rect2(2160, 0, 240, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ea563"]
 atlas = ExtResource("5_k087a")
@@ -215,6 +256,41 @@ animations = [{
 "speed": 6.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efk7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3s0a1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k087a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg4j8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj6pf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uut3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu2r4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkbbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf2r4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kj8c2")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_ea563")
 }, {
@@ -350,10 +426,11 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
+[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_2u57n")
+animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://urj01xa8pcy8"
+metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
