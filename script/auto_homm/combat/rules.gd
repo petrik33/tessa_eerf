@@ -1,23 +1,23 @@
 class_name teCombatRules extends Resource
 
 
-func initialize(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teCombatUnitRoster) -> teCombatState:
-	var state := teCombatState.new()
-	var team_id := 0
-	for team in setup.teams:
-		for unit_id in team.units_placement:
-			var unit := unit_roster.get_unit(unit_id)
-			var unit_initial_state := teCombatUnitState.new()
-			var unit_definition := unit_set.get_definition(unit.definition_uid)
-			unit_initial_state.hex = team.units_placement[unit_id]
-			unit_initial_state.hp = unit_definition.stats.max_hp
-			unit_initial_state.mana = 0
-			state.units[unit_id] = unit_initial_state
-			state.unit_teams[unit_id] = team_id
-		team_id += 1
-	for unit_id in state.units:
-		state.turn_queue.push_back(unit_id)
-	return state
+func prepare(
+	combat: teCombatState,
+	services: teCombatServices
+) -> teCombatEventLog:
+	var event_log := teCombatEventLog.new()
+	return event_log
+
+
+func is_finished(combat: teCombatState) -> bool:
+	var alive_teams: Dictionary[int, bool] = {}
+	for unit_id in combat.all_units_id():
+		var unit := combat.unit(unit_id)
+		if unit.is_alive():
+			var team_id := combat.unit_team_id(unit_id)
+			alive_teams[team_id] = true
+	return alive_teams.size() <= 1
+		
 
 
 func progress(
@@ -45,6 +45,7 @@ func fill_log(
 	services: teCombatServices,
 	events: Array[teCombatEventBase]
 ):
+	events.push_back(teCombatEvents.turn_started())
 	if command is teCombatCommandUnitMeleeAttack:
 		events.push_back(teCombatEvents.unit_melee_hit(
 			command.target_id,
@@ -52,5 +53,9 @@ func fill_log(
 			10,
 			false
 		))
-	events.push_back(teCombatEvents.progress_turn())
+	events.push_back(teCombatEvents.turn_finished())
+
+
+func is_valid(combat: teCombatState) -> bool:
+	return true
 	

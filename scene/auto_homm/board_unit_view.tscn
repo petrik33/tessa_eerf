@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bqjjla6c1xuhe" path="res://script/auto_homm/visual/board_unit_view.gd" id="1_rdlfa"]
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="2_jnodn"]
-[ext_resource type="PackedScene" uid="uid://dlllyceo4rdoi" path="res://scene/combat_ui/unit_marker.tscn" id="3_a31u8"]
+[ext_resource type="PackedScene" uid="uid://x1oxfgho7yu7" path="res://scene/auto_homm/ui/combat/unit_marker.tscn" id="3_j60lq"]
 
-[node name="BoardUnitView" type="Node2D" node_paths=PackedStringArray("unit_view_attach")]
+[node name="BoardUnitView" type="Node2D" node_paths=PackedStringArray("view_attach", "marker")]
 script = ExtResource("1_rdlfa")
-unit_view_attach = NodePath("UnitAttach")
+view_attach = NodePath("UnitAttach")
+marker = NodePath("UnitMarker")
 
 [node name="DbgCombatVisualHex" parent="." instance=ExtResource("2_jnodn")]
 visible = false
@@ -14,4 +15,10 @@ visible = false
 [node name="UnitAttach" type="Node2D" parent="."]
 position = Vector2(0, 2)
 
-[node name="UnitMarker" parent="." instance=ExtResource("3_a31u8")]
+[node name="UnitMarker" parent="." instance=ExtResource("3_j60lq")]
+
+[node name="MarkerAttach" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

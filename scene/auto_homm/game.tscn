@@ -1,8 +1,7 @@
-[gd_scene load_steps=41 format=4 uid="uid://cxlcpm8jg4s4g"]
+[gd_scene load_steps=39 format=4 uid="uid://cxlcpm8jg4s4g"]
 
 [ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
 [ext_resource type="Script" uid="uid://cx0e5cbn7xncm" path="res://script/auto_homm/debug/visual_game_config.gd" id="2_ap5p2"]
-[ext_resource type="Script" uid="uid://bsj2f5brhxk38" path="res://script/auto_homm/game/rules.gd" id="2_mehdm"]
 [ext_resource type="Resource" uid="uid://ecvihwn81f58" path="res://scene/auto_homm/grid/map.tres" id="2_qr44i"]
 [ext_resource type="Script" uid="uid://bq0btk6pleh5i" path="res://script/auto_homm/game/setup.gd" id="3_58b30"]
 [ext_resource type="Resource" uid="uid://bhy432ye7u446" path="res://resource/auto_homm/rule_set.tres" id="3_ycat3"]
@@ -13,7 +12,6 @@
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="8_e52gc"]
 [ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="8_ycat3"]
 [ext_resource type="PackedScene" uid="uid://yeda2nifrlx8" path="res://scene/auto_homm/unit/paladin/paladin.tscn" id="9_6327r"]
-[ext_resource type="Script" uid="uid://dqumqp1bdxv8q" path="res://script/auto_homm/combat/node/simulation_runner.gd" id="9_ap5p2"]
 [ext_resource type="Resource" uid="uid://cfvc63jynxb4o" path="res://scene/auto_homm/grid/ally.tres" id="9_g58u6"]
 [ext_resource type="Resource" uid="uid://bpiu83sab63yc" path="res://scene/auto_homm/hex/combat_layout.tres" id="9_mehdm"]
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="10_ju7bi"]
@@ -26,16 +24,14 @@
 [ext_resource type="PackedScene" uid="uid://ba8hm538xfpt6" path="res://scene/auto_homm/unit/martial_hero/martial_hero.tscn" id="13_qdtad"]
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="15_2p32r"]
 [ext_resource type="PackedScene" uid="uid://d3t3qgj2hvca0" path="res://scene/auto_homm/debug/debug.tscn" id="19_bdy12"]
-[ext_resource type="PackedScene" uid="uid://cpb8ao8rhvwuj" path="res://scene/auto_homm/combat_setup.tscn" id="20_6327r"]
 [ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="21_sun1c"]
 [ext_resource type="Script" uid="uid://c7cqwtc2k2l4p" path="res://script/auto_homm/visual/board_visual.gd" id="28_e52gc"]
-[ext_resource type="Script" uid="uid://ddrgqgy0a76hp" path="res://script/auto_homm/visual/combat_movie.gd" id="29_ju7bi"]
-[ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="30_jo8ct"]
-[ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="30_ptjxi"]
-
-[sub_resource type="Resource" id="Resource_ju7bi"]
-script = ExtResource("2_mehdm")
-metadata/_custom_type_script = "uid://bsj2f5brhxk38"
+[ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="28_mehdm"]
+[ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="29_mehdm"]
+[ext_resource type="PackedScene" uid="uid://d1gp87bi5qvo8" path="res://scene/auto_homm/ui/combat.tscn" id="30_ju7bi"]
+[ext_resource type="PackedScene" uid="uid://x1oxfgho7yu7" path="res://scene/auto_homm/ui/combat/unit_marker.tscn" id="31_2p32r"]
+[ext_resource type="Script" uid="uid://bsvjxvw8ny7j8" path="res://script/auto_homm/controller/combat_setup.gd" id="31_jo8ct"]
+[ext_resource type="PackedScene" uid="uid://bxi1j6sx4s8e1" path="res://scene/auto_homm/combat.tscn" id="31_ptjxi"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -951,19 +947,14 @@ cache/0/10/0/glyphs/402653212/texture_idx = 0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ntk6u"]
 blend_mode = 1
 
-[sub_resource type="Resource" id="Resource_2p32r"]
-script = ExtResource("30_jo8ct")
-metadata/_custom_type_script = "uid://celv2masnj3io"
-
-[node name="Game" type="Node" node_paths=PackedStringArray("visual_config", "simulation_runner", "board", "movie", "combat_setup", "units_node")]
+[node name="Game" type="Node" node_paths=PackedStringArray("visual_config", "board", "combat", "movie", "combat_setup", "units_node")]
 script = ExtResource("1_f57a3")
 visual_config = NodePath("Controllers/VisualConfig")
-rules = SubResource("Resource_ju7bi")
 setup = SubResource("Resource_ycat3")
-simulation_runner = NodePath("Controllers/SimulationRunner")
-board = NodePath("Controllers/BoardVisual")
-movie = NodePath("Controllers/CombatMovie")
-combat_setup = NodePath("Controllers/CombatSetup")
+board = NodePath("Controllers/Board")
+combat = NodePath("Controllers/Combat")
+movie = NodePath("Controllers/Movie")
+combat_setup = NodePath("Controllers/Setup")
 units_node = NodePath("HexSpace/Units")
 unit_view_scene = ExtResource("6_6327r")
 
@@ -1079,10 +1070,6 @@ scale = Vector2(-1, 1)
 
 [node name="Debug" parent="Controllers" instance=ExtResource("19_bdy12")]
 
-[node name="CombatSetup" parent="Controllers" node_paths=PackedStringArray("hex_picking", "board") instance=ExtResource("20_6327r")]
-hex_picking = NodePath("../../Input/HexPicking")
-board = NodePath("../BoardVisual")
-
 [node name="VisualConfig" type="Node" parent="Controllers" node_paths=PackedStringArray("units_node", "hex_space")]
 script = ExtResource("2_ap5p2")
 units_node = NodePath("../../HexSpace/Units")
@@ -1092,11 +1079,7 @@ ally_grid = ExtResource("9_g58u6")
 enemy_grid = ExtResource("10_t034j")
 metadata/_custom_type_script = "uid://cx0e5cbn7xncm"
 
-[node name="SimulationRunner" type="Node" parent="Controllers"]
-script = ExtResource("9_ap5p2")
-metadata/_custom_type_script = "uid://dqumqp1bdxv8q"
-
-[node name="BoardVisual" type="Node" parent="Controllers" node_paths=PackedStringArray("units_attach", "hex_space", "hex_hover_outline")]
+[node name="Board" type="Node" parent="Controllers" node_paths=PackedStringArray("units_attach", "hex_space", "hex_hover_outline")]
 script = ExtResource("28_e52gc")
 board_unit_view_scene = ExtResource("7_t034j")
 units_attach = NodePath("../../HexSpace/Units")
@@ -1104,16 +1087,27 @@ hex_space = NodePath("../../HexSpace")
 hex_hover_outline = NodePath("../../HexSpace/Outline/Selected")
 metadata/_custom_type_script = "uid://c7cqwtc2k2l4p"
 
-[node name="CombatMovie" type="Node" parent="Controllers" node_paths=PackedStringArray("director")]
-script = ExtResource("29_ju7bi")
-director = NodePath("../VisualDirector")
-writer = SubResource("Resource_2p32r")
-metadata/_custom_type_script = "uid://ddrgqgy0a76hp"
+[node name="Combat" parent="Controllers" instance=ExtResource("31_ptjxi")]
 
-[node name="VisualDirector" type="Node" parent="Controllers" node_paths=PackedStringArray("board")]
-script = ExtResource("30_ptjxi")
-board = NodePath("../BoardVisual")
+[node name="Setup" type="Node" parent="Controllers" node_paths=PackedStringArray("hex_picking", "board")]
+script = ExtResource("31_jo8ct")
+hex_picking = NodePath("../../Input/HexPicking")
+board = NodePath("../Board")
+metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
+
+[node name="Movie" parent="Controllers" node_paths=PackedStringArray("board", "director") instance=ExtResource("28_mehdm")]
+board = NodePath("../Board")
+director = NodePath("../Director")
+
+[node name="Director" type="Node" parent="Controllers" node_paths=PackedStringArray("board")]
+script = ExtResource("29_mehdm")
+board = NodePath("../Board")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
+
+[node name="CombatUI" parent="Controllers" node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
+combat = NodePath("../Combat")
+board = NodePath("../Board")
+marker_scene = ExtResource("31_2p32r")
 
 [node name="Input" type="Node" parent="."]
 
@@ -1122,3 +1116,7 @@ script = ExtResource("21_sun1c")
 space = NodePath("../../HexSpace")
 grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://cry7o5rka2bla"
+
+[connection signal="started" from="Controllers/Combat" to="Controllers/CombatUI" method="_on_combat_started"]
+[connection signal="place_unit_requested" from="Controllers/Setup" to="." method="_on_place_unit_requested"]
+[connection signal="combat_event" from="Controllers/Director" to="Controllers/CombatUI" method="_on_combat_event"]

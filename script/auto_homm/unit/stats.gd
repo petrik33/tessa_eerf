@@ -8,3 +8,4 @@ class_name teUnitStats extends Resource
 @export var base_magic_resistance := 10
 @export var base_movement_range := 5
 @export var base_attack_range := 1
+@export var base_initiative := 5

@@ -1,19 +1,27 @@
 class_name teCombatSimulation extends RefCounted
 
 
+var initial_state: teCombatState
 var prev_state: teCombatState
 var current_state: teCombatState
-var services: teCombatServices
-var rules: teCombatRules
-var seed: int = 42
-var turn_history: Array[teCombatEventLog] = []
+var turn_history := teTurnHistory.new()
 
 
-func progress() -> teCombatEventLog:
-	var next_command := rules.progress(current_state, services)
-	var turn_log := rules.process(current_state, next_command, services)
+func _init(_initial_state: teCombatState):
+	initial_state = _initial_state
+	current_state = _initial_state
+
+
+func steps_made() -> int:
+	return turn_history.number()
+
+
+func progress(turn_log: teCombatEventLog):
 	prev_state = current_state.duplicate(true)
 	current_state.update(turn_log)
 	turn_history.append(turn_log)
-	return turn_log
+
+
+func finished() -> bool:
+	return current_state.is_finished()
 	

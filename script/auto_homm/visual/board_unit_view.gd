@@ -1,28 +1,33 @@
 class_name teBoardUnitView extends Node2D
 
 
-@export var unit_view_attach: Node2D
+@export var view_attach: Node2D
+@export var marker: teCombatUnitMarker
 
 
-var unit_view: teUnitView
+var view: teUnitView
+
+
+func get_marker() -> teCombatUnitMarker:
+	return marker
 
 
 func set_hovered(hovered: bool):
-	unit_view.set_hovered(hovered)
+	view.set_hovered(hovered)
 
 
 func set_selected(selected: bool):
-	unit_view.set_selected(selected)
+	view.set_selected(selected)
 
 
-func attach_unit_view(node: teUnitView):
+func attach_view(node: teUnitView):
 	node.position = Vector2.ZERO
-	node.reparent(unit_view_attach, false)
-	unit_view = node
+	node.reparent(view_attach, false)
+	view = node
 
 
-func dettach_unit_view() -> teUnitView:
-	unit_view_attach.remove_child(unit_view)
-	var dettached_node := unit_view
-	unit_view = null
+func dettach_view() -> teUnitView:
+	view_attach.remove_child(view)
+	var dettached_node := view
+	view = null
 	return dettached_node

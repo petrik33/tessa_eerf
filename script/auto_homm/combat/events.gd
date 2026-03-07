@@ -14,5 +14,9 @@ static func unit_melee_hit(unit_id: int, attacker_id: int, damage: int, is_letha
 	return hit
 
 
-static func progress_turn() -> teCombatEventBase:
-	return teCombatEventTurnProgressed.new()
+static func turn_started() -> teCombatEventTurnStarted:
+	return teCombatEventTurnStarted.new()
+
+
+static func turn_finished() -> teCombatEventTurnFinished:
+	return teCombatEventTurnFinished.new()

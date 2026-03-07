@@ -10,6 +10,12 @@ class_name teBoardVisual extends Node
 var units: Dictionary[int, teBoardUnitView]
 
 
+func sync_state(combat: teCombatState):
+	for unit_id in combat.all_units_id():
+		var hex := combat.unit(unit_id).hex
+		units[unit_id].position = hex_space.layout.hex_to_pixel(hex)
+
+
 func sync_unit_positions(team: teCombatTeam):
 	for unit_id in team.units_placement:
 		var hex := team.units_placement[unit_id]
@@ -48,7 +54,7 @@ func select_unit(unit_id: int):
 
 func attach_unit(unit_view: teUnitView, id: int) -> teBoardUnitView:
 	var board_unit_view := board_unit_view_scene.instantiate() as teBoardUnitView
-	board_unit_view.attach_unit_view(unit_view)
+	board_unit_view.attach_view(unit_view)
 	units_attach.add_child(board_unit_view)
 	units[id] = board_unit_view
 	return board_unit_view
@@ -58,7 +64,7 @@ func dettach_unit(id: int) -> teUnitView:
 	var board_unit_view = units[id]
 	units.erase(id)
 	units_attach.remove_child(board_unit_view)
-	var dettached_unit := board_unit_view.dettach_unit_view()
+	var dettached_unit := board_unit_view.dettach_view()
 	board_unit_view.queue_free()
 	return dettached_unit
 
@@ -68,4 +74,4 @@ func get_unit(id: int) -> teBoardUnitView:
 
 
 func get_unit_visuals(id: int) -> teUnitVisuals:
-	return get_unit(id).unit_view.visuals
+	return get_unit(id).view.visuals

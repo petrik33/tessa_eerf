@@ -7,6 +7,10 @@ class_name teVisualDirector extends Node
 signal started(action: teVisualActionBase)
 signal played(action: teVisualActionBase)
 
+signal sequence_finished()
+
+signal combat_event(event: teCombatEventBase)
+
 
 func playing() -> bool:
 	return _playing > 0
@@ -34,6 +38,7 @@ func play_next():
 		sequence = _queue.pop_front()
 	for action in sequence.actions:
 		await play_action(action)
+	sequence_finished.emit()
 
 
 func play_action(action: teVisualActionBase):
@@ -69,8 +74,17 @@ func direct_action(action: teVisualActionBase):
 				continue
 			await visuals.call(method_name, act)
 		visuals.go_idle()
+	if action is teVisualActionFreezeFrame:
+		var old_scale := Engine.time_scale
+		Engine.time_scale = action.time_scale
+		await get_tree().create_timer(action.duration, true, false, true).timeout
+		Engine.time_scale = old_scale
+	if action is teVisualActionCombatEventHappened:
+		combat_event.emit(action.event)
 
 
+func clear_queue():
+	_queue.clear()
 
 
 var _queue: Array[teVisualSequence]

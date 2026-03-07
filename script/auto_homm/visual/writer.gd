@@ -1,6 +1,10 @@
 class_name teVisualWriter extends Resource
 
 
+@export var freeze_frame_duration_hit := 0.33
+@export var freeze_frame_duration_kill := 0.74
+
+
 func intro(initial_state: teCombatState) -> teVisualSequence:
 	return null
 
@@ -22,9 +26,15 @@ func write(event: teCombatEventBase) -> teVisualActionBase:
 				event.attacker_id,
 				teVisualActs.melee()
 			),
-			teVisualActions.unit_sequence(
-				event.unit_id,
-				on_hit_act(event.lethal)
+			teVisualActions.parallel(
+				teVisualActions.unit_sequence(
+					event.unit_id,
+					on_hit_act(event.lethal)
+				),
+				teVisualActions.freeze_frame(
+					freeze_frame_duration_kill if event.lethal else freeze_frame_duration_hit
+				),
+				teVisualActions.emit(event)
 			)
 		)
 	return null

@@ -1,0 +1,1 @@
+class_name teCombatEventTurnStarted extends teCombatEventBase

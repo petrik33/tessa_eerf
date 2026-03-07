@@ -2,23 +2,18 @@ class_name teGameNode extends Node
 
 
 @export var visual_config: teVisualGameConfig
-@export var rules: teGameRules
 @export var setup: teGameSetup
 @export var state: teGameState
-@export var simulation_runner: teCombatSimulationRunner
 @export var board: teBoardVisual
+@export var combat: teCombat
 @export var movie: teCombatMovie
 @export var combat_setup: teCombatSetupController
 
 # Shouldn't be here
 @export var units_node: Node2D
-@export var unit_view_scene: PackedScene 
-
-@export var dbg_simulation_steps := 33
+@export var unit_view_scene: PackedScene
 
 
-var combat_simulation_id := -1
-var selected_unit_id := -1
 var combat_services: teCombatServices
 
 
@@ -29,13 +24,15 @@ func _ready() -> void:
 		var unit_view := _create_unit_view(visuals)
 		board.attach_unit(unit_view, id)
 		id += 1
-	board.sync_unit_positions(state.enemy) # Shouldn't be here
+	board.sync_unit_positions(state.enemy) # Shouldn't be here I suppose
 	combat_setup.activate(state.current_team)
-	combat_setup.place_unit_requested.connect(_on_place_unit_requested)
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dbg_start_combat"):
+		if combat.is_active():
+			return
+		combat_setup.deactivate()
 		var next_combat := teCombatSetup.new()
 		var next_map := teCombatMap.new()
 		next_map.grid = setup.grid
@@ -43,34 +40,21 @@ func _input(event: InputEvent) -> void:
 		next_combat.teams.push_back(state.enemy)
 		next_combat.teams.push_back(state.current_team)
 		combat_services = teCombatServices.new(next_combat)
-		var initial_combat_state = setup.rule_set.rules.initialize(
-			next_combat,
-			setup.rule_set.units,
-			state.unit_roster
+		var initial_combat_state = teCombatState.from(
+			next_combat, setup.rule_set.units, state.unit_roster
 		)
-		combat_simulation_id = simulation_runner.start(
-			setup.rule_set.rules,
-			combat_services,
-			initial_combat_state
-		)
-		simulation_runner.turn_progressed.connect(_on_turn_progressed)
-		combat_setup.place_unit_requested.disconnect(_on_place_unit_requested)
-		combat_setup.deactivate()
-		for idx in range(dbg_simulation_steps):
-			simulation_runner.step()
+		movie.live(combat)
+		combat.start(initial_combat_state, setup.rule_set.rules, combat_services)
 	if event.is_action_pressed("dbg_finish_combat"):
-		simulation_runner.turn_progressed.disconnect(_on_turn_progressed)
-		simulation_runner.stop(combat_simulation_id)
+		if not combat.is_active():
+			return
+		combat.stop()
 		combat_services = null
+		if movie.playing():
+			await movie.turn_played
+		movie.stop_live()
+		board.sync_unit_positions(state.enemy)
 		combat_setup.activate(state.current_team)
-		combat_setup.place_unit_requested.connect(_on_place_unit_requested)
-
-
-func _on_turn_progressed(simulation_id: int, turn_log: teCombatEventLog):
-	if simulation_id != combat_simulation_id:
-		return
-	movie.run(turn_log)
-	
 
 
 func _create_unit_view(visuals: Node2D) -> teUnitView:
@@ -88,7 +72,7 @@ func _on_place_unit_requested(unit_id: int, hex: Vector2i):
 	var updated_state := state.duplicate(true)
 	updated_state.current_team.units_placement.erase(unit_id)
 	updated_state.current_team.units_placement.set(unit_id, hex)
-	if not rules.is_valid_state(updated_state):
-		return
+	#if not setup.rule_set.rules.is_valid(updated_state):
+		#return
 	state = updated_state
 	combat_setup.update_current_team(state.current_team)

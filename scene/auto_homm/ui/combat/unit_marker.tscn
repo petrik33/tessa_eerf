@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://x1oxfgho7yu7"]
+
+[ext_resource type="Script" uid="uid://6wibly175cty" path="res://script/auto_homm/ui/combat/unit_marker.gd" id="1_ry6oj"]
+[ext_resource type="FontFile" uid="uid://bsohi6jkogu0" path="res://asset/ui/font/monogram-extended.ttf" id="2_jobae"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as70w"]
+bg_color = Color(0.6, 0.10800001, 0.10800001, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27, 0.11070001, 0.11070001, 1)
+border_blend = true
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 1
+anti_aliasing = false
+anti_aliasing_size = 2.0
+
+[node name="UnitMarker" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 18.0
+script = ExtResource("1_ry6oj")
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_as70w")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_jobae")
+theme_override_font_sizes/font_size = 12
+text = "231"
+horizontal_alignment = 1
+vertical_alignment = 1
