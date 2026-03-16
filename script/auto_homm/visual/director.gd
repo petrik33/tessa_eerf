@@ -81,6 +81,9 @@ func direct_action(action: teVisualActionBase):
 		Engine.time_scale = old_scale
 	if action is teVisualActionCombatEventHappened:
 		combat_event.emit(action.event)
+	if action is teVisualActionUnitFlash:
+		var unit = board.get_unit(action.unit_id)
+		unit.flash()
 
 
 func clear_queue():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://cxlcpm8jg4s4g"]
+[gd_scene load_steps=42 format=4 uid="uid://cxlcpm8jg4s4g"]
 
 [ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
 [ext_resource type="Script" uid="uid://cx0e5cbn7xncm" path="res://script/auto_homm/debug/visual_game_config.gd" id="2_ap5p2"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://d1r7lqfhfq83t" path="res://script/hex/renderer/hex_coordinates_renderer.gd" id="15_2p32r"]
 [ext_resource type="PackedScene" uid="uid://d3t3qgj2hvca0" path="res://scene/auto_homm/debug/debug.tscn" id="19_bdy12"]
 [ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="21_sun1c"]
+[ext_resource type="Shader" uid="uid://bxw8qfsdoe88f" path="res://shader/auto_homm/focus_overlay.gdshader" id="22_2p32r"]
 [ext_resource type="Script" uid="uid://c7cqwtc2k2l4p" path="res://script/auto_homm/visual/board_visual.gd" id="28_e52gc"]
 [ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="28_mehdm"]
 [ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="29_mehdm"]
@@ -32,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://x1oxfgho7yu7" path="res://scene/auto_homm/ui/combat/unit_marker.tscn" id="31_2p32r"]
 [ext_resource type="Script" uid="uid://bsvjxvw8ny7j8" path="res://script/auto_homm/controller/combat_setup.gd" id="31_jo8ct"]
 [ext_resource type="PackedScene" uid="uid://bxi1j6sx4s8e1" path="res://scene/auto_homm/combat.tscn" id="31_ptjxi"]
+[ext_resource type="Script" uid="uid://kdruejcveor8" path="res://script/ui/focus_overlay.gd" id="33_jo8ct"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -947,6 +949,13 @@ cache/0/10/0/glyphs/402653212/texture_idx = 0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ntk6u"]
 blend_mode = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gt1v"]
+shader = ExtResource("22_2p32r")
+shader_parameter/focus_points = PackedVector2Array(323.45, 169.85)
+shader_parameter/focus_count = 1
+shader_parameter/radius = 72.0
+shader_parameter/softness = 18.0
+
 [node name="Game" type="Node" node_paths=PackedStringArray("visual_config", "board", "combat", "movie", "combat_setup", "units_node")]
 script = ExtResource("1_f57a3")
 visual_config = NodePath("Controllers/VisualConfig")
@@ -1065,6 +1074,30 @@ scale = Vector2(-1, 1)
 [node name="GroundMonk" parent="HexSpace/Units" instance=ExtResource("12_3tj1a")]
 position = Vector2(139, 81)
 scale = Vector2(-1, 1)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="FocusOverlay" type="ColorRect" parent="UI"]
+visible = false
+material = SubResource("ShaderMaterial_0gt1v")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.40784314)
+script = ExtResource("33_jo8ct")
+targets = Array[Vector2]([Vector2(323.45, 169.85)])
+metadata/_custom_type_script = "uid://kdruejcveor8"
 
 [node name="Controllers" type="Node" parent="."]
 

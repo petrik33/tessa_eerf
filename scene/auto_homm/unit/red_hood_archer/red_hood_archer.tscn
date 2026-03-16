@@ -583,7 +583,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 12.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -701,7 +701,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"melee",
-"speed": 16.0
+"speed": 32.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -782,6 +782,7 @@ animations = [{
 
 [node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_i4hou")
+melee_hit_frame = 4
 animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"

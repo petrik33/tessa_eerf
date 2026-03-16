@@ -1,4 +1,4 @@
-[gd_scene load_steps=178 format=3 uid="uid://clodbolh7jpeq"]
+[gd_scene load_steps=176 format=3 uid="uid://clodbolh7jpeq"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_fjbuf"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_sgoc5"]
@@ -201,10 +201,6 @@ region = Rect2(5760, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gecxl"]
 atlas = ExtResource("3_sgoc5")
 region = Rect2(5888, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jyoc5"]
-atlas = ExtResource("3_hsq4q")
-region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_06vkv"]
 atlas = ExtResource("3_hsq4q")
@@ -409,10 +405,6 @@ region = Rect2(4800, 0, 96, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwd7g"]
 atlas = ExtResource("3_hsq4q")
 region = Rect2(4896, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2saq0"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrlut"]
 atlas = ExtResource("4_xs1cl")
@@ -832,12 +824,9 @@ animations = [{
 }],
 "loop": false,
 "name": &"cast",
-"speed": 16.0
+"speed": 32.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jyoc5")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_06vkv")
 }, {
@@ -993,12 +982,9 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 20.0
+"speed": 32.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2saq0")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nrlut")
 }, {
@@ -1025,7 +1011,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 9.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1221,6 +1207,7 @@ animations = [{
 [node name="Necromancer" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_fjbuf")
 melee_animation_name = &"cast"
+melee_hit_frame = 35
 animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
@@ -1229,6 +1216,8 @@ metadata/_custom_type_script = "uid://bo2r223i6x8py"
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sgoc5")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"cast"
+animation = &"hurt"
 autoplay = "idle"
+frame = 7
+frame_progress = 1.0
 offset = Vector2(0, -12)

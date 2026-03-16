@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://hdsknl3q5dcn"]
+[gd_scene load_steps=93 format=3 uid="uid://hdsknl3q5dcn"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_p8yqc"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_35h25"]
@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://dafopwlyxqqda" path="res://asset/texture/unit/ground_monk/death/death_17.png" id="18_0j1op"]
 [ext_resource type="Texture2D" uid="uid://ccq5l88vovfeb" path="res://asset/texture/unit/ground_monk/death/death_18.png" id="19_hvf55"]
 [ext_resource type="Texture2D" uid="uid://c0yimws0ka4vf" path="res://asset/texture/unit/ground_monk/idle/idle_1.png" id="20_ypccy"]
-[ext_resource type="Texture2D" uid="uid://cwop3luqjjjl4" path="res://asset/texture/unit/ground_monk/meditate/meditate_1.png" id="21_0j1op"]
 [ext_resource type="Texture2D" uid="uid://c4px1srj70vx3" path="res://asset/texture/unit/ground_monk/idle/idle_2.png" id="21_kxp7p"]
 [ext_resource type="Texture2D" uid="uid://d0gpbx6qatlk7" path="res://asset/texture/unit/ground_monk/meditate/meditate_2.png" id="22_hvf55"]
 [ext_resource type="Texture2D" uid="uid://f73q8dmga6vm" path="res://asset/texture/unit/ground_monk/idle/idle_3.png" id="22_irfgi"]
@@ -157,12 +156,9 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 7.0
+"speed": 16.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("21_0j1op")
-}, {
 "duration": 1.0,
 "texture": ExtResource("22_hvf55")
 }, {
@@ -405,6 +401,7 @@ animations = [{
 
 [node name="GroundMonk" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_p8yqc")
+melee_hit_frame = 2
 animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
@@ -413,6 +410,7 @@ metadata/_custom_type_script = "uid://bo2r223i6x8py"
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_djk20")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"hurt"
+animation = &"death"
 autoplay = "idle"
+frame_progress = 0.15819721
 offset = Vector2(0, -53)

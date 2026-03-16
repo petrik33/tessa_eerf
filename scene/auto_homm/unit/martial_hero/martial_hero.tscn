@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ba8hm538xfpt6"]
+[gd_scene load_steps=47 format=3 uid="uid://ba8hm538xfpt6"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_qs61h"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_hjl7q"]
@@ -14,10 +14,6 @@ shader = ExtResource("2_hjl7q")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 2.0
 shader_parameter/glow_strength = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0rfx6"]
-atlas = ExtResource("3_hjl7q")
-region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ij4i7"]
 atlas = ExtResource("3_hjl7q")
@@ -38,10 +34,6 @@ region = Rect2(800, 0, 200, 200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5esi"]
 atlas = ExtResource("3_hjl7q")
 region = Rect2(1000, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_onfqa"]
-atlas = ExtResource("3_0rfx6")
-region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qr1lv"]
 atlas = ExtResource("3_0rfx6")
@@ -171,9 +163,6 @@ region = Rect2(1400, 0, 200, 200)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0rfx6")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ij4i7")
 }, {
 "duration": 1.0,
@@ -194,9 +183,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_onfqa")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_qr1lv")
 }, {
 "duration": 1.0,
@@ -207,7 +193,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -259,7 +245,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"melee",
-"speed": 12.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -326,6 +312,6 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hjl7q")
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"hurt"
-frame = 3
+frame = 2
 frame_progress = 1.0
 offset = Vector2(0, -18)

@@ -49,3 +49,15 @@ static func emit(event: teCombatEventBase) -> teVisualActionCombatEventHappened:
 	var action := teVisualActionCombatEventHappened.new()
 	action.event = event
 	return action
+
+static func focus_unit(unit_id: int) -> teVisualActionFocusUnit:
+	var action := teVisualActionFocusUnit.new()
+	action.unit_id = unit_id
+	return action
+
+static func unit_flash(unit_id: int, time := 1.0, color := Color.WHITE) -> teVisualActionUnitFlash:
+	var action := teVisualActionUnitFlash.new()
+	action.unit_id = unit_id
+	action.time = time
+	action.color = color
+	return action

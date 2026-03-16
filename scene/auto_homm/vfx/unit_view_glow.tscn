@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct6nj6l2m2pos"]
+
+[ext_resource type="Script" uid="uid://t4vfgdopwdxl" path="res://script/auto_homm/visual/vfx/unit_view_glow.gd" id="1_uh5jc"]
+[ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_xf8ir"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xf8ir"]
+resource_local_to_scene = true
+shader = ExtResource("2_xf8ir")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_size = 1.0
+shader_parameter/glow_strength = 0.0
+
+[node name="Glow" type="Node"]
+script = ExtResource("1_uh5jc")
+glow_material = SubResource("ShaderMaterial_xf8ir")

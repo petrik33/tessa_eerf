@@ -27,6 +27,7 @@ func write(event: teCombatEventBase) -> teVisualActionBase:
 				teVisualActs.melee()
 			),
 			teVisualActions.parallel(
+				teVisualActions.unit_flash(event.unit_id),
 				teVisualActions.unit_sequence(
 					event.unit_id,
 					on_hit_act(event.lethal)

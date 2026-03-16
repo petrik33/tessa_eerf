@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://yeda2nifrlx8"]
+[gd_scene load_steps=164 format=3 uid="uid://yeda2nifrlx8"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_h7216"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_h7216"]
@@ -273,10 +273,6 @@ region = Rect2(8064, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_a6vyc"]
 atlas = ExtResource("3_hwx5i")
 region = Rect2(8192, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xts68"]
-atlas = ExtResource("4_ppp3q")
-region = Rect2(0, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lf0a6"]
 atlas = ExtResource("4_ppp3q")
@@ -838,9 +834,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xts68")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_lf0a6")
 }, {
 "duration": 1.0,
@@ -875,7 +868,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt",
-"speed": 6.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1089,7 +1082,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"melee",
-"speed": 8.0
+"speed": 40.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1129,6 +1122,7 @@ animations = [{
 
 [node name="Paladin" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_h7216")
+melee_hit_frame = 25
 animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
@@ -1137,8 +1131,8 @@ metadata/_custom_type_script = "uid://bo2r223i6x8py"
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_h7216")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"melee"
+animation = &"hurt"
 autoplay = "idle"
-frame = 40
+frame = 10
 frame_progress = 1.0
 offset = Vector2(0, 4)
