@@ -430,6 +430,7 @@ animations = [{
 script = ExtResource("1_2u57n")
 melee_hit_frame = 0
 animated_sprite = NodePath("AnimatedSprite2D")
+hurt_animation_name = &""
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
 

@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://blc7d7qhuv7c6"]
+[gd_scene load_steps=7 format=3 uid="uid://blc7d7qhuv7c6"]
 
 [ext_resource type="Script" uid="uid://bqjjla6c1xuhe" path="res://script/auto_homm/visual/board_unit_view.gd" id="1_rdlfa"]
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="2_jnodn"]
 [ext_resource type="PackedScene" uid="uid://x1oxfgho7yu7" path="res://scene/auto_homm/ui/combat/unit_marker.tscn" id="3_j60lq"]
 [ext_resource type="PackedScene" uid="uid://w778dl2mxji7" path="res://scene/auto_homm/vfx/board_unit_view_flash.tscn" id="4_rdlfa"]
+[ext_resource type="Shader" uid="uid://l0wihqbflfey" path="res://shader/auto_homm/luminance_based_flash.gdshader" id="5_jnodn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a31u8"]
+resource_local_to_scene = true
+shader = ExtResource("5_jnodn")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/strength = 0.0
+shader_parameter/brightness_bias = 0.330000015675
 
 [node name="BoardUnitView" type="Node2D" node_paths=PackedStringArray("view_attach", "marker", "flash_vfx")]
 script = ExtResource("1_rdlfa")
@@ -26,3 +34,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Flash" parent="." instance=ExtResource("4_rdlfa")]
+flash_material = SubResource("ShaderMaterial_a31u8")
+target_strength = 1.25

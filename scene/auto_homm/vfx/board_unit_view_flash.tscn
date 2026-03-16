@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://w778dl2mxji7"]
 
 [ext_resource type="Script" uid="uid://c4h7xw782oh1f" path="res://script/auto_homm/visual/vfx/board_unit_view_flash.gd" id="1_cftyv"]
-[ext_resource type="Shader" uid="uid://53rpynm3ih27" path="res://shader/auto_homm/flash.gdshader" id="2_p1adj"]
+[ext_resource type="Shader" uid="uid://l0wihqbflfey" path="res://shader/auto_homm/luminance_based_flash.gdshader" id="2_p1adj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cftyv"]
 resource_local_to_scene = true
 shader = ExtResource("2_p1adj")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/strength = 0.0
+shader_parameter/brightness_bias = 0.750000035625
 
 [node name="Flash" type="Node"]
 script = ExtResource("1_cftyv")

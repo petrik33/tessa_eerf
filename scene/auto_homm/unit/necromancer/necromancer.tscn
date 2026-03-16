@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://clodbolh7jpeq"]
+[gd_scene load_steps=185 format=3 uid="uid://clodbolh7jpeq"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_fjbuf"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_sgoc5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dig2xt22qabw" path="res://asset/texture/unit/necromancer/Attack/spr_NecromancerAttackWithEffect_strip47.png" id="3_sgoc5"]
 [ext_resource type="Texture2D" uid="uid://bnncycbmoiqrb" path="res://asset/texture/unit/necromancer/GetHit/spr_NecromancerGetHit_strip9.png" id="4_xs1cl"]
 [ext_resource type="Texture2D" uid="uid://cijh65uuruk8s" path="res://asset/texture/unit/necromancer/Idle/spr_NecromancerIdle_strip50.png" id="5_36n4t"]
+[ext_resource type="Texture2D" uid="uid://b8mdwhppm3iup" path="res://asset/texture/unit/necromancer/GetHit/spr_NecromancerGetHitWithoutEffect_strip9.png" id="6_hsq4q"]
 [ext_resource type="Texture2D" uid="uid://c8nfjljcham1d" path="res://asset/texture/unit/necromancer/Walk/spr_NecromancerWalk_strip10.png" id="6_ygipj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sgoc5"]
@@ -436,6 +437,38 @@ region = Rect2(672, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jxli"]
 atlas = ExtResource("4_xs1cl")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3eqp"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4fik"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvvds"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq6pa"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyv0y"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oopol"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdudn"]
+atlas = ExtResource("6_hsq4q")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4e5w"]
+atlas = ExtResource("6_hsq4q")
 region = Rect2(768, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvd3s"]
@@ -1015,6 +1048,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_u3eqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4fik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvvds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq6pa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyv0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oopol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdudn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4e5w")
+}],
+"loop": false,
+"name": &"hurt_no_flash",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mvd3s")
 }, {
 "duration": 1.0,
@@ -1209,6 +1271,7 @@ script = ExtResource("1_fjbuf")
 melee_animation_name = &"cast"
 melee_hit_frame = 35
 animated_sprite = NodePath("AnimatedSprite2D")
+hurt_animation_name = &"hurt_no_flash"
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
@@ -1216,7 +1279,7 @@ metadata/_custom_type_script = "uid://bo2r223i6x8py"
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sgoc5")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"hurt"
+animation = &"hurt_no_flash"
 autoplay = "idle"
 frame = 7
 frame_progress = 1.0

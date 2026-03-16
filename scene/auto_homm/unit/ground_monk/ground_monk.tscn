@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://hdsknl3q5dcn"]
+[gd_scene load_steps=78 format=3 uid="uid://hdsknl3q5dcn"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_p8yqc"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_35h25"]
@@ -22,36 +22,21 @@
 [ext_resource type="Texture2D" uid="uid://ccq5l88vovfeb" path="res://asset/texture/unit/ground_monk/death/death_18.png" id="19_hvf55"]
 [ext_resource type="Texture2D" uid="uid://c0yimws0ka4vf" path="res://asset/texture/unit/ground_monk/idle/idle_1.png" id="20_ypccy"]
 [ext_resource type="Texture2D" uid="uid://c4px1srj70vx3" path="res://asset/texture/unit/ground_monk/idle/idle_2.png" id="21_kxp7p"]
-[ext_resource type="Texture2D" uid="uid://d0gpbx6qatlk7" path="res://asset/texture/unit/ground_monk/meditate/meditate_2.png" id="22_hvf55"]
 [ext_resource type="Texture2D" uid="uid://f73q8dmga6vm" path="res://asset/texture/unit/ground_monk/idle/idle_3.png" id="22_irfgi"]
 [ext_resource type="Texture2D" uid="uid://bv4uv3mwys0pa" path="res://asset/texture/unit/ground_monk/idle/idle_4.png" id="23_pf2w0"]
-[ext_resource type="Texture2D" uid="uid://b0hotl7eunxhi" path="res://asset/texture/unit/ground_monk/meditate/meditate_3.png" id="23_ypccy"]
-[ext_resource type="Texture2D" uid="uid://dyb51nnriktmg" path="res://asset/texture/unit/ground_monk/meditate/meditate_4.png" id="24_kxp7p"]
 [ext_resource type="Texture2D" uid="uid://k6eg4hgmtb57" path="res://asset/texture/unit/ground_monk/idle/idle_5.png" id="24_v726m"]
-[ext_resource type="Texture2D" uid="uid://dut3ppb16ymw5" path="res://asset/texture/unit/ground_monk/meditate/meditate_5.png" id="25_irfgi"]
 [ext_resource type="Texture2D" uid="uid://bus6c1veemppl" path="res://asset/texture/unit/ground_monk/idle/idle_6.png" id="25_rucio"]
-[ext_resource type="Texture2D" uid="uid://cgf28n176a1h6" path="res://asset/texture/unit/ground_monk/meditate/meditate_6.png" id="26_pf2w0"]
 [ext_resource type="Texture2D" uid="uid://cr2wb6w15uypg" path="res://asset/texture/unit/ground_monk/1_atk/1_atk_1.png" id="26_xup5e"]
 [ext_resource type="Texture2D" uid="uid://c2po4cvr4gi6d" path="res://asset/texture/unit/ground_monk/1_atk/1_atk_2.png" id="27_cywb1"]
-[ext_resource type="Texture2D" uid="uid://c1g452fyvt0u0" path="res://asset/texture/unit/ground_monk/meditate/meditate_7.png" id="27_v726m"]
 [ext_resource type="Texture2D" uid="uid://d12uygjurdcj1" path="res://asset/texture/unit/ground_monk/1_atk/1_atk_3.png" id="28_17ulg"]
-[ext_resource type="Texture2D" uid="uid://dv2urr3x7fi0y" path="res://asset/texture/unit/ground_monk/meditate/meditate_8.png" id="28_rucio"]
 [ext_resource type="Texture2D" uid="uid://ccuxrnwnbbi6v" path="res://asset/texture/unit/ground_monk/1_atk/1_atk_4.png" id="29_gpgm5"]
-[ext_resource type="Texture2D" uid="uid://cbwfoq3wk2dit" path="res://asset/texture/unit/ground_monk/meditate/meditate_9.png" id="29_xup5e"]
-[ext_resource type="Texture2D" uid="uid://gic2t4jmtbm" path="res://asset/texture/unit/ground_monk/meditate/meditate_10.png" id="30_cywb1"]
 [ext_resource type="Texture2D" uid="uid://7vxkcgyw6os0" path="res://asset/texture/unit/ground_monk/1_atk/1_atk_5.png" id="30_syfqw"]
-[ext_resource type="Texture2D" uid="uid://dub75s4m5nuwq" path="res://asset/texture/unit/ground_monk/meditate/meditate_11.png" id="31_17ulg"]
 [ext_resource type="Texture2D" uid="uid://c8akuvtqruo6w" path="res://asset/texture/unit/ground_monk/1_atk/1_atk_6.png" id="31_itc2s"]
-[ext_resource type="Texture2D" uid="uid://bthuymy5ls7hl" path="res://asset/texture/unit/ground_monk/meditate/meditate_12.png" id="32_gpgm5"]
 [ext_resource type="Texture2D" uid="uid://8hivh2jlwjht" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_1.png" id="32_h55c1"]
-[ext_resource type="Texture2D" uid="uid://qdev7tvv0pei" path="res://asset/texture/unit/ground_monk/meditate/meditate_13.png" id="33_syfqw"]
 [ext_resource type="Texture2D" uid="uid://b0xcgsk2l11u3" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_2.png" id="33_wowu6"]
 [ext_resource type="Texture2D" uid="uid://dr6wlhse4wrfq" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_3.png" id="34_hglst"]
-[ext_resource type="Texture2D" uid="uid://6agir0wf42wr" path="res://asset/texture/unit/ground_monk/meditate/meditate_14.png" id="34_itc2s"]
 [ext_resource type="Texture2D" uid="uid://c3u6as351g1x5" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_4.png" id="35_7xa4v"]
-[ext_resource type="Texture2D" uid="uid://ckrevbiitug2x" path="res://asset/texture/unit/ground_monk/meditate/meditate_15.png" id="35_h55c1"]
 [ext_resource type="Texture2D" uid="uid://cagplpc3uf5rg" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_5.png" id="36_ni3uy"]
-[ext_resource type="Texture2D" uid="uid://c0vkvh2mv3tj3" path="res://asset/texture/unit/ground_monk/meditate/meditate_16.png" id="36_wowu6"]
 [ext_resource type="Texture2D" uid="uid://dnj55q28agjwy" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_6.png" id="37_u5dta"]
 [ext_resource type="Texture2D" uid="uid://btpbtsxv1fwqg" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_7.png" id="38_0ihix"]
 [ext_resource type="Texture2D" uid="uid://m1xwuu6rl3kx" path="res://asset/texture/unit/ground_monk/2_atk/2_atk_8.png" id="39_rxfb6"]
@@ -157,56 +142,6 @@ animations = [{
 "loop": false,
 "name": &"death",
 "speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("22_hvf55")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_ypccy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_kxp7p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_irfgi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_pf2w0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_v726m")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_rucio")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_xup5e")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_cywb1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_17ulg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_gpgm5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_syfqw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_itc2s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_h55c1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_wowu6")
-}],
-"loop": false,
-"name": &"hurt",
-"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -403,6 +338,7 @@ animations = [{
 script = ExtResource("1_p8yqc")
 melee_hit_frame = 2
 animated_sprite = NodePath("AnimatedSprite2D")
+hurt_animation_name = &""
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
@@ -410,7 +346,6 @@ metadata/_custom_type_script = "uid://bo2r223i6x8py"
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_djk20")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.15819721
 offset = Vector2(0, -53)

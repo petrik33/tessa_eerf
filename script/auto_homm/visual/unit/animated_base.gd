@@ -13,6 +13,9 @@ func go_idle():
 
 
 func get_hurt(act: teVisualActGetHurt):
+	if hurt_animation_name == "":
+		go_idle()
+		return
 	animated_sprite.play(hurt_animation_name)
 	if not animated_sprite.is_playing():
 		return

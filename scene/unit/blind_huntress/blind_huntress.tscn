@@ -222,6 +222,11 @@ animations = [{
 "name": &"hurt",
 "speed": 8.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"hurt_no_flash",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ajifw")
@@ -358,9 +363,8 @@ metadata/_custom_type_script = "uid://du8en4n6dn4d6"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Physical"]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ll718")
-animation = &"idle"
+animation = &"hurt_no_flash"
 autoplay = "idle"
-frame_progress = 0.4516711
 offset = Vector2(-1, -15)
 
 [node name="Components" type="Node" parent="."]
