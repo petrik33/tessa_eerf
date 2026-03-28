@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://0xp42fwvcrjf"]
 
-[ext_resource type="Script" uid="uid://co76bbh2o12p" path="res://script/auto_homm/visual/unit_view.gd" id="1_lx01h"]
+[ext_resource type="Script" uid="uid://co76bbh2o12p" path="res://script/auto_homm/visual/unit/view.gd" id="1_lx01h"]
 [ext_resource type="PackedScene" uid="uid://ct6nj6l2m2pos" path="res://scene/auto_homm/vfx/unit_view_glow.tscn" id="3_jljnw"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="4_6bcyi"]
 

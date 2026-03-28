@@ -6,6 +6,9 @@ class_name teUnitVisualsMeleeBase extends teUnitVisualsAnimatedBase
 
 
 func melee(act: teVisualActMelee):
+	if not animated_sprite.sprite_frames.has_animation(melee_animation_name):
+		return
+	
 	animated_sprite.play(melee_animation_name)
 	
 	if melee_hit_frame == 0:

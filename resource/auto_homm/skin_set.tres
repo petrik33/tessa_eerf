@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dyt6sh81t35pd" path="res://scene/auto_homm/unit/blind_huntress/blind_huntress.tscn" id="1_fe01w"]
 [ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="1_ffarb"]
-[ext_resource type="Script" uid="uid://swxv64ugjqfe" path="res://script/auto_homm/combat/skin_set.gd" id="1_rujsr"]
+[ext_resource type="Script" uid="uid://swxv64ugjqfe" path="res://script/auto_homm/unit/skin_set.gd" id="1_rujsr"]
 [ext_resource type="PackedScene" uid="uid://hdsknl3q5dcn" path="res://scene/auto_homm/unit/ground_monk/ground_monk.tscn" id="2_ffarb"]
 [ext_resource type="PackedScene" uid="uid://ba8hm538xfpt6" path="res://scene/auto_homm/unit/martial_hero/martial_hero.tscn" id="3_ffarb"]
 [ext_resource type="PackedScene" uid="uid://yeda2nifrlx8" path="res://scene/auto_homm/unit/paladin/paladin.tscn" id="4_xfgtf"]

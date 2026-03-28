@@ -17,7 +17,7 @@ class_name HexOutlineRenderer extends HexGridRendererBase
 		antialiased = value
 		queue_redraw()
 
-func _draw_impl(grid: HexGridBase, layout: HexLayout):
+func _draw_impl(layout: HexLayout):
 	for hex in grid.iterator():
 		_draw_hex_outline(layout, hex)
 

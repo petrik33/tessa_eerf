@@ -28,10 +28,10 @@ func _draw():
 		return
 	if hex_space == null:
 		return
-	_draw_impl(grid, hex_space.layout)
+	_draw_impl(hex_space.layout)
 
 
-func _draw_impl(_grid: HexGridBase, _layout: HexLayout):
+func _draw_impl(_layout: HexLayout):
 	assert(false, "Not implemented")
 
 

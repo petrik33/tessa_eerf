@@ -3,7 +3,7 @@ class_name teVisualGameConfig extends Node
 
 @export var units_node: Node2D
 @export var hex_space: HexSpace
-@export var skin_set: teSkinSet
+@export var skin_set: teUnitSkinSet
 
 @export var ally_grid: HexGridBase
 @export var enemy_grid: HexGridBase
@@ -12,7 +12,9 @@ class_name teVisualGameConfig extends Node
 func get_unit_visuals() -> Array[Node2D]:
 	var visuals: Array[Node2D] = []
 	for node in units_node.get_children():
-		if node is teUnitVisuals:
+		if node is teUnitVisualsBase:
+			if not node.visible:
+				continue
 			visuals.append(node)
 	return visuals
 

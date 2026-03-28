@@ -17,7 +17,7 @@ class_name HexCoordinatesRenderer extends HexGridRendererBase
 		font_size = value
 		queue_redraw()
 
-func _draw_impl(grid: HexGridBase, layout: HexLayout):
+func _draw_impl(layout: HexLayout):
 	for hex in grid.iterator():
 		_draw_hex_coordinates(layout, hex)
 

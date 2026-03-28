@@ -17,11 +17,11 @@ class_name HexPerimeterRenderer extends HexGridRendererBase
 		antialiased = value
 		queue_redraw()
 
-func _draw_impl(grid: HexGridBase, layout: HexLayout):
+func _draw_impl(layout: HexLayout):
 	for hex in grid.iterator():
-		_draw_hex_perimeter_outline(grid, layout, hex)
+		_draw_hex_perimeter_outline(layout, hex)
 	
-func _draw_hex_perimeter_outline(grid: HexGridBase, layout: HexLayout, hex: Vector2i):
+func _draw_hex_perimeter_outline(layout: HexLayout, hex: Vector2i):
 	var hex_pos = layout.hex_to_pixel(hex)
 	for dir in range(HexLayoutMath.CORNER_NUM):
 		var neighbor := HexMath.neighbor(hex, dir)

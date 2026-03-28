@@ -21,6 +21,9 @@ func setup(node_to_glow: Node2D):
 
 
 func update(target: float):
+	if glow_node == null:
+		return
+	
 	glow_node.material = glow_material
 	
 	if is_equal_approx(target, glow_target):

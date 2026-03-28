@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_fodmf")
-size = Vector2(32, 18)
+size = Vector2(30, 18)
 metadata/_custom_type_script = "uid://bwitt2ghi4geg"

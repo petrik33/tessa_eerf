@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://dcbcfk3u2vj7j"]
 
-[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit_visuals.gd" id="1_tw2os"]
+[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit/visuals_base.gd" id="1_tw2os"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_26kl8"]
 [ext_resource type="Texture2D" uid="uid://cr7dubsl41gu7" path="res://asset/texture/unit/knight/noBKG_KnightIdle_strip.png" id="3_1r0va"]
 [ext_resource type="Texture2D" uid="uid://b1uwsgi5soeme" path="res://asset/texture/unit/knight/noBKG_KnightAttack_strip.png" id="4_73hoa"]

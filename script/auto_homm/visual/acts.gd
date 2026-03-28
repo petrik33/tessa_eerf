@@ -14,6 +14,8 @@ static func name(act: teVisualActBase) -> StringName:
 		return &"move"
 	if act is teVisualActGetHurt:
 		return &"get_hurt"
+	if act is teVisualActRanged:
+		return &"ranged"
 	return &""
 
 
@@ -28,3 +30,6 @@ static func get_hurt() -> teVisualActBase:
 
 static func melee() -> teVisualActBase:
 	return teVisualActMelee.new()
+
+static func ranged() -> teVisualActBase:
+	return teVisualActRanged.new()

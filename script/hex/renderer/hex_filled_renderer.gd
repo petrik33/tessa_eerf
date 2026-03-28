@@ -7,7 +7,7 @@ class_name HexFilledRenderer extends HexGridRendererBase
 		hex_color = new_color
 		queue_redraw()
 
-func _draw_impl(grid: HexGridBase, layout: HexLayout):
+func _draw_impl(layout: HexLayout):
 	for hex in grid.iterator():
 		_draw_hex(layout, hex)
 

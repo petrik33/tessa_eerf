@@ -1,4 +1,4 @@
-class_name teCombatEventUnitMeleeHit extends teCombatEventBase
+class_name teCombatEventUnitAttacked extends teCombatEventBase
 
 
 @export var unit_id: int = -1

@@ -12,6 +12,10 @@ var current_team: teCombatTeam
 var selected_unit_id := -1
 
 
+func is_active() -> bool:
+	return current_team != null
+
+
 func activate(team: teCombatTeam):
 	current_team = team
 	board.sync_unit_positions(team)

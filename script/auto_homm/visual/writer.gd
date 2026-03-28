@@ -1,45 +1,86 @@
-class_name teVisualWriter extends Resource
+class_name teVisualWriter extends teVisualWriterBase
+
+
+@export var unit_profiles: Dictionary[StringName, teVisualUnitProfile]
 
 
 @export var freeze_frame_duration_hit := 0.33
 @export var freeze_frame_duration_kill := 0.74
 
 
-func intro(initial_state: teCombatState) -> teVisualSequence:
+func intro(_initial_state: teCombatState) -> teVisualSequence:
 	return null
 
 
-func sequence(log: teCombatEventLog) -> teVisualSequence:
+func sequence(state: teCombatState, event_log: teCombatEventLog) -> teVisualSequence:
 	var written_sequence := teVisualSequence.new()
-	for event in log.events:
-		var action := write(event)
+	for event in event_log.events:
+		var action := write(state, event)
 		if action == null:
 			continue
 		written_sequence.actions.push_back(action)
 	return written_sequence
 
 
-func write(event: teCombatEventBase) -> teVisualActionBase:
-	if event is teCombatEventUnitMeleeHit:
-		return teVisualActions.unit_windup_sequence(
-			teVisualActions.unit_sequence(
-				event.attacker_id,
-				teVisualActs.melee()
-			),
-			teVisualActions.parallel(
-				teVisualActions.unit_flash(event.unit_id),
-				teVisualActions.unit_sequence(
-					event.unit_id,
-					on_hit_act(event.lethal)
-				),
-				teVisualActions.freeze_frame(
-					freeze_frame_duration_kill if event.lethal else freeze_frame_duration_hit
-				),
-				teVisualActions.emit(event)
-			)
-		)
+func write(state: teCombatState, event: teCombatEventBase) -> teVisualActionBase:
+	if event is teCombatEventUnitAttacked:
+		return write_attack(state, event)
 	return null
 
 
-func on_hit_act(is_lethal: bool) -> teVisualActBase:
+func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teVisualActionBase:
+	var attacker := state.unit(event.attacker_id)
+	if not attacker:
+		return null
+	var attack_kind: teVisualUnitProfile.AttackKind
+	var attacker_profile: teVisualUnitProfile = unit_profiles.get(attacker.definition_uid)
+	if attacker_profile == null:
+		attack_kind = teVisualUnitProfile.AttackKind.MELEE
+	else:
+		attack_kind = attacker_profile.attack
+	match attack_kind:
+		teVisualUnitProfile.AttackKind.MELEE: 
+			return teVisualActions.unit_windup_sequence(
+				teVisualActions.unit_sequence(
+					event.attacker_id,
+					teVisualActs.melee()
+				),
+				write_attack_impact(event)
+			)
+		teVisualUnitProfile.AttackKind.PROJECTILE:
+			return teVisualActions.unit_windup_sequence(
+				teVisualActions.unit_sequence(
+					event.attacker_id,
+					teVisualActs.ranged()
+				),
+				teVisualActions.sub_sequence(
+					teVisualActions.unit_shoot_projectile(
+						event.attacker_id,
+						event.unit_id,
+						attacker.definition_uid
+					),
+					write_attack_impact(event)
+				)
+
+			)
+		teVisualUnitProfile.AttackKind.CAST:
+			pass
+	return null
+
+
+func write_attack_impact(event: teCombatEventUnitAttacked) -> teVisualActionBase:
+	return teVisualActions.parallel(
+		teVisualActions.unit_flash(event.unit_id),
+		teVisualActions.unit_sequence(
+			event.unit_id,
+			hit_act(event.lethal)
+		),
+		teVisualActions.freeze_frame(
+			freeze_frame_duration_kill if event.lethal else freeze_frame_duration_hit
+		),
+		teVisualActions.emit(event)
+	)
+
+
+func hit_act(is_lethal: bool) -> teVisualActBase:
 	return teVisualActs.die() if is_lethal else teVisualActs.get_hurt()

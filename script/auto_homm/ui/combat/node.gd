@@ -18,6 +18,6 @@ func _on_combat_started(initial_state: teCombatState):
 
 
 func _on_combat_event(event: teCombatEventBase):
-	if event is teCombatEventUnitMeleeHit:
+	if event is teCombatEventUnitAttacked:
 		var unit_view := board.get_unit(event.unit_id)
 		unit_view.get_marker().decrease_hp(event.damage)

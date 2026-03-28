@@ -2,6 +2,7 @@ class_name teVisualDirector extends Node
 
 
 @export var board: teBoardVisual
+@export var projectile_system: teVisualProjectileSystem
 
 
 signal started(action: teVisualActionBase)
@@ -79,11 +80,22 @@ func direct_action(action: teVisualActionBase):
 		Engine.time_scale = action.time_scale
 		await get_tree().create_timer(action.duration, true, false, true).timeout
 		Engine.time_scale = old_scale
-	if action is teVisualActionCombatEventHappened:
+	if action is teVisualActionEmitCombatEvent:
 		combat_event.emit(action.event)
 	if action is teVisualActionUnitFlash:
 		var unit = board.get_unit(action.unit_id)
 		unit.flash()
+	if action is teVisualActionUnitShootProjectile:
+		var projectile := projectile_system.create(
+			action.projectile_uid,
+			board.get_unit(action.shooter_id).position,
+			board.get_unit(action.target_id).position,
+			action.speed_multiplier,
+			action.trajectory_name
+		)
+		await projectile.reached_target
+		projectile_system.destroy(projectile)
+		
 
 
 func clear_queue():

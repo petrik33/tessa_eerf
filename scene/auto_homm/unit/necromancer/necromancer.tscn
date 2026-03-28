@@ -1,6 +1,6 @@
 [gd_scene load_steps=185 format=3 uid="uid://clodbolh7jpeq"]
 
-[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_fjbuf"]
+[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/visuals/melee_base.gd" id="1_fjbuf"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_sgoc5"]
 [ext_resource type="Texture2D" uid="uid://cpn7mgk06wapm" path="res://asset/texture/unit/necromancer/Death/spr_NecromancerDeath_strip52.png" id="3_hsq4q"]
 [ext_resource type="Texture2D" uid="uid://dig2xt22qabw" path="res://asset/texture/unit/necromancer/Attack/spr_NecromancerAttackWithEffect_strip47.png" id="3_sgoc5"]

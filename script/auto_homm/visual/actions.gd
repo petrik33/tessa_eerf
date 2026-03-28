@@ -45,8 +45,8 @@ static func freeze_frame(duration: float = 0.08) -> teVisualActionFreezeFrame:
 	action.duration = duration
 	return action
 
-static func emit(event: teCombatEventBase) -> teVisualActionCombatEventHappened:
-	var action := teVisualActionCombatEventHappened.new()
+static func emit(event: teCombatEventBase) -> teVisualActionEmitCombatEvent:
+	var action := teVisualActionEmitCombatEvent.new()
 	action.event = event
 	return action
 
@@ -60,4 +60,19 @@ static func unit_flash(unit_id: int, time := 1.0, color := Color.WHITE) -> teVis
 	action.unit_id = unit_id
 	action.time = time
 	action.color = color
+	return action
+
+static func unit_shoot_projectile(
+	shooter_id: int,
+	target_id: int,
+	projectile_uid: StringName,
+	speed_multiplier: float = 1.0,
+	trajectory_name: StringName = teVisualProjectileTrajectory.STRAIGHT
+) -> teVisualActionUnitShootProjectile:
+	var action := teVisualActionUnitShootProjectile.new()
+	action.shooter_id = shooter_id
+	action.target_id = target_id
+	action.projectile_uid = projectile_uid
+	action.speed_multiplier = speed_multiplier
+	action.trajectory_name = trajectory_name
 	return action

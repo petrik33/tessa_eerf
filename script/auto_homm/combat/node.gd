@@ -2,16 +2,16 @@ class_name teCombat extends Node
 
 
 #signal hero_turn_started()
-signal started(state: teCombatState)
-signal turn_finished(log: teCombatEventLog)
-signal finished(state: teCombatState)
+signal started(first_state: teCombatState)
+signal turn_finished(previous_state: teCombatState, log: teCombatEventLog, updated_state: teCombatState)
+signal finished(final_state: teCombatState)
 
 
 @export var max_steps := 35
 @export var turn_timer: Timer
 
 
-var rules: teCombatRules
+var rule_set: teCombatRuleSet
 var services: teCombatServices
 
 
@@ -34,8 +34,8 @@ func is_active() -> bool:
 	return current_state != null
 
 
-func start(_initial_state: teCombatState, _rules: teCombatRules, _services: teCombatServices):
-	rules = _rules
+func start(_initial_state: teCombatState, _rule_set: teCombatRuleSet, _services: teCombatServices):
+	rule_set = _rule_set
 	services = _services
 	initial_state = _initial_state.duplicate()
 	current_state = _initial_state.duplicate()
@@ -43,7 +43,7 @@ func start(_initial_state: teCombatState, _rules: teCombatRules, _services: teCo
 	turn_history = teCombatTurnHistory.new()
 	
 	started.emit(current_state)
-	var turn_zero := rules.prepare(current_state, services)
+	var turn_zero := rule_set.rules.prepare(current_state, services, rule_set.units)
 	_take_turn(turn_zero)
 	try_take_next_turn()
 
@@ -53,7 +53,7 @@ func restart():
 		return
 	if is_active():
 		stop()
-	start(initial_state, rules, services)
+	start(initial_state, rule_set, services)
 
 
 func stop():
@@ -65,12 +65,12 @@ func stop():
 func try_take_next_turn() -> bool:
 	if not is_active():
 		return false
-	if rules.is_finished(current_state) or turns_made() >= max_steps:
+	if rule_set.rules.is_finished(current_state) or turns_made() >= max_steps:
 		finished.emit(current_state)
 		stop()
 		return false
-	var next_command := rules.progress(current_state, services)
-	var turn_log := rules.process(current_state, next_command, services)
+	var next_command := rule_set.rules.progress(current_state, services, rule_set.units)
+	var turn_log := rule_set.rules.process(current_state, next_command, services, rule_set.units)
 	_take_turn(turn_log)
 	turn_timer.start()
 	return true
@@ -80,7 +80,7 @@ func _take_turn(turn_log: teCombatEventLog):
 	prev_state = current_state.duplicate(true)
 	current_state.update(turn_log)
 	turn_history.turns.append(turn_log)
-	turn_finished.emit(turn_log)
+	turn_finished.emit(prev_state, turn_log, current_state)
 
 
 func _on_timer_timeout():

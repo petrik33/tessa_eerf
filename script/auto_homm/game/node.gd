@@ -32,6 +32,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dbg_start_combat"):
 		if combat.is_active():
 			return
+		if movie.playing():
+			return
 		combat_setup.deactivate()
 		var next_combat := teCombatSetup.new()
 		var next_map := teCombatMap.new()
@@ -44,17 +46,18 @@ func _input(event: InputEvent) -> void:
 			next_combat, setup.rule_set.units, state.unit_roster
 		)
 		movie.live(combat)
-		combat.start(initial_combat_state, setup.rule_set.rules, combat_services)
+		combat.start(initial_combat_state, setup.rule_set, combat_services)
 	if event.is_action_pressed("dbg_finish_combat"):
-		if not combat.is_active():
-			return
-		combat.stop()
-		combat_services = null
+		if combat.is_active():
+			combat.stop()
+			combat_services = null
 		if movie.playing():
 			await movie.turn_played
-		movie.stop_live()
+		if movie.is_live():
+			movie.stop_live()
 		board.sync_unit_positions(state.enemy)
-		combat_setup.activate(state.current_team)
+		if not combat_setup.is_active():
+			combat_setup.activate(state.current_team)
 
 
 func _create_unit_view(visuals: Node2D) -> teUnitView:
@@ -76,3 +79,8 @@ func _on_place_unit_requested(unit_id: int, hex: Vector2i):
 		#return
 	state = updated_state
 	combat_setup.update_current_team(state.current_team)
+
+
+func _on_combat_finished(_final_state: teCombatState):
+	board.sync_unit_positions(state.enemy)
+	combat_setup.activate(state.current_team)

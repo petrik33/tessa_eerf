@@ -1,0 +1,4 @@
+class_name teVisualActionEmitCombatEvent extends teVisualActionBase
+
+
+var event: teCombatEventBase

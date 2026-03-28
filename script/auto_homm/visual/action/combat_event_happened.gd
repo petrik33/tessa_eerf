@@ -1,4 +1,0 @@
-class_name teVisualActionCombatEventHappened extends teVisualActionBase
-
-
-var event: teCombatEventBase

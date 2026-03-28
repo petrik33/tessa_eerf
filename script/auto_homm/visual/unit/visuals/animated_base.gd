@@ -1,4 +1,4 @@
-class_name teUnitVisualsAnimatedBase extends teUnitVisuals
+class_name teUnitVisualsAnimatedBase extends teUnitVisualsBase
 
 
 @export var animated_sprite: AnimatedSprite2D
@@ -13,18 +13,15 @@ func go_idle():
 
 
 func get_hurt(act: teVisualActGetHurt):
-	if hurt_animation_name == "":
+	if not animated_sprite.sprite_frames.has_animation(hurt_animation_name):
 		go_idle()
 		return
 	animated_sprite.play(hurt_animation_name)
-	if not animated_sprite.is_playing():
-		return
 	return animated_sprite.animation_finished
 
 
 func die(act: teVisualActDie):
-	print("I DIED")
-	animated_sprite.play(death_animation_name)
-	if not animated_sprite.is_playing():
+	if not animated_sprite.sprite_frames.has_animation(death_animation_name):
 		return
+	animated_sprite.play(death_animation_name)
 	return animated_sprite.animation_finished

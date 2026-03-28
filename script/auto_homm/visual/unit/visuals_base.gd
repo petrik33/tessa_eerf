@@ -1,4 +1,4 @@
-class_name teUnitVisuals extends Node2D
+class_name teUnitVisualsBase extends Node2D
 
 
 signal windup()

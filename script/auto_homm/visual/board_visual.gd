@@ -73,5 +73,5 @@ func get_unit(id: int) -> teBoardUnitView:
 	return units[id]
 
 
-func get_unit_visuals(id: int) -> teUnitVisuals:
+func get_unit_visuals(id: int) -> teUnitVisualsBase:
 	return get_unit(id).view.visuals

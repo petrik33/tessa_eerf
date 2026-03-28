@@ -3,7 +3,8 @@ class_name teCombatRules extends Resource
 
 func prepare(
 	combat: teCombatState,
-	services: teCombatServices
+	services: teCombatServices,
+	unit_set: teUnitSet
 ) -> teCombatEventLog:
 	var event_log := teCombatEventLog.new()
 	return event_log
@@ -22,7 +23,8 @@ func is_finished(combat: teCombatState) -> bool:
 
 func progress(
 	combat: teCombatState,
-	services: teCombatServices
+	services: teCombatServices,
+	unit_set: teUnitSet
 ) -> teCombatCommandBase:
 	var current_unit_id := combat.current_unit_id()
 	var target_id := teCombatTargeting.find(current_unit_id, combat)
@@ -32,10 +34,11 @@ func progress(
 func process(
 	combat: teCombatState,
 	command: teCombatCommandBase,
-	services: teCombatServices
+	services: teCombatServices,
+	unit_set: teUnitSet
 ) -> teCombatEventLog:
 	var event_log := teCombatEventLog.new()
-	fill_log(combat, command, services, event_log.events)
+	fill_log(combat, command, services, unit_set, event_log.events)
 	return event_log
 
 
@@ -43,11 +46,12 @@ func fill_log(
 	combat: teCombatState,
 	command: teCombatCommandBase,
 	services: teCombatServices,
+	unit_set: teUnitSet,
 	events: Array[teCombatEventBase]
 ):
 	events.push_back(teCombatEvents.turn_started())
 	if command is teCombatCommandUnitMeleeAttack:
-		events.push_back(teCombatEvents.unit_melee_hit(
+		events.push_back(teCombatEvents.unit_attacked(
 			command.target_id,
 			command.unit_id,
 			10,
@@ -56,6 +60,6 @@ func fill_log(
 	events.push_back(teCombatEvents.turn_finished())
 
 
-func is_valid(combat: teCombatState) -> bool:
+func is_valid(combat: teCombatState, services: teCombatServices, unit_set: teUnitSet) -> bool:
 	return true
 	

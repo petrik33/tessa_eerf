@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://cxlcpm8jg4s4g"]
+[gd_scene load_steps=47 format=4 uid="uid://cxlcpm8jg4s4g"]
 
 [ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
 [ext_resource type="Script" uid="uid://cx0e5cbn7xncm" path="res://script/auto_homm/debug/visual_game_config.gd" id="2_ap5p2"]
@@ -34,6 +34,11 @@
 [ext_resource type="Script" uid="uid://bsvjxvw8ny7j8" path="res://script/auto_homm/controller/combat_setup.gd" id="31_jo8ct"]
 [ext_resource type="PackedScene" uid="uid://bxi1j6sx4s8e1" path="res://scene/auto_homm/combat.tscn" id="31_ptjxi"]
 [ext_resource type="Script" uid="uid://kdruejcveor8" path="res://script/ui/focus_overlay.gd" id="33_jo8ct"]
+[ext_resource type="Script" uid="uid://kgbi1bn657re" path="res://script/auto_homm/visual/system/projectile.gd" id="34_0gt1v"]
+[ext_resource type="PackedScene" uid="uid://bdrkshdc4sl7r" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="35_hyctw"]
+[ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="36_ntk6u"]
+[ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="37_rca0q"]
+[ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -970,7 +975,7 @@ unit_view_scene = ExtResource("6_6327r")
 [node name="Arena" parent="." instance=ExtResource("7_7g3bp")]
 
 [node name="HexSpace" type="Node2D" parent="."]
-position = Vector2(208, 99)
+position = Vector2(222, 92)
 script = ExtResource("8_e52gc")
 layout = ExtResource("9_mehdm")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
@@ -1065,15 +1070,17 @@ position = Vector2(135, 25)
 position = Vector2(85, 81)
 
 [node name="BlindHuntress" parent="HexSpace/Units" instance=ExtResource("10_sun1c")]
-position = Vector2(1, 164)
+position = Vector2(3, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" instance=ExtResource("11_7g3bp")]
-position = Vector2(188, 14)
+position = Vector2(335, 23)
 scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" instance=ExtResource("12_3tj1a")]
-position = Vector2(139, 81)
+position = Vector2(132, 79)
 scale = Vector2(-1, 1)
+
+[node name="Projectiles" type="Node2D" parent="HexSpace"]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -1132,15 +1139,30 @@ metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 board = NodePath("../Board")
 director = NodePath("../Director")
 
-[node name="Director" type="Node" parent="Controllers" node_paths=PackedStringArray("board")]
+[node name="Director" type="Node" parent="Controllers" node_paths=PackedStringArray("board", "projectile_system")]
 script = ExtResource("29_mehdm")
 board = NodePath("../Board")
+projectile_system = NodePath("../../Visual/Projectiles")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
 [node name="CombatUI" parent="Controllers" node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
 combat = NodePath("../Combat")
 board = NodePath("../Board")
 marker_scene = ExtResource("31_2p32r")
+
+[node name="Visual" type="Node" parent="."]
+
+[node name="Projectiles" type="Node" parent="Visual" node_paths=PackedStringArray("group_node")]
+script = ExtResource("34_0gt1v")
+group_node = NodePath("../../HexSpace/Projectiles")
+scenes = Dictionary[StringName, PackedScene]({
+&"red_hood_archer": ExtResource("35_hyctw")
+})
+trajectories = Dictionary[StringName, ExtResource("36_ntk6u")]({
+&"straight": ExtResource("37_rca0q")
+})
+projectile_scene = ExtResource("38_rca0q")
+metadata/_custom_type_script = "uid://kgbi1bn657re"
 
 [node name="Input" type="Node" parent="."]
 
@@ -1150,6 +1172,7 @@ space = NodePath("../../HexSpace")
 grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
+[connection signal="finished" from="Controllers/Combat" to="." method="_on_combat_finished"]
 [connection signal="started" from="Controllers/Combat" to="Controllers/CombatUI" method="_on_combat_started"]
 [connection signal="place_unit_requested" from="Controllers/Setup" to="." method="_on_place_unit_requested"]
 [connection signal="combat_event" from="Controllers/Director" to="Controllers/CombatUI" method="_on_combat_event"]

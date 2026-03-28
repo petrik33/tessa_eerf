@@ -1,6 +1,6 @@
 [gd_scene load_steps=95 format=3 uid="uid://des0ux6tte0v1"]
 
-[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/melee_base.gd" id="1_i4hou"]
+[ext_resource type="Script" uid="uid://3dme4uxypqvh" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer.gd" id="1_qrxtw"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_yjyko"]
 [ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="3_qrxtw"]
 [ext_resource type="Texture2D" uid="uid://c5vftmqfi6a8c" path="res://asset/texture/unit/red_hood_archer/spr_ArcherDeath_strip_NoBkg.png" id="3_xtfeo"]
@@ -677,10 +677,10 @@ animations = [{
 }]
 
 [node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
-script = ExtResource("1_i4hou")
+script = ExtResource("1_qrxtw")
+ranged_shot_frame = 9
 melee_hit_frame = 4
 animated_sprite = NodePath("AnimatedSprite2D")
-hurt_animation_name = &""
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
 

@@ -8,14 +8,14 @@ class_name teUnitView extends Node2D
 @export var hovered_glow_strength := 0.6
 
 
-var visuals: teUnitVisuals
+var visuals: teUnitVisualsBase
 
 var is_dragged := false
 var is_selected := false
 var is_hovered := false
 
 
-func attach_visuals(visuals_node: teUnitVisuals):
+func attach_visuals(visuals_node: teUnitVisualsBase):
 	visuals = visuals_node
 	glow.setup(visuals.node_to_glow)
 

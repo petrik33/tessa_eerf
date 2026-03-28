@@ -1,4 +1,4 @@
-class_name teSkinSet extends Resource
+class_name teUnitSkinSet extends Resource
 
 
 @export var scenes: Dictionary[StringName, PackedScene]

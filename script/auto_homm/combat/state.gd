@@ -17,6 +17,7 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 			unit_initial_state.hex = team.units_placement[unit_id]
 			unit_initial_state.hp = unit_definition.stats.max_hp
 			unit_initial_state.mana = 0
+			unit_initial_state.definition_uid = placed_unit.definition_uid
 			state.units[unit_id] = unit_initial_state
 			state.unit_teams[unit_id] = team_id
 		team_id += 1
@@ -33,7 +34,7 @@ func update(turn_log: teCombatEventLog):
 func apply_event(event: teCombatEventBase):
 	if event is teCombatEventTurnStarted:
 		turn_queue.push_back(turn_queue.pop_front())
-	if event is teCombatEventUnitMeleeHit:
+	if event is teCombatEventUnitAttacked:
 		units[event.unit_id].hp -= event.damage
 
 

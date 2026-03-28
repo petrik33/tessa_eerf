@@ -20,8 +20,10 @@ func replay(initial_state: teCombatState, turn_history: teCombatTurnHistory):
 	if is_live():
 		stop_live()
 	board.sync_state(initial_state)
+	var turn_state := initial_state.duplicate()
 	for turn in turn_history.turns:
-		play_turn(turn)
+		play_turn(turn_state, turn)
+		turn_state.update(turn)
 
 
 func is_live() -> bool:
@@ -43,14 +45,14 @@ func stop_live():
 	live_combat = null
 
 
-func play_turn(turn_log: teCombatEventLog):
-	director.play(writer.sequence(turn_log))
+func play_turn(state: teCombatState, turn_log: teCombatEventLog):
+	director.play(writer.sequence(state, turn_log))
 	await director.sequence_finished
 	turn_played.emit()
 
 
-func _on_live_combat_turn_finished(turn_log: teCombatEventLog):
-	play_turn(turn_log)
+func _on_live_combat_turn_finished(initial_state: teCombatState, turn_log: teCombatEventLog, _updated_state: teCombatState):
+	play_turn(initial_state, turn_log)
 
 
 func _on_live_combat_started(initial_state: teCombatState):
