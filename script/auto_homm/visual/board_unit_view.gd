@@ -6,7 +6,20 @@ class_name teBoardUnitView extends Node2D
 @export var flash_vfx: teBoardUnitViewFlash
 
 
+const SOCKET_METHODNAME_POSTFIX := "_socket"
+const DEFAULT_TARGET_OFFSET := Vector2(0.0, -12.0)
+
+
 var view: teUnitView
+
+
+func get_socket(name: StringName) -> Vector2:
+	var socket_method_name := name + SOCKET_METHODNAME_POSTFIX
+	if view.visuals.has_method(socket_method_name):
+		return view.visuals.call(socket_method_name)
+	if name == &"target":
+		return view.visuals.global_position + DEFAULT_TARGET_OFFSET
+	return view.visuals.global_position
 
 
 func get_marker() -> teCombatUnitMarker:

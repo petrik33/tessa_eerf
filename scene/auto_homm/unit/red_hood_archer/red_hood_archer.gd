@@ -1,8 +1,14 @@
 extends teUnitVisualsMeleeBase
 
 
+@export var ranged_offset_marker: Node2D
+@export var ranged_arrow_origin: Node2D
 @export var ranged_animation_name := &"ranged"
 @export var ranged_shot_frame := -1
+
+
+func ranged_socket() -> Vector2:
+	return ranged_arrow_origin.global_position
 
 
 func ranged(act: teVisualActRanged):

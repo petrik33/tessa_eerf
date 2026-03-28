@@ -676,8 +676,10 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
+[node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("ranged_offset_marker", "ranged_arrow_origin", "animated_sprite", "node_to_glow")]
 script = ExtResource("1_qrxtw")
+ranged_offset_marker = NodePath("AnimatedSprite2D/Markers/RangedOffset")
+ranged_arrow_origin = NodePath("AnimatedSprite2D/Markers/ArrowOrigin")
 ranged_shot_frame = 9
 melee_hit_frame = 4
 animated_sprite = NodePath("AnimatedSprite2D")

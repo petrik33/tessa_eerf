@@ -86,10 +86,12 @@ func direct_action(action: teVisualActionBase):
 		var unit = board.get_unit(action.unit_id)
 		unit.flash()
 	if action is teVisualActionUnitShootProjectile:
+		var shooter := board.get_unit(action.shooter_id)
+		var target := board.get_unit(action.target_id)
 		var projectile := projectile_system.create(
 			action.projectile_uid,
-			board.get_unit(action.shooter_id).position,
-			board.get_unit(action.target_id).position,
+			board.hex_space.to_local(shooter.get_socket(&"ranged")),
+			board.hex_space.to_local(target.get_socket(&"target")),
 			action.speed_multiplier,
 			action.trajectory_name
 		)

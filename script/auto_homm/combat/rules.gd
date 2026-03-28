@@ -51,11 +51,12 @@ func fill_log(
 ):
 	events.push_back(teCombatEvents.turn_started())
 	if command is teCombatCommandUnitMeleeAttack:
+		var target := combat.unit(command.target_id)
 		events.push_back(teCombatEvents.unit_attacked(
 			command.target_id,
 			command.unit_id,
 			10,
-			false
+			target.hp <= 10
 		))
 	events.push_back(teCombatEvents.turn_finished())
 

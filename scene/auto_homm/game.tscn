@@ -1064,6 +1064,7 @@ rotation = 3.1415927
 scale = Vector2(1, -1)
 
 [node name="Necromancer" parent="HexSpace/Units" instance=ExtResource("8_ycat3")]
+visible = false
 position = Vector2(135, 25)
 
 [node name="Paladin" parent="HexSpace/Units" instance=ExtResource("9_6327r")]
