@@ -1,13 +1,15 @@
 class_name teCombatState extends Resource
 
 
+@export var map: teCombatMap
 @export var units: Dictionary[int, teCombatUnitState]
 @export var unit_teams: Dictionary[int, int]
-@export var turn_queue: Array[int]
+@export var initiative_holder_id: int = -1
 
 
 static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teCombatUnitRoster) -> teCombatState:
 	var state := teCombatState.new()
+	state.map = setup.map.duplicate()
 	var team_id := 0
 	for team in setup.teams:
 		for unit_id in team.units_placement:
@@ -15,14 +17,14 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 			var unit_initial_state := teCombatUnitState.new()
 			var unit_definition := unit_set.get_definition(placed_unit.definition_uid)
 			unit_initial_state.hex = team.units_placement[unit_id]
-			unit_initial_state.hp = unit_definition.stats.max_hp
-			unit_initial_state.mana = 0
+			unit_initial_state.hp_spent = 0
+			unit_initial_state.mana_collected = 0
+			unit_initial_state.initiative_progress = 0.0
+			unit_initial_state.stats = unit_definition.base_stats.duplicate()
 			unit_initial_state.definition_uid = placed_unit.definition_uid
 			state.units[unit_id] = unit_initial_state
 			state.unit_teams[unit_id] = team_id
 		team_id += 1
-	for unit_id in state.units:
-		state.turn_queue.push_back(unit_id)
 	return state
 
 
@@ -32,18 +34,21 @@ func update(turn_log: teCombatEventLog):
 
 
 func apply_event(event: teCombatEventBase):
-	if event is teCombatEventTurnStarted:
-		turn_queue.push_back(turn_queue.pop_front())
 	if event is teCombatEventUnitAttacked:
-		units[event.unit_id].hp -= event.damage
+		units[event.unit_id].hp_spent += event.damage
+		if event.lethal:
+			units.erase(event.unit_id)
+			unit_teams.erase(event.unit_id)
+	if event is teCombatEventInitiativeTaken:
+		for id in units:
+			units[id].initiative_progress += event.progress_made
+		initiative_holder_id = event.unit_id
+		units[initiative_holder_id].initiative_progress = 0
+		
 
 
 func is_finished() -> bool:
 	return false
-
-
-func current_unit_id() -> int:
-	return turn_queue.front()
 
 
 func all_units_id() -> Array[int]:

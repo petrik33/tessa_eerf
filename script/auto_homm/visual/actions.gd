@@ -76,3 +76,8 @@ static func unit_shoot_projectile(
 	action.speed_multiplier = speed_multiplier
 	action.trajectory_name = trajectory_name
 	return action
+
+static func unit_die(unit_id: int) -> teVisualActionUnitDie:
+	var action := teVisualActionUnitDie.new()
+	action.unit_id = unit_id
+	return action

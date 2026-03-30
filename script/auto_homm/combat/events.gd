@@ -13,10 +13,8 @@ static func unit_attacked(unit_id: int, attacker_id: int, damage: int, is_lethal
 	hit.lethal = is_lethal
 	return hit
 
-
 static func turn_started() -> teCombatEventTurnStarted:
 	return teCombatEventTurnStarted.new()
-
 
 static func turn_finished() -> teCombatEventTurnFinished:
 	return teCombatEventTurnFinished.new()

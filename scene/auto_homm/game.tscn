@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://cxlcpm8jg4s4g"]
+[gd_scene format=4 uid="uid://cxlcpm8jg4s4g"]
 
 [ext_resource type="Script" uid="uid://b3t8mmyxnogy4" path="res://script/auto_homm/game/node.gd" id="1_f57a3"]
 [ext_resource type="Script" uid="uid://cx0e5cbn7xncm" path="res://script/auto_homm/debug/visual_game_config.gd" id="2_ap5p2"]
@@ -76,6 +76,15 @@ font_weight = 600
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
 cache/0/16/0/ascent = 18.0
 cache/0/16/0/descent = 5.0
 cache/0/16/0/underline_position = 1.609375
@@ -961,7 +970,7 @@ shader_parameter/focus_count = 1
 shader_parameter/radius = 72.0
 shader_parameter/softness = 18.0
 
-[node name="Game" type="Node" node_paths=PackedStringArray("visual_config", "board", "combat", "movie", "combat_setup", "units_node")]
+[node name="Game" type="Node" unique_id=320701044 node_paths=PackedStringArray("visual_config", "board", "combat", "movie", "combat_setup", "units_node")]
 script = ExtResource("1_f57a3")
 visual_config = NodePath("Controllers/VisualConfig")
 setup = SubResource("Resource_ycat3")
@@ -972,26 +981,26 @@ combat_setup = NodePath("Controllers/Setup")
 units_node = NodePath("HexSpace/Units")
 unit_view_scene = ExtResource("6_6327r")
 
-[node name="Arena" parent="." instance=ExtResource("7_7g3bp")]
+[node name="Arena" parent="." unique_id=2098708954 instance=ExtResource("7_7g3bp")]
 
-[node name="HexSpace" type="Node2D" parent="."]
+[node name="HexSpace" type="Node2D" parent="." unique_id=644167766]
 position = Vector2(222, 92)
 script = ExtResource("8_e52gc")
 layout = ExtResource("9_mehdm")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
 
-[node name="Map" type="Node2D" parent="HexSpace"]
+[node name="Map" type="Node2D" parent="HexSpace" unique_id=318795079]
 
-[node name="Combined" type="Node2D" parent="HexSpace/Map"]
+[node name="Combined" type="Node2D" parent="HexSpace/Map" unique_id=1480879648]
 script = ExtResource("10_ju7bi")
 color = Color(0.392157, 0.588235, 1, 0.490196)
 width = 2.0
 grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://dtavfh04dvr10"
 
-[node name="Ally" type="Node2D" parent="HexSpace/Map"]
+[node name="Ally" type="Node2D" parent="HexSpace/Map" unique_id=57436179]
 
-[node name="Base" type="Node2D" parent="HexSpace/Map/Ally"]
+[node name="Base" type="Node2D" parent="HexSpace/Map/Ally" unique_id=842784462]
 physics_interpolation_mode = 2
 material = SubResource("CanvasItemMaterial_hyctw")
 script = ExtResource("11_ptjxi")
@@ -999,14 +1008,14 @@ hex_color = Color(0.7704, 0.9, 0.468, 0.196078)
 grid = ExtResource("9_g58u6")
 metadata/_custom_type_script = "uid://pjy55ieuvcl5"
 
-[node name="Outline" type="Node2D" parent="HexSpace/Map/Ally"]
+[node name="Outline" type="Node2D" parent="HexSpace/Map/Ally" unique_id=319873986]
 physics_interpolation_mode = 2
 script = ExtResource("13_jo8ct")
 outline_color = Color(0.658, 0.7, 0.48999998, 1)
 grid = ExtResource("9_g58u6")
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
-[node name="Perimeter" type="Node2D" parent="HexSpace/Map/Ally"]
+[node name="Perimeter" type="Node2D" parent="HexSpace/Map/Ally" unique_id=234099771]
 physics_interpolation_mode = 2
 visible = false
 script = ExtResource("10_ju7bi")
@@ -1014,9 +1023,9 @@ color = Color(0.392157, 0.588235, 1, 0.490196)
 grid = ExtResource("9_g58u6")
 metadata/_custom_type_script = "uid://dtavfh04dvr10"
 
-[node name="Enemy" type="Node2D" parent="HexSpace/Map"]
+[node name="Enemy" type="Node2D" parent="HexSpace/Map" unique_id=2145094955]
 
-[node name="Base" type="Node2D" parent="HexSpace/Map/Enemy"]
+[node name="Base" type="Node2D" parent="HexSpace/Map/Enemy" unique_id=2051391004]
 physics_interpolation_mode = 2
 material = SubResource("CanvasItemMaterial_hyctw")
 script = ExtResource("11_ptjxi")
@@ -1024,14 +1033,14 @@ hex_color = Color(0.9, 0.54, 0.46799996, 0.19607843)
 grid = ExtResource("10_t034j")
 metadata/_custom_type_script = "uid://pjy55ieuvcl5"
 
-[node name="Outline" type="Node2D" parent="HexSpace/Map/Enemy"]
+[node name="Outline" type="Node2D" parent="HexSpace/Map/Enemy" unique_id=1389165803]
 physics_interpolation_mode = 2
 script = ExtResource("13_jo8ct")
 outline_color = Color(0.7, 0.525, 0.48999998, 1)
 grid = ExtResource("10_t034j")
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
-[node name="Perimeter" type="Node2D" parent="HexSpace/Map/Enemy"]
+[node name="Perimeter" type="Node2D" parent="HexSpace/Map/Enemy" unique_id=506692561]
 physics_interpolation_mode = 2
 visible = false
 script = ExtResource("10_ju7bi")
@@ -1039,7 +1048,7 @@ color = Color(0.392157, 0.588235, 1, 0.490196)
 grid = ExtResource("10_t034j")
 metadata/_custom_type_script = "uid://dtavfh04dvr10"
 
-[node name="Coordinates" type="Node2D" parent="HexSpace/Map"]
+[node name="Coordinates" type="Node2D" parent="HexSpace/Map" unique_id=1814159615]
 visible = false
 script = ExtResource("15_2p32r")
 use_cube_format = false
@@ -1047,43 +1056,43 @@ font = SubResource("FontFile_n1t1l")
 grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://d1r7lqfhfq83t"
 
-[node name="Outline" type="Node2D" parent="HexSpace"]
+[node name="Outline" type="Node2D" parent="HexSpace" unique_id=1444566272]
 
-[node name="Selected" type="Node2D" parent="HexSpace/Outline"]
+[node name="Selected" type="Node2D" parent="HexSpace/Outline" unique_id=1978231097]
 material = SubResource("CanvasItemMaterial_ntk6u")
 script = ExtResource("13_jo8ct")
 outline_color = Color(1, 1, 1, 0.30980393)
 outline_width = 4.0
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
-[node name="Units" type="Node2D" parent="HexSpace"]
+[node name="Units" type="Node2D" parent="HexSpace" unique_id=1297948076]
 
-[node name="MartialHero" parent="HexSpace/Units" instance=ExtResource("13_qdtad")]
+[node name="MartialHero" parent="HexSpace/Units" unique_id=1030655582 instance=ExtResource("13_qdtad")]
 position = Vector2(54, 162)
 rotation = 3.1415927
 scale = Vector2(1, -1)
 
-[node name="Necromancer" parent="HexSpace/Units" instance=ExtResource("8_ycat3")]
+[node name="Necromancer" parent="HexSpace/Units" unique_id=1458274522 instance=ExtResource("8_ycat3")]
 visible = false
 position = Vector2(135, 25)
 
-[node name="Paladin" parent="HexSpace/Units" instance=ExtResource("9_6327r")]
+[node name="Paladin" parent="HexSpace/Units" unique_id=1425105537 instance=ExtResource("9_6327r")]
 position = Vector2(85, 81)
 
-[node name="BlindHuntress" parent="HexSpace/Units" instance=ExtResource("10_sun1c")]
+[node name="BlindHuntress" parent="HexSpace/Units" unique_id=1266929943 instance=ExtResource("10_sun1c")]
 position = Vector2(3, 164)
 
-[node name="RedHoodArcher" parent="HexSpace/Units" instance=ExtResource("11_7g3bp")]
+[node name="RedHoodArcher" parent="HexSpace/Units" unique_id=464352761 instance=ExtResource("11_7g3bp")]
 position = Vector2(335, 23)
 scale = Vector2(-1, 1)
 
-[node name="GroundMonk" parent="HexSpace/Units" instance=ExtResource("12_3tj1a")]
+[node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
 position = Vector2(132, 79)
 scale = Vector2(-1, 1)
 
-[node name="Projectiles" type="Node2D" parent="HexSpace"]
+[node name="Projectiles" type="Node2D" parent="HexSpace" unique_id=571823503]
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1227010509]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1092,7 +1101,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="FocusOverlay" type="ColorRect" parent="UI"]
+[node name="FocusOverlay" type="ColorRect" parent="UI" unique_id=1429793219]
 visible = false
 material = SubResource("ShaderMaterial_0gt1v")
 layout_mode = 1
@@ -1107,11 +1116,11 @@ script = ExtResource("33_jo8ct")
 targets = Array[Vector2]([Vector2(323.45, 169.85)])
 metadata/_custom_type_script = "uid://kdruejcveor8"
 
-[node name="Controllers" type="Node" parent="."]
+[node name="Controllers" type="Node" parent="." unique_id=1150315259]
 
-[node name="Debug" parent="Controllers" instance=ExtResource("19_bdy12")]
+[node name="Debug" parent="Controllers" unique_id=120952508 instance=ExtResource("19_bdy12")]
 
-[node name="VisualConfig" type="Node" parent="Controllers" node_paths=PackedStringArray("units_node", "hex_space")]
+[node name="VisualConfig" type="Node" parent="Controllers" unique_id=1178726708 node_paths=PackedStringArray("units_node", "hex_space")]
 script = ExtResource("2_ap5p2")
 units_node = NodePath("../../HexSpace/Units")
 hex_space = NodePath("../../HexSpace")
@@ -1120,40 +1129,42 @@ ally_grid = ExtResource("9_g58u6")
 enemy_grid = ExtResource("10_t034j")
 metadata/_custom_type_script = "uid://cx0e5cbn7xncm"
 
-[node name="Board" type="Node" parent="Controllers" node_paths=PackedStringArray("units_attach", "hex_space", "hex_hover_outline")]
+[node name="Board" type="Node" parent="Controllers" unique_id=476741378 node_paths=PackedStringArray("units_attach", "hex_space", "hex_hover_outline")]
 script = ExtResource("28_e52gc")
+skin_set = ExtResource("5_m6xp2")
+unit_view_scene = ExtResource("6_6327r")
 board_unit_view_scene = ExtResource("7_t034j")
 units_attach = NodePath("../../HexSpace/Units")
 hex_space = NodePath("../../HexSpace")
 hex_hover_outline = NodePath("../../HexSpace/Outline/Selected")
 metadata/_custom_type_script = "uid://c7cqwtc2k2l4p"
 
-[node name="Combat" parent="Controllers" instance=ExtResource("31_ptjxi")]
+[node name="Combat" parent="Controllers" unique_id=108202202 instance=ExtResource("31_ptjxi")]
 
-[node name="Setup" type="Node" parent="Controllers" node_paths=PackedStringArray("hex_picking", "board")]
+[node name="Setup" type="Node" parent="Controllers" unique_id=1094671795 node_paths=PackedStringArray("hex_picking", "board")]
 script = ExtResource("31_jo8ct")
 hex_picking = NodePath("../../Input/HexPicking")
 board = NodePath("../Board")
 metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 
-[node name="Movie" parent="Controllers" node_paths=PackedStringArray("board", "director") instance=ExtResource("28_mehdm")]
+[node name="Movie" parent="Controllers" unique_id=356424720 node_paths=PackedStringArray("board", "director") instance=ExtResource("28_mehdm")]
 board = NodePath("../Board")
 director = NodePath("../Director")
 
-[node name="Director" type="Node" parent="Controllers" node_paths=PackedStringArray("board", "projectile_system")]
+[node name="Director" type="Node" parent="Controllers" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system")]
 script = ExtResource("29_mehdm")
 board = NodePath("../Board")
 projectile_system = NodePath("../../Visual/Projectiles")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
-[node name="CombatUI" parent="Controllers" node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
+[node name="CombatUI" parent="Controllers" unique_id=1022763525 node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
 combat = NodePath("../Combat")
 board = NodePath("../Board")
 marker_scene = ExtResource("31_2p32r")
 
-[node name="Visual" type="Node" parent="."]
+[node name="Visual" type="Node" parent="." unique_id=1950942529]
 
-[node name="Projectiles" type="Node" parent="Visual" node_paths=PackedStringArray("group_node")]
+[node name="Projectiles" type="Node" parent="Visual" unique_id=2105457694 node_paths=PackedStringArray("group_node")]
 script = ExtResource("34_0gt1v")
 group_node = NodePath("../../HexSpace/Projectiles")
 scenes = Dictionary[StringName, PackedScene]({
@@ -1165,9 +1176,9 @@ trajectories = Dictionary[StringName, ExtResource("36_ntk6u")]({
 projectile_scene = ExtResource("38_rca0q")
 metadata/_custom_type_script = "uid://kgbi1bn657re"
 
-[node name="Input" type="Node" parent="."]
+[node name="Input" type="Node" parent="." unique_id=222531903]
 
-[node name="HexPicking" type="Node" parent="Input" node_paths=PackedStringArray("space")]
+[node name="HexPicking" type="Node" parent="Input" unique_id=142824532 node_paths=PackedStringArray("space")]
 script = ExtResource("21_sun1c")
 space = NodePath("../../HexSpace")
 grid = ExtResource("2_qr44i")

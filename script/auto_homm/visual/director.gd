@@ -55,7 +55,6 @@ func play_action(action: teVisualActionBase):
 
 
 func direct_action(action: teVisualActionBase):
-	print(action.dbg_dump())
 	if action is teVisualActionParallel:
 		for sub_action in action.actions:
 			play_action(sub_action)
@@ -97,6 +96,11 @@ func direct_action(action: teVisualActionBase):
 		)
 		await projectile.reached_target
 		projectile_system.destroy(projectile)
+	if action is teVisualActionUnitDie:
+		var unit_visuals := board.get_unit_visuals(action.unit_id)
+		if unit_visuals.has_method("die"):
+			await unit_visuals.call("die", teVisualActDie.new())
+		board.dettach_unit(action.unit_id)
 		
 
 

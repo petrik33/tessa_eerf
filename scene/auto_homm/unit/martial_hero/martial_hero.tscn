@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ba8hm538xfpt6"]
+[gd_scene format=3 uid="uid://ba8hm538xfpt6"]
 
 [ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/visuals/melee_base.gd" id="1_qs61h"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_hjl7q"]
@@ -300,14 +300,14 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MartialHero" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
+[node name="MartialHero" type="Node2D" unique_id=1703202135 node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_qs61h")
 melee_hit_frame = 4
 animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=76700442]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hjl7q")
 sprite_frames = SubResource("SpriteFrames_wlhx3")

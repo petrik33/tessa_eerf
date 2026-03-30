@@ -2,65 +2,63 @@ class_name teCombatRules extends Resource
 
 
 func prepare(
-	combat: teCombatState,
-	services: teCombatServices,
-	unit_set: teUnitSet
+	state: teCombatState,
+	services: teCombatServices
 ) -> teCombatEventLog:
 	var event_log := teCombatEventLog.new()
+	event_log.events.append(teCombatInitiative.progress(state))
 	return event_log
 
 
-func is_finished(combat: teCombatState) -> bool:
+func is_finished(state: teCombatState) -> bool:
 	var alive_teams: Dictionary[int, bool] = {}
-	for unit_id in combat.all_units_id():
-		var unit := combat.unit(unit_id)
+	for unit_id in state.all_units_id():
+		var unit := state.unit(unit_id)
 		if unit.is_alive():
-			var team_id := combat.unit_team_id(unit_id)
+			var team_id := state.unit_team_id(unit_id)
 			alive_teams[team_id] = true
 	return alive_teams.size() <= 1
-		
 
 
 func progress(
-	combat: teCombatState,
-	services: teCombatServices,
-	unit_set: teUnitSet
+	state: teCombatState,
+	services: teCombatServices
 ) -> teCombatCommandBase:
-	var current_unit_id := combat.current_unit_id()
-	var target_id := teCombatTargeting.find(current_unit_id, combat)
-	return teCombatCommands.melee(current_unit_id, target_id)
+	var target_id := teCombatTargeting.find(state.initiative_holder_id, state)
+	return teCombatCommands.unit_attack(state.initiative_holder_id, target_id)
 
 
 func process(
 	combat: teCombatState,
 	command: teCombatCommandBase,
-	services: teCombatServices,
-	unit_set: teUnitSet
+	services: teCombatServices
 ) -> teCombatEventLog:
 	var event_log := teCombatEventLog.new()
-	fill_log(combat, command, services, unit_set, event_log.events)
+	fill_log(combat, command, services, event_log.events)
 	return event_log
 
 
 func fill_log(
-	combat: teCombatState,
+	state: teCombatState,
 	command: teCombatCommandBase,
 	services: teCombatServices,
-	unit_set: teUnitSet,
 	events: Array[teCombatEventBase]
 ):
 	events.push_back(teCombatEvents.turn_started())
-	if command is teCombatCommandUnitMeleeAttack:
-		var target := combat.unit(command.target_id)
+	if command is teCombatCommandUnitAttack:
+		var target := state.unit(command.target_id)
+		var attacker := state.unit(command.unit_id)
+		var damage := teCombatDamage.calculate(state, attacker, target)
 		events.push_back(teCombatEvents.unit_attacked(
 			command.target_id,
 			command.unit_id,
-			10,
-			target.hp <= 10
+			damage,
+			teCombatDamage.is_lethal(state, target, damage)
 		))
+	events.push_back(teCombatInitiative.progress(state))
 	events.push_back(teCombatEvents.turn_finished())
 
 
-func is_valid(combat: teCombatState, services: teCombatServices, unit_set: teUnitSet) -> bool:
+func is_valid(state: teCombatState, services: teCombatServices) -> bool:
 	return true
 	

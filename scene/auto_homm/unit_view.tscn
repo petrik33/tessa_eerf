@@ -1,21 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://0xp42fwvcrjf"]
+[gd_scene format=3 uid="uid://0xp42fwvcrjf"]
 
 [ext_resource type="Script" uid="uid://co76bbh2o12p" path="res://script/auto_homm/visual/unit/view.gd" id="1_lx01h"]
 [ext_resource type="PackedScene" uid="uid://ct6nj6l2m2pos" path="res://scene/auto_homm/vfx/unit_view_glow.tscn" id="3_jljnw"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="4_6bcyi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5pho1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ac874"]
 resource_local_to_scene = true
 shader = ExtResource("4_6bcyi")
 shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 1.0
 shader_parameter/glow_strength = 0.0
 
-[node name="UnitView" type="Node2D" node_paths=PackedStringArray("glow")]
+[node name="UnitView" type="Node2D" unique_id=421710444 node_paths=PackedStringArray("glow")]
 script = ExtResource("1_lx01h")
 glow = NodePath("Glow")
 
-[node name="VisualsAttach" type="Node2D" parent="."]
+[node name="VisualsAttach" type="Node2D" parent="." unique_id=569910652]
 
-[node name="Glow" parent="." instance=ExtResource("3_jljnw")]
-glow_material = SubResource("ShaderMaterial_5pho1")
+[node name="Glow" parent="." unique_id=63307358 instance=ExtResource("3_jljnw")]
+glow_material = SubResource("ShaderMaterial_ac874")

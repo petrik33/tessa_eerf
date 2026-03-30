@@ -11,7 +11,7 @@ signal finished(final_state: teCombatState)
 @export var turn_timer: Timer
 
 
-var rule_set: teCombatRuleSet
+var rules: teCombatRules
 var services: teCombatServices
 
 
@@ -34,16 +34,15 @@ func is_active() -> bool:
 	return current_state != null
 
 
-func start(_initial_state: teCombatState, _rule_set: teCombatRuleSet, _services: teCombatServices):
-	rule_set = _rule_set
-	services = _services
+func start(_initial_state: teCombatState, _rules: teCombatRules):
+	rules = _rules
+	services = teCombatServices.new(_initial_state)
 	initial_state = _initial_state.duplicate()
 	current_state = _initial_state.duplicate()
 	prev_state = null
 	turn_history = teCombatTurnHistory.new()
-	
 	started.emit(current_state)
-	var turn_zero := rule_set.rules.prepare(current_state, services, rule_set.units)
+	var turn_zero := rules.prepare(current_state, services)
 	_take_turn(turn_zero)
 	try_take_next_turn()
 
@@ -53,24 +52,25 @@ func restart():
 		return
 	if is_active():
 		stop()
-	start(initial_state, rule_set, services)
+	start(initial_state, rules)
 
 
 func stop():
 	turn_timer.stop()
 	prev_state = current_state
 	current_state = null
+	services = null
 
 
 func try_take_next_turn() -> bool:
 	if not is_active():
 		return false
-	if rule_set.rules.is_finished(current_state) or turns_made() >= max_steps:
+	if rules.is_finished(current_state) or turns_made() >= max_steps:
 		finished.emit(current_state)
 		stop()
 		return false
-	var next_command := rule_set.rules.progress(current_state, services, rule_set.units)
-	var turn_log := rule_set.rules.process(current_state, next_command, services, rule_set.units)
+	var next_command := rules.progress(current_state, services)
+	var turn_log := rules.process(current_state, next_command, services)
 	_take_turn(turn_log)
 	turn_timer.start()
 	return true

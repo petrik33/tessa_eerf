@@ -5,12 +5,12 @@ var navigation: HexNavigationContext
 var pathfinding: HexPathfinding
 
 
-func _init(setup: teCombatSetup):
-	navigation = HexNavigationContext.new(setup.map.grid)
+func _init(state: teCombatState):
+	navigation = HexNavigationContext.new(state.map.grid)
 	pathfinding = HexPathfinding.new(navigation)
-	for team in setup.teams:
-		for unit_id in team.units_placement:
-			pathfinding.set_point_disabled(team.units_placement[unit_id])
+	for unit_id in state.all_units_id():
+		var unit := state.unit(unit_id)
+		pathfinding.set_point_disabled(unit.hex)
 
 
 func sync(state: teCombatState):

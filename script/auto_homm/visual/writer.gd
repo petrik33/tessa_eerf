@@ -71,10 +71,7 @@ func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teV
 func write_attack_impact(event: teCombatEventUnitAttacked) -> teVisualActionBase:
 	return teVisualActions.parallel(
 		teVisualActions.unit_flash(event.unit_id),
-		teVisualActions.unit_sequence(
-			event.unit_id,
-			hit_act(event.lethal)
-		),
+		hit_action(event.unit_id, event.lethal),
 		teVisualActions.freeze_frame(
 			freeze_frame_duration_kill if event.lethal else freeze_frame_duration_hit
 		),
@@ -82,5 +79,11 @@ func write_attack_impact(event: teCombatEventUnitAttacked) -> teVisualActionBase
 	)
 
 
-func hit_act(is_lethal: bool) -> teVisualActBase:
-	return teVisualActs.die() if is_lethal else teVisualActs.get_hurt()
+func hit_action(unit_id: int, is_lethal: bool) -> teVisualActionBase:
+	if not is_lethal:
+		return teVisualActions.unit_sequence(
+			unit_id,
+			teVisualActs.get_hurt()
+		)
+	else:
+		return teVisualActions.unit_die(unit_id)

@@ -9,7 +9,7 @@ class_name teCombatUI extends Node
 func sync_unit_hp(unit_id: int, combat_state: teCombatState):
 	var combat_unit := combat_state.unit(unit_id)
 	var unit_view := board.get_unit(unit_id)
-	unit_view.get_marker().set_hp(combat_unit.hp)
+	unit_view.get_marker().set_hp(combat_unit.hp_left())
 
 
 func _on_combat_started(initial_state: teCombatState):

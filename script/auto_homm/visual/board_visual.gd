@@ -1,6 +1,8 @@
 class_name teBoardVisual extends Node
 
 
+@export var skin_set: teUnitSkinSet
+@export var unit_view_scene: PackedScene
 @export var board_unit_view_scene: PackedScene
 @export var units_attach: Node2D
 @export var hex_space: HexSpace
@@ -12,14 +14,10 @@ var units: Dictionary[int, teBoardUnitView]
 
 func sync_state(combat: teCombatState):
 	for unit_id in combat.all_units_id():
-		var hex := combat.unit(unit_id).hex
-		units[unit_id].position = hex_space.layout.hex_to_pixel(hex)
-
-
-func sync_unit_positions(team: teCombatTeam):
-	for unit_id in team.units_placement:
-		var hex := team.units_placement[unit_id]
-		units[unit_id].position = hex_space.layout.hex_to_pixel(hex)
+		var unit := combat.unit(unit_id)
+		if not units.has(unit_id):
+			create_unit(unit.definition_uid, unit_id)
+		units[unit_id].position = hex_space.layout.hex_to_pixel(unit.hex)
 
 
 func clear_all_hover():
@@ -50,6 +48,13 @@ func deselect_unit(unit_id: int):
 
 func select_unit(unit_id: int):
 	units[unit_id].set_selected(true)
+
+
+func create_unit(uid: StringName, id: int) -> teBoardUnitView:
+	var visuals := skin_set.scenes[uid].instantiate() as teUnitVisualsBase
+	var unit_view := unit_view_scene.instantiate() as teUnitView
+	unit_view.attach_visuals(visuals)
+	return attach_unit(unit_view, id)
 
 
 func attach_unit(unit_view: teUnitView, id: int) -> teBoardUnitView:
