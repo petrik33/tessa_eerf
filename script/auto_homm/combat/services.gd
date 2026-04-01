@@ -17,5 +17,5 @@ func sync(state: teCombatState):
 	pass
 
 
-func update(log: teCombatEventLog):
+func update(log: teCombatTurnLog):
 	pass

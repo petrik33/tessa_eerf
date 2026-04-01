@@ -45,13 +45,13 @@ func stop_live():
 	live_combat = null
 
 
-func play_turn(state: teCombatState, turn_log: teCombatEventLog):
+func play_turn(state: teCombatState, turn_log: teCombatTurnLog):
 	director.play(writer.sequence(state, turn_log))
 	await director.sequence_finished
 	turn_played.emit()
 
 
-func _on_live_combat_turn_finished(initial_state: teCombatState, turn_log: teCombatEventLog, _updated_state: teCombatState):
+func _on_live_combat_turn_finished(initial_state: teCombatState, turn_log: teCombatTurnLog, _updated_state: teCombatState):
 	play_turn(initial_state, turn_log)
 
 

@@ -12,7 +12,7 @@ func intro(_initial_state: teCombatState) -> teVisualSequence:
 	return null
 
 
-func sequence(state: teCombatState, event_log: teCombatEventLog) -> teVisualSequence:
+func sequence(state: teCombatState, event_log: teCombatTurnLog) -> teVisualSequence:
 	var written_sequence := teVisualSequence.new()
 	for event in event_log.events:
 		var action := write(state, event)

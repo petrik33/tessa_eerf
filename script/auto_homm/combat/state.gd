@@ -28,14 +28,17 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 	return state
 
 
-func update(turn_log: teCombatEventLog):
+func update(turn_log: teCombatTurnLog):
 	for event in turn_log.events:
 		apply_event(event)
 
 
 func apply_event(event: teCombatEventBase):
 	if event is teCombatEventUnitAttacked:
-		units[event.unit_id].hp_spent += event.damage
+		units[event.unit_id].hp_spent = min(
+			units[event.unit_id].hp_spent + event.damage,
+			units[event.unit_id].stats.max_hp
+		)
 		if event.lethal:
 			units.erase(event.unit_id)
 			unit_teams.erase(event.unit_id)
