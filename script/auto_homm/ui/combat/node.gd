@@ -6,6 +6,11 @@ class_name teCombatUI extends Node
 @export var marker_scene: PackedScene
 
 
+func sync_units(combat_state: teCombatState):
+	for unit_id in combat_state.all_units_id():
+		sync_unit_hp(unit_id, combat_state)
+
+
 func sync_unit_hp(unit_id: int, combat_state: teCombatState):
 	var combat_unit := combat_state.unit(unit_id)
 	var unit_view := board.get_unit(unit_id)
@@ -13,8 +18,7 @@ func sync_unit_hp(unit_id: int, combat_state: teCombatState):
 
 
 func _on_combat_started(initial_state: teCombatState):
-	for unit_id in initial_state.all_units_id():
-		sync_unit_hp(unit_id, initial_state)
+	sync_units(initial_state)
 
 
 func _on_combat_event(event: teCombatEventBase):

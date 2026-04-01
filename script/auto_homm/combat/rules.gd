@@ -23,21 +23,22 @@ func progress(runtime: teCombatRuntime) -> teCombatCommandBase:
 
 
 func process(runtime: teCombatRuntime, command: teCombatCommandBase):
-	runtime.begin_turn()
+	runtime.update(teCombatEvents.turn_started())
 	var state := runtime.state
+	if command is teCombatCommandStart:
+		pass
 	if command is teCombatCommandUnitAttack:
 		var target := state.unit(command.target_id)
 		var attacker := state.unit(command.unit_id)
 		var damage := teCombatDamage.calculate(state, attacker, target)
-		runtime.apply(teCombatEvents.unit_attacked(
+		runtime.update(teCombatEvents.unit_attacked(
 			command.target_id,
 			command.unit_id,
 			damage,
 			teCombatDamage.is_lethal(state, target, damage)
 		))
-	runtime.apply(teCombatInitiative.progress(state))
-	runtime.end_turn()
-
+	runtime.update(teCombatInitiative.progress(state))
+	runtime.update(teCombatEvents.turn_finished())
 
 
 func is_valid(runtime: teCombatRuntime) -> bool:

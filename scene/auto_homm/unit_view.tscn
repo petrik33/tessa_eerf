@@ -11,8 +11,9 @@ shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_size = 1.0
 shader_parameter/glow_strength = 0.0
 
-[node name="UnitView" type="Node2D" unique_id=421710444 node_paths=PackedStringArray("glow")]
+[node name="UnitView" type="Node2D" unique_id=421710444 node_paths=PackedStringArray("visuals_attach", "glow")]
 script = ExtResource("1_lx01h")
+visuals_attach = NodePath("VisualsAttach")
 glow = NodePath("Glow")
 
 [node name="VisualsAttach" type="Node2D" parent="." unique_id=569910652]

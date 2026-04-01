@@ -52,7 +52,9 @@ func select_unit(unit_id: int):
 
 func create_unit(uid: StringName, id: int) -> teBoardUnitView:
 	var visuals := skin_set.scenes[uid].instantiate() as teUnitVisualsBase
+	units_attach.add_child(visuals)
 	var unit_view := unit_view_scene.instantiate() as teUnitView
+	units_attach.add_child(unit_view)
 	unit_view.attach_visuals(visuals)
 	return attach_unit(unit_view, id)
 

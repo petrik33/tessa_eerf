@@ -2,6 +2,7 @@ class_name teCombatMovie extends Node
 
 
 signal turn_played()
+signal finished()
 
 
 @export var board: teBoardVisual
@@ -10,6 +11,14 @@ signal turn_played()
 
 
 var live_combat: teCombat
+
+
+func _ready() -> void:
+	director.sequence_finished.connect(_on_director_sequence_finished)
+
+
+func _exit_tree() -> void:
+	director.sequence_finished.disconnect(_on_director_sequence_finished)
 
 
 func playing() -> bool:
@@ -47,13 +56,17 @@ func stop_live():
 
 func play_turn(state: teCombatState, turn_log: teCombatTurnLog):
 	director.play(writer.sequence(state, turn_log))
-	await director.sequence_finished
-	turn_played.emit()
 
 
-func _on_live_combat_turn_finished(initial_state: teCombatState, turn_log: teCombatTurnLog, _updated_state: teCombatState):
+func _on_live_combat_turn_finished(initial_state: teCombatState, turn_log: teCombatTurnLog):
 	play_turn(initial_state, turn_log)
 
 
 func _on_live_combat_started(initial_state: teCombatState):
 	board.sync_state(initial_state)
+
+
+func _on_director_sequence_finished():
+	turn_played.emit()
+	if director.queue_empty():
+		finished.emit()

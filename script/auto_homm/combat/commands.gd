@@ -10,3 +10,6 @@ static func unit_attack(unit_id: int, target_id: int) -> teCombatCommandUnitAtta
 	command.unit_id = unit_id
 	command.target_id = target_id
 	return command
+
+static func start_combat() -> teCombatCommandStart:
+	return teCombatCommandStart.new()

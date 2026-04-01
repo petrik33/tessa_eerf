@@ -970,11 +970,12 @@ shader_parameter/focus_count = 1
 shader_parameter/radius = 72.0
 shader_parameter/softness = 18.0
 
-[node name="Game" type="Node" unique_id=320701044 node_paths=PackedStringArray("visual_config", "board", "combat", "movie", "combat_setup", "units_node")]
+[node name="Game" type="Node" unique_id=320701044 node_paths=PackedStringArray("visual_config", "board", "combat_ui", "combat", "movie", "combat_setup", "units_node")]
 script = ExtResource("1_f57a3")
 visual_config = NodePath("Controllers/VisualConfig")
 setup = SubResource("Resource_ycat3")
 board = NodePath("Controllers/Board")
+combat_ui = NodePath("Controllers/CombatUI")
 combat = NodePath("Controllers/Combat")
 movie = NodePath("Controllers/Movie")
 combat_setup = NodePath("Controllers/Setup")
@@ -1073,7 +1074,6 @@ rotation = 3.1415927
 scale = Vector2(1, -1)
 
 [node name="Necromancer" parent="HexSpace/Units" unique_id=1458274522 instance=ExtResource("8_ycat3")]
-visible = false
 position = Vector2(135, 25)
 
 [node name="Paladin" parent="HexSpace/Units" unique_id=1425105537 instance=ExtResource("9_6327r")]

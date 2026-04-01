@@ -24,34 +24,38 @@ func queue_empty() -> bool:
 func play(sequence: teVisualSequence):
 	enqueue(sequence)
 	if not playing():
-		play_next()
+		play_next_sequence()
 
 
 func enqueue(sequence: teVisualSequence):
 	_queue.push_back(sequence)
 
 
-func play_next():
+func play_next_sequence():
+	if queue_empty():
+		return
 	var sequence = _queue.pop_front()
-	while sequence.actions.is_empty():
-		if _queue.is_empty():
-			return
-		sequence = _queue.pop_front()
+	if sequence.actions.is_empty():
+		play_next_sequence()
+		return
 	for action in sequence.actions:
 		await play_action(action)
+	while playing():
+		await played
 	sequence_finished.emit()
+	play_next_sequence()
 
 
 func play_action(action: teVisualActionBase):
 	_playing += 1
 	started.emit(action)
+	print("Action started: " + action.dbg_dump())
+	print("Playing ", _playing)
 	await direct_action(action)
-	played.emit(action)
+	print("Action finished: " + action.dbg_dump())
 	_playing -= 1
-	if playing():
-		return
-	if not queue_empty():
-		play_next()
+	print("Playing ", _playing)
+	played.emit(action)
 
 
 func direct_action(action: teVisualActionBase):
@@ -84,6 +88,8 @@ func direct_action(action: teVisualActionBase):
 	if action is teVisualActionUnitFlash:
 		var unit = board.get_unit(action.unit_id)
 		unit.flash()
+		await get_tree().create_timer(action.time, false).timeout
+		print("flash")
 	if action is teVisualActionUnitShootProjectile:
 		var shooter := board.get_unit(action.shooter_id)
 		var target := board.get_unit(action.target_id)
@@ -101,7 +107,6 @@ func direct_action(action: teVisualActionBase):
 		if unit_visuals.has_method("die"):
 			await unit_visuals.call("die", teVisualActDie.new())
 		board.dettach_unit(action.unit_id)
-		
 
 
 func clear_queue():

@@ -3,9 +3,9 @@ class_name teCombat extends Node
 
 #signal hero_turn_started()
 signal started(first_state: teCombatState)
-signal turn_started()
+signal turn_started(state: teCombatState)
 signal updated(state: teCombatState, event: teCombatEventBase)
-signal turn_finished(log: teCombatTurnLog)
+signal turn_finished(state: teCombatState, log: teCombatTurnLog)
 signal finished(final_state: teCombatState)
 
 
@@ -15,12 +15,12 @@ signal finished(final_state: teCombatState)
 
 var rules: teCombatRules
 var runtime: teCombatRuntime
-
+var turn_history: teCombatTurnHistory
 var initial_state: teCombatState
 
 
 func turns_made() -> int:
-	var number := runtime.turn_history.number()
+	var number := turn_history.number()
 	return number - 1 if number > 0 else 0 # Turn Zero doesn't count
 
 
@@ -32,8 +32,10 @@ func start(_initial_state: teCombatState, _rules: teCombatRules):
 	rules = _rules
 	initial_state = _initial_state.duplicate()
 	runtime = teCombatRuntime.new(initial_state)
+	runtime.updated.connect(_on_runtime_updated)
+	turn_history = teCombatTurnHistory.new()
 	started.emit(initial_state)
-	rules.prepare(runtime)
+	_take_turn(teCombatCommands.start_combat())
 	try_take_next_turn()
 
 
@@ -47,6 +49,7 @@ func restart():
 
 func stop():
 	turn_timer.stop()
+	runtime.updated.disconnect(_on_runtime_updated)
 	runtime = null
 
 
@@ -57,15 +60,21 @@ func try_take_next_turn() -> bool:
 		finished.emit(runtime.state)
 		stop()
 		return false
-	turn_started.emit()
 	var next_command := rules.progress(runtime)
-	rules.process(runtime, next_command)
-	turn_finished.emit()
+	_take_turn(next_command)
 	turn_timer.start()
 	return true
 
 
+func _take_turn(command: teCombatCommandBase):
+	turn_history.record_next_turn()
+	turn_started.emit(runtime.state)
+	rules.process(runtime, command)
+	turn_finished.emit(runtime.state, turn_history.current_turn())
+
+
 func _on_runtime_updated(event: teCombatEventBase):
+	turn_history.record(event)
 	updated.emit(runtime.state, event)
 
 
