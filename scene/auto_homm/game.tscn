@@ -39,6 +39,8 @@
 [ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="36_ntk6u"]
 [ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="37_rca0q"]
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
+[ext_resource type="Script" uid="uid://cvee6hi1txtqj" path="res://script/auto_homm/visual/system/vfx.gd" id="39_sgu15"]
+[ext_resource type="PackedScene" uid="uid://bw45ewg6oq7gc" path="res://scene/auto_homm/unit/necromancer/cast.tscn" id="40_rpcyj"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -1077,9 +1079,11 @@ scale = Vector2(1, -1)
 position = Vector2(135, 25)
 
 [node name="Paladin" parent="HexSpace/Units" unique_id=1425105537 instance=ExtResource("9_6327r")]
+visible = false
 position = Vector2(85, 81)
 
 [node name="BlindHuntress" parent="HexSpace/Units" unique_id=1266929943 instance=ExtResource("10_sun1c")]
+visible = false
 position = Vector2(3, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" unique_id=464352761 instance=ExtResource("11_7g3bp")]
@@ -1087,6 +1091,7 @@ position = Vector2(335, 23)
 scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
+visible = false
 position = Vector2(132, 79)
 scale = Vector2(-1, 1)
 
@@ -1151,10 +1156,11 @@ metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 board = NodePath("../Board")
 director = NodePath("../Director")
 
-[node name="Director" type="Node" parent="Controllers" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system")]
+[node name="Director" type="Node" parent="Controllers" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system", "vfx_system")]
 script = ExtResource("29_mehdm")
 board = NodePath("../Board")
 projectile_system = NodePath("../../Visual/Projectiles")
+vfx_system = NodePath("../../Visual/VFX")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
 [node name="CombatUI" parent="Controllers" unique_id=1022763525 node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
@@ -1175,6 +1181,13 @@ trajectories = Dictionary[StringName, ExtResource("36_ntk6u")]({
 })
 projectile_scene = ExtResource("38_rca0q")
 metadata/_custom_type_script = "uid://kgbi1bn657re"
+
+[node name="VFX" type="Node" parent="Visual" unique_id=511826867]
+script = ExtResource("39_sgu15")
+library = Dictionary[StringName, PackedScene]({
+&"necromancer": ExtResource("40_rpcyj")
+})
+metadata/_custom_type_script = "uid://cvee6hi1txtqj"
 
 [node name="Input" type="Node" parent="." unique_id=222531903]
 

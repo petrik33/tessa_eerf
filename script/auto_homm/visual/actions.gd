@@ -77,6 +77,21 @@ static func unit_shoot_projectile(
 	action.trajectory_name = trajectory_name
 	return action
 
+
+static func vfx_on_target(
+	vfx_id: StringName,
+	target_id: int,
+	params: Dictionary = {},
+	socket: StringName = &"target"
+) -> teVisualActionVfxOnTarget:
+	var action := teVisualActionVfxOnTarget.new()
+	action.vfx_id = vfx_id
+	action.target_unit_id = target_id
+	action.params = params
+	action.socket = socket
+	return action
+
+
 static func unit_die(unit_id: int) -> teVisualActionUnitDie:
 	var action := teVisualActionUnitDie.new()
 	action.unit_id = unit_id

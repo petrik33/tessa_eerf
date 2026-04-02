@@ -3,6 +3,7 @@ class_name teVisualDirector extends Node
 
 @export var board: teBoardVisual
 @export var projectile_system: teVisualProjectileSystem
+@export var vfx_system: teVisualVfxSystem
 
 
 signal started(action: teVisualActionBase)
@@ -107,6 +108,15 @@ func direct_action(action: teVisualActionBase):
 		if unit_visuals.has_method("die"):
 			await unit_visuals.call("die", teVisualActDie.new())
 		board.dettach_unit(action.unit_id)
+	if action is teVisualActionVfxOnTarget:
+		var unit := board.get_unit(action.target_unit_id)
+		var pos := board.hex_space.to_local(unit.get_socket(action.socket))
+		await vfx_system.play(
+			action.vfx_id,
+			pos,
+			board.hex_space,
+			action.params
+		)
 
 
 func clear_queue():

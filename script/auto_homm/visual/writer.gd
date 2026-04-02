@@ -64,7 +64,19 @@ func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teV
 
 			)
 		teVisualUnitProfile.AttackKind.CAST:
-			pass
+			return teVisualActions.unit_windup_sequence(
+				teVisualActions.unit_sequence(
+					event.attacker_id,
+					teVisualActs.cast()
+				),
+				teVisualActions.sub_sequence(
+					teVisualActions.vfx_on_target(
+						attacker.definition_uid,
+						event.unit_id
+					),
+					write_attack_impact(event)
+				)
+			)
 	return null
 
 

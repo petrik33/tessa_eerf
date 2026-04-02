@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://des0ux6tte0v1"]
+[gd_scene format=3 uid="uid://des0ux6tte0v1"]
 
 [ext_resource type="Script" uid="uid://3dme4uxypqvh" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer.gd" id="1_qrxtw"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_yjyko"]
@@ -644,7 +644,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ranged",
-"speed": 8.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -676,7 +676,7 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="RedHoodArcher" type="Node2D" node_paths=PackedStringArray("ranged_offset_marker", "ranged_arrow_origin", "animated_sprite", "node_to_glow")]
+[node name="RedHoodArcher" type="Node2D" unique_id=2142995411 node_paths=PackedStringArray("ranged_offset_marker", "ranged_arrow_origin", "animated_sprite", "node_to_glow")]
 script = ExtResource("1_qrxtw")
 ranged_offset_marker = NodePath("AnimatedSprite2D/Markers/RangedOffset")
 ranged_arrow_origin = NodePath("AnimatedSprite2D/Markers/ArrowOrigin")
@@ -686,13 +686,11 @@ animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://bo2r223i6x8py"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1365871477]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_ql1wo")
-}
+libraries/ = SubResource("AnimationLibrary_ql1wo")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=976366034]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_yjyko")
 position = Vector2(0, -9)
@@ -700,17 +698,17 @@ sprite_frames = SubResource("SpriteFrames_qu5vg")
 animation = &"ranged"
 autoplay = "idle"
 
-[node name="Markers" type="Node2D" parent="AnimatedSprite2D"]
+[node name="Markers" type="Node2D" parent="AnimatedSprite2D" unique_id=332571072]
 visible = false
 
-[node name="ArrowOrigin" type="Marker2D" parent="AnimatedSprite2D/Markers"]
+[node name="ArrowOrigin" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=76207121]
 unique_name_in_owner = true
 position = Vector2(5.5, -3)
 
-[node name="IdleOffset" type="Marker2D" parent="AnimatedSprite2D/Markers"]
+[node name="IdleOffset" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=538323298]
 unique_name_in_owner = true
 position = Vector2(-1, 8)
 
-[node name="RangedOffset" type="Marker2D" parent="AnimatedSprite2D/Markers"]
+[node name="RangedOffset" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=2090302270]
 unique_name_in_owner = true
 position = Vector2(-4.5, 15.5)
