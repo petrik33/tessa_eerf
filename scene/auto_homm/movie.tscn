@@ -4,14 +4,14 @@
 [ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="2_gglum"]
 [ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit_profile.gd" id="3_byswl"]
 
-[sub_resource type="Resource" id="Resource_go46e"]
-script = ExtResource("3_byswl")
-attack = 1
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
 [sub_resource type="Resource" id="Resource_byswl"]
 script = ExtResource("3_byswl")
 attack = 2
+metadata/_custom_type_script = "uid://w6o4p73o148l"
+
+[sub_resource type="Resource" id="Resource_go46e"]
+script = ExtResource("3_byswl")
+attack = 1
 metadata/_custom_type_script = "uid://w6o4p73o148l"
 
 [sub_resource type="Resource" id="Resource_x7leu"]

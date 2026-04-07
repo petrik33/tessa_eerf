@@ -25,7 +25,21 @@ func sequence(state: teCombatState, event_log: teCombatTurnLog) -> teVisualSeque
 func write(state: teCombatState, event: teCombatEventBase) -> teVisualActionBase:
 	if event is teCombatEventUnitAttacked:
 		return write_attack(state, event)
+	if event is teCombatEventUnitMoved:
+		return write_unit_move(state, event)
 	return null
+
+
+func write_unit_move(_state: teCombatState, event: teCombatEventUnitMoved) -> teVisualActionBase:
+	return teVisualActions.sub_sequence(
+		teVisualActions.unit_move(
+			event.unit_id,
+			event.path
+		),
+		teVisualActions.unit_go_idle(
+			event.unit_id
+		)
+	)
 
 
 func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teVisualActionBase:
@@ -41,17 +55,17 @@ func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teV
 	match attack_kind:
 		teVisualUnitProfile.AttackKind.MELEE: 
 			return teVisualActions.unit_windup_sequence(
-				teVisualActions.unit_sequence(
+				teVisualActions.unit_act(
 					event.attacker_id,
-					teVisualActs.melee()
+					teVisualActs.MELEE
 				),
 				write_attack_impact(event)
 			)
 		teVisualUnitProfile.AttackKind.PROJECTILE:
 			return teVisualActions.unit_windup_sequence(
-				teVisualActions.unit_sequence(
+				teVisualActions.unit_act(
 					event.attacker_id,
-					teVisualActs.ranged()
+					teVisualActs.RANGED
 				),
 				teVisualActions.sub_sequence(
 					teVisualActions.unit_shoot_projectile(
@@ -61,13 +75,12 @@ func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teV
 					),
 					write_attack_impact(event)
 				)
-
 			)
 		teVisualUnitProfile.AttackKind.CAST:
 			return teVisualActions.unit_windup_sequence(
-				teVisualActions.unit_sequence(
+				teVisualActions.unit_act(
 					event.attacker_id,
-					teVisualActs.cast()
+					teVisualActs.CAST
 				),
 				teVisualActions.sub_sequence(
 					teVisualActions.vfx_on_target(
@@ -93,9 +106,9 @@ func write_attack_impact(event: teCombatEventUnitAttacked) -> teVisualActionBase
 
 func hit_action(unit_id: int, is_lethal: bool) -> teVisualActionBase:
 	if not is_lethal:
-		return teVisualActions.unit_sequence(
+		return teVisualActions.unit_act(
 			unit_id,
-			teVisualActs.get_hurt()
+			teVisualActs.GET_HURT
 		)
 	else:
 		return teVisualActions.unit_die(unit_id)

@@ -10,7 +10,7 @@ const DEATH := &"death"
 
 
 func _init() -> void:
-	assert(false, "Library class not supposed to be created")
+	Utils.assert_static_lib()
 
 
 static func walk(unit_handle: CombatUnitHandle, path: Array[Vector2]) -> CombatVisualUnitActionWalk:

@@ -1,6 +1,6 @@
-[gd_scene load_steps=54 format=3 uid="uid://b0kv6xupf1dp3"]
+[gd_scene format=3 uid="uid://b0kv6xupf1dp3"]
 
-[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit/visuals_base.gd" id="1_6ksbd"]
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_6ksbd"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_ubqc5"]
 [ext_resource type="Texture2D" uid="uid://10axl463b85q" path="res://asset/texture/unit/blue_witch/B_witch_charge.png" id="3_q5mfk"]
 [ext_resource type="Texture2D" uid="uid://bp7m052ako0f0" path="res://asset/texture/unit/blue_witch/B_witch_death.png" id="4_d6edi"]
@@ -349,12 +349,13 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlueWitch" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
+[node name="BlueWitch" type="Node2D" unique_id=968360280 node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
 script = ExtResource("1_6ksbd")
+animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://urj01xa8pcy8"
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236516026]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_ubqc5")
 sprite_frames = SubResource("SpriteFrames_eyjtx")

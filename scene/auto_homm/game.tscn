@@ -41,6 +41,8 @@
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
 [ext_resource type="Script" uid="uid://cvee6hi1txtqj" path="res://script/auto_homm/visual/system/vfx.gd" id="39_sgu15"]
 [ext_resource type="PackedScene" uid="uid://bw45ewg6oq7gc" path="res://scene/auto_homm/unit/necromancer/cast.tscn" id="40_rpcyj"]
+[ext_resource type="PackedScene" uid="uid://bqb0jlb11iw1m" path="res://scene/auto_homm/unfiltered/freeze_system.tscn" id="41_dubvl"]
+[ext_resource type="Script" uid="uid://bm0ws3t3savhd" path="res://script/auto_homm/visual/system/movement.gd" id="42_swouy"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -1076,22 +1078,21 @@ rotation = 3.1415927
 scale = Vector2(1, -1)
 
 [node name="Necromancer" parent="HexSpace/Units" unique_id=1458274522 instance=ExtResource("8_ycat3")]
+visible = false
 position = Vector2(135, 25)
 
 [node name="Paladin" parent="HexSpace/Units" unique_id=1425105537 instance=ExtResource("9_6327r")]
-visible = false
 position = Vector2(85, 81)
 
 [node name="BlindHuntress" parent="HexSpace/Units" unique_id=1266929943 instance=ExtResource("10_sun1c")]
-visible = false
 position = Vector2(3, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" unique_id=464352761 instance=ExtResource("11_7g3bp")]
+visible = false
 position = Vector2(335, 23)
 scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
-visible = false
 position = Vector2(132, 79)
 scale = Vector2(-1, 1)
 
@@ -1156,11 +1157,13 @@ metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 board = NodePath("../Board")
 director = NodePath("../Director")
 
-[node name="Director" type="Node" parent="Controllers" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system", "vfx_system")]
+[node name="Director" type="Node" parent="Controllers" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
 script = ExtResource("29_mehdm")
 board = NodePath("../Board")
 projectile_system = NodePath("../../Visual/Projectiles")
 vfx_system = NodePath("../../Visual/VFX")
+freeze_system = NodePath("../../Visual/FreezeSystem")
+movement_system = NodePath("../../Visual/MovementSystem")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
 [node name="CombatUI" parent="Controllers" unique_id=1022763525 node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
@@ -1188,6 +1191,12 @@ library = Dictionary[StringName, PackedScene]({
 &"necromancer": ExtResource("40_rpcyj")
 })
 metadata/_custom_type_script = "uid://cvee6hi1txtqj"
+
+[node name="FreezeSystem" parent="Visual" unique_id=258549042 instance=ExtResource("41_dubvl")]
+
+[node name="MovementSystem" type="Node" parent="Visual" unique_id=1906131214]
+script = ExtResource("42_swouy")
+metadata/_custom_type_script = "uid://bm0ws3t3savhd"
 
 [node name="Input" type="Node" parent="." unique_id=222531903]
 

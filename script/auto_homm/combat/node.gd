@@ -60,8 +60,13 @@ func try_take_next_turn() -> bool:
 		finished.emit(runtime.state)
 		stop()
 		return false
-	var next_command := rules.progress(runtime)
-	_take_turn(next_command)
+	if rules.is_hero_turn(runtime):
+		_take_turn(teCombatCommands.skip_hero_turn())
+		turn_timer.start()
+		return true
+	rules.progress(runtime)
+	var next_unit_command := rules.auto_command(runtime)
+	_take_turn(next_unit_command)
 	turn_timer.start()
 	return true
 

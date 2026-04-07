@@ -2,7 +2,7 @@ class_name teVisualActions
 
 
 func _init() -> void:
-	assert(false, "Static lib shouldn't be constructed")
+	Utils.assert_static_lib()
 
 
 static func parallel(... actions: Array) -> teVisualActionBase:
@@ -19,25 +19,37 @@ static func sub_sequence(... actions: Array) -> teVisualActionBase:
 		action.actions.push_back(sub_action)
 	return action
 
-static func unit_sequence(unit_id: int, ... acts: Array) -> teVisualActionBase:
-	var action := teVisualActionUnitSequence.new()
+static func unit_act(unit_id: int, act: StringName, go_idle := true) -> teVisualActionBase:
+	var action := teVisualActionUnitAct.new()
 	action.unit_id = unit_id
-	for act in acts:
-		action.acts.push_back(act)
+	action.act = act
+	action.go_idle = go_idle
 	return action
 
-static func wait_unit_windup(unit_id: int) -> teVisualActionBase:
+static func unit_move(unit_id: int, path: Array[Vector2i]) -> teVisualActionBase:
+	var action := teVisualActionUnitMove.new()
+	action.unit_id = unit_id
+	action.path = path
+	return action
+
+static func unit_go_idle(unit_id: int) -> teVisualActionBase:
+	var action := teVisualActionUnitGoIdle.new()
+	action.unit_id = unit_id
+	return action
+
+static func wait_unit_windup(unit_id: int, act: StringName) -> teVisualActionBase:
 	var action := teVisualActionUnitWindup.new()
 	action.unit_id = unit_id
+	action.act = act
 	return action
 
 static func unit_windup_sequence(
-	sequence: teVisualActionUnitSequence,
+	windup_act: teVisualActionUnitAct,
 	on_windup: teVisualActionBase
 ) -> teVisualActionBase:
 	return parallel(
-		sequence,
-		sub_sequence(wait_unit_windup(sequence.unit_id), on_windup)
+		windup_act,
+		sub_sequence(wait_unit_windup(windup_act.unit_id, windup_act.act), on_windup)
 	)
 
 static func freeze_frame(duration: float = 0.08) -> teVisualActionFreezeFrame:

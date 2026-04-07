@@ -2,7 +2,15 @@ class_name teVisualActs
 
 
 func _init() -> void:
-	assert(false, "Static lib shouldn't be constructed")
+	Utils.assert_static_lib()
+
+
+const MELEE := &"melee"
+const GET_HURT := &"hurt"
+const RANGED := &"ranged"
+const CAST := &"cast"
+const DIE := &"death"
+const MOVE := &"walk"
 
 
 static func name(act: teVisualActBase) -> StringName:

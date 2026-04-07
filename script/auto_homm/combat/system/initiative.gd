@@ -2,21 +2,24 @@ class_name teCombatInitiative
 
 
 func _init() -> void:
-	assert(false, "Static lib shouldn't be constructed")
+	Utils.assert_static_lib()
 
 
-static func progress(combat: teCombatState) -> teCombatEventInitiativeTaken:
-	var event := teCombatEventInitiativeTaken.new()
+static func calc_next_unit_id(combat: teCombatState) -> int:
+	var next_unit_id := -1
 	var smallest_progress_left := INF
 	var potential_unit_progress := 0.0
 	for unit_id in combat.all_units_id():
 		var unit := combat.unit(unit_id)
-		var progress_left := 1.0 / unit.stats.initiative - unit.initiative_progress
-		var tie := is_equal_approx(progress_left, smallest_progress_left)
+		var unit_progress_left := progress_left(unit)
+		var tie := is_equal_approx(unit_progress_left, smallest_progress_left)
 		if tie and unit.initiative_progress > potential_unit_progress \
-				or progress_left < smallest_progress_left:
-			event.unit_id = unit_id
-			smallest_progress_left = progress_left
+				or unit_progress_left < smallest_progress_left:
+			next_unit_id = unit_id
+			smallest_progress_left = unit_progress_left
 			potential_unit_progress = unit.initiative_progress
-	event.progress_made = smallest_progress_left
-	return event
+	return next_unit_id
+
+
+static func progress_left(unit: teCombatUnitState) -> float:
+	return 1.0 / unit.stats.initiative - unit.initiative_progress

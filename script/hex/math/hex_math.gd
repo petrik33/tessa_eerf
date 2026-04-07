@@ -36,7 +36,10 @@ static func to_cube(hex: Vector2i) -> Vector3i:
 
 static func neighbor_direction(direction: int) -> Vector2i:
 	return NEIGHBOR_DIRECTION[direction]
-	
+
+static func neighbors_iter(hex: Vector2i) -> HexNeighborsIterator:
+	return HexNeighborsIterator.new(hex)
+
 static func neighbor(hex: Vector2i, direction: int) -> Vector2i:
 	return hex + neighbor_direction(direction)
 

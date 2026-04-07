@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://clodbolh7jpeq"]
 
-[ext_resource type="Script" uid="uid://dp5qo61qm8mc4" path="res://scene/auto_homm/unit/necromancer/necromancer.gd" id="1_hsq4q"]
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_hsq4q"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_sgoc5"]
 [ext_resource type="Texture2D" uid="uid://cpn7mgk06wapm" path="res://asset/texture/unit/necromancer/Death/spr_NecromancerDeath_strip52.png" id="3_hsq4q"]
 [ext_resource type="Texture2D" uid="uid://ic12cu8lwcdn" path="res://asset/texture/unit/necromancer/Attack/spr_NecromancerAttackWithoutEffect_strip47.png" id="3_xs1cl"]
-[ext_resource type="Texture2D" uid="uid://bnncycbmoiqrb" path="res://asset/texture/unit/necromancer/GetHit/spr_NecromancerGetHit_strip9.png" id="4_xs1cl"]
 [ext_resource type="Texture2D" uid="uid://cijh65uuruk8s" path="res://asset/texture/unit/necromancer/Idle/spr_NecromancerIdle_strip50.png" id="5_36n4t"]
 [ext_resource type="Texture2D" uid="uid://b8mdwhppm3iup" path="res://asset/texture/unit/necromancer/GetHit/spr_NecromancerGetHitWithoutEffect_strip9.png" id="6_hsq4q"]
 [ext_resource type="Texture2D" uid="uid://c8nfjljcham1d" path="res://asset/texture/unit/necromancer/Walk/spr_NecromancerWalk_strip10.png" id="6_ygipj"]
@@ -406,38 +405,6 @@ region = Rect2(4800, 0, 96, 96)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwd7g"]
 atlas = ExtResource("3_hsq4q")
 region = Rect2(4896, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nrlut"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(96, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u2ci4"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(192, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p0yxu"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(288, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qi3xv"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(384, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkhyu"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(480, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dgtcv"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(576, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_867rx"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(672, 0, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jxli"]
-atlas = ExtResource("4_xs1cl")
-region = Rect2(768, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u3eqp"]
 atlas = ExtResource("6_hsq4q")
@@ -1019,35 +986,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nrlut")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u2ci4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p0yxu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qi3xv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fkhyu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dgtcv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_867rx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5jxli")
-}],
-"loop": false,
-"name": &"hurt",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_u3eqp")
 }, {
 "duration": 1.0,
@@ -1072,7 +1010,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_n4e5w")
 }],
 "loop": false,
-"name": &"hurt_no_flash",
+"name": &"hurt",
 "speed": 12.0
 }, {
 "frames": [{
@@ -1266,22 +1204,21 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Necromancer" type="Node2D" unique_id=2009513977 node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
+[node name="Necromancer" type="Node2D" unique_id=1398765949 node_paths=PackedStringArray("sprite", "node_to_glow")]
 script = ExtResource("1_hsq4q")
-cast_frame = 31
-melee_animation_name = &"cast"
-melee_hit_frame = 35
-animated_sprite = NodePath("AnimatedSprite2D")
-hurt_animation_name = &"hurt_no_flash"
+sprite = NodePath("AnimatedSprite2D")
+windup_frames = Dictionary[StringName, int]({
+&"cast": 31
+})
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://bo2r223i6x8py"
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1082688758]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sgoc5")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"cast"
+animation = &"hurt"
 autoplay = "idle"
-frame = 46
+frame = 7
 frame_progress = 1.0
 offset = Vector2(0, -12)

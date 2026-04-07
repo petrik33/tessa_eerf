@@ -1,5 +1,6 @@
-[gd_scene load_steps=45 format=3 uid="uid://dvj1nnbudlxri"]
+[gd_scene format=3 uid="uid://dvj1nnbudlxri"]
 
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_y0d00"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_dts52"]
 [ext_resource type="Texture2D" uid="uid://bpna3e6tujqrj" path="res://asset/texture/unit/samurai/HURT.png" id="3_r8bki"]
 [ext_resource type="Texture2D" uid="uid://b22v3buy1aljn" path="res://asset/texture/unit/samurai/IDLE.png" id="4_3qce6"]
@@ -294,10 +295,11 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Samurai" type="Node2D"]
-metadata/_custom_type_script = "uid://urj01xa8pcy8"
+[node name="Samurai" type="Node2D" unique_id=71493812]
+script = ExtResource("1_y0d00")
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1319001683]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sojgr")
 sprite_frames = SubResource("SpriteFrames_8gi48")

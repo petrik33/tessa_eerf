@@ -2,7 +2,7 @@ class_name teCombatTargeting
 
 
 func _init() -> void:
-	assert(false, "Static lib shouldn't be constructed")
+	Utils.assert_static_lib()
 
 
 enum Mode {

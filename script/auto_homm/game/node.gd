@@ -36,9 +36,9 @@ func _input(event: InputEvent) -> void:
 		if movie.playing():
 			return
 		combat_setup.deactivate()
+		board.clear_all_hover()
 		movie.live(combat)
 		combat.start(potential_combat_state, setup.rule_set.rules)
-		board.clear_all_hover()
 	if event.is_action_pressed("dbg_finish_combat"):
 		if not combat.is_active():
 			return

@@ -1,23 +1,19 @@
+@abstract
 class_name teUnitVisualsBase extends Node2D
-
-
-signal windup()
 
 
 @export var node_to_glow: Node2D
 
 
-var winding_up: bool = false
+@abstract func play_act(act_name: StringName)
+@abstract func knows_act(act_name: StringName) -> bool
+@abstract func is_winding_up(act_name: StringName) -> bool
+@abstract func windup_finished(act_name: StringName) -> bool
+@abstract func windup_signal(act_name: StringName) -> Signal
 
 
 func go_idle():
 	pass
 
-
-func _windup_start():
-	winding_up = true
-
-
-func _windup_finish():
-	winding_up = false
-	windup.emit()
+func start_moving():
+	pass

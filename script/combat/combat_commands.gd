@@ -3,7 +3,7 @@ class_name CombatCommands
 
 
 func _init() -> void:
-	assert(false, "Static lib shouldn't be constructed")
+	Utils.assert_static_lib()
 
 
 static func move_unit(id_path: PackedInt64Array) -> CombatCommandMoveUnit:

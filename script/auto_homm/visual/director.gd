@@ -4,6 +4,8 @@ class_name teVisualDirector extends Node
 @export var board: teBoardVisual
 @export var projectile_system: teVisualProjectileSystem
 @export var vfx_system: teVisualVfxSystem
+@export var freeze_system: teVisualFreezeSystem
+@export var movement_system: teVisualMovementSystem
 
 
 signal started(action: teVisualActionBase)
@@ -41,8 +43,6 @@ func play_next_sequence():
 		return
 	for action in sequence.actions:
 		await play_action(action)
-	while playing():
-		await played
 	sequence_finished.emit()
 	play_next_sequence()
 
@@ -50,73 +50,105 @@ func play_next_sequence():
 func play_action(action: teVisualActionBase):
 	_playing += 1
 	started.emit(action)
-	print("Action started: " + action.dbg_dump())
-	print("Playing ", _playing)
-	await direct_action(action)
-	print("Action finished: " + action.dbg_dump())
+
+	var track := direct_action(action)
+	track.play()
+
+	if not track.is_done:
+		await track.finished
+
 	_playing -= 1
-	print("Playing ", _playing)
 	played.emit(action)
 
 
-func direct_action(action: teVisualActionBase):
+func direct_action(action: teVisualActionBase) -> teVisualDirectorTrackBase:
 	if action is teVisualActionParallel:
-		for sub_action in action.actions:
-			play_action(sub_action)
+		return teVisualDirectorTracks.parallel(action, self	)
 	if action is teVisualActionSubSequence:
-		for sub_action in action.actions:
-			await play_action(sub_action)
+		return  teVisualDirectorTracks.sequential(action, self)
 	if action is teVisualActionUnitWindup:
 		var visuals := board.get_unit_visuals(action.unit_id)
-		if not visuals.winding_up:
-			return
-		await visuals.windup
-	if action is teVisualActionUnitSequence:
+		if not visuals.is_winding_up(action.act):
+			return teVisualDirectorTracks.fail()
+		if visuals.windup_finished(action.act):
+			return teVisualDirectorTracks.instant()
+		return teVisualDirectorTracks.signaled(visuals.windup_signal(action.act))
+	if action is teVisualActionUnitAct:
 		var visuals = board.get_unit_visuals(action.unit_id)
-		for act in action.acts:
-			var method_name := teVisualActs.name(act)
-			if not visuals.has_method(method_name):
-				continue
-			await visuals.call(method_name, act)
-		visuals.go_idle()
+		if not visuals.knows_act(action.act):
+			return teVisualDirectorTracks.instant()
+		var track := teVisualDirectorTracks.coroutine(
+			func(): await visuals.play_act(action.act)
+		)
+		if action.go_idle:
+			track.finished.connect(func(): visuals.go_idle())
+		return track
 	if action is teVisualActionFreezeFrame:
-		var old_scale := Engine.time_scale
-		Engine.time_scale = action.time_scale
-		await get_tree().create_timer(action.duration, true, false, true).timeout
-		Engine.time_scale = old_scale
+		return teVisualDirectorTracks.signaled(
+			freeze_system.freeze_frame(action.duration, action.time_scale)
+		)
 	if action is teVisualActionEmitCombatEvent:
 		combat_event.emit(action.event)
+		return teVisualDirectorTracks.instant()
 	if action is teVisualActionUnitFlash:
 		var unit = board.get_unit(action.unit_id)
+		if unit == null:
+			return teVisualDirectorTracks.fail()
 		unit.flash()
-		await get_tree().create_timer(action.time, false).timeout
-		print("flash")
+		return teVisualDirectorTracks.timer(self, action.time)
 	if action is teVisualActionUnitShootProjectile:
 		var shooter := board.get_unit(action.shooter_id)
 		var target := board.get_unit(action.target_id)
 		var projectile := projectile_system.create(
 			action.projectile_uid,
 			board.hex_space.to_local(shooter.get_socket(&"ranged")),
-			board.hex_space.to_local(target.get_socket(&"target")),
-			action.speed_multiplier,
 			action.trajectory_name
 		)
-		await projectile.reached_target
-		projectile_system.destroy(projectile)
+		if projectile == null:
+			return teVisualDirectorTracks.fail()
+		var track := teVisualDirectorTracks.signaled(projectile.reached_target)
+		track.finished.connect(func(): projectile_system.destroy(projectile))
+		projectile.shoot(
+			board.hex_space.to_local(target.get_socket(&"target")),
+			action.speed_multiplier
+		)
+		return track
 	if action is teVisualActionUnitDie:
 		var unit_visuals := board.get_unit_visuals(action.unit_id)
-		if unit_visuals.has_method("die"):
-			await unit_visuals.call("die", teVisualActDie.new())
-		board.dettach_unit(action.unit_id)
+		var last_act := teVisualActs.DIE
+		if not unit_visuals.knows_act(teVisualActs.DIE):
+			last_act = teVisualActs.GET_HURT
+		var track := teVisualDirectorTracks.coroutine(
+			func(): await unit_visuals.play_act(last_act)
+		)
+		track.finished.connect(func(): board.dettach_unit(action.unit_id))
+		return track
+	if action is teVisualActionUnitGoIdle:
+		board.get_unit_visuals(action.unit_id).go_idle()
+		return teVisualDirectorTracks.instant()
+	if action is teVisualActionUnitMove:
+		var unit := board.get_unit(action.unit_id)
+		if unit == null:
+			return teVisualDirectorTracks.fail()
+		var visuals := board.get_unit_visuals(action.unit_id)
+		var path: Array[Vector2] = []
+		for point in action.path:
+			path.push_back(board.hex_space.layout.hex_to_pixel(point))
+		return teVisualDirectorTracks.coroutine(func():
+			visuals.start_moving()
+			await movement_system.follow_path(
+				unit,
+				path,
+				0.1 * path.size() # TODO: Replace with varying speed and etc.
+			)
+		)
 	if action is teVisualActionVfxOnTarget:
 		var unit := board.get_unit(action.target_unit_id)
 		var pos := board.hex_space.to_local(unit.get_socket(action.socket))
-		await vfx_system.play(
-			action.vfx_id,
-			pos,
-			board.hex_space,
-			action.params
+		return teVisualDirectorTracks.coroutine(
+			func(): await vfx_system.play(action.vfx_id, pos, board.hex_space, action.params)
 		)
+	return teVisualDirectorTracks.fail()
 
 
 func clear_queue():

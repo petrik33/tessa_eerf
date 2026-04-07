@@ -1,21 +1,24 @@
 class_name teCombatServices extends RefCounted
 
 
-var navigation: HexNavigationContext
-var pathfinding: HexPathfinding
+var navigation: HexNavigation
 
 
 func _init(state: teCombatState):
-	navigation = HexNavigationContext.new(state.map.grid)
-	pathfinding = HexPathfinding.new(navigation)
+	navigation = HexNavigation.new(state.map.grid)
 	for unit_id in state.all_units_id():
 		var unit := state.unit(unit_id)
-		pathfinding.set_point_disabled(unit.hex)
+		navigation.set_point_disabled(unit.hex)
 
 
 func sync(state: teCombatState):
-	pass
+	navigation.clear_disabled_points()
+	for unit_id in state.all_units_id():
+		var unit := state.unit(unit_id)
+		navigation.set_point_disabled(unit.hex)
 
 
-func update(log: teCombatTurnLog):
-	pass
+func update(event: teCombatEventBase):
+	if event is teCombatEventUnitMoved:
+		navigation.set_point_disabled(event.path.front(), false)
+		navigation.set_point_disabled(event.path.back(), true)

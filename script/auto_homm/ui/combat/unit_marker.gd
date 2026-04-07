@@ -9,7 +9,7 @@ var hp_level := 0
 
 
 func decrease_hp(hp: int):
-	set_hp(hp_level - hp)
+	set_hp(max(hp_level - hp, 0))
 
 
 func set_hp(hp: int):

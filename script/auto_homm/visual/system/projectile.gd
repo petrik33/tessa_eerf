@@ -21,8 +21,6 @@ func last() -> teVisualProjectileNode2D:
 func create(
 	uid: StringName,
 	origin: Vector2,
-	target: Vector2,
-	speed_multiplier := 1.0,
 	trajectory_name: StringName = teVisualProjectileTrajectory.STRAIGHT
 ) -> teVisualProjectileNode2D:
 	var visual_scene: PackedScene = scenes.get(uid)
@@ -35,19 +33,19 @@ func create(
 	
 	var projectile := projectile_scene.instantiate() as teVisualProjectileNode2D
 	group_node.add_child(projectile)
+	created.append(projectile)
 	
-	var visuals := visual_scene.instantiate()
-	
+	projectile.attach_visuals(visual_scene.instantiate())
 	projectile.trajectory = trajectory
 	projectile.position = origin
-	projectile.shoot(visuals, target - origin, speed_multiplier)
-
-	created.append(projectile)
 	
 	return projectile
 
 
 func destroy(projectile: teVisualProjectileNode2D):
+	var id := created.find(projectile)
+	if id == -1:
+		return
 	group_node.remove_child(projectile)
-	created.erase(projectile)
+	created.remove_at(id)
 	projectile.queue_free()

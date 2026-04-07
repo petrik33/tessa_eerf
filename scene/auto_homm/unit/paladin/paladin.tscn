@@ -1,6 +1,6 @@
-[gd_scene load_steps=176 format=3 uid="uid://yeda2nifrlx8"]
+[gd_scene format=3 uid="uid://yeda2nifrlx8"]
 
-[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/visuals/melee_base.gd" id="1_h7216"]
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_hwx5i"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_h7216"]
 [ext_resource type="Texture2D" uid="uid://bl66x02ft5ao8" path="res://asset/texture/unit/paladin/Death/spr_PaladinDeathWithEffect_strip65.png" id="3_hwx5i"]
 [ext_resource type="Texture2D" uid="uid://b4w6ntbutqxqv" path="res://asset/texture/unit/paladin/GetHit/spr_PaladinGetHitWithEffect_strip12.png" id="4_ppp3q"]
@@ -1203,20 +1203,19 @@ animations = [{
 "speed": 9.0
 }]
 
-[node name="Paladin" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
-script = ExtResource("1_h7216")
-melee_hit_frame = 25
-animated_sprite = NodePath("AnimatedSprite2D")
-hurt_animation_name = &"hurt_no_flash"
+[node name="Paladin" type="Node2D" unique_id=44346240 node_paths=PackedStringArray("sprite", "node_to_glow")]
+script = ExtResource("1_hwx5i")
+sprite = NodePath("AnimatedSprite2D")
+windup_frames = Dictionary[StringName, int]({
+&"melee": 25
+})
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://bo2r223i6x8py"
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1083509621]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_h7216")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"hurt_no_flash"
+animation = &"idle"
 autoplay = "idle"
-frame = 10
-frame_progress = 1.0
 offset = Vector2(0, 4)

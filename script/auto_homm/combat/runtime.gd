@@ -14,5 +14,6 @@ func _init(initial_state: teCombatState):
 
 
 func update(event: teCombatEventBase):
+	services.update(event)
 	state.apply_event(event)
 	updated.emit(event)

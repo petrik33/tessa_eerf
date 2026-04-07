@@ -2,7 +2,7 @@
 class_name Math
 
 func _init() -> void:
-	assert(false, "Static lib shouldn't be constructed")
+	Utils.assert_static_lib()
 
 
 const INT_MAX := 9223372036854775807 

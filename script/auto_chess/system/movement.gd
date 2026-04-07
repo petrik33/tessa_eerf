@@ -3,7 +3,7 @@ class_name acMovement
 
 
 func _init() -> void:
-	assert(false, "Can't be constructed")
+	Utils.assert_static_lib()
 
 
 static func pick_next_hex(unit: acUnitState, target: acUnitState, state: acBattleState) -> Vector2i:

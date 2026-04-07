@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bqb0jlb11iw1m"]
+
+[ext_resource type="Script" uid="uid://dupuvb2j8ytiy" path="res://script/auto_homm/visual/system/freeze.gd" id="1_wki1w"]
+
+[node name="FreezeSystem" type="Node" unique_id=258549042 node_paths=PackedStringArray("freeze_timer")]
+script = ExtResource("1_wki1w")
+freeze_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="." unique_id=1558179898]
+process_mode = 3
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_freeze_timer_timeout"]

@@ -1,13 +1,8 @@
+@abstract
 class_name teVisualVfxInstanceBase extends Node2D
 
 
-signal impact()
-signal finished()
-
-
-func play(_params: Dictionary):
-	pass
-
-
-func instant_impact() -> bool:
-	return false
+@abstract func play(params: Dictionary)
+@abstract func impact_made() -> bool
+@abstract func impact_signal() -> Signal
+@abstract func finished_signal() -> Signal

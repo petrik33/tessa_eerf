@@ -1,11 +1,10 @@
-[gd_scene load_steps=65 format=3 uid="uid://dyt6sh81t35pd"]
+[gd_scene format=3 uid="uid://dyt6sh81t35pd"]
 
-[ext_resource type="Script" uid="uid://bo2r223i6x8py" path="res://script/auto_homm/visual/unit/visuals/melee_base.gd" id="1_2u57n"]
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_e28un"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_e28un"]
 [ext_resource type="Texture2D" uid="uid://b1h0gsc1tojhk" path="res://asset/texture/unit/blind_huntress/6 - dash.png" id="3_efk7q"]
 [ext_resource type="Texture2D" uid="uid://bhe5asrlyfto2" path="res://asset/texture/unit/blind_huntress/12 - dash attack.png" id="4_3s0a1"]
 [ext_resource type="Texture2D" uid="uid://b7ii2enxq8tfm" path="res://asset/texture/unit/blind_huntress/15 - death.png" id="5_e28un"]
-[ext_resource type="Texture2D" uid="uid://bnkk6aiv11d2v" path="res://asset/texture/unit/blind_huntress/14 - hit.png" id="5_k087a"]
 [ext_resource type="Texture2D" uid="uid://jubwdb40vg33" path="res://asset/texture/unit/blind_huntress/1 - Idle.png" id="6_lg4j8"]
 [ext_resource type="Texture2D" uid="uid://b2gmih54y7317" path="res://asset/texture/unit/blind_huntress/10 - attack 1.png" id="7_qj6pf"]
 [ext_resource type="Texture2D" uid="uid://bf8rgsqh8o0w6" path="res://asset/texture/unit/blind_huntress/11 - attack 3.png" id="8_uut3a"]
@@ -85,10 +84,6 @@ region = Rect2(1920, 0, 240, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj8c2"]
 atlas = ExtResource("5_e28un")
 region = Rect2(2160, 0, 240, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ea563"]
-atlas = ExtResource("5_k087a")
-region = Rect2(0, 0, 240, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ajifw"]
 atlas = ExtResource("6_lg4j8")
@@ -291,17 +286,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_ea563")
-}, {
-"duration": 0.5,
-"texture": SubResource("AtlasTexture_ajifw")
-}],
-"loop": false,
-"name": &"hurt",
-"speed": 8.0
-}, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ajifw")
 }, {
@@ -426,15 +410,16 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlindHuntress" type="Node2D" node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
-script = ExtResource("1_2u57n")
-melee_hit_frame = 0
-animated_sprite = NodePath("AnimatedSprite2D")
-hurt_animation_name = &""
+[node name="BlindHuntress" type="Node2D" unique_id=1839575083 node_paths=PackedStringArray("sprite", "node_to_glow")]
+script = ExtResource("1_e28un")
+sprite = NodePath("AnimatedSprite2D")
+windup_frames = Dictionary[StringName, int]({
+&"melee": 0
+})
 node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://bo2r223i6x8py"
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1492028342]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_efk7q")
 sprite_frames = SubResource("SpriteFrames_ll718")

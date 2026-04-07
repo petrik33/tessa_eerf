@@ -3,7 +3,7 @@ class_name acTargeting
 
 
 func _init() -> void:
-	assert(false, "Can't be constructed")
+	Utils.assert_static_lib()
 
 
 enum Mode {

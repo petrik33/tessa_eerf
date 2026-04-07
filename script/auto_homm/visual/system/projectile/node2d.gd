@@ -20,9 +20,12 @@ const BASE_TRAJECTORY_LENGTH := 100.0
 const ANIMATION_NAME := "trajectory"
 
 
-func shoot(visuals: Node2D, target: Vector2, speed_multiplier := 1.0):
-	_apply_transform(target)
+func attach_visuals(visuals: Node2D):
 	path_follow.add_child(visuals)
+
+
+func shoot(target: Vector2, speed_multiplier := 1.0):
+	_apply_transform(target)
 	animation_player.speed_scale = scale.x * speed_multiplier
 	animation_player.play(ANIMATION_NAME)
 	await animation_player.animation_finished
@@ -30,8 +33,9 @@ func shoot(visuals: Node2D, target: Vector2, speed_multiplier := 1.0):
 
 
 func _apply_transform(target: Vector2):
-	var target_scale = target.length() / BASE_TRAJECTORY_LENGTH
-	rotation = target.angle()
+	var to_target := target - position
+	var target_scale = to_target.length() / BASE_TRAJECTORY_LENGTH
+	rotation = to_target.angle()
 	path.scale = Vector2(target_scale, target_scale)
 	path_follow.scale = Vector2(1 / target_scale, 1 / target_scale)
 

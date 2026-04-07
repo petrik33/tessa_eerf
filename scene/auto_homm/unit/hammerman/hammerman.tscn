@@ -1,6 +1,6 @@
-[gd_scene load_steps=101 format=3 uid="uid://s2sm1oi7wopw"]
+[gd_scene format=3 uid="uid://s2sm1oi7wopw"]
 
-[ext_resource type="Script" uid="uid://urj01xa8pcy8" path="res://script/auto_homm/visual/unit/visuals_base.gd" id="1_hmkwq"]
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_hmkwq"]
 [ext_resource type="Texture2D" uid="uid://dxbe2bm8vbd3s" path="res://asset/texture/unit/hammerman/spr_Death_strip.png" id="2_shgf8"]
 [ext_resource type="Texture2D" uid="uid://c183qymwvw240" path="res://asset/texture/unit/hammerman/spr_Idle_strip.png" id="3_xs1vs"]
 [ext_resource type="Texture2D" uid="uid://4bcr0hw0dl64" path="res://asset/texture/unit/hammerman/spr_Attack_strip.png" id="4_wyuqf"]
@@ -687,12 +687,11 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Hammerman" type="Node2D" node_paths=PackedStringArray("node_to_glow")]
+[node name="Hammerman" type="Node2D" unique_id=581319834]
 script = ExtResource("1_hmkwq")
-node_to_glow = NodePath("AnimatedSprite2D")
-metadata/_custom_type_script = "uid://urj01xa8pcy8"
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1773110724]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"

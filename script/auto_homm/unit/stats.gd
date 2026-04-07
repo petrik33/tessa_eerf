@@ -9,3 +9,4 @@ class_name teUnitStats extends Resource
 @export var attack_range := 1
 @export var attack_damage := 15
 @export var initiative := 5
+@export var move_range := 5

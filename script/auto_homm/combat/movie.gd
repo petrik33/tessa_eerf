@@ -58,6 +58,12 @@ func play_turn(state: teCombatState, turn_log: teCombatTurnLog):
 	director.play(writer.sequence(state, turn_log))
 
 
+func _on_live_combat_updated(updated_state: teCombatState, event: teCombatEventBase):
+	var sequence := teVisualSequence.new()
+	sequence.actions = [writer.write(updated_state, event)]
+	director.play(sequence)
+
+
 func _on_live_combat_turn_finished(initial_state: teCombatState, turn_log: teCombatTurnLog):
 	play_turn(initial_state, turn_log)
 
