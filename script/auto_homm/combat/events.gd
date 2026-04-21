@@ -13,6 +13,17 @@ static func unit_attacked(unit_id: int, attacker_id: int, damage: int, is_lethal
 	hit.lethal = is_lethal
 	return hit
 
+static func unit_damaged(unit_id: int, damage: int) -> teCombatEventUnitDamaged:
+	var event := teCombatEventUnitDamaged.new()
+	event.unit_id = unit_id
+	event.damage = damage
+	return event
+
+static func unit_died(unit_id: int) -> teCombatEventUnitDied:
+	var event := teCombatEventUnitDied.new()
+	event.unit_id = unit_id
+	return event
+
 static func unit_moved(unit_id: int, path: Array[Vector2i]) -> teCombatEventUnitMoved:
 	var event := teCombatEventUnitMoved.new()
 	event.unit_id = unit_id
@@ -33,4 +44,10 @@ static func initiative_progressed(progress: float) -> teCombatEventInitiativePro
 static func initiative_taken(unit_id: int) -> teCombatEventInitiativeTaken:
 	var event := teCombatEventInitiativeTaken.new()
 	event.unit_id = unit_id
+	return event
+
+static func mana_gained(unit_id: int, mana: int) -> teCombatEventManaGained:
+	var event := teCombatEventManaGained.new()
+	event.unit_id = unit_id
+	event.mana = mana
 	return event

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://sj1uhv6p1wjg"]
 
-[ext_resource type="Script" uid="uid://ddrgqgy0a76hp" path="res://script/auto_homm/combat/movie.gd" id="1_eyshp"]
+[ext_resource type="Script" uid="uid://ddrgqgy0a76hp" path="res://script/auto_homm/visual/movie.gd" id="1_eyshp"]
 [ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="2_gglum"]
 [ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit_profile.gd" id="3_byswl"]
 

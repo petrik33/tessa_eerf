@@ -337,7 +337,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 52.0
+"speed": 44.0
 }]
 
 [node name="Cast" type="Node2D" unique_id=1488990738 node_paths=PackedStringArray("sprite")]
@@ -348,5 +348,6 @@ metadata/_custom_type_script = "uid://c5ppkivs7hy8n"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1566232153]
 sprite_frames = SubResource("SpriteFrames_8jeae")
-frame = 35
+frame = 46
+frame_progress = 1.0
 offset = Vector2(-50, 11)

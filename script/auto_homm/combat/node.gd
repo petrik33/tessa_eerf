@@ -3,25 +3,17 @@ class_name teCombat extends Node
 
 #signal hero_turn_started()
 signal started(first_state: teCombatState)
-signal turn_started(state: teCombatState)
-signal updated(state: teCombatState, event: teCombatEventBase)
-signal turn_finished(state: teCombatState, log: teCombatTurnLog)
+signal action_taken(state: teCombatState, resolved: teCombatResolvedAction)
 signal finished(final_state: teCombatState)
 
 
-@export var max_steps := 35
 @export var turn_timer: Timer
 
 
 var rules: teCombatRules
 var runtime: teCombatRuntime
-var turn_history: teCombatTurnHistory
+var state: teCombatState
 var initial_state: teCombatState
-
-
-func turns_made() -> int:
-	var number := turn_history.number()
-	return number - 1 if number > 0 else 0 # Turn Zero doesn't count
 
 
 func is_active() -> bool:
@@ -29,59 +21,62 @@ func is_active() -> bool:
 
 
 func start(_initial_state: teCombatState, _rules: teCombatRules):
+	if is_active():
+		stop()
 	rules = _rules
 	initial_state = _initial_state.duplicate()
+	state = initial_state.duplicate()
 	runtime = teCombatRuntime.new(initial_state)
-	runtime.updated.connect(_on_runtime_updated)
-	turn_history = teCombatTurnHistory.new()
 	started.emit(initial_state)
-	_take_turn(teCombatCommands.start_combat())
-	try_take_next_turn()
+	step()
+
+
+func step():
+	if not is_active():
+		return
+	var command: teCombatCommandBase
+	if rules.is_hero_turn(state):
+		command = teCombatCommands.skip_hero_turn()
+	else:
+		_take(teCombatActions.initiative_advance())
+		command = rules.auto_command(state)
+	var expanded := rules.expand(runtime, state, command)
+	if not expanded.is_valid():
+		return
+	for action in expanded.actions:
+		runtime.enqueue(action)
+	while not runtime.action_queue.is_empty():
+		_take(runtime.action_queue.pop_front())
+	if rules.is_finished(state):
+		stop()
+		return
+	turn_timer.start()
+
+
+func stop():
+	if not is_active():
+		return
+	turn_timer.stop()
+	runtime = null
+	finished.emit(state)
+	state = null
 
 
 func restart():
 	if initial_state == null:
 		return
-	if is_active():
-		stop()
 	start(initial_state, rules)
 
 
-func stop():
-	turn_timer.stop()
-	runtime.updated.disconnect(_on_runtime_updated)
-	runtime = null
-
-
-func try_take_next_turn() -> bool:
-	if not is_active():
-		return false
-	if rules.is_finished(runtime) or turns_made() >= max_steps:
-		finished.emit(runtime.state)
-		stop()
-		return false
-	if rules.is_hero_turn(runtime):
-		_take_turn(teCombatCommands.skip_hero_turn())
-		turn_timer.start()
-		return true
-	rules.progress(runtime)
-	var next_unit_command := rules.auto_command(runtime)
-	_take_turn(next_unit_command)
-	turn_timer.start()
-	return true
-
-
-func _take_turn(command: teCombatCommandBase):
-	turn_history.record_next_turn()
-	turn_started.emit(runtime.state)
-	rules.process(runtime, command)
-	turn_finished.emit(runtime.state, turn_history.current_turn())
-
-
-func _on_runtime_updated(event: teCombatEventBase):
-	turn_history.record(event)
-	updated.emit(runtime.state, event)
+func _take(action: teCombatActionBase):
+	var resolved := rules.resolve(state, action)
+	if not resolved.is_valid():
+		return
+	for event in resolved.events:
+		state.update(event)
+		runtime.update(event)
+	action_taken.emit(state, resolved)
 
 
 func _on_timer_timeout():
-	try_take_next_turn()
+	step()

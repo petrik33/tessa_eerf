@@ -1,19 +1,17 @@
 class_name teCombatRuntime extends RefCounted
 
 
-signal updated(updated_state: teCombatState, event: teCombatEventBase)
-
-
-var state: teCombatState
 var services: teCombatServices
+var action_queue: Array[teCombatActionBase]
 
 
 func _init(initial_state: teCombatState):
-	state = initial_state.duplicate()
-	services = teCombatServices.new(state)
+	services = teCombatServices.new(initial_state)
 
 
 func update(event: teCombatEventBase):
 	services.update(event)
-	state.apply_event(event)
-	updated.emit(event)
+
+
+func enqueue(action: teCombatActionBase):
+	action_queue.push_back(action)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://blc7d7qhuv7c6"]
+[gd_scene format=3 uid="uid://blc7d7qhuv7c6"]
 
 [ext_resource type="Script" uid="uid://bqjjla6c1xuhe" path="res://script/auto_homm/visual/board_unit_view.gd" id="1_rdlfa"]
 [ext_resource type="PackedScene" uid="uid://ogedwonbrora" path="res://scene/combat_visual/dbg_combat_visual_hex.tscn" id="2_jnodn"]
+[ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="3_a31u8"]
 [ext_resource type="PackedScene" uid="uid://x1oxfgho7yu7" path="res://scene/auto_homm/ui/combat/unit_marker.tscn" id="3_j60lq"]
 [ext_resource type="PackedScene" uid="uid://w778dl2mxji7" path="res://scene/auto_homm/vfx/board_unit_view_flash.tscn" id="4_rdlfa"]
 [ext_resource type="Shader" uid="uid://l0wihqbflfey" path="res://shader/auto_homm/luminance_based_flash.gdshader" id="5_jnodn"]
@@ -13,26 +14,23 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/strength = 0.0
 shader_parameter/brightness_bias = 0.330000015675
 
-[node name="BoardUnitView" type="Node2D" node_paths=PackedStringArray("view_attach", "marker", "flash_vfx")]
+[node name="BoardUnitView" type="Node2D" unique_id=1216768633 node_paths=PackedStringArray("view_attach", "marker", "flash_vfx")]
 script = ExtResource("1_rdlfa")
 view_attach = NodePath("UnitAttach")
 marker = NodePath("UnitMarker")
 flash_vfx = NodePath("Flash")
 
-[node name="DbgCombatVisualHex" parent="." instance=ExtResource("2_jnodn")]
+[node name="DbgCombatVisualHex" parent="." unique_id=268866418 instance=ExtResource("2_jnodn")]
 visible = false
 
-[node name="UnitAttach" type="Node2D" parent="."]
+[node name="UnitAttach" type="Node2D" parent="." unique_id=128244182]
 position = Vector2(0, 2)
 
-[node name="UnitMarker" parent="." instance=ExtResource("3_j60lq")]
+[node name="Necromancer" parent="UnitAttach" unique_id=1398765949 instance=ExtResource("3_a31u8")]
+visible = false
 
-[node name="MarkerAttach" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="UnitMarker" parent="." unique_id=411214510 instance=ExtResource("3_j60lq")]
 
-[node name="Flash" parent="." instance=ExtResource("4_rdlfa")]
+[node name="Flash" parent="." unique_id=129286827 instance=ExtResource("4_rdlfa")]
 flash_material = SubResource("ShaderMaterial_a31u8")
 target_strength = 1.25

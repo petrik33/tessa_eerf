@@ -7,14 +7,12 @@ func _init() -> void:
 
 static func parallel(... actions: Array) -> teVisualActionBase:
 	var action := teVisualActionParallel.new()
-	action.actions = []
 	for sub_action in actions:
 		action.actions.push_back(sub_action)
 	return action
 
 static func sub_sequence(... actions: Array) -> teVisualActionBase:
 	var action := teVisualActionSubSequence.new()
-	action.actions = []
 	for sub_action in actions:
 		action.actions.push_back(sub_action)
 	return action
@@ -60,6 +58,12 @@ static func freeze_frame(duration: float = 0.08) -> teVisualActionFreezeFrame:
 static func emit(event: teCombatEventBase) -> teVisualActionEmitCombatEvent:
 	var action := teVisualActionEmitCombatEvent.new()
 	action.event = event
+	return action
+
+static func emit_all(events: Array[teCombatEventBase]) -> teVisualActionBase:
+	var action := teVisualActionParallel.new()
+	for event in events:
+		action.actions.push_back(emit(event))
 	return action
 
 static func focus_unit(unit_id: int) -> teVisualActionFocusUnit:

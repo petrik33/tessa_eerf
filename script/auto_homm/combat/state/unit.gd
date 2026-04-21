@@ -13,5 +13,9 @@ func hp_left() -> int:
 	return stats.max_hp - hp_spent
 
 
+func enough_mana() -> bool:
+	return mana_collected >= stats.required_mana
+
+
 func is_alive() -> bool:
 	return hp_left() > 0

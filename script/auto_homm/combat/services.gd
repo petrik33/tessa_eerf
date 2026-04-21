@@ -6,9 +6,7 @@ var navigation: HexNavigation
 
 func _init(state: teCombatState):
 	navigation = HexNavigation.new(state.map.grid)
-	for unit_id in state.all_units_id():
-		var unit := state.unit(unit_id)
-		navigation.set_point_disabled(unit.hex)
+	sync(state)
 
 
 func sync(state: teCombatState):

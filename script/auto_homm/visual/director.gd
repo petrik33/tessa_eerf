@@ -24,27 +24,17 @@ func queue_empty() -> bool:
 	return _queue.is_empty()
 
 
-func play(sequence: teVisualSequence):
-	enqueue(sequence)
-	if not playing():
-		play_next_sequence()
-
-
-func enqueue(sequence: teVisualSequence):
-	_queue.push_back(sequence)
-
-
-func play_next_sequence():
-	if queue_empty():
+func play(action: teVisualActionBase):
+	enqueue(action)
+	if playing():
 		return
-	var sequence = _queue.pop_front()
-	if sequence.actions.is_empty():
-		play_next_sequence()
-		return
-	for action in sequence.actions:
-		await play_action(action)
-	sequence_finished.emit()
-	play_next_sequence()
+	while not queue_empty():
+		await play_action(_queue.pop_front())
+		sequence_finished.emit()
+
+
+func enqueue(action: teVisualActionBase):
+	_queue.push_back(action)
 
 
 func play_action(action: teVisualActionBase):
@@ -155,5 +145,5 @@ func clear_queue():
 	_queue.clear()
 
 
-var _queue: Array[teVisualSequence]
+var _queue: Array[teVisualActionBase]
 var _playing: int

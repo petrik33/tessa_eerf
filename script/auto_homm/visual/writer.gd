@@ -12,38 +12,42 @@ func intro(_initial_state: teCombatState) -> teVisualSequence:
 	return null
 
 
-func sequence(state: teCombatState, event_log: teCombatTurnLog) -> teVisualSequence:
-	var written_sequence := teVisualSequence.new()
-	for event in event_log.events:
-		var action := write(state, event)
-		if action == null:
-			continue
-		written_sequence.actions.push_back(action)
-	return written_sequence
-
-
-func write(state: teCombatState, event: teCombatEventBase) -> teVisualActionBase:
-	if event is teCombatEventUnitAttacked:
-		return write_attack(state, event)
-	if event is teCombatEventUnitMoved:
-		return write_unit_move(state, event)
+func sequence(
+	state: teCombatState,
+	action: teCombatActionBase,
+	events: Array[teCombatEventBase]
+) -> teVisualActionBase:
+	if action is teCombatActionUnitAttack:
+		return write_attack(state, action, events)
+	if action is teCombatActionUnitMove:
+		return write_unit_move(action, events)
 	return null
 
 
-func write_unit_move(_state: teCombatState, event: teCombatEventUnitMoved) -> teVisualActionBase:
+func write_unit_move(
+	action: teCombatActionUnitMove,
+	events: Array[teCombatEventBase]
+) -> teVisualActionBase:
+	var visual_path := action.path.through.duplicate()
+	visual_path.insert(0, action.path.from)
 	return teVisualActions.sub_sequence(
 		teVisualActions.unit_move(
-			event.unit_id,
-			event.path
+			action.unit_id,
+			visual_path
 		),
 		teVisualActions.unit_go_idle(
-			event.unit_id
-		)
+			action.unit_id
+		),
+		teVisualActions.emit_all(events)
 	)
 
 
-func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teVisualActionBase:
-	var attacker := state.unit(event.attacker_id)
+func write_attack(
+	state: teCombatState,
+	action: teCombatActionUnitAttack,
+	events: Array[teCombatEventBase]
+) -> teVisualActionBase:
+	var attacker := state.unit(action.unit_id)
 	if not attacker:
 		return null
 	var attack_kind: teVisualUnitProfile.AttackKind
@@ -56,51 +60,52 @@ func write_attack(state: teCombatState, event: teCombatEventUnitAttacked) -> teV
 		teVisualUnitProfile.AttackKind.MELEE: 
 			return teVisualActions.unit_windup_sequence(
 				teVisualActions.unit_act(
-					event.attacker_id,
+					action.unit_id,
 					teVisualActs.MELEE
 				),
-				write_attack_impact(event)
+				write_attack_impact(action, events)
 			)
 		teVisualUnitProfile.AttackKind.PROJECTILE:
 			return teVisualActions.unit_windup_sequence(
 				teVisualActions.unit_act(
-					event.attacker_id,
+					action.unit_id,
 					teVisualActs.RANGED
 				),
 				teVisualActions.sub_sequence(
 					teVisualActions.unit_shoot_projectile(
-						event.attacker_id,
-						event.unit_id,
+						action.unit_id,
+						action.target_id,
 						attacker.definition_uid
 					),
-					write_attack_impact(event)
+					write_attack_impact(action, events)
 				)
 			)
 		teVisualUnitProfile.AttackKind.CAST:
 			return teVisualActions.unit_windup_sequence(
 				teVisualActions.unit_act(
-					event.attacker_id,
+					action.unit_id,
 					teVisualActs.CAST
 				),
 				teVisualActions.sub_sequence(
 					teVisualActions.vfx_on_target(
 						attacker.definition_uid,
-						event.unit_id
+						action.target_id,
 					),
-					write_attack_impact(event)
+					write_attack_impact(action, events)
 				)
 			)
 	return null
 
 
-func write_attack_impact(event: teCombatEventUnitAttacked) -> teVisualActionBase:
+func write_attack_impact(action: teCombatActionUnitAttack, events: Array[teCombatEventBase]) -> teVisualActionBase:
+	var is_lethal := events.find_custom(func (ev): return ev is teCombatEventUnitDied) != -1
 	return teVisualActions.parallel(
-		teVisualActions.unit_flash(event.unit_id),
-		hit_action(event.unit_id, event.lethal),
+		teVisualActions.unit_flash(action.target_id),
+		hit_action(action.target_id, is_lethal),
 		teVisualActions.freeze_frame(
-			freeze_frame_duration_kill if event.lethal else freeze_frame_duration_hit
+			freeze_frame_duration_kill if is_lethal else freeze_frame_duration_hit
 		),
-		teVisualActions.emit(event)
+		teVisualActions.emit_all(events)
 	)
 
 

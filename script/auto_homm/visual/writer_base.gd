@@ -6,7 +6,8 @@ class_name teVisualWriterBase extends Resource
 func intro(initial_state: teCombatState) -> teVisualSequence
 
 @abstract
-func sequence(state: teCombatState, event_log: teCombatTurnLog) -> teVisualSequence
-
-@abstract
-func write(state: teCombatState, event: teCombatEventBase) -> teVisualActionBase
+func sequence(
+	state: teCombatState,
+	action: teCombatActionBase,
+	events: Array[teCombatEventBase]
+) -> teVisualActionBase

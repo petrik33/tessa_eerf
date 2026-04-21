@@ -39,22 +39,17 @@ func active_unit() -> teCombatUnitState:
 	return unit(initiative_holder_id)
 
 
-func update(turn_log: teCombatTurnLog):
-	for event in turn_log.events:
-		apply_event(event)
-
-
-func apply_event(event: teCombatEventBase):
+func update(event: teCombatEventBase):
 	if event is teCombatEventTurnStarted:
 		active_unit_moved = false
-	if event is teCombatEventUnitAttacked:
+	if event is teCombatEventUnitDamaged:
 		units[event.unit_id].hp_spent = min(
 			units[event.unit_id].hp_spent + event.damage,
 			units[event.unit_id].stats.max_hp
 		)
-		if event.lethal:
-			units.erase(event.unit_id)
-			unit_teams.erase(event.unit_id)
+	if event is teCombatEventUnitDied:
+		units.erase(event.unit_id)
+		unit_teams.erase(event.unit_id)
 	if event is teCombatEventInitiativeProgressed:
 		for id in units:
 			units[id].initiative_progress += event.progress
@@ -64,6 +59,8 @@ func apply_event(event: teCombatEventBase):
 	if event is teCombatEventUnitMoved:
 		units[event.unit_id].hex = event.path.back()
 		active_unit_moved = true
+	if event is teCombatEventManaGained:
+		units[event.unit_id].mana_collected += event.mana
 		
 
 

@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxi1j6sx4s8e1"]
+[gd_scene format=3 uid="uid://bxi1j6sx4s8e1"]
 
 [ext_resource type="Script" uid="uid://cjitshpn34tl8" path="res://script/auto_homm/combat/node.gd" id="1_7mc0s"]
 
-[node name="Combat" type="Node" node_paths=PackedStringArray("turn_timer")]
+[node name="Combat" type="Node" unique_id=1529090557 node_paths=PackedStringArray("turn_timer")]
 script = ExtResource("1_7mc0s")
 turn_timer = NodePath("TurnTimer")
 
-[node name="TurnTimer" type="Timer" parent="."]
+[node name="TurnTimer" type="Timer" parent="." unique_id=952651906]
 ignore_time_scale = true
 
 [connection signal="timeout" from="TurnTimer" to="." method="_on_timer_timeout"]

@@ -9,6 +9,8 @@ var playing: int
 func play():
 	director.played.connect(_on_sub_action_played)
 	playing = action.actions.size()
+	if playing == 0:
+		_finish()
 	for sub_action in action.actions:
 		director.play_action(sub_action)
 

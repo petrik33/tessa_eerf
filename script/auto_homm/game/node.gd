@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 			return
 		combat_setup.deactivate()
 		board.clear_all_hover()
-		movie.live(combat)
+		movie.start(combat)
 		combat.start(potential_combat_state, setup.rule_set.rules)
 	if event.is_action_pressed("dbg_finish_combat"):
 		if not combat.is_active():
@@ -45,7 +45,7 @@ func _input(event: InputEvent) -> void:
 		combat.stop()
 		if movie.playing():
 			await movie.turn_played
-		movie.stop_live()
+		movie.stop()
 		_update_potential_combat_state()
 		combat_setup.activate(state.current_team)
 		
@@ -75,7 +75,7 @@ func _on_place_unit_requested(unit_id: int, hex: Vector2i):
 func _on_combat_finished(_final_state: teCombatState):
 	if movie.playing():
 		await movie.finished
-	movie.stop_live()
+	movie.stop()
 	_update_potential_combat_state()
 	combat_setup.activate(state.current_team)
 

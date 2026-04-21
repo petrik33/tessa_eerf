@@ -11,9 +11,8 @@ static func unit_attack(unit_id: int, target_id: int) -> teCombatCommandUnitAtta
 	command.target_id = target_id
 	return command
 
-static func unit_move(unit_id: int, path: Array[Vector2i]) -> teCombatCommandUnitMove:
-	var command := teCombatCommandUnitMove.new()
-	command.move_path = path
+static func unit_wait(unit_id: int) -> teCombatCommandUnitWait:
+	var command := teCombatCommandUnitWait.new()
 	command.unit_id = unit_id
 	return command
 

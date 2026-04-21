@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="teUnitSet" load_steps=16 format=3 uid="uid://b2k6fmss4dwyi"]
+[gd_resource type="Resource" script_class="teUnitSet" format=3 uid="uid://b2k6fmss4dwyi"]
 
-[ext_resource type="Script" uid="uid://daavssjfuh6c3" path="res://script/auto_homm/combat/unit_set.gd" id="1_al2hj"]
+[ext_resource type="Script" uid="uid://daavssjfuh6c3" path="res://script/auto_homm/combat/unit/set.gd" id="1_al2hj"]
 [ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="2_uxbsg"]
 [ext_resource type="Script" uid="uid://bmmh4y5p4r5ej" path="res://script/auto_homm/unit/stats.gd" id="3_uxbsg"]
 

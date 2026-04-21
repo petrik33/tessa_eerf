@@ -1078,7 +1078,6 @@ rotation = 3.1415927
 scale = Vector2(1, -1)
 
 [node name="Necromancer" parent="HexSpace/Units" unique_id=1458274522 instance=ExtResource("8_ycat3")]
-visible = false
 position = Vector2(135, 25)
 
 [node name="Paladin" parent="HexSpace/Units" unique_id=1425105537 instance=ExtResource("9_6327r")]
@@ -1088,12 +1087,11 @@ position = Vector2(85, 81)
 position = Vector2(3, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" unique_id=464352761 instance=ExtResource("11_7g3bp")]
-visible = false
 position = Vector2(335, 23)
 scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
-position = Vector2(132, 79)
+position = Vector2(130, 78)
 scale = Vector2(-1, 1)
 
 [node name="Projectiles" type="Node2D" parent="HexSpace" unique_id=571823503]
@@ -1207,6 +1205,5 @@ grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
 [connection signal="finished" from="Controllers/Combat" to="." method="_on_combat_finished"]
-[connection signal="started" from="Controllers/Combat" to="Controllers/CombatUI" method="_on_combat_started"]
 [connection signal="place_unit_requested" from="Controllers/Setup" to="." method="_on_place_unit_requested"]
 [connection signal="combat_event" from="Controllers/Director" to="Controllers/CombatUI" method="_on_combat_event"]
