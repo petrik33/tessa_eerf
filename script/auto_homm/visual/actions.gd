@@ -71,7 +71,7 @@ static func focus_unit(unit_id: int) -> teVisualActionFocusUnit:
 	action.unit_id = unit_id
 	return action
 
-static func unit_flash(unit_id: int, time := 1.0, color := Color.WHITE) -> teVisualActionUnitFlash:
+static func unit_flash(unit_id: int, time := 0.1, color := Color.WHITE) -> teVisualActionUnitFlash:
 	var action := teVisualActionUnitFlash.new()
 	action.unit_id = unit_id
 	action.time = time
@@ -95,13 +95,13 @@ static func unit_shoot_projectile(
 
 
 static func vfx_on_target(
-	vfx_id: StringName,
+	vfx_uid: StringName,
 	target_id: int,
 	params: Dictionary = {},
 	socket: StringName = &"target"
 ) -> teVisualActionVfxOnTarget:
 	var action := teVisualActionVfxOnTarget.new()
-	action.vfx_id = vfx_id
+	action.vfx_uid = vfx_uid
 	action.target_unit_id = target_id
 	action.params = params
 	action.socket = socket

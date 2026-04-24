@@ -26,12 +26,18 @@ func knows_act(act_name: StringName) -> bool:
 	return sprite.sprite_frames.has_animation(act_name)
 
 
-func play_act(act_name: StringName):
+func play_act(act_name: StringName, speed_scale: float):
 	if windup_frames.has(act_name):
-		await animation_trigger.run(act_name, windup_frames[act_name])
+		await animation_trigger.run(act_name, windup_frames[act_name], speed_scale)
 	else:
-		sprite.play(act_name)
+		sprite.play(act_name, speed_scale)
 		await sprite.animation_finished
+
+
+func act_duration(act_name: StringName) -> float:
+	if not knows_act(act_name):
+		return 0.0
+	return Utils.animation_duration_sprite2d(sprite, act_name)
 
 
 func is_winding_up(act_name: StringName) -> bool:

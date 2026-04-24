@@ -9,8 +9,12 @@ class_name teVisualVfxAnimatedWithTrigger extends teVisualVfxInstanceBase
 @onready var animation_trigger := AnimationTrigger.new(sprite)
 
 
-func play(_params: Dictionary):
-	animation_trigger.run(animation, trigger_frame)
+func play(_params: Dictionary, speed_scale: float):
+	animation_trigger.run(animation, trigger_frame, speed_scale)
+
+
+func duration():
+	return Utils.animation_duration_sprite2d(sprite, animation)
 
 
 func impact_made() -> bool:

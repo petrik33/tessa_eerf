@@ -4,6 +4,15 @@ class_name teVisualVfxSystem extends Node
 
 
 var playing: Array[teVisualVfxInstanceBase]
+var durations: Dictionary[StringName, float]
+
+
+func _enter_tree() -> void:
+	for uid in library:
+		var vfx_scene := library[uid]
+		var vfx := vfx_scene.instantiate() as teVisualVfxInstanceBase
+		durations[uid] = vfx.duration()
+		vfx.queue_free()
 
 
 func _exit_tree() -> void:
@@ -12,12 +21,13 @@ func _exit_tree() -> void:
 
 
 func play(
-	vfx_id: StringName,
+	vfx_uid: StringName,
 	position: Vector2,
 	parent: Node,
-	params: Dictionary
+	speed_scale := 1.0,
+	params: Dictionary = {}
 ):
-	var scene: PackedScene = library.get(vfx_id)
+	var scene: PackedScene = library.get(vfx_uid)
 	if scene == null:
 		return
 	var instance = scene.instantiate() as teVisualVfxInstanceBase
@@ -29,8 +39,11 @@ func play(
 		parent.remove_child(instance)
 		instance.queue_free()
 	)
-	instance.play(params)
+	instance.play(params, speed_scale)
 	if instance.impact_made():
 		return
 	await instance.impact_signal()
-	
+
+
+func duration(vfx_uid: StringName) -> float:
+	return durations[vfx_uid]

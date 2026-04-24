@@ -7,6 +7,7 @@ script = ExtResource("1_7mc0s")
 turn_timer = NodePath("TurnTimer")
 
 [node name="TurnTimer" type="Timer" parent="." unique_id=952651906]
+wait_time = 0.05
 ignore_time_scale = true
 
 [connection signal="timeout" from="TurnTimer" to="." method="_on_timer_timeout"]

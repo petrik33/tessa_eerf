@@ -5,17 +5,19 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-static func parallel(action: teVisualActionParallel, director: teVisualDirector) -> teVisualDirectorParallelTrack:
+static func parallel(action: teVisualActionParallel, director: teVisualDirector, speed_scale: float) -> teVisualDirectorParallelTrack:
 	var track := teVisualDirectorParallelTrack.new()
 	track.action = action
 	track.director = director
+	track.speed_scale = speed_scale
 	return track
 
 
-static func sequential(action: teVisualActionSubSequence, director: teVisualDirector) -> teVisualDirectorSequentialTrack:
+static func sequential(action: teVisualActionSubSequence, director: teVisualDirector, speed_scale: float) -> teVisualDirectorSequentialTrack:
 	var track := teVisualDirectorSequentialTrack.new()
 	track.action = action
 	track.director = director
+	track.speed_scale = speed_scale
 	return track
 
 

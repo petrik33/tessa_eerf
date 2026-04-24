@@ -50,7 +50,7 @@ func _on_combat_action_taken(state: teCombatState, resolved: teCombatResolvedAct
 	var sequence := writer.sequence(state, resolved.action, resolved.events)
 	if sequence == null:
 		return
-	director.play(sequence)
+	director.play(sequence, 0.5)
 
 
 func _on_combat_started(initial_state: teCombatState):

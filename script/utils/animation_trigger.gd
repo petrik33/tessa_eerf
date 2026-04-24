@@ -14,7 +14,7 @@ func _init(_sprite: AnimatedSprite2D):
 	sprite = _sprite
 
 
-func run(animation: StringName, trigger_frame: int) -> void:
+func run(animation: StringName, trigger_frame: int, speed_scale := 1.0) -> void:
 	if is_running:
 		return
 	
@@ -23,7 +23,7 @@ func run(animation: StringName, trigger_frame: int) -> void:
 	
 	is_running = true
 	
-	sprite.play(animation)
+	sprite.play(animation, speed_scale)
 	
 	if trigger_frame == 0:
 		_trigger()
