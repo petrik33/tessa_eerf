@@ -2,7 +2,7 @@ class_name teBoardUnitView extends Node2D
 
 
 @export var view_attach: Node2D
-@export var marker: teCombatUnitMarker
+@export var marker_tracker: Node2D
 @export var flash_vfx: teBoardUnitViewFlash
 
 
@@ -22,8 +22,8 @@ func get_socket(name: StringName) -> Vector2:
 	return view.visuals.global_position
 
 
-func get_marker() -> teCombatUnitMarker:
-	return marker
+func get_marker_global_position() -> Vector2:
+	return marker_tracker.global_position
 
 
 func flash(time := 0.1, color := Color.WHITE):

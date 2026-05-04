@@ -6,23 +6,16 @@ signal finished()
 
 
 @export var board: teBoardVisual
-@export var director: teVisualDirector
-@export var writer: teVisualWriter
+@export var producer: teVisualProducer
+@export var writer: teVisualWriterBase
+@export var cutter: teVisualCutterBase
 
 
 var combat: teCombat
 
 
-func _ready() -> void:
-	director.sequence_finished.connect(_on_director_sequence_finished)
-
-
-func _exit_tree() -> void:
-	director.sequence_finished.disconnect(_on_director_sequence_finished)
-
-
-func playing() -> bool:
-	return director.playing()
+func is_playing() -> bool:
+	return producer.is_playing()
 
 
 func is_live() -> bool:
@@ -35,29 +28,31 @@ func start(_combat: teCombat):
 	combat = _combat
 	combat.started.connect(_on_combat_started)
 	combat.action_taken.connect(_on_combat_action_taken)
+	producer.start()
 
 
 func stop():
-	director.clear_queue()
 	if not is_live():
 		return
+	producer.stop()
 	combat.action_taken.disconnect(_on_combat_action_taken)
 	combat.started.disconnect(_on_combat_started)
 	combat = null
 
 
 func _on_combat_action_taken(state: teCombatState, resolved: teCombatResolvedAction):
-	var sequence := writer.sequence(state, resolved.action, resolved.events)
-	if sequence == null:
+	var root_action := writer.sequence(state, resolved.action, resolved.events)
+	if root_action == null:
 		return
-	director.play(sequence, 0.5)
+	producer.enqueue(root_action, cutter.cut_time(resolved.action))
 
 
 func _on_combat_started(initial_state: teCombatState):
 	board.sync_state(initial_state)
 
 
-func _on_director_sequence_finished():
+func _on_producer_sequence_finished():
 	turn_played.emit()
-	if director.queue_empty():
+	if is_live() and not combat.is_active() and producer.queue_empty():
 		finished.emit()
+	

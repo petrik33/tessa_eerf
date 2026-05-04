@@ -1,5 +1,5 @@
 @abstract
-class_name teVisualWriterBase extends Resource
+class_name teVisualWriterBase extends Node
 
 
 @abstract

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b00my3rka8ncb"]
+
+[ext_resource type="Script" uid="uid://b2ei674sm8hjo" path="res://script/auto_homm/visual/producer.gd" id="1_w83n0"]
+
+[node name="Producer" type="Node" unique_id=1328117501 node_paths=PackedStringArray("deadline_timer")]
+script = ExtResource("1_w83n0")
+deadline_timer = NodePath("DeadlineTimer")
+
+[node name="DeadlineTimer" type="Timer" parent="." unique_id=1335503574]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="DeadlineTimer" to="." method="_on_deadline_timeout"]

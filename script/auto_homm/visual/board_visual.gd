@@ -18,6 +18,7 @@ func sync_state(combat: teCombatState):
 		if not units.has(unit_id):
 			create_unit(unit.definition_uid, unit_id)
 		units[unit_id].position = hex_space.layout.hex_to_pixel(unit.hex)
+		units[unit_id].view.visuals.face(get_unit_facing_angle(combat.unit_team_id(unit_id)))
 
 
 func clear_all_hover():
@@ -82,3 +83,9 @@ func get_unit(id: int) -> teBoardUnitView:
 
 func get_unit_visuals(id: int) -> teUnitVisualsBase:
 	return get_unit(id).view.visuals
+
+
+func get_unit_facing_angle(side: int) -> float:
+	if side == 0:
+		return 0.0
+	return PI

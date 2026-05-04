@@ -35,10 +35,15 @@
 [ext_resource type="PackedScene" uid="uid://bxi1j6sx4s8e1" path="res://scene/auto_homm/combat.tscn" id="31_ptjxi"]
 [ext_resource type="Script" uid="uid://kdruejcveor8" path="res://script/ui/focus_overlay.gd" id="33_jo8ct"]
 [ext_resource type="Script" uid="uid://kgbi1bn657re" path="res://script/auto_homm/visual/system/projectile.gd" id="34_0gt1v"]
+[ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="34_2xgjj"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit_profile.gd" id="35_eb2m8"]
 [ext_resource type="PackedScene" uid="uid://bdrkshdc4sl7r" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="35_hyctw"]
+[ext_resource type="PackedScene" uid="uid://b00my3rka8ncb" path="res://scene/auto_homm/visual/producer.tscn" id="35_njtx5"]
 [ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="36_ntk6u"]
+[ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/auto_homm/visual/cutter.gd" id="37_aqgb5"]
 [ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="37_rca0q"]
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
+[ext_resource type="Script" uid="uid://duq7x6fmv2lb8" path="res://script/auto_homm/ui/combat/markers.gd" id="38_vq27j"]
 [ext_resource type="Script" uid="uid://cvee6hi1txtqj" path="res://script/auto_homm/visual/system/vfx.gd" id="39_sgu15"]
 [ext_resource type="PackedScene" uid="uid://bw45ewg6oq7gc" path="res://scene/auto_homm/unit/necromancer/cast.tscn" id="40_rpcyj"]
 [ext_resource type="PackedScene" uid="uid://bqb0jlb11iw1m" path="res://scene/auto_homm/unfiltered/freeze_system.tscn" id="41_dubvl"]
@@ -974,12 +979,22 @@ shader_parameter/focus_count = 1
 shader_parameter/radius = 72.0
 shader_parameter/softness = 18.0
 
+[sub_resource type="Resource" id="Resource_aqgb5"]
+script = ExtResource("35_eb2m8")
+attack = 2
+metadata/_custom_type_script = "uid://w6o4p73o148l"
+
+[sub_resource type="Resource" id="Resource_vq27j"]
+script = ExtResource("35_eb2m8")
+attack = 1
+metadata/_custom_type_script = "uid://w6o4p73o148l"
+
 [node name="Game" type="Node" unique_id=320701044 node_paths=PackedStringArray("visual_config", "board", "combat_ui", "combat", "movie", "combat_setup", "units_node")]
 script = ExtResource("1_f57a3")
 visual_config = NodePath("Controllers/VisualConfig")
 setup = SubResource("Resource_ycat3")
 board = NodePath("Controllers/Board")
-combat_ui = NodePath("Controllers/CombatUI")
+combat_ui = NodePath("Controllers/UI/Combat")
 combat = NodePath("Controllers/Combat")
 movie = NodePath("Controllers/Movie")
 combat_setup = NodePath("Controllers/Setup")
@@ -1070,12 +1085,13 @@ outline_color = Color(1, 1, 1, 0.30980393)
 outline_width = 4.0
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
+[node name="Markers" type="Node2D" parent="HexSpace" unique_id=1011423931]
+
 [node name="Units" type="Node2D" parent="HexSpace" unique_id=1297948076]
+y_sort_enabled = true
 
 [node name="MartialHero" parent="HexSpace/Units" unique_id=1030655582 instance=ExtResource("13_qdtad")]
 position = Vector2(54, 162)
-rotation = 3.1415927
-scale = Vector2(1, -1)
 
 [node name="Necromancer" parent="HexSpace/Units" unique_id=1458274522 instance=ExtResource("8_ycat3")]
 position = Vector2(135, 25)
@@ -1088,15 +1104,13 @@ position = Vector2(3, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" unique_id=464352761 instance=ExtResource("11_7g3bp")]
 position = Vector2(335, 23)
-scale = Vector2(-1, 1)
 
 [node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
 position = Vector2(130, 78)
-scale = Vector2(-1, 1)
 
 [node name="Projectiles" type="Node2D" parent="HexSpace" unique_id=571823503]
 
-[node name="UI" type="Control" parent="." unique_id=1227010509]
+[node name="HUD" type="Control" parent="." unique_id=1227010509]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1105,7 +1119,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="FocusOverlay" type="ColorRect" parent="UI" unique_id=1429793219]
+[node name="FocusOverlay" type="ColorRect" parent="HUD" unique_id=1429793219]
 visible = false
 material = SubResource("ShaderMaterial_0gt1v")
 layout_mode = 1
@@ -1151,23 +1165,54 @@ hex_picking = NodePath("../../Input/HexPicking")
 board = NodePath("../Board")
 metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 
-[node name="Movie" parent="Controllers" unique_id=356424720 node_paths=PackedStringArray("board", "director") instance=ExtResource("28_mehdm")]
+[node name="Movie" parent="Controllers" unique_id=356424720 node_paths=PackedStringArray("board", "producer", "writer", "cutter") instance=ExtResource("28_mehdm")]
 board = NodePath("../Board")
-director = NodePath("../Director")
+producer = NodePath("Crew/Producer")
+writer = NodePath("Crew/Writer")
+cutter = NodePath("Crew/Cutter")
 
-[node name="Director" type="Node" parent="Controllers" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
+[node name="Crew" type="Node" parent="Controllers/Movie" unique_id=1553414178]
+
+[node name="Director" type="Node" parent="Controllers/Movie/Crew" unique_id=2013994153 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
 script = ExtResource("29_mehdm")
-board = NodePath("../Board")
-projectile_system = NodePath("../../Visual/Projectiles")
-vfx_system = NodePath("../../Visual/VFX")
-freeze_system = NodePath("../../Visual/FreezeSystem")
-movement_system = NodePath("../../Visual/MovementSystem")
+board = NodePath("../../../Board")
+projectile_system = NodePath("../../../../Visual/Projectiles")
+vfx_system = NodePath("../../../../Visual/VFX")
+freeze_system = NodePath("../../../../Visual/FreezeSystem")
+movement_system = NodePath("../../../../Visual/MovementSystem")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
-[node name="CombatUI" parent="Controllers" unique_id=1022763525 node_paths=PackedStringArray("combat", "board") instance=ExtResource("30_ju7bi")]
-combat = NodePath("../Combat")
-board = NodePath("../Board")
-marker_scene = ExtResource("31_2p32r")
+[node name="Writer" type="Node" parent="Controllers/Movie/Crew" unique_id=757996334 node_paths=PackedStringArray("board")]
+script = ExtResource("34_2xgjj")
+board = NodePath("../../../Board")
+unit_profiles = Dictionary[StringName, ExtResource("35_eb2m8")]({
+&"necromancer": SubResource("Resource_aqgb5"),
+&"red_hood_archer": SubResource("Resource_vq27j")
+})
+metadata/_custom_type_script = "uid://celv2masnj3io"
+
+[node name="Producer" parent="Controllers/Movie/Crew" unique_id=1328117501 node_paths=PackedStringArray("director") instance=ExtResource("35_njtx5")]
+director = NodePath("../Director")
+deadline_threshold_sec = 0.2
+
+[node name="Cutter" type="Node" parent="Controllers/Movie/Crew" unique_id=134790619]
+script = ExtResource("37_aqgb5")
+uniform_time_sec = 0.5
+metadata/_custom_type_script = "uid://div15hdt2vtdg"
+
+[node name="UI" type="Node" parent="Controllers" unique_id=1683646025]
+
+[node name="Combat" parent="Controllers/UI" unique_id=1022763525 node_paths=PackedStringArray("combat", "board", "markers") instance=ExtResource("30_ju7bi")]
+combat = NodePath("../../Combat")
+board = NodePath("../../Board")
+markers = NodePath("Markers")
+
+[node name="Markers" type="Node" parent="Controllers/UI/Combat" unique_id=298241615 node_paths=PackedStringArray("markers_container", "board")]
+script = ExtResource("38_vq27j")
+markers_container = NodePath("../../../../HexSpace/Markers")
+board = NodePath("../../../Board")
+unit_marker_scene = ExtResource("31_2p32r")
+metadata/_custom_type_script = "uid://duq7x6fmv2lb8"
 
 [node name="Visual" type="Node" parent="." unique_id=1950942529]
 
@@ -1206,4 +1251,5 @@ metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
 [connection signal="finished" from="Controllers/Combat" to="." method="_on_combat_finished"]
 [connection signal="place_unit_requested" from="Controllers/Setup" to="." method="_on_place_unit_requested"]
-[connection signal="combat_event" from="Controllers/Director" to="Controllers/CombatUI" method="_on_combat_event"]
+[connection signal="combat_event" from="Controllers/Movie/Crew/Director" to="Controllers/UI/Combat" method="_on_combat_event"]
+[connection signal="sequence_finished" from="Controllers/Movie/Crew/Producer" to="Controllers/Movie" method="_on_producer_sequence_finished"]

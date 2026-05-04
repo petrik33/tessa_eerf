@@ -3,20 +3,11 @@ class_name teCombatUI extends Node
 
 @export var combat: teCombat
 @export var board: teBoardVisual
-@export var marker_scene: PackedScene
+@export var markers: teCombatUiMarkers
 
 
 func sync_units(combat_state: teCombatState):
-	for unit_id in combat_state.all_units_id():
-		sync_unit(unit_id, combat_state)
-
-
-func sync_unit(unit_id: int, combat_state: teCombatState):
-	var combat_unit := combat_state.unit(unit_id)
-	var unit_view := board.get_unit(unit_id)
-	var marker := unit_view.get_marker()
-	marker.set_hp(combat_unit.hp_left())
-	marker.set_mana(combat_unit.mana_collected)
+	markers.sync(combat_state)
 
 
 func _on_combat_started(initial_state: teCombatState):
@@ -25,8 +16,8 @@ func _on_combat_started(initial_state: teCombatState):
 
 func _on_combat_event(event: teCombatEventBase):
 	if event is teCombatEventUnitDamaged:
-		var unit_view := board.get_unit(event.unit_id)
-		unit_view.get_marker().decrease_hp(event.damage)
+		markers.unit_update_hp(event.unit_id, -event.damage)
 	if event is teCombatEventManaGained:
-		var unit_view := board.get_unit(event.unit_id)
-		unit_view.get_marker().increase_mana(event.mana)
+		markers.unit_update_mana(event.unit_id, event.mana)
+	if event is teCombatEventUnitDied:
+		markers.unit_remove_marker(event.unit_id)

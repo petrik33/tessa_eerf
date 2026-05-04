@@ -1,6 +1,9 @@
 class_name teVisualWriter extends teVisualWriterBase
 
 
+@export var board: teBoardVisual
+
+
 @export var unit_profiles: Dictionary[StringName, teVisualUnitProfile]
 
 

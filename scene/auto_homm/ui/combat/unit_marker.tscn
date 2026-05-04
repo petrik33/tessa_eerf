@@ -30,17 +30,27 @@ anti_aliasing_size = 2.0
 [node name="UnitMarker" type="Control" unique_id=1942827305 node_paths=PackedStringArray("hp_label", "hp_panel", "mana_label", "mana_panel")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -16.0
-offset_top = 8.0
-offset_right = 16.0
-offset_bottom = 18.0
+offset_right = 32.0
+offset_bottom = 10.0
 script = ExtResource("1_ry6oj")
-hp_label = NodePath("HpLabel")
-hp_panel = NodePath("HpPanel")
-mana_label = NodePath("ManaLabel")
-mana_panel = NodePath("ManaPanel")
+hp_label = NodePath("Container/HpLabel")
+hp_panel = NodePath("Container/HpPanel")
+mana_label = NodePath("Container/ManaLabel")
+mana_panel = NodePath("Container/ManaPanel")
 
-[node name="HpPanel" type="Panel" parent="." unique_id=1541213049]
+[node name="Container" type="Control" parent="." unique_id=811101722]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -5.0
+offset_right = -16.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HpPanel" type="Panel" parent="Container" unique_id=1541213049]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -50,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_as70w")
 
-[node name="ManaPanel" type="Panel" parent="." unique_id=637465906]
+[node name="ManaPanel" type="Panel" parent="Container" unique_id=637465906]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -61,7 +71,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ry6oj")
 
-[node name="HpLabel" type="Label" parent="." unique_id=393671610]
+[node name="HpLabel" type="Label" parent="Container" unique_id=393671610]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -77,7 +87,7 @@ theme_override_font_sizes/font_size = 12
 text = "231"
 vertical_alignment = 1
 
-[node name="ManaLabel" type="Label" parent="." unique_id=800654788]
+[node name="ManaLabel" type="Label" parent="Container" unique_id=800654788]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1

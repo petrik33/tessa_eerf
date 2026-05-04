@@ -80,6 +80,10 @@ func unit_team_id(unit_id: int) -> int:
 	return unit_teams[unit_id]
 
 
+func has_unit(unit_id: int) -> bool:
+	return units.has(unit_id)
+
+
 func allies_id(unit_id: int) -> Array[int]:
 	var allies: Array[int] = []
 	var unit_team := unit_teams[unit_id]

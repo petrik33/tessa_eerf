@@ -7,13 +7,21 @@ class_name teUnitVisualsAnimated extends teUnitVisualsBase
 
 @onready var animation_trigger := AnimationTrigger.new(sprite)
 
+var facing_right: bool
+
 
 const IDLE_ANIMATION := &"idle"
 const MOVE_ANIMATION := &"walk"
 
 
+func face(angle: float):
+	facing_right = cos(angle) >= 0
+	_update_facing()
+
+
 func go_idle():
 	sprite.play(IDLE_ANIMATION)
+	_update_facing()
 
 
 func start_moving():
@@ -50,3 +58,7 @@ func windup_finished(act_name: StringName) -> bool:
 
 func windup_signal(act_name: StringName) -> Signal:
 	return animation_trigger.triggered
+
+
+func _update_facing():
+	sprite.flip_h = not facing_right
