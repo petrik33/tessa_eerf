@@ -39,14 +39,16 @@ func step():
 		command = teCombatCommands.skip_hero_turn()
 	else:
 		_take(teCombatActions.initiative_advance())
-		command = rules.auto_command(state)
+		command = rules.auto_command(runtime, state)
 	var expanded := rules.expand(runtime, state, command)
 	if not expanded.is_valid():
 		return
-	for action in expanded.actions:
-		runtime.enqueue(action)
+	for idx in range(expanded.actions.size()):
+		var action := expanded.actions[idx]
+		var context := expanded.context[idx]
+		runtime.enqueue(action, context)
 	while not runtime.action_queue.is_empty():
-		_take(runtime.action_queue.pop_front())
+		_take(runtime.action_queue.pop_front(), runtime.action_context_queue.pop_front())
 	if rules.is_finished(state):
 		stop()
 		return
@@ -68,8 +70,8 @@ func restart():
 	start(initial_state, rules)
 
 
-func _take(action: teCombatActionBase):
-	var resolved := rules.resolve(state, action)
+func _take(action: teCombatActionBase, context: Context = null):
+	var resolved := rules.resolve(state, action, context)
 	if not resolved.is_valid():
 		return
 	for event in resolved.events:

@@ -5,28 +5,62 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-enum Mode {
+enum Attack {
 	NEAREST,
 	LOWEST_HP,
 	HIGHEST_THREAT,
 	RANDOM,
 	FURTHEST,
-	FRONTLINE_FIRST
+	FRONTLINE_FIRST,
+	INHERIT
 }
 
 
-static func find(unit_id: int, combat: teCombatState) -> int:
-	var best := -1
+enum Mode {
+	UNIT,
+	AREA,
+	LOCATION,
+	SELF_AOE,
+	SELF,
+	CONE,
+	DIRECTION,
+	UNIT_AND_LOCATION,
+	INVALID,
+}
+
+
+static func is_valid(target: teCombatTargetBase) -> bool:
+	return not target is teCombatTargetInvalid
+
+
+static func unit_attack(unit_id: int, state: teCombatState) -> int:
+	return nearest_unit(unit_id, state)
+
+
+static func nearest_unit(unit_id: int, state: teCombatState) -> int:
+	var best_id := -1
 	var best_score := Math.INT_MAX
-	var unit := combat.unit(unit_id)
-	var enemies_id := combat.enemies_id(unit_id)
+	var unit := state.unit(unit_id)
+	var enemies_id := state.unit_enemies_id(unit_id)
 
 	for other_id in enemies_id:
-		var enemy_unit := combat.unit(other_id)
+		var enemy_unit := state.unit(other_id)
 		if not enemy_unit.is_alive():
 			continue
 		var d := HexMath.distance(unit.hex, enemy_unit.hex)
 		if d < best_score:
 			best_score = d
-			best = other_id
-	return best
+			best_id = other_id
+	
+	return best_id
+
+
+static func target_fits_mode(target: teCombatTargetBase, mode: Mode) -> bool:
+	match mode:
+		Mode.UNIT:
+			return target is teCombatTargetUnit
+		Mode.LOCATION:
+			return target is teCombatTargetHex
+		Mode.UNIT_AND_LOCATION:
+			return target is teCombatTargetUnitAndHex
+	return false

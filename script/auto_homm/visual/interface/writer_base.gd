@@ -9,5 +9,6 @@ func intro(initial_state: teCombatState) -> teVisualSequence
 func sequence(
 	state: teCombatState,
 	action: teCombatActionBase,
+	context: Context,
 	events: Array[teCombatEventBase]
 ) -> teVisualActionBase

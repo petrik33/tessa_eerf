@@ -13,6 +13,10 @@ const DIE := &"death"
 const MOVE := &"walk"
 
 
+static func combo(base: StringName, number: int) -> StringName:
+	return base + "_" + str(number)
+
+
 static func name(act: teVisualActBase) -> StringName:
 	if act is teVisualActDie:
 		return &"die"

@@ -41,7 +41,7 @@ func stop():
 
 
 func _on_combat_action_taken(state: teCombatState, resolved: teCombatResolvedAction):
-	var root_action := writer.sequence(state, resolved.action, resolved.events)
+	var root_action := writer.sequence(state, resolved.action, resolved.context, resolved.events)
 	if root_action == null:
 		return
 	producer.enqueue(root_action, cutter.cut_time(resolved.action))

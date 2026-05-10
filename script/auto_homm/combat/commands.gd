@@ -21,3 +21,9 @@ static func start_combat() -> teCombatCommandStart:
 
 static func skip_hero_turn() -> teCombatCommandSkipHeroTurn:
 	return teCombatCommandSkipHeroTurn.new()
+
+static func unit_cast_skill(unit_id: int, target: teCombatTargetBase) -> teCombatCommandUnitCastSkill:
+	var command := teCombatCommandUnitCastSkill.new()
+	command.unit_id = unit_id
+	command.target = target
+	return command

@@ -19,12 +19,18 @@ func has_hex(hex: Vector2i) -> bool:
 
 
 func get_path(from: Vector2i, to: Vector2i, allow_partial: bool = false) -> Array[Vector2i]:
+	var from_was_disabled := false
+	if is_point_disabled(from):
+		from_was_disabled = true
+		set_point_disabled(from, false)
 	var id_path := _hex_astar.get_id_path(_id_by_hex(from), _id_by_hex(to), allow_partial)
 	var path: Array[Vector2i] = []
 	var path_size := id_path.size()
-	path.resize(path_size)
-	for idx in range(path_size):
-		path[idx] = _hex_by_id(id_path[idx])
+	path.resize(path_size - 1)
+	for idx in range(path_size - 1):
+		path[idx] = _hex_by_id(id_path[idx + 1])
+	if from_was_disabled:
+		set_point_disabled(from, true)
 	return path
 
 

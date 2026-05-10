@@ -1197,7 +1197,6 @@ deadline_threshold_sec = 0.2
 
 [node name="Cutter" type="Node" parent="Controllers/Movie/Crew" unique_id=134790619]
 script = ExtResource("37_aqgb5")
-uniform_time_sec = 0.5
 metadata/_custom_type_script = "uid://div15hdt2vtdg"
 
 [node name="UI" type="Node" parent="Controllers" unique_id=1683646025]
@@ -1249,7 +1248,6 @@ space = NodePath("../../HexSpace")
 grid = ExtResource("2_qr44i")
 metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
-[connection signal="finished" from="Controllers/Combat" to="." method="_on_combat_finished"]
 [connection signal="place_unit_requested" from="Controllers/Setup" to="." method="_on_place_unit_requested"]
 [connection signal="combat_event" from="Controllers/Movie/Crew/Director" to="Controllers/UI/Combat" method="_on_combat_event"]
 [connection signal="sequence_finished" from="Controllers/Movie/Crew/Producer" to="Controllers/Movie" method="_on_producer_sequence_finished"]

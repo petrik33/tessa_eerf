@@ -23,6 +23,8 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 			unit_initial_state.initiative_progress = 0.0
 			unit_initial_state.stats = unit_definition.base_stats.duplicate()
 			unit_initial_state.definition_uid = placed_unit.definition_uid
+			if unit_definition.skill != null:
+				unit_initial_state.skill = unit_definition.skill.duplicate(true)
 			state.units[unit_id] = unit_initial_state
 			state.unit_teams[unit_id] = team_id
 		team_id += 1
@@ -37,6 +39,10 @@ func active_unit() -> teCombatUnitState:
 	if initiative_holder_id == -1:
 		return null
 	return unit(initiative_holder_id)
+
+
+func active_unit_id() -> int:
+	return initiative_holder_id
 
 
 func update(event: teCombatEventBase):
@@ -84,19 +90,25 @@ func has_unit(unit_id: int) -> bool:
 	return units.has(unit_id)
 
 
-func allies_id(unit_id: int) -> Array[int]:
+func unit_allies_id(unit_id: int) -> Array[int]:
+	return allies_id(unit_teams[unit_id])
+
+
+func unit_enemies_id(unit_id: int) -> Array[int]:
+	return enemies_id(unit_teams[unit_id])
+
+
+func allies_id(ally_side: int) -> Array[int]:
 	var allies: Array[int] = []
-	var unit_team := unit_teams[unit_id]
 	for other_id in units:
-		if unit_teams[other_id] == unit_team:
+		if unit_teams[other_id] == ally_side:
 			allies.push_back(other_id)
 	return allies
 
 
-func enemies_id(unit_id: int) -> Array[int]:
+func enemies_id(ally_side: int) -> Array[int]:
 	var enemies: Array[int] = []
-	var unit_team := unit_teams[unit_id]
 	for other_id in units:
-		if unit_teams[other_id] != unit_team:
+		if unit_teams[other_id] != ally_side:
 			enemies.push_back(other_id)
 	return enemies

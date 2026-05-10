@@ -5,7 +5,7 @@ var _points: Array[Vector2i]
 var _index: int
 
 func _init(points: Array[Vector2i]):
-	_points = points.duplicate()  # Create a copy to prevent external modification
+	_points = points.duplicate()
 
 func _iter_init(arg) -> bool:
 	_index = 0

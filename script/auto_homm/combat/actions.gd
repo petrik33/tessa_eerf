@@ -5,10 +5,10 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-static func unit_attack(unit_id: int, taget_id: int) -> teCombatActionUnitAttack:
+static func unit_attack(unit_id: int, target_id: int) -> teCombatActionUnitAttack:
 	var action := teCombatActionUnitAttack.new()
 	action.unit_id = unit_id
-	action.target_id = taget_id
+	action.target_id = target_id
 	return action
 
 

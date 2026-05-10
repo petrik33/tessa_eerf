@@ -18,10 +18,16 @@ func intro(_initial_state: teCombatState) -> teVisualSequence:
 func sequence(
 	state: teCombatState,
 	action: teCombatActionBase,
+	context: Context,
 	events: Array[teCombatEventBase]
 ) -> teVisualActionBase:
 	if action is teCombatActionUnitAttack:
-		return write_attack(state, action, events)
+		return write_attack(
+			state,
+			action,
+			events,
+			context.read_or(teCombatContext.COMBO_HIT, -1)
+		)
 	if action is teCombatActionUnitMove:
 		return write_unit_move(action, events)
 	return null
@@ -48,7 +54,8 @@ func write_unit_move(
 func write_attack(
 	state: teCombatState,
 	action: teCombatActionUnitAttack,
-	events: Array[teCombatEventBase]
+	events: Array[teCombatEventBase],
+	combo_hit_idx: int = -1
 ) -> teVisualActionBase:
 	var attacker := state.unit(action.unit_id)
 	if not attacker:
@@ -60,7 +67,7 @@ func write_attack(
 	else:
 		attack_kind = attacker_profile.attack
 	match attack_kind:
-		teVisualUnitProfile.AttackKind.MELEE: 
+		teVisualUnitProfile.AttackKind.MELEE:
 			return teVisualActions.unit_windup_sequence(
 				teVisualActions.unit_act(
 					action.unit_id,

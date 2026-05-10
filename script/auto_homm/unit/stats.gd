@@ -1,7 +1,7 @@
 class_name teUnitStats extends Resource
 
 
-@export var max_hp := 100
+@export var max_hp := 200
 @export var required_mana := 30
 @export var movement_range := 5
 @export var armor := 10
