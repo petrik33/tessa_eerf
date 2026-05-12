@@ -43,6 +43,10 @@ func hover_unit(unit_id: int):
 	units[unit_id].set_hovered(true)
 
 
+func unhover_unit(unit_id: int):
+	units[unit_id].set_hovered(false)
+
+
 func deselect_unit(unit_id: int):
 	units[unit_id].set_selected(false)
 

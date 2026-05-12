@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bhy432ye7u446" path="res://resource/auto_homm/rule_set.tres" id="3_ycat3"]
 [ext_resource type="Resource" uid="uid://c31cby404a1vn" path="res://resource/auto_homm/skin_set.tres" id="5_m6xp2"]
 [ext_resource type="PackedScene" uid="uid://0xp42fwvcrjf" path="res://scene/auto_homm/unit_view.tscn" id="6_6327r"]
-[ext_resource type="PackedScene" uid="uid://bgxwb0b5svmxs" path="res://scene/auto_chess/arena/bg_nature.tscn" id="7_7g3bp"]
+[ext_resource type="PackedScene" uid="uid://d2iwtwuy3yipx" path="res://scene/auto_homm/arena/bg_nature.tscn" id="7_0k111"]
 [ext_resource type="PackedScene" uid="uid://blc7d7qhuv7c6" path="res://scene/auto_homm/board_unit_view.tscn" id="7_t034j"]
 [ext_resource type="Script" uid="uid://bs1nban30c83i" path="res://script/hex/node/hex_space.gd" id="8_e52gc"]
 [ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="8_ycat3"]
@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://bw45ewg6oq7gc" path="res://scene/auto_homm/unit/necromancer/cast.tscn" id="40_rpcyj"]
 [ext_resource type="PackedScene" uid="uid://bqb0jlb11iw1m" path="res://scene/auto_homm/unfiltered/freeze_system.tscn" id="41_dubvl"]
 [ext_resource type="Script" uid="uid://bm0ws3t3savhd" path="res://script/auto_homm/visual/system/movement.gd" id="42_swouy"]
+[ext_resource type="PackedScene" uid="uid://csbs8cpl6yvhg" path="res://scene/auto_homm/unfiltered/board_combat_observer.tscn" id="48_0k111"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
 script = ExtResource("3_58b30")
@@ -1001,7 +1002,7 @@ combat_setup = NodePath("Controllers/Setup")
 units_node = NodePath("HexSpace/Units")
 unit_view_scene = ExtResource("6_6327r")
 
-[node name="Arena" parent="." unique_id=2098708954 instance=ExtResource("7_7g3bp")]
+[node name="ArenaBG" parent="." unique_id=680371563 instance=ExtResource("7_0k111")]
 
 [node name="HexSpace" type="Node2D" parent="." unique_id=644167766]
 position = Vector2(222, 92)
@@ -1091,7 +1092,7 @@ metadata/_custom_type_script = "uid://k7hs7m35gx78"
 y_sort_enabled = true
 
 [node name="MartialHero" parent="HexSpace/Units" unique_id=1030655582 instance=ExtResource("13_qdtad")]
-position = Vector2(54, 162)
+position = Vector2(131, 83)
 
 [node name="Necromancer" parent="HexSpace/Units" unique_id=1458274522 instance=ExtResource("8_ycat3")]
 position = Vector2(135, 25)
@@ -1106,7 +1107,7 @@ position = Vector2(3, 164)
 position = Vector2(335, 23)
 
 [node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
-position = Vector2(130, 78)
+position = Vector2(52, 165)
 
 [node name="Projectiles" type="Node2D" parent="HexSpace" unique_id=571823503]
 
@@ -1197,6 +1198,7 @@ deadline_threshold_sec = 0.2
 
 [node name="Cutter" type="Node" parent="Controllers/Movie/Crew" unique_id=134790619]
 script = ExtResource("37_aqgb5")
+uniform_time_sec = 0.5
 metadata/_custom_type_script = "uid://div15hdt2vtdg"
 
 [node name="UI" type="Node" parent="Controllers" unique_id=1683646025]
@@ -1240,6 +1242,9 @@ metadata/_custom_type_script = "uid://cvee6hi1txtqj"
 script = ExtResource("42_swouy")
 metadata/_custom_type_script = "uid://bm0ws3t3savhd"
 
+[node name="BoardCombatObserver" parent="Visual" unique_id=1973503903 node_paths=PackedStringArray("board") instance=ExtResource("48_0k111")]
+board = NodePath("../../Controllers/Board")
+
 [node name="Input" type="Node" parent="." unique_id=222531903]
 
 [node name="HexPicking" type="Node" parent="Input" unique_id=142824532 node_paths=PackedStringArray("space")]
@@ -1250,4 +1255,5 @@ metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
 [connection signal="place_unit_requested" from="Controllers/Setup" to="." method="_on_place_unit_requested"]
 [connection signal="combat_event" from="Controllers/Movie/Crew/Director" to="Controllers/UI/Combat" method="_on_combat_event"]
+[connection signal="combat_event" from="Controllers/Movie/Crew/Director" to="Visual/BoardCombatObserver" method="_on_combat_event"]
 [connection signal="sequence_finished" from="Controllers/Movie/Crew/Producer" to="Controllers/Movie" method="_on_producer_sequence_finished"]

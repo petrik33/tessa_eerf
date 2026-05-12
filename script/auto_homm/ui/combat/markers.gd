@@ -62,13 +62,9 @@ func unit_remove_marker(unit_id: int):
 	destroy_marker(marker)
 
 
-func unit_update_hp(unit_id: int, diff: int):
-	var marker = unit_markers[unit_id]
-	if diff < 0:
-		marker.decrease_hp(-diff)
+func unit_set_hp(unit_id: int, hp: int):
+	unit_markers[unit_id].set_hp(hp)
 
 
-func unit_update_mana(unit_id: int, diff: int):
-	var marker = unit_markers[unit_id]
-	if diff > 0:
-		marker.increase_mana(diff)
+func unit_set_mana(unit_id: int, mana: int):
+	unit_markers[unit_id].set_mana(mana)

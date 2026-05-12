@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://csbs8cpl6yvhg"]
+
+[sub_resource type="GDScript" id="GDScript_ugv3f"]
+script/source = "extends Node
+
+
+@export var board: teBoardVisual
+
+
+func _on_combat_event(event: teCombatEventBase, state: teCombatState):
+	if event is teCombatEventManaGained:
+		var unit := state.unit(event.unit_id)
+		if unit.can_cast():
+			board.hover_unit(event.unit_id)
+	if event is teCombatEventManaSpent:
+		var unit := state.unit(event.unit_id)
+		if not unit.can_cast():
+			board.unhover_unit(event.unit_id)
+"
+
+[node name="BoardCombatObserver" type="Node" unique_id=1973503903]
+script = SubResource("GDScript_ugv3f")

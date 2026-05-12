@@ -74,7 +74,7 @@ func _take(action: teCombatActionBase, context: Context = null):
 	var resolved := rules.resolve(state, action, context)
 	if not resolved.is_valid():
 		return
-	for event in resolved.events:
+	for event in resolved.events_buffer.events:
 		state.update(event)
 		runtime.update(event)
 	action_taken.emit(state, resolved)

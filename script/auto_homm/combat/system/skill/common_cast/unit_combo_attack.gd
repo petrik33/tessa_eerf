@@ -18,8 +18,9 @@ func expand(
 		expanded.append(teCombatActions.unit_move(unit_id, movement_path))
 	for idx in range(attacks_number):
 		var context := Context.new()
-		context.add(teCombatContext.COMBO_HIT, idx + 1)
+		context.add(teCombatContext.COMBO_HIT, idx)
 		context.add(teCombatContext.COMBO_LENGTH, attacks_number)
+		context.add(teCombatContext.ADD_MANA, false)
 		expanded.append(teCombatActions.unit_attack(unit_id, target.unit_id), context)
 
 

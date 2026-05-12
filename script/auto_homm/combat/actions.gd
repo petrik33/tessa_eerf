@@ -19,5 +19,11 @@ static func unit_move(unit_id: int, movement_path: teCombatMovementPath) -> teCo
 	return action
 
 
+static func unit_cast(unit_id: int) -> teCombatActionUnitCastSkill:
+	var action := teCombatActionUnitCastSkill.new()
+	action.unit_id = unit_id
+	return action
+
+
 static func initiative_advance() -> teCombatActionInitiativeAdvance:
 	return teCombatActionInitiativeAdvance.new()

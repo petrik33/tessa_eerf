@@ -368,8 +368,9 @@ script = ExtResource("1_35h25")
 sprite = NodePath("AnimatedSprite2D")
 windup_frames = Dictionary[StringName, int]({
 &"melee": 1,
-&"melee_2": 5,
-&"melee_3": 8
+&"melee_3_1": 2,
+&"melee_3_2": 5,
+&"melee_3_3": 9
 })
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://clvxp2i6wcbas"
@@ -380,6 +381,4 @@ material = SubResource("ShaderMaterial_djk20")
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"melee_3"
 autoplay = "idle"
-frame = 11
-frame_progress = 1.0
 offset = Vector2(0, -53)

@@ -4,7 +4,7 @@ class_name Context extends Resource
 var fields: Dictionary[StringName, Variant] = {}
 
 
-func add(key: StringName, value: Variant):
+func add(key: StringName, value: Variant = true):
 	fields[key] = value
 
 
@@ -21,3 +21,9 @@ func read_or(key: StringName, default: Variant) -> Variant:
 		return read(key)
 	else:
 		return default
+
+
+func overwrite(key: StringName, value: Variant):
+	if not has(key):
+		return
+	fields[key] = value

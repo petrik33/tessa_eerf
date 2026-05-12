@@ -62,6 +62,7 @@ func expand(
 				return expanded
 		expanded.append(teCombatActions.unit_attack(command.unit_id, command.target_id))
 	if command is teCombatCommandUnitCastSkill:
+		expanded.append(teCombatActions.unit_cast(command.unit_id))
 		var unit := state.unit(command.unit_id)
 		unit.skill.expand(command.unit_id, command.target, state, runtime, expanded)
 	return expanded
@@ -81,6 +82,10 @@ func resolve(
 	context: Context
 ) -> teCombatResolvedAction:
 	var resolved := teCombatResolvedAction.new(action, context)
+	if action is teCombatActionUnitCastSkill:
+		var unit := state.unit(action.unit_id)
+		var mana_spent := unit.stats.required_mana
+		resolved.push_back(teCombatEvents.mana_spent(action.unit_id, mana_spent))
 	if action is teCombatActionInitiativeAdvance:
 		var next_unit_id := teCombatInitiative.calc_next_unit_id(state)
 		var progress_made := teCombatInitiative.progress_left(state.unit(next_unit_id))
@@ -96,12 +101,17 @@ func resolve(
 			action.target_id,
 			damage
 		))
+		if resolved.context.read_or(teCombatContext.ADD_MANA, true):
+			resolved.push_back(teCombatEvents.mana_gained(
+				action.unit_id,
+				7 # TODO: Implement properly
+			))
 		if teCombatDamage.is_lethal(state, target, damage):
+			resolved.context.overwrite(
+				teCombatContext.COMBO_LENGTH,
+				context.read_or(teCombatContext.COMBO_HIT, -1) + 1
+			)
 			resolved.push_back(teCombatEvents.unit_died(action.target_id))
-		resolved.push_back(teCombatEvents.mana_gained(
-			action.unit_id,
-			7 # TODO: Implement properly
-		))
 	if action is teCombatActionUnitMove:
 		resolved.push_back(teCombatEvents.unit_moved(
 			action.unit_id, action.path.through

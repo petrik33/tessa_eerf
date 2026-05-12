@@ -17,11 +17,19 @@ static func sub_sequence(... actions: Array) -> teVisualActionBase:
 		action.actions.push_back(sub_action)
 	return action
 
-static func unit_act(unit_id: int, act: StringName, go_idle := true) -> teVisualActionBase:
+static func unit_act(
+	unit_id: int,
+	act: StringName,
+	go_idle := true,
+	wait := true,
+	can_be_unknown := false
+) -> teVisualActionBase:
 	var action := teVisualActionUnitAct.new()
 	action.unit_id = unit_id
 	action.act = act
 	action.go_idle = go_idle
+	action.wait_animation_finished = wait
+	action.can_be_unknown = can_be_unknown
 	return action
 
 static func unit_move(unit_id: int, path: Array[Vector2i]) -> teVisualActionBase:
@@ -55,15 +63,10 @@ static func freeze_frame(duration: float = 0.08) -> teVisualActionFreezeFrame:
 	action.duration = duration
 	return action
 
-static func emit(event: teCombatEventBase) -> teVisualActionEmitCombatEvent:
-	var action := teVisualActionEmitCombatEvent.new()
-	action.event = event
-	return action
-
-static func emit_all(events: Array[teCombatEventBase]) -> teVisualActionBase:
-	var action := teVisualActionParallel.new()
-	for event in events:
-		action.actions.push_back(emit(event))
+static func emit(events_buffer: teCombatEventsBuffer, state: teCombatState) -> teVisualActionEmitCombatEvents:
+	var action := teVisualActionEmitCombatEvents.new()
+	action.events = events_buffer.events.duplicate()
+	action.updated_state = state.duplicate(true)
 	return action
 
 static func focus_unit(unit_id: int) -> teVisualActionFocusUnit:
@@ -71,9 +74,10 @@ static func focus_unit(unit_id: int) -> teVisualActionFocusUnit:
 	action.unit_id = unit_id
 	return action
 
-static func unit_flash(unit_id: int, time := 0.1, color := Color.WHITE) -> teVisualActionUnitFlash:
+static func unit_flash(unit_id: int, wait := true, time := 0.1, color := Color.WHITE) -> teVisualActionUnitFlash:
 	var action := teVisualActionUnitFlash.new()
 	action.unit_id = unit_id
+	action.wait = wait
 	action.time = time
 	action.color = color
 	return action

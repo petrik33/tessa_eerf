@@ -1,7 +1,7 @@
 class_name teVisualDirector extends teVisualDirectorBase
 
 
-signal combat_event(event: teCombatEventBase)
+signal combat_event(event: teCombatEventBase, state: teCombatState)
 
 
 @export var board: teBoardVisual
@@ -14,35 +14,43 @@ signal combat_event(event: teCombatEventBase)
 func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake:
 	if action is teVisualActionUnitWindup:
 		var visuals := board.get_unit_visuals(action.unit_id)
-		if not visuals.is_winding_up(action.act):
-			return teVisualTakes.fail()
-		if visuals.windup_finished(action.act):
+		if not visuals.is_acting():
+			return teVisualTakes.fail("Visuals not acting to wait for windup")
+		visuals.windup(action.act)
+		if visuals.windup_finished():
 			return teVisualTakes.instant()
-		return teVisualTakes.signaled(visuals.windup_signal(action.act))
+		return teVisualTakes.signaled(visuals.windup_signal())
 	if action is teVisualActionUnitAct:
 		var visuals = board.get_unit_visuals(action.unit_id)
 		if not visuals.knows_act(action.act):
+			if action.can_be_unknown:
+				return teVisualTakes.instant()
+			else:
+				return teVisualTakes.fail("Visuals don't know act")
+		if not action.wait_animation_finished:
+			visuals.play_act(action.act, speed_scale, action.go_idle)
 			return teVisualTakes.instant()
-		var take := teVisualTakes.async(
-			func(): await visuals.play_act(action.act, speed_scale)
+		return teVisualTakes.async(
+			func(): await visuals.play_act(action.act, speed_scale, action.go_idle)
 		)
-		if action.go_idle:
-			take.cut.connect(func(): visuals.go_idle())
-		return take
 	if action is teVisualActionFreezeFrame:
 		var freeze_time = action.duration / speed_scale
 		freeze_system.freeze_frame(freeze_time, action.time_scale)
 		return teVisualTakes.timer(self, freeze_time)
-	if action is teVisualActionEmitCombatEvent:
-		combat_event.emit(action.event)
+	if action is teVisualActionEmitCombatEvents:
+		for event in action.events:
+			combat_event.emit(event, action.updated_state)
 		return teVisualTakes.instant()
 	if action is teVisualActionUnitFlash:
 		var unit = board.get_unit(action.unit_id)
 		if unit == null:
-			return teVisualTakes.fail()
+			return teVisualTakes.fail("Can't get unit to flash")
 		var duration = action.time / speed_scale
 		unit.flash(duration)
-		return teVisualTakes.timer(self, duration)
+		if action.wait:
+			return teVisualTakes.timer(self, duration)
+		else:
+			return teVisualTakes.instant()
 	if action is teVisualActionUnitShootProjectile:
 		var shooter := board.get_unit(action.shooter_id)
 		var target := board.get_unit(action.target_id)
@@ -62,7 +70,7 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 		if not unit_visuals.knows_act(teVisualActs.DIE):
 			last_act = teVisualActs.GET_HURT
 		var take := teVisualTakes.async(
-			func(): await unit_visuals.play_act(last_act, speed_scale)
+			func(): await unit_visuals.play_act(last_act, speed_scale, false)
 		)
 		take.cut.connect(func(): board.dettach_unit(action.unit_id))
 		return take
@@ -72,7 +80,7 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 	if action is teVisualActionUnitMove:
 		var unit := board.get_unit(action.unit_id)
 		if unit == null:
-			return teVisualTakes.fail()
+			return teVisualTakes.fail("Can't get unit to move")
 		var visuals := board.get_unit_visuals(action.unit_id)
 		var path: Array[Vector2] = []
 		for point in action.path:
@@ -97,7 +105,7 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 				action.params
 			)
 		)
-	return teVisualTakes.fail()
+	return teVisualTakes.fail("Unknown action type to direct")
 
 
 func estimate_duration(action: teVisualActionBase) -> float:

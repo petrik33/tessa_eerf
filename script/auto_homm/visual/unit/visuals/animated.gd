@@ -34,12 +34,13 @@ func knows_act(act_name: StringName) -> bool:
 	return sprite.sprite_frames.has_animation(act_name)
 
 
-func play_act(act_name: StringName, speed_scale: float):
-	if windup_frames.has(act_name):
-		await animation_trigger.run(act_name, windup_frames[act_name], speed_scale)
-	else:
-		sprite.play(act_name, speed_scale)
-		await sprite.animation_finished
+func play_act(act_name: StringName, speed_scale: float, go_idle_then: bool):
+	if sprite.is_playing() and sprite.animation == act_name:
+		sprite.stop()
+	sprite.play(act_name, speed_scale)
+	await sprite.animation_finished
+	if go_idle_then:
+		go_idle()
 
 
 func act_duration(act_name: StringName) -> float:
@@ -48,15 +49,26 @@ func act_duration(act_name: StringName) -> float:
 	return Utils.animation_duration_sprite2d(sprite, act_name)
 
 
-func is_winding_up(act_name: StringName) -> bool:
-	return animation_trigger.is_running
+func windup(act_name: StringName):
+	if windup_frames.has(act_name):
+		animation_trigger.next(windup_frames[act_name])
+	else:
+		animation_trigger.on_finished()
 
 
-func windup_finished(act_name: StringName) -> bool:
+func is_acting() -> bool:
+	return sprite.is_playing() and sprite.animation != IDLE_ANIMATION
+
+
+func is_winding_up() -> bool:
+	return animation_trigger.waiting_for_trigger()
+
+
+func windup_finished() -> bool:
 	return animation_trigger.is_triggered
 
 
-func windup_signal(act_name: StringName) -> Signal:
+func windup_signal() -> Signal:
 	return animation_trigger.triggered
 
 

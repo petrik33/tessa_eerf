@@ -10,5 +10,5 @@ func sequence(
 	state: teCombatState,
 	action: teCombatActionBase,
 	context: Context,
-	events: Array[teCombatEventBase]
+	events_buffer: teCombatEventsBuffer
 ) -> teVisualActionBase

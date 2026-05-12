@@ -10,7 +10,8 @@ class_name teVisualVfxAnimatedWithTrigger extends teVisualVfxInstanceBase
 
 
 func play(_params: Dictionary, speed_scale: float):
-	animation_trigger.run(animation, trigger_frame, speed_scale)
+	sprite.play(animation, speed_scale)
+	animation_trigger.next(trigger_frame)
 
 
 func duration():
@@ -26,4 +27,4 @@ func impact_signal() -> Signal:
 
 
 func finished_signal() -> Signal:
-	return animation_trigger.finished
+	return sprite.animation_finished

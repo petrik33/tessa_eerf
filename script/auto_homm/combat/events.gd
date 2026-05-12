@@ -51,3 +51,10 @@ static func mana_gained(unit_id: int, mana: int) -> teCombatEventManaGained:
 	event.unit_id = unit_id
 	event.mana = mana
 	return event
+
+
+static func mana_spent(unit_id: int, mana: int) -> teCombatEventManaSpent:
+	var event := teCombatEventManaSpent.new()
+	event.unit_id = unit_id
+	event.amount = mana
+	return event

@@ -10,7 +10,7 @@ func _init(_command: teCombatCommandBase):
 	command = _command
 
 
-func append(action: teCombatActionBase, action_context: Context = null):
+func append(action: teCombatActionBase, action_context: Context = Context.new()):
 	actions.push_back(action)
 	context.push_back(action_context)
 

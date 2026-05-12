@@ -30,6 +30,8 @@ func set_target(node: Node2D):
 
 
 func flash(time: float = 1.0, color := Color.WHITE):
+	var previous_material := target_node.material
+	
 	target_node.material = flash_material
 	
 	flash_material.set_shader_parameter("flash_color", color)
@@ -57,3 +59,7 @@ func flash(time: float = 1.0, color := Color.WHITE):
 		0.0,
 		down_time
 	)
+	
+	await tween.finished
+	
+	target_node.material = previous_material

@@ -7,6 +7,7 @@ signal sequence_finished()
 @export var director: teVisualDirectorBase
 @export var deadline_timer: Timer
 @export var deadline_threshold_sec: float = 0.25
+@export var deadlines_on := true
 
 
 var current_track: teVisualTrackBase
@@ -84,12 +85,12 @@ func _play_next_track():
 	var speed_scale = max(estimated_time_sec / sequence.timeout_sec, 1.0)
 	current_track = track(sequence.root_action, speed_scale)
 	current_track.finished.connect(_on_current_track_finished, CONNECT_ONE_SHOT)
-	deadline_timer.start(sequence.timeout_sec + deadline_threshold_sec)
+	if deadlines_on:
+		deadline_timer.start(sequence.timeout_sec + deadline_threshold_sec)
 	current_track.start()
 
 
 func _on_current_track_finished():
-	print("Track finished")
 	deadline_timer.stop()
 	_finish_sequence()
 

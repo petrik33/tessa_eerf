@@ -15,7 +15,7 @@ static func async(callable: Callable) -> teVisualTake:
 
 static func instant() -> teVisualTake:
 	var take := teVisualTake.new()
-	take.is_cut = true	
+	take.is_cut = true
 	return take
 
 
@@ -25,4 +25,4 @@ static func fail(msg: String = "") -> teVisualTake:
 
 
 static func timer(node: Node, time_sec: float) -> teVisualTake:
-	return signaled(node.get_tree().create_timer(time_sec).timeout)
+	return signaled(node.get_tree().create_timer(time_sec, true, false, true).timeout)

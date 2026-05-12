@@ -66,7 +66,11 @@ func update(event: teCombatEventBase):
 		units[event.unit_id].hex = event.path.back()
 		active_unit_moved = true
 	if event is teCombatEventManaGained:
-		units[event.unit_id].mana_collected += event.mana
+		var target = units[event.unit_id]
+		target.mana_collected = min(target.stats.required_mana, target.mana_collected + event.mana)
+	if event is teCombatEventManaSpent:
+		var target = units[event.unit_id]
+		target.mana_collected = max(0, target.mana_collected - event.amount)
 		
 
 
