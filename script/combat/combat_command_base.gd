@@ -1,1 +1,0 @@
-class_name CombatCommandBase extends Resource

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="HexLayout" load_steps=2 format=3 uid="uid://dqy4qrx5gvxy1"]
-
-[ext_resource type="Script" uid="uid://bwitt2ghi4geg" path="res://script/hex/hex_layout.gd" id="1_wt8n2"]
-
-[resource]
-script = ExtResource("1_wt8n2")
-base_hex_rotation = 0.523599
-size = Vector2(26, 14)
-metadata/_custom_type_script = "uid://bwitt2ghi4geg"

@@ -1,3 +1,0 @@
-class_name CombatVisualActionWaitUnitTrigger extends CombatVisualActionBase
-	
-@export var unit_handle: CombatUnitHandle

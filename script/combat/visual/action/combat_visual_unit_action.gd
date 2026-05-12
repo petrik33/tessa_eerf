@@ -1,3 +1,0 @@
-class_name CombatVisualUnitActionBase extends CombatVisualActionBase
-
-@export var unit_handle: CombatUnitHandle
