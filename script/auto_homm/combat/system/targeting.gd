@@ -18,6 +18,7 @@ enum Attack {
 
 enum Mode {
 	UNIT,
+	UNIT_OR_UNITS,
 	AREA,
 	LOCATION,
 	SELF_AOE,
@@ -58,9 +59,11 @@ static func nearest_unit(unit_id: int, state: teCombatState) -> int:
 static func target_fits_mode(target: teCombatTargetBase, mode: Mode) -> bool:
 	match mode:
 		Mode.UNIT:
-			return target is teCombatTargetUnit
+			return target is teCombatTargetUnit and target.is_single()
 		Mode.LOCATION:
 			return target is teCombatTargetHex
 		Mode.UNIT_AND_LOCATION:
 			return target is teCombatTargetUnitAndHex
+		Mode.UNIT_OR_UNITS:
+			return target is teCombatTargetUnit
 	return false

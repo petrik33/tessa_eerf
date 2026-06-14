@@ -21,8 +21,14 @@ static func instant() -> teVisualTake:
 
 static func fail(msg: String = "") -> teVisualTake:
 	print(msg)
-	return instant()
+	var take := instant()
+	take.is_aborted = true
+	return take
 
 
 static func timer(node: Node, time_sec: float) -> teVisualTake:
 	return signaled(node.get_tree().create_timer(time_sec, true, false, true).timeout)
+
+
+static func is_failed(take: teVisualTake) -> bool:
+	return take.is_aborted

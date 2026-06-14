@@ -349,15 +349,15 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="BlueWitch" type="Node2D" unique_id=968360280 node_paths=PackedStringArray("animated_sprite", "node_to_glow")]
+[node name="BlueWitch" type="Node2D" unique_id=968360280 node_paths=PackedStringArray("node_to_glow")]
 script = ExtResource("1_6ksbd")
-animated_sprite = NodePath("AnimatedSprite2D")
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236516026]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_ubqc5")
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"hurt"
 autoplay = "idle"

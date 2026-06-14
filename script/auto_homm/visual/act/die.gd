@@ -1,1 +1,0 @@
-class_name teVisualActDie extends teVisualActBase

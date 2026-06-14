@@ -1,0 +1,228 @@
+[gd_scene format=3 uid="uid://dlxfjmn1h0ih7"]
+
+[ext_resource type="Script" uid="uid://cbfue1iffqygr" path="res://script/auto_homm/ui/combat/unit/marker.gd" id="1_nunio"]
+[ext_resource type="Script" uid="uid://g43ofjxqxc1c" path="res://script/ui/range_segments.gd" id="2_am5dy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nunio"]
+bg_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5vvi"]
+
+[sub_resource type="Gradient" id="Gradient_s5vvi"]
+colors = PackedColorArray(0.16470589, 0.16470589, 0.16470589, 1, 0.06666667, 0.06666667, 0.06666667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nunio"]
+gradient = SubResource("Gradient_s5vvi")
+width = 8
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_nunio"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0.13333334, 1, 1, 1, 0.0627451, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_am5dy"]
+gradient = SubResource("Gradient_nunio")
+width = 8
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_am5dy"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.23921569, 0.68235296, 0.2784314, 1, 0.34901962, 0.8392157, 0.37254903, 1, 0.4862745, 1, 0.52156866, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ioexv"]
+gradient = SubResource("Gradient_am5dy")
+height = 8
+
+[sub_resource type="Gradient" id="Gradient_ioexv"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.8509804, 0.47843137, 0, 1, 1, 0.70980394, 0.2784314, 1, 1, 0.8156863, 0.5372549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wirx4"]
+gradient = SubResource("Gradient_ioexv")
+height = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nunio"]
+
+[sub_resource type="Gradient" id="Gradient_6b2tb"]
+colors = PackedColorArray(0.10980392, 0.17254902, 0.26666668, 1, 0.039215688, 0.078431375, 0.14117648, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bbw8q"]
+gradient = SubResource("Gradient_6b2tb")
+width = 8
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_ui45a"]
+colors = PackedColorArray(1, 1, 1, 0.09411765, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k503h"]
+gradient = SubResource("Gradient_ui45a")
+width = 8
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_si13h"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.105882354, 0.42745098, 1, 1, 0.24705882, 0.654902, 1, 1, 0.34901962, 0.8392157, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vbldr"]
+gradient = SubResource("Gradient_si13h")
+height = 8
+
+[node name="Marker" type="Control" unique_id=617972592 node_paths=PackedStringArray("hp_bar", "hp_damage_bar", "mana_bar", "hp_segments", "hp_label", "name_label")]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_nunio")
+hp_bar = NodePath("Root/Content/Hp/Bar")
+hp_damage_bar = NodePath("Root/Content/Hp/Damage")
+mana_bar = NodePath("Root/Content/Mana/Bar")
+hp_segments = NodePath("Root/Content/Hp/RangeSegments")
+hp_label = NodePath("Root/Content/Hp/Label")
+name_label = NodePath("Root/Content/Info/Name")
+
+[node name="Root" type="MarginContainer" parent="." unique_id=266599262]
+custom_minimum_size = Vector2(32, 9)
+layout_mode = 1
+offset_left = -16.0
+offset_top = -4.0
+offset_right = 16.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Bg" type="Panel" parent="Root" unique_id=1116147467]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nunio")
+
+[node name="Content" type="VBoxContainer" parent="Root" unique_id=2032870764]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Hp" type="PanelContainer" parent="Root/Content" unique_id=233924629]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s5vvi")
+
+[node name="Bar" type="TextureProgressBar" parent="Root/Content/Hp" unique_id=1820878616]
+layout_mode = 2
+value = 55.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_nunio")
+texture_over = SubResource("GradientTexture2D_am5dy")
+texture_progress = SubResource("GradientTexture2D_ioexv")
+tint_under = Color(0.105882354, 0.105882354, 0.105882354, 1)
+tint_progress = Color(0.34901962, 0.8392157, 0.37254903, 1)
+
+[node name="RangeSegments" type="Range" parent="Root/Content/Hp" unique_id=1722212844]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = null
+theme_type_variation = &""
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 55.0
+exp_edit = false
+rounded = false
+allow_greater = false
+allow_lesser = false
+script = ExtResource("2_am5dy")
+segment_value = 50.0
+metadata/_custom_type_script = "uid://g43ofjxqxc1c"
+
+[node name="Damage" type="TextureProgressBar" parent="Root/Content/Hp" unique_id=443346921]
+visible = false
+layout_mode = 2
+nine_patch_stretch = true
+texture_over = SubResource("GradientTexture2D_am5dy")
+texture_progress = SubResource("GradientTexture2D_wirx4")
+tint_progress = Color(1, 0.70980394, 0.2784314, 1)
+
+[node name="Label" type="Label" parent="Root/Content/Hp" unique_id=454339518]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mana" type="PanelContainer" parent="Root/Content" unique_id=103969327]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nunio")
+
+[node name="Bar" type="TextureProgressBar" parent="Root/Content/Mana" unique_id=496653304]
+layout_mode = 2
+value = 90.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_bbw8q")
+texture_over = SubResource("GradientTexture2D_k503h")
+texture_progress = SubResource("GradientTexture2D_vbldr")
+tint_under = Color(0.0627451, 0.1254902, 0.1882353, 1)
+tint_progress = Color(0.24705882, 0.654902, 1, 1)
+
+[node name="Info" type="HBoxContainer" parent="Root/Content" unique_id=940087987]
+visible = false
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Root/Content/Info" unique_id=586430110]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="Stars" type="HBoxContainer" parent="Root/Content/Info" unique_id=1351868345]
+layout_mode = 2

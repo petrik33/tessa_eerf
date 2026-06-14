@@ -13,7 +13,13 @@ static func hex(value: Vector2i) -> teCombatTargetBase:
 
 static func unit(id: int) -> teCombatTargetBase:
 	var target := teCombatTargetUnit.new()
-	target.unit_id = id
+	target.units_id = [id]
+	return target
+
+
+static func units(id: Array[int]) -> teCombatTargetBase:
+	var target := teCombatTargetUnit.new()
+	target.units_id = id
 	return target
 
 

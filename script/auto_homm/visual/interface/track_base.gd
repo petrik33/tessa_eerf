@@ -20,7 +20,7 @@ func start():
 
 
 func stop():
-	if not is_playing or is_finished:
+	if not is_playing:
 		return
 	is_playing = false
 	is_stopped = true
@@ -33,5 +33,6 @@ func stop():
 
 
 func _finish():
+	is_playing = false
 	is_finished = true
 	finished.emit()

@@ -16,6 +16,11 @@ func _on_combat_event(event: teCombatEventBase, state: teCombatState):
 		var unit := state.unit(event.unit_id)
 		if not unit.can_cast():
 			board.unhover_unit(event.unit_id)
+	if event is teCombatEventUnitDied:
+		var unit_visuals := board.get_unit_visuals(event.unit_id)
+		if unit_visuals.is_acting():
+			await unit_visuals.act_finished_signal()
+		board.dettach_unit(event.unit_id)
 "
 
 [node name="BoardCombatObserver" type="Node" unique_id=1973503903]

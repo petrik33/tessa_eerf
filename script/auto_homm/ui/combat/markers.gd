@@ -38,8 +38,8 @@ func sync_unit_marker(unit_id: int, state: teCombatState):
 	if marker == null:
 		unit_markers[unit_id] = create_marker()
 		marker = unit_markers[unit_id]
-	marker.set_hp(combat_unit.hp_left())
-	marker.set_mana(combat_unit.mana_collected)
+	marker.set_hp_values(combat_unit.hp_left(), combat_unit.stats.max_hp)
+	marker.set_mana_values(combat_unit.mana_collected, combat_unit.stats.required_mana)
 	marker.global_position = unit_view.get_marker_global_position()
 
 
@@ -62,9 +62,13 @@ func unit_remove_marker(unit_id: int):
 	destroy_marker(marker)
 
 
-func unit_set_hp(unit_id: int, hp: int):
-	unit_markers[unit_id].set_hp(hp)
+func unit_damage(unit_id: int, hp: int):
+	unit_markers[unit_id].damage(hp)
 
 
-func unit_set_mana(unit_id: int, mana: int):
-	unit_markers[unit_id].set_mana(mana)
+func unit_gain_mana(unit_id: int, mana: int):
+	unit_markers[unit_id].add_mana(mana)
+
+
+func unit_spend_mana(unit_id: int, mana: int):
+	unit_markers[unit_id].spend_mana(mana)

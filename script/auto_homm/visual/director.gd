@@ -12,31 +12,44 @@ signal combat_event(event: teCombatEventBase, state: teCombatState)
 
 
 func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake:
-	if action is teVisualActionUnitWindup:
-		var visuals := board.get_unit_visuals(action.unit_id)
-		if not visuals.is_acting():
-			return teVisualTakes.fail("Visuals not acting to wait for windup")
-		visuals.windup(action.act)
-		if visuals.windup_finished():
-			return teVisualTakes.instant()
-		return teVisualTakes.signaled(visuals.windup_signal())
 	if action is teVisualActionUnitAct:
 		var visuals = board.get_unit_visuals(action.unit_id)
-		if not visuals.knows_act(action.act):
-			if action.can_be_unknown:
-				return teVisualTakes.instant()
-			else:
-				return teVisualTakes.fail("Visuals don't know act")
-		if not action.wait_animation_finished:
-			visuals.play_act(action.act, speed_scale, action.go_idle)
+		if visuals == null:
+			return teVisualTakes.fail("Can't get unit visuals to act")
+		if visuals.knows_act(action.act):
+			visuals.play_act(action.act, speed_scale)
 			return teVisualTakes.instant()
-		return teVisualTakes.async(
-			func(): await visuals.play_act(action.act, speed_scale, action.go_idle)
+		if visuals.knows_act(action.reserve_act):
+			visuals.play_act(action.reserve_act, speed_scale)
+			return teVisualTakes.instant()
+		if action.can_be_unknown:
+			return teVisualTakes.instant()
+		return teVisualTakes.fail("Visuals don't know act")
+	if action is teVisualActionUnitWindup:
+		var visuals := board.get_unit_visuals(action.unit_id)
+		if visuals == null:
+			return teVisualTakes.fail("Can't get unit visuals to windup")
+		if not visuals.knows_windup(action.act):
+			return teVisualTakes.fail("Unit visuals don't know windup")
+		return teVisualTakes.async(func(): await visuals.play_windup(action.act, speed_scale))
+	if action is teVisualActionUnitCombo:
+		var visuals = board.get_unit_visuals(action.unit_id)
+		if visuals == null:
+			return teVisualTakes.fail("Can't get unit visuals to make combo")
+		if not visuals.knows_combo(action.base_act, action.total):
+			return teVisualTakes.fail("Visuals don't know combo")
+		return teVisualTakes.async(func():
+			await visuals.play_combo(action.base_act, speed_scale, action.idx, action.total)	
 		)
+	if action is teVisualActionUnitWaitWinddown:
+		var visuals = board.get_unit_visuals(action.unit_id)
+		if not visuals.is_acting():
+			return teVisualTakes.instant()
+		return teVisualTakes.signaled(visuals.act_finished_signal())
 	if action is teVisualActionFreezeFrame:
 		var freeze_time = action.duration / speed_scale
-		freeze_system.freeze_frame(freeze_time, action.time_scale)
-		return teVisualTakes.timer(self, freeze_time)
+		freeze_system.stop_frame(freeze_time)
+		return teVisualTakes.signaled(freeze_system.unfrozen)
 	if action is teVisualActionEmitCombatEvents:
 		for event in action.events:
 			combat_event.emit(event, action.updated_state)
@@ -56,24 +69,19 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 		var target := board.get_unit(action.target_id)
 		var origin_pos := board.hex_space.to_local(shooter.get_socket(&"ranged"))
 		var target_pos := board.hex_space.to_local(target.get_socket(&"target"))
+		return direct_take(teVisualActions.shoot_projectile(
+			origin_pos, target_pos,
+			action.projectile_uid, action.speed_multiplier, action.trajectory_name
+		))
+	if action is teVisualActionShootProjectile:
 		return teVisualTakes.async(
 			func(): await projectile_system.shoot(
 				action.projectile_uid, 
-				origin_pos,
-				target_pos,
+				action.origin,
+				action.target,
 				action.speed_multiplier * speed_scale
 			)
 		)
-	if action is teVisualActionUnitDie:
-		var unit_visuals := board.get_unit_visuals(action.unit_id)
-		var last_act := teVisualActs.DIE
-		if not unit_visuals.knows_act(teVisualActs.DIE):
-			last_act = teVisualActs.GET_HURT
-		var take := teVisualTakes.async(
-			func(): await unit_visuals.play_act(last_act, speed_scale, false)
-		)
-		take.cut.connect(func(): board.dettach_unit(action.unit_id))
-		return take
 	if action is teVisualActionUnitGoIdle:
 		board.get_unit_visuals(action.unit_id).go_idle()
 		return teVisualTakes.instant()
@@ -109,23 +117,38 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 
 
 func estimate_duration(action: teVisualActionBase) -> float:
-	if action is teVisualActionUnitWindup:
-		return estimate_duration(teVisualActions.unit_act(action.unit_id, action.act))
 	if action is teVisualActionUnitAct:
-		var visuals = board.get_unit_visuals(action.unit_id)
-		return visuals.act_duration(action.act)
-	if action is teVisualActionFreezeFrame:
-		return action.duration
-	if action is teVisualActionUnitFlash:
-		return action.time
-	if action is teVisualActionUnitShootProjectile:
 		return 0.0
-	if action is teVisualActionUnitDie:
-		var unit_visuals := board.get_unit_visuals(action.unit_id)
-		var last_act := teVisualActs.DIE
-		if not unit_visuals.knows_act(teVisualActs.DIE):
-			last_act = teVisualActs.GET_HURT
-		return estimate_duration(teVisualActions.unit_act(action.unit_id, last_act))
+	if action is teVisualActionUnitWindup:
+		var visuals = board.get_unit_visuals(action.unit_id)
+		if visuals == null:
+			return 0.0
+		return visuals.windup_duration(action.act)
+	if action is teVisualActionUnitWaitWinddown:
+		var visuals = board.get_unit_visuals(action.unit_id)
+		if visuals == null:
+			return 0.0
+		return visuals.winddown_duration(action.act)
+	if action is teVisualActionUnitCombo:
+		var visuals = board.get_unit_visuals(action.unit_id)
+		if visuals == null:
+			return 0.0
+		return visuals.combo_duration(action.base_act, action.idx, action.total)
+	if action is teVisualActionUnitFlash:
+		if action.wait:
+			return action.time
+		else:
+			return 0.0
+	if action is teVisualActionUnitShootProjectile:
+		var shooter := board.get_unit(action.shooter_id)
+		var target := board.get_unit(action.target_id)
+		var origin_pos := board.hex_space.to_local(shooter.get_socket(&"ranged"))
+		var target_pos := board.hex_space.to_local(target.get_socket(&"target"))
+		return projectile_system.estimate_shot_duration(
+			action.projectile_uid,
+			origin_pos,
+			target_pos
+		)
 	if action is teVisualActionUnitMove:
 		var path: Array[Vector2] = []
 		for point in action.path:
@@ -133,4 +156,11 @@ func estimate_duration(action: teVisualActionBase) -> float:
 		return 0.1 * path.size()
 	if action is teVisualActionVfxOnTarget:
 		return vfx_system.duration(action.vfx_uid)
+	if action is teVisualActionEmitCombatEvents:
+		return 0.0
+	if action is teVisualActionFreezeFrame:
+		return action.duration
+	if action is teVisualActionUnitGoIdle:
+		return 0.0
+	print("Unknown estimate in director")
 	return 0.0

@@ -17,8 +17,10 @@ func _on_combat_started(initial_state: teCombatState):
 func _on_combat_event(event: teCombatEventBase, state: teCombatState):
 	if event is teCombatEventUnitDamaged:
 		if state.has_unit(event.unit_id):
-			markers.unit_set_hp(event.unit_id, state.unit(event.unit_id).hp_left())
-	if event is teCombatEventManaGained or event is teCombatEventManaSpent:
-		markers.unit_set_mana(event.unit_id, state.unit(event.unit_id).mana_collected)
+			markers.unit_damage(event.unit_id, event.damage)
+	if event is teCombatEventManaGained:
+		markers.unit_gain_mana(event.unit_id, event.mana)
+	if event is teCombatEventManaSpent:
+		markers.unit_spend_mana(event.unit_id, event.amount)
 	if event is teCombatEventUnitDied:
 		markers.unit_remove_marker(event.unit_id)

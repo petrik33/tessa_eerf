@@ -422,6 +422,7 @@ metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1492028342]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_efk7q")
+position = Vector2(2, -1)
 sprite_frames = SubResource("SpriteFrames_ll718")
 animation = &"idle"
 autoplay = "idle"

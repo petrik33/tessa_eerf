@@ -1,4 +1,4 @@
-class_name teCombatUnitMarker extends Control
+class_name teCombatUnitMarkerOld extends Control
 
 
 @export var hp_label: Label

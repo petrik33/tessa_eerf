@@ -330,7 +330,7 @@ animations = [{
 "texture": ExtResource("66_gvsoq")
 }],
 "loop": false,
-"name": &"melee_5",
+"name": &"melee_4",
 "speed": 14.0
 }, {
 "frames": [{
@@ -368,9 +368,9 @@ script = ExtResource("1_35h25")
 sprite = NodePath("AnimatedSprite2D")
 windup_frames = Dictionary[StringName, int]({
 &"melee": 1,
-&"melee_3_1": 2,
-&"melee_3_2": 5,
-&"melee_3_3": 9
+&"melee_2": 5,
+&"melee_3": 8,
+&"melee_4": 17
 })
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://clvxp2i6wcbas"
@@ -378,7 +378,8 @@ metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1530810457]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_djk20")
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"melee_3"
+animation = &"melee_4"
 autoplay = "idle"
 offset = Vector2(0, -53)

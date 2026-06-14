@@ -5,8 +5,9 @@ class_name teUnitVisualsAnimated extends teUnitVisualsBase
 @export var windup_frames: Dictionary[StringName, int]
 
 
-@onready var animation_trigger := AnimationTrigger.new(sprite)
+@onready var windup_trigger := AnimationFrameTrigger.new(sprite)
 
+var winddown_trigger: AnimationEndTrigger
 var facing_right: bool
 
 
@@ -14,15 +15,9 @@ const IDLE_ANIMATION := &"idle"
 const MOVE_ANIMATION := &"walk"
 
 
-func face(angle: float):
-	facing_right = cos(angle) >= 0
-	_update_facing()
-
-
 func go_idle():
 	sprite.play(IDLE_ANIMATION)
 	_update_facing()
-
 
 func start_moving():
 	if not sprite.sprite_frames.has_animation(MOVE_ANIMATION):
@@ -30,47 +25,77 @@ func start_moving():
 	sprite.play(MOVE_ANIMATION)
 
 
-func knows_act(act_name: StringName) -> bool:
-	return sprite.sprite_frames.has_animation(act_name)
+func face(angle: float):
+	facing_right = cos(angle) >= 0
+	_update_facing()
 
-
-func play_act(act_name: StringName, speed_scale: float, go_idle_then: bool):
-	if sprite.is_playing() and sprite.animation == act_name:
-		sprite.stop()
+func act(act_name: StringName, speed_scale: float):
 	sprite.play(act_name, speed_scale)
-	await sprite.animation_finished
-	if go_idle_then:
-		go_idle()
+
+func windup(act_name: StringName):
+	windup_trigger.start(_windup_frame(act_name))
+
+func winddown():
+	assert(winddown_trigger == null, "Already winding down")
+	winddown_trigger = Utils.animation_end_trigger(sprite, _on_winddown)
+
+func stop_acting():
+	sprite.stop()
+	if winddown_trigger != null:
+		winddown_trigger.triggered.disconnect(_on_winddown)
+		winddown_trigger = null
 
 
 func act_duration(act_name: StringName) -> float:
-	if not knows_act(act_name):
-		return 0.0
 	return Utils.animation_duration_sprite2d(sprite, act_name)
 
+func windup_duration(act_name: StringName):
+	return Utils.animation_duration_sprite2d(sprite, act_name, _windup_frame(act_name))
 
-func windup(act_name: StringName):
-	if windup_frames.has(act_name):
-		animation_trigger.next(windup_frames[act_name])
-	else:
-		animation_trigger.on_finished()
+func winddown_duration(act_name: StringName):
+	return Utils.animation_duration_sprite2d(sprite, act_name, -1, _windup_frame(act_name))
+
+func combo_duration(base_act: StringName, idx: int, total: int):
+	var combo_from := 0
+	if idx > 0:
+		combo_from = _windup_frame(combo_windup_name(base_act, idx - 1))
+	var combo_frame := _windup_frame(combo_windup_name(base_act, idx))
+	var combo_animation := combo_act_name(base_act, total)
+	return Utils.animation_duration_sprite2d(
+		sprite,
+		combo_animation,
+		combo_frame - combo_from,
+		combo_from,
+	)
+
+
+func knows_act(act_name: StringName) -> bool:
+	return sprite.sprite_frames.has_animation(act_name)
 
 
 func is_acting() -> bool:
 	return sprite.is_playing() and sprite.animation != IDLE_ANIMATION
 
-
 func is_winding_up() -> bool:
-	return animation_trigger.waiting_for_trigger()
+	return windup_trigger.waiting_for_trigger()
 
 
 func windup_finished() -> bool:
-	return animation_trigger.is_triggered
-
+	return windup_trigger.is_triggered
 
 func windup_signal() -> Signal:
-	return animation_trigger.triggered
+	return windup_trigger.triggered
+
+func act_finished_signal() -> Signal:
+	return sprite.animation_finished
 
 
 func _update_facing():
 	sprite.flip_h = not facing_right
+
+func _windup_frame(act_name: StringName) -> int:
+	return windup_frames.get(act_name, -1)
+
+func _on_winddown():
+	go_idle()
+	winddown_trigger = null

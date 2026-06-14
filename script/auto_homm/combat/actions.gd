@@ -25,5 +25,17 @@ static func unit_cast(unit_id: int) -> teCombatActionUnitCastSkill:
 	return action
 
 
+static func damage(instance: teCombatDamageInstance) -> teCombatActionDamage:
+	var action := teCombatActionDamage.new()
+	action.instances = [instance]
+	return action
+
+
+static func multiple_damage(instances: Array[teCombatDamageInstance] = []) -> teCombatActionDamage:
+	var action := teCombatActionDamage.new()
+	action.instances = instances
+	return action
+
+
 static func initiative_advance() -> teCombatActionInitiativeAdvance:
 	return teCombatActionInitiativeAdvance.new()

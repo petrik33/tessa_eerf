@@ -693,6 +693,7 @@ metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1773110724]
 unique_name_in_owner = true
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_eyjtx")
 animation = &"idle"
 autoplay = "idle"

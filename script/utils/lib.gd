@@ -22,20 +22,25 @@ static func assert_static_lib():
 	assert(false, "Static lib shouldn't be constructed")
 
 
-static func animation_duration_sprite2d(
-	sprite: AnimatedSprite2D, animation: StringName
-) -> float:
-	var frames := sprite.sprite_frames.get_frame_count(animation)
-	if frames == 0:
-		return 0.0
+static func animation_end_trigger(sprite: AnimatedSprite2D, callable: Callable) -> AnimationEndTrigger:
+	var trigger := AnimationEndTrigger.new(sprite)
+	trigger.triggered.connect(callable)
+	return trigger
 
+
+static func animation_duration_sprite2d(
+	sprite: AnimatedSprite2D, animation: StringName, frames := -1, from := 0,
+) -> float:
+	if frames == -1:
+		frames = sprite.sprite_frames.get_frame_count(animation) - from
+	
 	var fps := sprite.sprite_frames.get_animation_speed(animation)
 	if fps <= 0.0:
 		return 0.0
 
 	var total := 0.0
 
-	for i in range(frames):
+	for i in range(from, from + frames):
 		var rel := sprite.sprite_frames.get_frame_duration(animation, i)
 		total += rel / fps
 

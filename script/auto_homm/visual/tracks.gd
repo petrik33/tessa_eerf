@@ -17,6 +17,12 @@ static func sub_sequence(tracks: Array[teVisualTrackBase]) -> teVisualSubSequenc
 	return track
 
 
+static func background(sub_track: teVisualTrackBase) -> teVisualTrackBackground:
+	var track := teVisualTrackBackground.new()
+	track.sub_track = sub_track
+	return track
+
+
 static func take(director: teVisualDirectorBase, action: teVisualActionBase, speed_scale: float) -> teVisualTakeTrack:
 	var track := teVisualTakeTrack.new()
 	track.director = director

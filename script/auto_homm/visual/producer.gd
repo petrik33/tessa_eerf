@@ -58,14 +58,20 @@ func queue_empty() -> bool:
 
 
 func track(action: teVisualActionBase, speed_scale: float) -> teVisualTrackBase:
+	if action == null:
+		return null
 	if action is teVisualActionParallel:
 		return teVisualTracks.parallel(_map_tracks(action.actions, speed_scale))
 	if action is teVisualActionSubSequence:
 		return teVisualTracks.sub_sequence(_map_tracks(action.actions, speed_scale))
+	if action is teVisualActionBackground:
+		return teVisualTracks.background(track(action.sub_action, speed_scale))
 	return teVisualTracks.take(director, action, speed_scale)
 
 
 func estimate_duration(action: teVisualActionBase) -> float:
+	if action == null:
+		return 0.0
 	if action is teVisualActionParallel:
 		var max_duration := 0.0
 		for sub_action in action.actions:
@@ -76,14 +82,21 @@ func estimate_duration(action: teVisualActionBase) -> float:
 		for sub_action in action.actions:
 			total_duration += estimate_duration(sub_action)
 		return total_duration
+	if action is teVisualActionBackground:
+		return 0.0
 	return director.estimate_duration(action)
 
 
 func _play_next_track():
+	if not is_filming or queue_empty():
+		return
 	var sequence: teVisualSequence = sequence_queue.pop_front()
 	var estimated_time_sec := estimate_duration(sequence.root_action)
 	var speed_scale = max(estimated_time_sec / sequence.timeout_sec, 1.0)
 	current_track = track(sequence.root_action, speed_scale)
+	if current_track == null:
+		_play_next_track()
+		return
 	current_track.finished.connect(_on_current_track_finished, CONNECT_ONE_SHOT)
 	if deadlines_on:
 		deadline_timer.start(sequence.timeout_sec + deadline_threshold_sec)
@@ -105,8 +118,7 @@ func _on_deadline_timeout():
 func _finish_sequence():
 	current_track = null
 	sequence_finished.emit()
-	if is_filming and not queue_empty():
-		_play_next_track()
+	_play_next_track()
 
 
 func _map_tracks(actions: Array[teVisualActionBase], speed_scale: float) -> Array[teVisualTrackBase]:

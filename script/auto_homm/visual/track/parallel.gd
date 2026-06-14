@@ -6,12 +6,16 @@ var playing: int
 
 
 func _play():
-	playing = tracks.size()
+	for track in tracks:
+		if track == null:
+			continue
+		track.start()
+		if track.is_finished:
+			continue
+		track.finished.connect(_on_sub_track_finished, CONNECT_ONE_SHOT)
+		playing += 1
 	if playing == 0:
 		_finish()
-	for track in tracks:
-		track.finished.connect(_on_sub_track_finished, CONNECT_ONE_SHOT)
-		track.start()
 
 
 func _cancel():

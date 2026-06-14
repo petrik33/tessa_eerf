@@ -107,16 +107,22 @@ func resolve(
 				7 # TODO: Implement properly
 			))
 		if teCombatDamage.is_lethal(state, target, damage):
-			resolved.context.overwrite(
-				teCombatContext.COMBO_LENGTH,
-				context.read_or(teCombatContext.COMBO_HIT, -1) + 1
-			)
 			resolved.push_back(teCombatEvents.unit_died(action.target_id))
 	if action is teCombatActionUnitMove:
 		resolved.push_back(teCombatEvents.unit_moved(
 			action.unit_id, action.path.through
 		))
 	return resolved
+
+
+func resolve_damage(
+	state: teCombatState,
+	action: teCombatActionBase,
+	context: Context,
+	resolved: teCombatResolvedAction,
+	instance: teCombatDamageInstance
+):
+	pass
 
 
 func react(

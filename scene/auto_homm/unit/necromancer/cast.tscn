@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bw45ewg6oq7gc"]
 
-[ext_resource type="Script" uid="uid://c5ppkivs7hy8n" path="res://script/auto_homm/visual/system/vfx/animated_with_trigger.gd" id="1_lpf7w"]
+[ext_resource type="Script" uid="uid://bni6g5tci71yf" path="res://script/auto_homm/visual/system/vfx/mirror_animated.gd" id="1_lpf7w"]
 [ext_resource type="Texture2D" uid="uid://bguo17w4ikc0y" path="res://asset/texture/unit/necromancer/Attack/spr_NecromancerAttackEffect_strip47.png" id="2_lpf7w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bfmx3"]
@@ -340,13 +340,24 @@ animations = [{
 "speed": 44.0
 }]
 
-[node name="Cast" type="Node2D" unique_id=1488990738 node_paths=PackedStringArray("sprite")]
+[node name="Cast" type="Node2D" unique_id=229284250 node_paths=PackedStringArray("mirrored_sprite", "sprite")]
 script = ExtResource("1_lpf7w")
-sprite = NodePath("AnimatedSprite2D")
+mirrored_sprite = NodePath("AnimatedSpriteRight")
+sprite = NodePath("AnimatedSpriteLeft")
 trigger_frame = 35
-metadata/_custom_type_script = "uid://c5ppkivs7hy8n"
+metadata/_custom_type_script = "uid://bni6g5tci71yf"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1566232153]
+[node name="AnimatedSpriteLeft" type="AnimatedSprite2D" parent="." unique_id=1566232153]
+position = Vector2(-4, 0)
+sprite_frames = SubResource("SpriteFrames_8jeae")
+frame = 46
+frame_progress = 1.0
+offset = Vector2(-50, 11)
+
+[node name="AnimatedSpriteRight" type="AnimatedSprite2D" parent="." unique_id=2121224224]
+position = Vector2(4, 0)
+rotation = -3.1415927
+scale = Vector2(1, -1)
 sprite_frames = SubResource("SpriteFrames_8jeae")
 frame = 46
 frame_progress = 1.0

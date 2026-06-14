@@ -312,6 +312,7 @@ metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=76700442]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hjl7q")
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_wlhx3")
 animation = &"hurt"
 autoplay = "idle"

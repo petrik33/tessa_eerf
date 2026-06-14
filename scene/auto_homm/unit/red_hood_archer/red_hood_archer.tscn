@@ -628,9 +628,9 @@ node_to_glow = NodePath("AnimatedSprite2D")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=976366034]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_yjyko")
-position = Vector2(0, -9)
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_qu5vg")
-animation = &"ranged"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Markers" type="Node2D" parent="AnimatedSprite2D" unique_id=332571072]
@@ -638,12 +638,12 @@ visible = false
 
 [node name="ArrowOrigin" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=76207121]
 unique_name_in_owner = true
-position = Vector2(5.5, -3)
+position = Vector2(5.5, -6)
 
 [node name="IdleOffset" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=538323298]
 unique_name_in_owner = true
-position = Vector2(-1, 8)
+position = Vector2(-1, 5)
 
 [node name="RangedOffset" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=2090302270]
 unique_name_in_owner = true
-position = Vector2(-4.5, 15.5)
+position = Vector2(-4.5, 12.5)

@@ -19,11 +19,14 @@ func unfreeze():
 	_on_freeze_timer_timeout()
 
 
-func freeze_frame(time_sec: float, time_scale: float) -> Signal:
+func stop_frame(time_sec: float):
+	freeze_frame(time_sec, 0.0)
+
+
+func freeze_frame(time_sec: float, time_scale: float):
 	initial_time_scale = Engine.time_scale
 	Engine.time_scale = time_scale
 	freeze_timer.start(time_sec)
-	return unfrozen
 
 
 func _on_freeze_timer_timeout():

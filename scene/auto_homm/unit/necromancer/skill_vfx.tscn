@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://dy3culhlehwps"]
+
+[ext_resource type="Script" uid="uid://c5ppkivs7hy8n" path="res://script/auto_homm/visual/system/vfx/animated.gd" id="1_fd2br"]
+[ext_resource type="Texture2D" uid="uid://daqy0dckojrmi" path="res://asset/texture/unit/necromancer/Skill/spr_NecromancerSkill_strip20_effect.png" id="2_2jyhs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mau81"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(0, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybul4"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(48, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ovu6"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(96, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8pym"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(144, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jvc2"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(192, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quak8"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(240, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msl8a"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(288, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nhye"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(336, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x03c"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(384, 0, 48, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmqkf"]
+atlas = ExtResource("2_2jyhs")
+region = Rect2(432, 0, 48, 57)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_alswr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mau81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybul4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ovu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8pym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jvc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quak8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msl8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nhye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x03c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmqkf")
+}],
+"loop": false,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="SkillVfx" type="Node2D" unique_id=1656229672 node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_fd2br")
+sprite = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://c5ppkivs7hy8n"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880448119]
+sprite_frames = SubResource("SpriteFrames_alswr")
+frame = 9
+frame_progress = 1.0
+offset = Vector2(0, -28.5)

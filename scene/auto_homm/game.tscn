@@ -30,7 +30,6 @@
 [ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="28_mehdm"]
 [ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="29_mehdm"]
 [ext_resource type="PackedScene" uid="uid://d1gp87bi5qvo8" path="res://scene/auto_homm/ui/combat.tscn" id="30_ju7bi"]
-[ext_resource type="PackedScene" uid="uid://x1oxfgho7yu7" path="res://scene/auto_homm/ui/combat/unit_marker.tscn" id="31_2p32r"]
 [ext_resource type="Script" uid="uid://bsvjxvw8ny7j8" path="res://script/auto_homm/controller/combat_setup.gd" id="31_jo8ct"]
 [ext_resource type="PackedScene" uid="uid://bxi1j6sx4s8e1" path="res://scene/auto_homm/combat.tscn" id="31_ptjxi"]
 [ext_resource type="Script" uid="uid://kdruejcveor8" path="res://script/ui/focus_overlay.gd" id="33_jo8ct"]
@@ -42,6 +41,7 @@
 [ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="36_ntk6u"]
 [ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/auto_homm/visual/cutter.gd" id="37_aqgb5"]
 [ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="37_rca0q"]
+[ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker.tscn" id="38_0k111"]
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
 [ext_resource type="Script" uid="uid://duq7x6fmv2lb8" path="res://script/auto_homm/ui/combat/markers.gd" id="38_vq27j"]
 [ext_resource type="Script" uid="uid://cvee6hi1txtqj" path="res://script/auto_homm/visual/system/vfx.gd" id="39_sgu15"]
@@ -1183,9 +1183,8 @@ freeze_system = NodePath("../../../../Visual/FreezeSystem")
 movement_system = NodePath("../../../../Visual/MovementSystem")
 metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
-[node name="Writer" type="Node" parent="Controllers/Movie/Crew" unique_id=757996334 node_paths=PackedStringArray("board")]
+[node name="Writer" type="Node" parent="Controllers/Movie/Crew" unique_id=757996334]
 script = ExtResource("34_2xgjj")
-board = NodePath("../../../Board")
 unit_profiles = Dictionary[StringName, ExtResource("35_eb2m8")]({
 &"necromancer": SubResource("Resource_aqgb5"),
 &"red_hood_archer": SubResource("Resource_vq27j")
@@ -1194,11 +1193,11 @@ metadata/_custom_type_script = "uid://celv2masnj3io"
 
 [node name="Producer" parent="Controllers/Movie/Crew" unique_id=1328117501 node_paths=PackedStringArray("director") instance=ExtResource("35_njtx5")]
 director = NodePath("../Director")
-deadline_threshold_sec = 0.2
+deadline_threshold_sec = 0.1
 
 [node name="Cutter" type="Node" parent="Controllers/Movie/Crew" unique_id=134790619]
 script = ExtResource("37_aqgb5")
-uniform_time_sec = 0.5
+uniform_time_sec = 0.8
 metadata/_custom_type_script = "uid://div15hdt2vtdg"
 
 [node name="UI" type="Node" parent="Controllers" unique_id=1683646025]
@@ -1212,7 +1211,7 @@ markers = NodePath("Markers")
 script = ExtResource("38_vq27j")
 markers_container = NodePath("../../../../HexSpace/Markers")
 board = NodePath("../../../Board")
-unit_marker_scene = ExtResource("31_2p32r")
+unit_marker_scene = ExtResource("38_0k111")
 metadata/_custom_type_script = "uid://duq7x6fmv2lb8"
 
 [node name="Visual" type="Node" parent="." unique_id=1950942529]
