@@ -6,3 +6,4 @@ class_name teUnitDefinition extends Resource
 @export var tags: Array[StringName] = []
 @export var base_stats := teUnitStats.new()
 @export var skill: teCombatUnitSkill
+@export var custom_attack_pattern: teCombatAttackPatternBase

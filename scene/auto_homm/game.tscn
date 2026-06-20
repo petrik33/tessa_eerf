@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://d3t3qgj2hvca0" path="res://scene/auto_homm/debug/debug.tscn" id="19_bdy12"]
 [ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="21_sun1c"]
 [ext_resource type="Shader" uid="uid://bxw8qfsdoe88f" path="res://shader/auto_homm/focus_overlay.gdshader" id="22_2p32r"]
+[ext_resource type="Texture2D" uid="uid://d2vh3pu27os3r" path="res://asset/ui/hourglass.png" id="24_2xycu"]
 [ext_resource type="Script" uid="uid://c7cqwtc2k2l4p" path="res://script/auto_homm/visual/board_visual.gd" id="28_e52gc"]
 [ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="28_mehdm"]
 [ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="29_mehdm"]
@@ -41,13 +42,17 @@
 [ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="36_ntk6u"]
 [ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/auto_homm/visual/cutter.gd" id="37_aqgb5"]
 [ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="37_rca0q"]
+[ext_resource type="Script" uid="uid://c2iyvivunkx07" path="res://script/auto_homm/visual/scheduler.gd" id="37_sgynk"]
 [ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker.tscn" id="38_0k111"]
+[ext_resource type="Script" uid="uid://ba7egnixkgh8u" path="res://script/auto_homm/visual/production_log.gd" id="38_krgjf"]
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
 [ext_resource type="Script" uid="uid://duq7x6fmv2lb8" path="res://script/auto_homm/ui/combat/markers.gd" id="38_vq27j"]
 [ext_resource type="Script" uid="uid://cvee6hi1txtqj" path="res://script/auto_homm/visual/system/vfx.gd" id="39_sgu15"]
+[ext_resource type="Script" uid="uid://c2cndqvddug5p" path="res://script/auto_homm/visual/take_log.gd" id="39_wyj42"]
 [ext_resource type="PackedScene" uid="uid://bw45ewg6oq7gc" path="res://scene/auto_homm/unit/necromancer/cast.tscn" id="40_rpcyj"]
 [ext_resource type="PackedScene" uid="uid://bqb0jlb11iw1m" path="res://scene/auto_homm/unfiltered/freeze_system.tscn" id="41_dubvl"]
 [ext_resource type="Script" uid="uid://bm0ws3t3savhd" path="res://script/auto_homm/visual/system/movement.gd" id="42_swouy"]
+[ext_resource type="PackedScene" uid="uid://dy3culhlehwps" path="res://scene/auto_homm/unit/necromancer/skill_vfx.tscn" id="46_cwim7"]
 [ext_resource type="PackedScene" uid="uid://csbs8cpl6yvhg" path="res://scene/auto_homm/unfiltered/board_combat_observer.tscn" id="48_0k111"]
 
 [sub_resource type="Resource" id="Resource_ycat3"]
@@ -983,6 +988,8 @@ shader_parameter/softness = 18.0
 [sub_resource type="Resource" id="Resource_aqgb5"]
 script = ExtResource("35_eb2m8")
 attack = 2
+skill = 0
+skill_socket = &"origin"
 metadata/_custom_type_script = "uid://w6o4p73o148l"
 
 [sub_resource type="Resource" id="Resource_vq27j"]
@@ -1104,12 +1111,14 @@ position = Vector2(85, 81)
 position = Vector2(3, 164)
 
 [node name="RedHoodArcher" parent="HexSpace/Units" unique_id=464352761 instance=ExtResource("11_7g3bp")]
-position = Vector2(335, 23)
+position = Vector2(340, 29)
 
 [node name="GroundMonk" parent="HexSpace/Units" unique_id=122210036 instance=ExtResource("12_3tj1a")]
 position = Vector2(52, 165)
 
 [node name="Projectiles" type="Node2D" parent="HexSpace" unique_id=571823503]
+
+[node name="VFX" type="Node2D" parent="HexSpace" unique_id=1134990098]
 
 [node name="HUD" type="Control" parent="." unique_id=1227010509]
 layout_mode = 3
@@ -1134,6 +1143,16 @@ color = Color(0, 0, 0, 0.40784314)
 script = ExtResource("33_jo8ct")
 targets = Array[Vector2]([Vector2(323.45, 169.85)])
 metadata/_custom_type_script = "uid://kdruejcveor8"
+
+[node name="Hourglass" type="TextureRect" parent="HUD" unique_id=735578536]
+visible = false
+layout_mode = 0
+offset_left = 31.0
+offset_top = 22.0
+offset_right = 31.0
+offset_bottom = 22.0
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("24_2xycu")
 
 [node name="Controllers" type="Node" parent="." unique_id=1150315259]
 
@@ -1191,14 +1210,32 @@ unit_profiles = Dictionary[StringName, ExtResource("35_eb2m8")]({
 })
 metadata/_custom_type_script = "uid://celv2masnj3io"
 
-[node name="Producer" parent="Controllers/Movie/Crew" unique_id=1328117501 node_paths=PackedStringArray("director") instance=ExtResource("35_njtx5")]
+[node name="Producer" parent="Controllers/Movie/Crew" unique_id=1328117501 node_paths=PackedStringArray("director", "scheduler") instance=ExtResource("35_njtx5")]
 director = NodePath("../Director")
+scheduler = NodePath("../Scheduler")
 deadline_threshold_sec = 0.1
+slow_down_on = true
 
 [node name="Cutter" type="Node" parent="Controllers/Movie/Crew" unique_id=134790619]
 script = ExtResource("37_aqgb5")
-uniform_time_sec = 0.8
+uniform_time_sec = 5.0
 metadata/_custom_type_script = "uid://div15hdt2vtdg"
+
+[node name="Scheduler" type="Node" parent="Controllers/Movie/Crew" unique_id=81836832]
+script = ExtResource("37_sgynk")
+metadata/_custom_type_script = "uid://c2iyvivunkx07"
+
+[node name="ProductionLog" type="Node" parent="Controllers/Movie" unique_id=930027704 node_paths=PackedStringArray("combat", "producer", "scheduler", "take_log")]
+script = ExtResource("38_krgjf")
+combat = NodePath("../../Combat")
+producer = NodePath("../Crew/Producer")
+scheduler = NodePath("../Crew/Scheduler")
+take_log = NodePath("TakeLog")
+metadata/_custom_type_script = "uid://ba7egnixkgh8u"
+
+[node name="TakeLog" type="Node" parent="Controllers/Movie/ProductionLog" unique_id=1366325787]
+script = ExtResource("39_wyj42")
+metadata/_custom_type_script = "uid://c2cndqvddug5p"
 
 [node name="UI" type="Node" parent="Controllers" unique_id=1683646025]
 
@@ -1228,14 +1265,18 @@ trajectories = Dictionary[StringName, ExtResource("36_ntk6u")]({
 projectile_scene = ExtResource("38_rca0q")
 metadata/_custom_type_script = "uid://kgbi1bn657re"
 
-[node name="VFX" type="Node" parent="Visual" unique_id=511826867]
+[node name="VFX" type="Node" parent="Visual" unique_id=511826867 node_paths=PackedStringArray("parent_node")]
 script = ExtResource("39_sgu15")
 library = Dictionary[StringName, PackedScene]({
-&"necromancer": ExtResource("40_rpcyj")
+&"necromancer": ExtResource("40_rpcyj"),
+&"necromancer_skill": ExtResource("46_cwim7")
 })
+parent_node = NodePath("../../HexSpace/VFX")
 metadata/_custom_type_script = "uid://cvee6hi1txtqj"
 
-[node name="FreezeSystem" parent="Visual" unique_id=258549042 instance=ExtResource("41_dubvl")]
+[node name="FreezeSystem" parent="Visual" unique_id=258549042 node_paths=PackedStringArray("freeze_tip") instance=ExtResource("41_dubvl")]
+freeze_tip = NodePath("../../HUD/Hourglass")
+tip_on = true
 
 [node name="MovementSystem" type="Node" parent="Visual" unique_id=1906131214]
 script = ExtResource("42_swouy")

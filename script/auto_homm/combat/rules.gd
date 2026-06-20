@@ -15,16 +15,6 @@ func is_hero_turn(_state: teCombatState) -> bool:
 	return false
 
 
-#func progress(runtime: teCombatRuntime):
-	#var state := runtime.state
-	#if state.turn_in_progress():
-		#return
-	#var next_unit_id := teCombatInitiative.calc_next_unit_id(state)
-	#var progress_made := teCombatInitiative.progress_left(state.unit(next_unit_id))
-	#runtime.update(teCombatEvents.initiative_progressed(progress_made))
-	#runtime.update(teCombatEvents.initiative_taken(next_unit_id))
-
-
 func auto_command(runtime: teCombatRuntime, state: teCombatState) -> teCombatCommandBase:
 	var active_unit_id := state.active_unit_id()
 	var active_unit := state.active_unit()
@@ -47,8 +37,7 @@ func expand(
 	if command is teCombatCommandStart:
 		expanded.append(teCombatActions.initiative_advance())
 	if command is teCombatCommandUnitWait:
-		# TODO: Reduce initiative
-		pass
+		expanded.append(teCombatActions.initiative_advance())
 	if command is teCombatCommandUnitAttack:
 		var unit := state.unit(command.unit_id)
 		var target := state.unit(command.target_id)
@@ -59,25 +48,24 @@ func expand(
 			expanded.append(teCombatActions.unit_move(command.unit_id, movement_path))
 			if movement_path.length() > unit.stats.movement_range:
 				movement_path.limit(unit.stats.movement_range)
+				expanded.append(teCombatActions.initiative_advance())
 				return expanded
-		expanded.append(teCombatActions.unit_attack(command.unit_id, command.target_id))
+		if unit.get_attack_pattern() != null:
+			unit.attack_pattern.expand(command.unit_id, command.target_id, runtime, state, expanded)
+		else:
+			expanded.append(teCombatActions.unit_attack(command.unit_id, command.target_id))
+		expanded.append(teCombatActions.initiative_advance())
 	if command is teCombatCommandUnitCastSkill:
-		expanded.append(teCombatActions.unit_cast(command.unit_id))
+		expanded.append(teCombatActions.unit_cast(command.unit_id, command.target))
 		var unit := state.unit(command.unit_id)
-		unit.skill.expand(command.unit_id, command.target, state, runtime, expanded)
+		if unit.skill.ends_turn:
+			expanded.append(teCombatActions.initiative_advance())
 	return expanded
-
-
-func interrupt(
-	runtime: teCombatRuntime,
-	state: teCombatState,
-	action: teCombatActionBase
-):
-	pass
 
 
 func resolve(
 	state: teCombatState,
+	runtime: teCombatRuntime,
 	action: teCombatActionBase,
 	context: Context
 ) -> teCombatResolvedAction:
@@ -85,69 +73,56 @@ func resolve(
 	if action is teCombatActionUnitCastSkill:
 		var unit := state.unit(action.unit_id)
 		var mana_spent := unit.stats.required_mana
-		resolved.push_back(teCombatEvents.mana_spent(action.unit_id, mana_spent))
+		resolved.emit(teCombatEvents.mana_spent(action.unit_id, mana_spent))
+		unit.skill.resolve(action.target, state, runtime, resolved)
 	if action is teCombatActionInitiativeAdvance:
 		var next_unit_id := teCombatInitiative.calc_next_unit_id(state)
 		var progress_made := teCombatInitiative.progress_left(state.unit(next_unit_id))
-		resolved.push_back(teCombatEvents.initiative_progressed(progress_made))
-		resolved.push_back(teCombatEvents.initiative_taken(next_unit_id))
+		resolved.emit(teCombatEvents.initiative_progressed(progress_made))
+		resolved.emit(teCombatEvents.initiative_taken(next_unit_id))
+		teCombatEffects.apply_on_hook(teCombatEffects.Hook.TURN_START, next_unit_id, runtime, state, resolved)
+		teCombatEffects.consume_with_duration(teCombatEffects.Duration.TURNS, next_unit_id, runtime, state, resolved)
 	if action is teCombatActionUnitAttack:
 		if not state.has_unit(action.target_id):
 			return teCombatResolvedAction.unresolved()
-		var target := state.unit(action.target_id)
 		var attacker := state.unit(action.unit_id)
-		var damage := teCombatDamage.calculate(state, attacker, target)
-		resolved.push_back(teCombatEvents.unit_damaged(
-			action.target_id,
-			damage
+		
+		if teCombatDodge.check(action.unit_id, action.target_id, runtime, state):
+			resolved.schedule(teCombatActions.dodge_attack(action.target_id))
+			return
+		
+		teCombatEffects.apply_on_hook(teCombatEffects.Hook.ATTACK, action.unit_id, runtime, state, resolved)
+		teCombatEffects.consume_with_duration(teCombatEffects.Duration.ATTACKS, action.unit_id, runtime, state, resolved)
+		
+		resolved.schedule(teCombatActions.damage(
+			action.target_id, teCombatDamage.TYPE.PHYSICAL, attacker.stats.attack_damage
 		))
-		if resolved.context.read_or(teCombatContext.ADD_MANA, true):
-			resolved.push_back(teCombatEvents.mana_gained(
-				action.unit_id,
-				7 # TODO: Implement properly
-			))
-		if teCombatDamage.is_lethal(state, target, damage):
-			resolved.push_back(teCombatEvents.unit_died(action.target_id))
+		
+		resolved.emit(teCombatEvents.mana_gained(
+			action.unit_id,
+			7 # TODO: Implement properly
+		))
 	if action is teCombatActionUnitMove:
-		resolved.push_back(teCombatEvents.unit_moved(
+		resolved.emit(teCombatEvents.unit_moved(
 			action.unit_id, action.path.through
 		))
+	if action is teCombatActionDamage:
+		for instance in action.instances:
+			resolved.emit(teCombatEvents.unit_damaged(
+				instance.target_unit_id,
+				instance.base_amount
+			))
+			if teCombatDamage.is_lethal(state, instance):
+				resolved.emit(teCombatEvents.unit_died(instance.target_unit_id))
+				if state.active_unit_id() == instance.target_unit_id:
+					resolved.schedule(teCombatActions.initiative_advance())
+	if action is teCombatActionApplyEffect:
+		for unit_id in action.units:
+			var inst := teCombatEffects.instance(action.effect, action.charges, action.duration)
+			var effect_id := runtime.effect_id()
+			resolved.emit(teCombatEvents.effect_applied(unit_id, effect_id, inst))
 	return resolved
-
-
-func resolve_damage(
-	state: teCombatState,
-	action: teCombatActionBase,
-	context: Context,
-	resolved: teCombatResolvedAction,
-	instance: teCombatDamageInstance
-):
-	pass
-
-
-func react(
-	runtime: teCombatRuntime,
-	state: teCombatState,
-	action: teCombatResolvedAction
-):
-	pass
-
-
-#func cast(state: teCombatState, unit_id: int, expanded: teCombatExpandedCommand):
-	#var unit := state.unit(unit_id)
-	#var skill := unit.skill
-	#if skill is teCombatSkillUnitComboAttack:
-		#var target := teCombatTargeting.find(unit_id, state, skill.targeting)
-		#if target == -1:
-			#expanded.invalidate()
-			#return
-		#for idx in range(skill.attacks_number):
-			#var context := teCombatActionContext.new()
-			#context.add(teCombatActionsContext.COMBO_HIT, idx + 1)
-			#expanded.append(teCombatActions.unit_attack(unit_id, target), context)
-	
 
 
 func is_valid(runtime: teCombatRuntime) -> bool:
 	return true
-	

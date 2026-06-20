@@ -5,9 +5,12 @@
 [ext_resource type="Script" uid="uid://daavssjfuh6c3" path="res://script/auto_homm/combat/unit/set.gd" id="3_ikphj"]
 [ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="4_ikphj"]
 [ext_resource type="Script" uid="uid://bmmh4y5p4r5ej" path="res://script/auto_homm/unit/stats.gd" id="5_ikphj"]
-[ext_resource type="Script" uid="uid://dqat26krhykin" path="res://script/auto_homm/combat/skill/unit_combo_attack.gd" id="6_wsd47"]
+[ext_resource type="Script" uid="uid://l7eeknl6jwp5" path="res://script/auto_homm/combat/system/effect/impl/combo.gd" id="6_urxnx"]
+[ext_resource type="Script" uid="uid://c887x0hx6ft7x" path="res://script/auto_homm/combat/system/skill/cast/apply_effect.gd" id="7_5lh6l"]
 [ext_resource type="Script" uid="uid://t0fycew1djni" path="res://script/auto_homm/combat/system/skill/unit.gd" id="7_wsd47"]
-[ext_resource type="Script" uid="uid://cwdd4ug4m73f5" path="res://script/auto_homm/combat/system/targeting/selection/unit_attack.gd" id="8_wsd47"]
+[ext_resource type="Script" uid="uid://n60j1rpr6spd" path="res://script/auto_homm/combat/system/targeting/selection/self.gd" id="9_5lh6l"]
+[ext_resource type="Script" uid="uid://w725jw6e04nu" path="res://script/auto_homm/combat/system/effect/impl/poison.gd" id="10_2wb03"]
+[ext_resource type="Script" uid="uid://dwdaoppkl4lb8" path="res://script/auto_homm/combat/system/targeting/selection/enemies.gd" id="11_eqe1j"]
 
 [sub_resource type="Resource" id="Resource_d2lcd"]
 script = ExtResource("1_dnmu3")
@@ -24,22 +27,28 @@ metadata/_custom_type_script = "uid://bxwdn821h7m3q"
 [sub_resource type="Resource" id="Resource_le1ug"]
 script = ExtResource("5_ikphj")
 max_hp = 133
-required_mana = 0
+required_mana = 7
 attack_damage = 13
 
 [sub_resource type="Resource" id="Resource_55dpk"]
-script = ExtResource("6_wsd47")
-attacks_number = 3
-metadata/_custom_type_script = "uid://dqat26krhykin"
+script = ExtResource("6_urxnx")
+metadata/_custom_type_script = "uid://l7eeknl6jwp5"
 
 [sub_resource type="Resource" id="Resource_nfb0r"]
-script = ExtResource("8_wsd47")
-metadata/_custom_type_script = "uid://cwdd4ug4m73f5"
+script = ExtResource("7_5lh6l")
+effect = SubResource("Resource_55dpk")
+duration = 3
+metadata/_custom_type_script = "uid://c887x0hx6ft7x"
+
+[sub_resource type="Resource" id="Resource_qcag6"]
+script = ExtResource("9_5lh6l")
+metadata/_custom_type_script = "uid://n60j1rpr6spd"
 
 [sub_resource type="Resource" id="Resource_pbg0x"]
 script = ExtResource("7_wsd47")
-cast = SubResource("Resource_55dpk")
-selection = SubResource("Resource_nfb0r")
+cast = SubResource("Resource_nfb0r")
+selection = SubResource("Resource_qcag6")
+ends_turn = false
 metadata/_custom_type_script = "uid://t0fycew1djni"
 
 [sub_resource type="Resource" id="Resource_5lh6l"]
@@ -58,11 +67,33 @@ metadata/_custom_type_script = "uid://bxwdn821h7m3q"
 
 [sub_resource type="Resource" id="Resource_2wb03"]
 script = ExtResource("5_ikphj")
+required_mana = 7
 attack_range = 10
+
+[sub_resource type="Resource" id="Resource_82dls"]
+script = ExtResource("10_2wb03")
+metadata/_custom_type_script = "uid://w725jw6e04nu"
+
+[sub_resource type="Resource" id="Resource_pxlwc"]
+script = ExtResource("7_5lh6l")
+effect = SubResource("Resource_82dls")
+charges = 3
+metadata/_custom_type_script = "uid://c887x0hx6ft7x"
+
+[sub_resource type="Resource" id="Resource_stapm"]
+script = ExtResource("11_eqe1j")
+metadata/_custom_type_script = "uid://dwdaoppkl4lb8"
+
+[sub_resource type="Resource" id="Resource_yr3rm"]
+script = ExtResource("7_wsd47")
+cast = SubResource("Resource_pxlwc")
+selection = SubResource("Resource_stapm")
+metadata/_custom_type_script = "uid://t0fycew1djni"
 
 [sub_resource type="Resource" id="Resource_n3uly"]
 script = ExtResource("4_ikphj")
 base_stats = SubResource("Resource_2wb03")
+skill = SubResource("Resource_yr3rm")
 metadata/_custom_type_script = "uid://bxwdn821h7m3q"
 
 [sub_resource type="Resource" id="Resource_deqbk"]

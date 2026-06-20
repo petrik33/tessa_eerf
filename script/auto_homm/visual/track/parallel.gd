@@ -1,35 +1,31 @@
 class_name teVisualParallelTrack extends teVisualTrackBase
 
 
-var tracks: Array[teVisualTrackBase]
+var scheduler: teVisualScheduler
+var tracks: Array[int]
 var playing: int
 
 
 func _play():
-	for track in tracks:
-		if track == null:
-			continue
-		track.start()
-		if track.is_finished:
-			continue
-		track.finished.connect(_on_sub_track_finished, CONNECT_ONE_SHOT)
-		playing += 1
-	if playing == 0:
-		_finish()
+	scheduler.track_finished.connect(_on_track_finished)
+	playing = tracks.size()
+	for track_id in tracks:
+		if scheduler.is_scheduled(track_id):
+			scheduler.start(track_id)
+		else:
+			playing -= 1
 
 
 func _cancel():
-	if playing == 0:
+	scheduler.track_finished.disconnect(_on_track_finished)
+	for track_id in tracks:
+		if scheduler.is_running(track_id):
+			scheduler.stop(track_id)
+
+
+func _on_track_finished(_track: teVisualTrackBase, id: int):
+	if not tracks.has(id):
 		return
-	for track in tracks:
-		if track.is_finished:
-			continue
-		track.finished.disconnect(_on_sub_track_finished)
-		track.stop()
-	playing = 0
-
-
-func _on_sub_track_finished():
 	playing -= 1
 	if playing == 0:
 		_finish()

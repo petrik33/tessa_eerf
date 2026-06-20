@@ -6,6 +6,7 @@ func _init() -> void:
 
 
 const UNIT_ID := &"unit_id"
+const TEAM_ID := &"team_id"
 
 
 const COMBO_HIT := &"combo_hit_idx"

@@ -1,6 +1,8 @@
 class_name teVisualVfxSystem extends Node
 
+
 @export var library: Dictionary[StringName, PackedScene]
+@export var parent_node: Node2D
 
 
 var playing: Array[teVisualVfxInstanceBase]
@@ -23,7 +25,6 @@ func _exit_tree() -> void:
 func play(
 	vfx_uid: StringName,
 	position: Vector2,
-	parent: Node,
 	speed_scale := 1.0,
 	params: Dictionary = {}
 ):
@@ -33,10 +34,10 @@ func play(
 	var instance = scene.instantiate() as teVisualVfxInstanceBase
 	if instance == null:
 		return
-	instance.position = position
-	parent.add_child(instance)
+	parent_node.add_child(instance)
+	instance.global_position = position
 	instance.finished_signal().connect(func():
-		parent.remove_child(instance)
+		parent_node.remove_child(instance)
 		instance.queue_free()
 	)
 	instance.play(params, speed_scale)

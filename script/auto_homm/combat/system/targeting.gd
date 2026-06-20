@@ -66,4 +66,6 @@ static func target_fits_mode(target: teCombatTargetBase, mode: Mode) -> bool:
 			return target is teCombatTargetUnitAndHex
 		Mode.UNIT_OR_UNITS:
 			return target is teCombatTargetUnit
+		Mode.SELF:
+			return target is teCombatTargetUnit
 	return false

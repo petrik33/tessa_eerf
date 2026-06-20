@@ -3,6 +3,7 @@ class_name teCombatUnitSkill extends Resource
 
 @export var cast: teCombatSkillCastBase
 @export var selection: teCombatTargetSelectionBase
+@export var ends_turn: bool = true
 
 
 func find_target(
@@ -12,17 +13,16 @@ func find_target(
 ) -> teCombatTargetBase:
 	var context := Context.new()
 	context.add(teCombatContext.UNIT_ID, unit_id)
+	context.add(teCombatContext.TEAM_ID, state.unit_team_id(unit_id))
 	return selection.first_target(state, runtime, context)
 
 
-func expand(
-	unit_id: int,
+func resolve(
 	target: teCombatTargetBase,
 	state: teCombatState,
 	runtime: teCombatRuntime,
-	expanded: teCombatExpandedCommand
+	resolved: teCombatResolvedAction
 ):
 	if not teCombatTargeting.target_fits_mode(target, cast.targeting_mode()):
-		expanded.invalidate()
 		return
-	cast.expand(unit_id, target, state, runtime, expanded)
+	cast.resolve(target, state, runtime, resolved)

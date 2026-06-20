@@ -1,18 +1,21 @@
 class_name teVisualSubSequenceTrack extends teVisualTrackBase
 
 
-var tracks: Array[teVisualTrackBase]
+var scheduler: teVisualScheduler
+var tracks: Array[int]
 var current_track_idx: int
+var current_track_id: int
 
 
 func _play():
+	scheduler.track_finished.connect(_on_track_finished)
 	current_track_idx = -1
 	_play_next_track()
 
 
 func _cancel():
-	tracks[current_track_idx].finished.disconnect(_play_next_track)
-	tracks[current_track_idx].stop()
+	scheduler.track_finished.disconnect(_on_track_finished)
+	scheduler.stop(current_track_id)
 
 
 func _play_next_track():
@@ -20,9 +23,14 @@ func _play_next_track():
 	if current_track_idx > tracks.size() - 1:
 		_finish()
 		return
-	var track := tracks[current_track_idx]
-	if track == null:
+	current_track_id = tracks[current_track_idx]
+	if not scheduler.is_scheduled(current_track_id):
 		_play_next_track()
 		return
-	track.finished.connect(_play_next_track, CONNECT_ONE_SHOT)
-	track.start()
+	scheduler.start(current_track_id)
+
+
+func _on_track_finished(_track: teVisualTrackBase, id: int):
+	if id != current_track_id:
+		return
+	_play_next_track()

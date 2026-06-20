@@ -5,21 +5,17 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-static func parallel(tracks: Array[teVisualTrackBase]) -> teVisualParallelTrack:
+static func parallel(scheduler: teVisualScheduler, tracks: Array[int]) -> teVisualParallelTrack:
 	var track := teVisualParallelTrack.new()
+	track.scheduler = scheduler
 	track.tracks = tracks
 	return track
 
 
-static func sub_sequence(tracks: Array[teVisualTrackBase]) -> teVisualSubSequenceTrack:
+static func sub_sequence(scheduler: teVisualScheduler, tracks: Array[int]) -> teVisualSubSequenceTrack:
 	var track := teVisualSubSequenceTrack.new()
+	track.scheduler = scheduler
 	track.tracks = tracks
-	return track
-
-
-static func background(sub_track: teVisualTrackBase) -> teVisualTrackBackground:
-	var track := teVisualTrackBackground.new()
-	track.sub_track = sub_track
 	return track
 
 

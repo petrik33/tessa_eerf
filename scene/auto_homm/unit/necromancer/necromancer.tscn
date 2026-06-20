@@ -1354,7 +1354,8 @@ animations = [{
 script = ExtResource("1_hsq4q")
 sprite = NodePath("AnimatedSprite2D")
 windup_frames = Dictionary[StringName, int]({
-&"cast": 31
+&"cast": 31,
+&"skill": 9
 })
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://clvxp2i6wcbas"
@@ -1364,8 +1365,6 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_sgoc5")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"skill"
+animation = &"idle"
 autoplay = "idle"
-frame = 19
-frame_progress = 1.0
 offset = Vector2(0, -12)

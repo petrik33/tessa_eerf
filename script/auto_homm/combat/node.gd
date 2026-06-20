@@ -28,31 +28,20 @@ func start(_initial_state: teCombatState, _rules: teCombatRules):
 	state = initial_state.duplicate()
 	runtime = teCombatRuntime.new(initial_state)
 	started.emit(initial_state)
-	step()
+	_process_command(teCombatCommands.start_combat())
 
 
-func step():
+func next_step():
 	if not is_active():
 		return
-	var command: teCombatCommandBase
+	_process_command(next_command())
+
+
+func next_command() -> teCombatCommandBase:
 	if rules.is_hero_turn(state):
-		command = teCombatCommands.skip_hero_turn()
+		return teCombatCommands.skip_hero_turn()
 	else:
-		_take(teCombatActions.initiative_advance())
-		command = rules.auto_command(runtime, state)
-	var expanded := rules.expand(runtime, state, command)
-	if not expanded.is_valid():
-		return
-	for idx in range(expanded.actions.size()):
-		var action := expanded.actions[idx]
-		var context := expanded.context[idx]
-		runtime.enqueue(action, context)
-	while not runtime.action_queue.is_empty():
-		_take(runtime.action_queue.pop_front(), runtime.action_context_queue.pop_front())
-	if rules.is_finished(state):
-		stop()
-		return
-	turn_timer.start()
+		return rules.auto_command(runtime, state)
 
 
 func stop():
@@ -70,15 +59,35 @@ func restart():
 	start(initial_state, rules)
 
 
+func _process_command(command: teCombatCommandBase):
+	var expanded := rules.expand(runtime, state, command)
+	if not expanded.is_valid():
+		turn_timer.start()
+		return
+	_take_scheduled(expanded.actions)
+	if rules.is_finished(state):
+		stop()
+		return
+	turn_timer.start()
+
+
+func _take_scheduled(scheduled: teCombatScheduledActionsBuffer):
+	for idx in range(scheduled.size()):
+		var action := scheduled.actions[idx]
+		var context := scheduled.context[idx]
+		_take(action, context)
+
+
 func _take(action: teCombatActionBase, context: Context = null):
-	var resolved := rules.resolve(state, action, context)
+	var resolved := rules.resolve(state, runtime, action, context)
 	if not resolved.is_valid():
 		return
-	for event in resolved.events_buffer.events:
+	for event in resolved.events_to_emit():
 		state.update(event)
 		runtime.update(event)
 	action_taken.emit(state, resolved)
+	_take_scheduled(resolved.actions_to_resolve())
 
 
 func _on_timer_timeout():
-	step()
+	next_step()

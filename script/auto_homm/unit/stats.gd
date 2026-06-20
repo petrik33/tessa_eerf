@@ -10,3 +10,16 @@ class_name teUnitStats extends Resource
 @export var attack_damage := 15
 @export var initiative := 5
 @export var move_range := 5
+
+
+const STAT_FIELDS := [
+	"max_hp",
+	"required_mana",
+	"movement_range",
+	"armor",
+	"magic_resistance",
+	"attack_range",
+	"attack_damage",
+	"initiative",
+	"move_range"
+]

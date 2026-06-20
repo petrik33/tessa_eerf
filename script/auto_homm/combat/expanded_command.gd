@@ -2,17 +2,16 @@ class_name teCombatExpandedCommand extends Resource
 
 
 var command: teCombatCommandBase
-var actions: Array[teCombatActionBase] = []
-var context: Array[Context] = []
+var actions: teCombatScheduledActionsBuffer
 
 
 func _init(_command: teCombatCommandBase):
 	command = _command
+	actions = teCombatScheduledActionsBuffer.new()
 
 
 func append(action: teCombatActionBase, action_context: Context = Context.new()):
-	actions.push_back(action)
-	context.push_back(action_context)
+	actions.append(action, action_context)
 
 
 func is_valid() -> bool:

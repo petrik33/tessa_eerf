@@ -2,6 +2,7 @@
 class_name teVisualTrackBase extends RefCounted
 
 
+signal started()
 signal finished()
 
 
@@ -16,6 +17,7 @@ func start():
 	is_playing = true
 	is_finished = false
 	is_stopped = false
+	started.emit()
 	_play()
 
 

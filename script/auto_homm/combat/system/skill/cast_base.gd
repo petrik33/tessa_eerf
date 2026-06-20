@@ -3,12 +3,11 @@ class_name teCombatSkillCastBase extends Resource
 
 
 @abstract
-func expand(
-	unit_id: int,
+func resolve(
 	target: teCombatTargetBase,
 	state: teCombatState,
 	runtime: teCombatRuntime,
-	expanded: teCombatExpandedCommand
+	resolved: teCombatResolvedAction
 )
 
 @abstract

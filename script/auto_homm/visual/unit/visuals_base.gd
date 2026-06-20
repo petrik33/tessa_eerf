@@ -22,6 +22,8 @@ func play_windup(act_name: StringName, speed_scale: float):
 
 func play_combo(base_act: StringName, speed_scale: float, idx: int, total: int):
 	if idx == 0:
+		if is_acting():
+			stop_acting()
 		act(combo_act_name(base_act, total), speed_scale)
 	windup(combo_windup_name(base_act, idx))
 	if not windup_finished():

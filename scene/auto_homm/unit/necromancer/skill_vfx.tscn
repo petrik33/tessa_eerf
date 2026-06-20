@@ -84,6 +84,7 @@ animations = [{
 [node name="SkillVfx" type="Node2D" unique_id=1656229672 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_fd2br")
 sprite = NodePath("AnimatedSprite2D")
+trigger_frame = 2
 metadata/_custom_type_script = "uid://c5ppkivs7hy8n"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1880448119]

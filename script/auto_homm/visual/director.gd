@@ -67,8 +67,8 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 	if action is teVisualActionUnitShootProjectile:
 		var shooter := board.get_unit(action.shooter_id)
 		var target := board.get_unit(action.target_id)
-		var origin_pos := board.hex_space.to_local(shooter.get_socket(&"ranged"))
-		var target_pos := board.hex_space.to_local(target.get_socket(&"target"))
+		var origin_pos := board.hex_space.to_local(shooter.get_socket(teVisualUnitSockets.RANGED))
+		var target_pos := board.hex_space.to_local(target.get_socket(teVisualUnitSockets.TARGET))
 		return direct_take(teVisualActions.shoot_projectile(
 			origin_pos, target_pos,
 			action.projectile_uid, action.speed_multiplier, action.trajectory_name
@@ -103,16 +103,17 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 		)
 	if action is teVisualActionVfxOnTarget:
 		var unit := board.get_unit(action.target_unit_id)
-		var pos := board.hex_space.to_local(unit.get_socket(action.socket))
+		var pos := unit.get_socket(action.socket)
 		return teVisualTakes.async(
 			func(): await vfx_system.play(
 				action.vfx_uid,
 				pos,
-				board.hex_space,
 				speed_scale,
 				action.params
 			)
 		)
+	if action is teVisualActionWait:
+		return teVisualTakes.timer(self, action.time_sec / speed_scale)
 	return teVisualTakes.fail("Unknown action type to direct")
 
 
@@ -142,8 +143,8 @@ func estimate_duration(action: teVisualActionBase) -> float:
 	if action is teVisualActionUnitShootProjectile:
 		var shooter := board.get_unit(action.shooter_id)
 		var target := board.get_unit(action.target_id)
-		var origin_pos := board.hex_space.to_local(shooter.get_socket(&"ranged"))
-		var target_pos := board.hex_space.to_local(target.get_socket(&"target"))
+		var origin_pos := board.hex_space.to_local(shooter.get_socket(teVisualUnitSockets.RANGED))
+		var target_pos := board.hex_space.to_local(target.get_socket(teVisualUnitSockets.TARGET))
 		return projectile_system.estimate_shot_duration(
 			action.projectile_uid,
 			origin_pos,
@@ -156,6 +157,8 @@ func estimate_duration(action: teVisualActionBase) -> float:
 		return 0.1 * path.size()
 	if action is teVisualActionVfxOnTarget:
 		return vfx_system.duration(action.vfx_uid)
+	if action is teVisualActionWait:
+		return action.time_sec
 	if action is teVisualActionEmitCombatEvents:
 		return 0.0
 	if action is teVisualActionFreezeFrame:

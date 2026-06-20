@@ -20,6 +20,11 @@ static func background(sub_action: teVisualActionBase) -> teVisualActionBackgrou
 	action.sub_action = sub_action
 	return action
 
+static func wait(time_sec: float) -> teVisualActionWait:
+	var action := teVisualActionWait.new()
+	action.time_sec = time_sec
+	return action
+
 static func unit_combo_sequence(
 	unit_id: int,
 	base_act: StringName,

@@ -1,11 +1,17 @@
 class_name teVisualWriter extends teVisualWriterBase
 
 
-@export var unit_profiles: Dictionary[StringName, teVisualUnitProfile]
+@export var unit_profiles: Dictionary[StringName, teVisualWritingUnitProfile]
 
 
 @export var freeze_frame_duration_hit := 0.33
 @export var freeze_frame_duration_kill := 0.74
+
+@export var initiative_advance_time_sec := 0.3
+
+
+func get_unit_profile(uid: StringName) -> teVisualWritingUnitProfile:
+	return unit_profiles.get(uid, teVisualWritingUnitProfile.new())
 
 
 func intro(_initial_state: teCombatState) -> teVisualSequence:
@@ -19,20 +25,67 @@ func sequence(
 	events_buffer: teCombatEventsBuffer
 ) -> teVisualActionBase:
 	if action is teCombatActionUnitAttack:
-		return write_attack(
-			state,
-			action,
-			context,
-			events_buffer,
-		)
+		return write_attack(state, action, context, events_buffer)
 	if action is teCombatActionUnitMove:
-		return write_unit_move(action, state, events_buffer)
+		return write_unit_move(state, action, events_buffer)
+	if action is teCombatActionDamage:
+		return write_damage(state, action, events_buffer)
+	if action is teCombatActionUnitCastSkill:
+		return write_cast(state, action, events_buffer)
+	if action is teCombatActionInitiativeAdvance:
+		return write_initiative_advance(state, action, context, events_buffer) 
 	return teVisualActions.emit(events_buffer, state)
 
 
-func write_unit_move(
-	action: teCombatActionUnitMove,
+func write_initiative_advance(
 	state: teCombatState,
+	action: teCombatActionInitiativeAdvance,
+	context: Context,
+	events_buffer: teCombatEventsBuffer
+) -> teVisualActionBase:
+	return teVisualActions.sub_sequence(
+		teVisualActions.wait(initiative_advance_time_sec),
+		teVisualActions.emit(events_buffer, state)
+	)
+
+
+func write_cast(
+	state: teCombatState,
+	action: teCombatActionUnitCastSkill,
+	events_buffer: teCombatEventsBuffer
+) -> teVisualActionBase:
+	return teVisualActions.sub_sequence(
+		teVisualActions.unit_windup(action.unit_id, teVisualActs.SKILL),
+		write_skill_visual(state, action, events_buffer),
+		teVisualActions.emit(events_buffer, state),
+		teVisualActions.unit_wait_winddown(action.unit_id, teVisualActs.SKILL)
+	)
+
+
+func write_skill_visual(
+	state: teCombatState,
+	action: teCombatActionUnitCastSkill,
+	_events_buffer: teCombatEventsBuffer
+) -> teVisualActionBase:
+	var unit := state.unit(action.unit_id)
+	var unit_profile := get_unit_profile(unit.definition_uid)
+	match unit_profile.skill:
+		teVisualWriting.SkillVisual.VFX:
+			var unit_target := action.target as teCombatTargetUnit
+			if unit_target != null:
+				var parallel_vfx := teVisualActions.parallel()
+				for unit_id in unit_target.units_id:
+					parallel_vfx.actions.push_back(teVisualActions.vfx_on_target(
+						teVisualWritingVfx.skill(unit.definition_uid),
+						unit_id, {}, unit_profile.skill_socket
+					))
+				return parallel_vfx
+	return null
+
+
+func write_unit_move(
+	state: teCombatState,
+	action: teCombatActionUnitMove,
 	events_buffer: teCombatEventsBuffer
 ) -> teVisualActionBase:
 	var visual_path := action.path.through.duplicate()
@@ -49,6 +102,32 @@ func write_unit_move(
 	)
 
 
+func write_damage(
+	state: teCombatState,
+	action: teCombatActionDamage,
+	events_buffer: teCombatEventsBuffer
+) -> teVisualActionBase:
+	var is_lethal := events_buffer.has(func (ev): return ev is teCombatEventUnitDied)
+	var parallel := teVisualActions.parallel()
+	for instance in action.instances:
+		parallel.actions.push_back(teVisualActions.parallel(
+			teVisualActions.unit_flash(instance.target_unit_id),
+			teVisualActions.unit_act(
+				instance.target_unit_id,
+				teVisualActs.DIE if is_lethal else teVisualActs.GET_HURT,
+				teVisualActs.GET_HURT,
+				true
+			),
+			teVisualActions.emit(events_buffer, state)
+		))
+	return teVisualActions.sub_sequence(
+		parallel,
+		teVisualActions.freeze_frame(
+			freeze_frame_duration_kill if is_lethal else freeze_frame_duration_hit
+		)
+	)
+
+
 func write_attack(
 	state: teCombatState,
 	action: teCombatActionUnitAttack,
@@ -58,36 +137,27 @@ func write_attack(
 	var attacker := state.unit(action.unit_id)
 	if not attacker:
 		return null
-	var attack_kind := get_attack_kind(attacker)
-	var is_lethal := events_buffer.events.find_custom(func (ev): return ev is teCombatEventUnitDied) != -1
+	var unit_profile := get_unit_profile(attacker.definition_uid)
+	var attack_kind := unit_profile.attack
+	var combo_hit_idx = context.read_or(teCombatContext.COMBO_HIT, -1)
+	var combo_length = context.read_or(teCombatContext.COMBO_LENGTH, 0)
 	return teVisualActions.sub_sequence(
-		write_attack_windup(action.unit_id, attack_kind, context),
+		write_attack_windup(action.unit_id, attack_kind, combo_hit_idx, combo_length),
 		write_attack_post_windup(attacker, action.unit_id, action.target_id, attack_kind),
-		teVisualActions.parallel(
-			teVisualActions.unit_flash(action.target_id),
-			teVisualActions.unit_act(
-				action.target_id,
-				teVisualActs.DIE if is_lethal else teVisualActs.GET_HURT,
-				teVisualActs.GET_HURT,
-				true
-			),
-			teVisualActions.emit(events_buffer, state)
-		),
-		teVisualActions.freeze_frame(freeze_frame_duration_kill if is_lethal else freeze_frame_duration_hit),
+		teVisualActions.emit(events_buffer, state)
 	)
 
 
 func write_attack_windup(
 	attacker_id: int,
-	attack_kind: teVisualUnitProfile.AttackKind,
-	context: Context
+	attack_kind: teVisualWriting.AttackKind,
+	combo_hit_idx: int = -1,
+	combo_length: int = 0
 ) -> teVisualActionBase:
 	var attack_act := get_attack_act(attack_kind)
-	var combo_hit_idx = context.read_or(teCombatContext.COMBO_HIT, -1)
 	var is_combo: bool = combo_hit_idx != -1
 	if not is_combo:
 		return teVisualActions.unit_windup(attacker_id, attack_act)
-	var combo_length = context.read_or(teCombatContext.COMBO_LENGTH, 1)
 	return teVisualActions.unit_combo(
 		attacker_id, attack_act,
 		combo_hit_idx, combo_length
@@ -98,18 +168,18 @@ func write_attack_post_windup(
 	attacker: teCombatUnitState,
 	attacker_id: int,
 	target_id: int,
-	attack_kind: teVisualUnitProfile.AttackKind
+	attack_kind: teVisualWriting.AttackKind
 ) -> teVisualActionBase:
 	match attack_kind:
-		teVisualUnitProfile.AttackKind.MELEE:
+		teVisualWriting.AttackKind.MELEE:
 			return null
-		teVisualUnitProfile.AttackKind.PROJECTILE:
+		teVisualWriting.AttackKind.PROJECTILE:
 			return teVisualActions.unit_shoot_projectile(
 				attacker_id,
 				target_id,
 				attacker.definition_uid
 			)
-		teVisualUnitProfile.AttackKind.CAST:
+		teVisualWriting.AttackKind.CAST:
 			return teVisualActions.vfx_on_target(
 				attacker.definition_uid,
 				target_id,
@@ -117,20 +187,12 @@ func write_attack_post_windup(
 	return null
 
 
-func get_attack_act(attack_kind: teVisualUnitProfile.AttackKind) -> StringName:
+func get_attack_act(attack_kind: teVisualWriting.AttackKind) -> StringName:
 	match attack_kind:
-		teVisualUnitProfile.AttackKind.MELEE:
+		teVisualWriting.AttackKind.MELEE:
 			return teVisualActs.MELEE
-		teVisualUnitProfile.AttackKind.PROJECTILE:
+		teVisualWriting.AttackKind.PROJECTILE:
 			return teVisualActs.RANGED
-		teVisualUnitProfile.AttackKind.CAST:
+		teVisualWriting.AttackKind.CAST:
 			return teVisualActs.CAST
 	return ""
-
-
-func get_attack_kind(attacker: teCombatUnitState) -> teVisualUnitProfile.AttackKind:
-	var attacker_profile: teVisualUnitProfile = unit_profiles.get(attacker.definition_uid)
-	if attacker_profile == null:
-		return teVisualUnitProfile.AttackKind.MELEE
-	else:
-		return attacker_profile.attack

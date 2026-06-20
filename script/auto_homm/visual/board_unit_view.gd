@@ -17,8 +17,10 @@ func get_socket(name: StringName) -> Vector2:
 	var socket_method_name := name + SOCKET_METHODNAME_POSTFIX
 	if view.visuals.has_method(socket_method_name):
 		return view.visuals.call(socket_method_name)
-	if name == &"target":
+	if name == teVisualUnitSockets.TARGET:
 		return view.visuals.global_position + DEFAULT_TARGET_OFFSET
+	if name == teVisualUnitSockets.ORIGIN:
+		return view.visuals.global_position
 	return view.visuals.global_position
 
 

@@ -17,3 +17,11 @@ func update(event: teCombatEventBase):
 func enqueue(action: teCombatActionBase, action_context: Context):
 	action_queue.push_back(action)
 	action_context_queue.push_back(action_context)
+
+
+func effect_id() -> int:
+	_effects_counter += 1
+	return _effects_counter
+
+
+var _effects_counter := -1

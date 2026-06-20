@@ -36,8 +36,11 @@ func windup(act_name: StringName):
 	windup_trigger.start(_windup_frame(act_name))
 
 func winddown():
+	if not sprite.is_playing():
+		return
 	assert(winddown_trigger == null, "Already winding down")
-	winddown_trigger = Utils.animation_end_trigger(sprite, _on_winddown)
+	winddown_trigger = Utils.animation_end_trigger(sprite)
+	winddown_trigger.triggered.connect(_on_winddown)
 
 func stop_acting():
 	sprite.stop()

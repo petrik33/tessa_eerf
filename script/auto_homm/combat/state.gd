@@ -23,6 +23,8 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 			unit_initial_state.initiative_progress = 0.0
 			unit_initial_state.stats = unit_definition.base_stats.duplicate()
 			unit_initial_state.definition_uid = placed_unit.definition_uid
+			if unit_definition.custom_attack_pattern != null:
+				unit_initial_state.attack_pattern = unit_definition.custom_attack_pattern.duplicate()
 			if unit_definition.skill != null:
 				unit_initial_state.skill = unit_definition.skill.duplicate(true)
 			state.units[unit_id] = unit_initial_state
@@ -71,7 +73,18 @@ func update(event: teCombatEventBase):
 	if event is teCombatEventManaSpent:
 		var target = units[event.unit_id]
 		target.mana_collected = max(0, target.mana_collected - event.amount)
-		
+	if event is teCombatEventUnitNextAttackModifierConsumed:
+		var target = units[event.unit_id]
+		target.next_attack_pattern = null
+	if event is teCombatEventEffectApplied:
+		var target = units[event.unit_id]
+		target.effects.set(event.effect_id, event.effect)
+	if event is teCombatEventEffectConsumed:
+		var target = units[event.unit_id]
+		target.effects[event.effect_id].charges_left -= 1
+	if event is teCombatEventEffectFinished:
+		var target = units[event.unit_id]
+		target.effects.erase(event.effect_id)
 
 
 func is_finished() -> bool:
@@ -102,12 +115,12 @@ func unit_enemies_id(unit_id: int) -> Array[int]:
 	return enemies_id(unit_teams[unit_id])
 
 
-func allies_id(ally_side: int) -> Array[int]:
-	var allies: Array[int] = []
-	for other_id in units:
-		if unit_teams[other_id] == ally_side:
-			allies.push_back(other_id)
-	return allies
+func team_units_id(team_id: int) -> Array[int]:
+	var units_id: Array[int] = []
+	for unit_id in units:
+		if unit_teams[unit_id] == team_id:
+			units_id.push_back(unit_id)
+	return units_id
 
 
 func enemies_id(ally_side: int) -> Array[int]:
@@ -116,3 +129,7 @@ func enemies_id(ally_side: int) -> Array[int]:
 		if unit_teams[other_id] != ally_side:
 			enemies.push_back(other_id)
 	return enemies
+
+
+func allies_id(ally_side: int) -> Array[int]:
+	return team_units_id(ally_side)

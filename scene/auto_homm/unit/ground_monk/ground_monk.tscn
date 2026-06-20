@@ -80,7 +80,23 @@
 [ext_resource type="Texture2D" uid="uid://bqk8f2x5cvakw" path="res://asset/texture/unit/ground_monk/run/run_5.png" id="71_cxvjm"]
 [ext_resource type="Texture2D" uid="uid://csmoolahr3vc" path="res://asset/texture/unit/ground_monk/run/run_6.png" id="72_0buw5"]
 [ext_resource type="Texture2D" uid="uid://6ymmloxmjvrl" path="res://asset/texture/unit/ground_monk/run/run_7.png" id="73_41j4e"]
+[ext_resource type="Texture2D" uid="uid://cwop3luqjjjl4" path="res://asset/texture/unit/ground_monk/meditate/meditate_1.png" id="74_v726m"]
 [ext_resource type="Texture2D" uid="uid://baqrxop0pb7mi" path="res://asset/texture/unit/ground_monk/run/run_8.png" id="74_xi2bq"]
+[ext_resource type="Texture2D" uid="uid://d0gpbx6qatlk7" path="res://asset/texture/unit/ground_monk/meditate/meditate_2.png" id="75_rucio"]
+[ext_resource type="Texture2D" uid="uid://b0hotl7eunxhi" path="res://asset/texture/unit/ground_monk/meditate/meditate_3.png" id="76_xup5e"]
+[ext_resource type="Texture2D" uid="uid://dyb51nnriktmg" path="res://asset/texture/unit/ground_monk/meditate/meditate_4.png" id="77_cywb1"]
+[ext_resource type="Texture2D" uid="uid://dut3ppb16ymw5" path="res://asset/texture/unit/ground_monk/meditate/meditate_5.png" id="78_17ulg"]
+[ext_resource type="Texture2D" uid="uid://cgf28n176a1h6" path="res://asset/texture/unit/ground_monk/meditate/meditate_6.png" id="79_gpgm5"]
+[ext_resource type="Texture2D" uid="uid://c1g452fyvt0u0" path="res://asset/texture/unit/ground_monk/meditate/meditate_7.png" id="80_syfqw"]
+[ext_resource type="Texture2D" uid="uid://dv2urr3x7fi0y" path="res://asset/texture/unit/ground_monk/meditate/meditate_8.png" id="81_itc2s"]
+[ext_resource type="Texture2D" uid="uid://cbwfoq3wk2dit" path="res://asset/texture/unit/ground_monk/meditate/meditate_9.png" id="82_h55c1"]
+[ext_resource type="Texture2D" uid="uid://gic2t4jmtbm" path="res://asset/texture/unit/ground_monk/meditate/meditate_10.png" id="83_wowu6"]
+[ext_resource type="Texture2D" uid="uid://dub75s4m5nuwq" path="res://asset/texture/unit/ground_monk/meditate/meditate_11.png" id="84_hglst"]
+[ext_resource type="Texture2D" uid="uid://bthuymy5ls7hl" path="res://asset/texture/unit/ground_monk/meditate/meditate_12.png" id="85_7xa4v"]
+[ext_resource type="Texture2D" uid="uid://qdev7tvv0pei" path="res://asset/texture/unit/ground_monk/meditate/meditate_13.png" id="86_ni3uy"]
+[ext_resource type="Texture2D" uid="uid://6agir0wf42wr" path="res://asset/texture/unit/ground_monk/meditate/meditate_14.png" id="87_u5dta"]
+[ext_resource type="Texture2D" uid="uid://ckrevbiitug2x" path="res://asset/texture/unit/ground_monk/meditate/meditate_15.png" id="88_0ihix"]
+[ext_resource type="Texture2D" uid="uid://c0vkvh2mv3tj3" path="res://asset/texture/unit/ground_monk/meditate/meditate_16.png" id="89_rxfb6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_djk20"]
 shader = ExtResource("2_35h25")
@@ -335,6 +351,59 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("74_v726m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_rucio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_xup5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_cywb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_17ulg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_gpgm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_syfqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_itc2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_h55c1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_wowu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_hglst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_7xa4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_ni3uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_u5dta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_0ihix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_rxfb6")
+}],
+"loop": false,
+"name": &"skill",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("67_73mwl")
 }, {
 "duration": 1.0,
@@ -370,7 +439,8 @@ windup_frames = Dictionary[StringName, int]({
 &"melee": 1,
 &"melee_2": 5,
 &"melee_3": 8,
-&"melee_4": 17
+&"melee_4": 17,
+&"skill": 5
 })
 node_to_glow = NodePath("AnimatedSprite2D")
 metadata/_custom_type_script = "uid://clvxp2i6wcbas"
@@ -380,6 +450,6 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_djk20")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_eyjtx")
-animation = &"melee_4"
+animation = &"idle"
 autoplay = "idle"
 offset = Vector2(0, -53)

@@ -14,7 +14,6 @@ enum TYPE {
 
 static func instance(
 	target_unit_id: int,
-	source_unit_id: int,
 	type: TYPE,
 	base_amount: float,
 	tags := TagSet.new()
@@ -22,7 +21,6 @@ static func instance(
 	var inst := teCombatDamageInstance.new()
 	inst.base_amount = base_amount
 	inst.target_unit_id = target_unit_id
-	inst.source_unit_id = source_unit_id
 	inst.type = type
 	inst.tags = tags
 	return inst
@@ -38,7 +36,7 @@ static func calculate(
 
 static func is_lethal(
 	combat: teCombatState,
-	unit: teCombatUnitState,
-	damage: int
+	damage: teCombatDamageInstance
 ) -> bool:
-	return unit.hp_spent + damage > unit.stats.max_hp
+	var unit := combat.unit(damage.target_unit_id)
+	return unit.hp_spent + damage.base_amount > unit.stats.max_hp
