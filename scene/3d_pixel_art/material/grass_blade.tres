@@ -1,0 +1,39 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://syydpp6sn7fd"]
+
+[ext_resource type="Shader" uid="uid://diqq75r1rpcng" path="res://shader/grass3d.gdshader" id="1_ux2a1"]
+[ext_resource type="Texture2D" uid="uid://1c8c8blct0x8" path="res://scene/3d_pixel_art/texture/grass_albedo2_noise.tres" id="2_3vusc"]
+[ext_resource type="Texture2D" uid="uid://dbonm58uwbt6p" path="res://scene/3d_pixel_art/texture/grass_albedo_noise.tres" id="2_4yhbn"]
+[ext_resource type="Texture2D" uid="uid://dj6u7f1ofwaol" path="res://asset/texture/env/accent_grass.png" id="2_5fs6l"]
+[ext_resource type="Texture2D" uid="uid://dsxpybup5rhhe" path="res://asset/texture/env/grass_blade.png" id="2_khj3k"]
+[ext_resource type="Texture2D" uid="uid://b58kb1h4nso1v" path="res://asset/texture/env/accent_grass2.png" id="3_5fs6l"]
+[ext_resource type="Texture2D" uid="uid://bwrcf8q8geqbi" path="res://scene/3d_pixel_art/texture/wind_noise.tres" id="7_t0og0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ux2a1")
+shader_parameter/albedo = Color(0.21960784, 0.38039216, 0.1764706, 1)
+shader_parameter/albedo_texture = ExtResource("2_khj3k")
+shader_parameter/albedo_noise = ExtResource("2_4yhbn")
+shader_parameter/albedo_noise_scale = 0.01
+shader_parameter/albedo2_threshold = 0.6000000285
+shader_parameter/albedo2 = Color(0.26666668, 0.39215687, 0.15294118, 1)
+shader_parameter/albedo2_noise = ExtResource("2_3vusc")
+shader_parameter/albedo3_threshold = 0.6000000285
+shader_parameter/albedo3 = Color(0.28235295, 0.4117647, 0.15686275, 1)
+shader_parameter/accent1_probability = 0.0030000001425
+shader_parameter/accent1_albedo = Color(0.18044683, 0.31862417, 0.14336321, 1)
+shader_parameter/accent1_texture = ExtResource("2_5fs6l")
+shader_parameter/accent1_scale = 1.0
+shader_parameter/accent1_height = 0.5
+shader_parameter/accent2_probability = 0.0010000000475
+shader_parameter/accent2_albedo = Color(0.18431373, 0.36078432, 0.16862746, 1)
+shader_parameter/accent2_texture = ExtResource("3_5fs6l")
+shader_parameter/accent2_scale = 1.0
+shader_parameter/accent2_height = 0.5
+shader_parameter/wind_noise = ExtResource("7_t0og0")
+shader_parameter/wind_noise_scale = 0.001
+shader_parameter/sway_angle = 30.0
+shader_parameter/wind_direction = Vector2(0, 0)
+shader_parameter/terrain_center = Vector2(0, 0)
+shader_parameter/terrain_size = Vector2(4, 1)
+shader_parameter/terrain_border_albedo = Color(0.2, 0.1, 0.05, 1)

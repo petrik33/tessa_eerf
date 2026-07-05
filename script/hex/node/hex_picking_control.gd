@@ -88,7 +88,7 @@ func _update_size_and_pivot():
 		size = Vector2.ZERO
 		pivot_offset = Vector2.ZERO
 		return
-	var bounds := grid.approx_pixel_bounds(_hex_space.layout)
+	var bounds := grid.exact_pixel_bounds(_hex_space.layout)
 	bounds.position -= Vector2(bbox_expand_left, bbox_expand_top)
 	bounds.size += Vector2(bbox_expand_left + bbox_expand_right, bbox_expand_bottom + bbox_expand_top)
 	#var scaled_bounds_size := bounds.size * bbox_scale

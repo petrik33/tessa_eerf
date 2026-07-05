@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://bqjjla6c1xuhe" path="res://script/auto_homm/visual/board_unit_view.gd" id="1_rdlfa"]
 [ext_resource type="PackedScene" uid="uid://csaw8p1ew42kd" path="res://scene/auto_homm/debug/dbg_map_hex.tscn" id="2_jnodn"]
 [ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="3_a31u8"]
+[ext_resource type="PackedScene" uid="uid://0xp42fwvcrjf" path="res://scene/auto_homm/unit_view.tscn" id="3_nmwjp"]
 [ext_resource type="PackedScene" uid="uid://w778dl2mxji7" path="res://scene/auto_homm/vfx/board_unit_view_flash.tscn" id="4_rdlfa"]
 [ext_resource type="Shader" uid="uid://l0wihqbflfey" path="res://shader/auto_homm/luminance_based_flash.gdshader" id="5_jnodn"]
 [ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker.tscn" id="6_a31u8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a31u8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65srk"]
 resource_local_to_scene = true
 shader = ExtResource("5_jnodn")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -24,17 +25,19 @@ flash_vfx = NodePath("Flash")
 visible = false
 
 [node name="UnitAttach" type="Node2D" parent="." unique_id=128244182]
-position = Vector2(0, 4)
+
+[node name="UnitView" parent="UnitAttach" unique_id=421710444 instance=ExtResource("3_nmwjp")]
+visible = false
 
 [node name="Necromancer" parent="UnitAttach" unique_id=1398765949 instance=ExtResource("3_a31u8")]
 visible = false
 
 [node name="Flash" parent="." unique_id=129286827 instance=ExtResource("4_rdlfa")]
-flash_material = SubResource("ShaderMaterial_a31u8")
+flash_material = SubResource("ShaderMaterial_65srk")
 target_strength = 1.25
 
 [node name="MarkerTracker" type="Marker2D" parent="." unique_id=498545476]
-position = Vector2(0, 9)
+position = Vector2(0, 10)
 
 [node name="Marker" parent="MarkerTracker" unique_id=617972592 instance=ExtResource("6_a31u8")]
 visible = false

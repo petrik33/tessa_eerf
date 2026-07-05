@@ -21,6 +21,9 @@ signal sequence_finished()
 @export var deadlines_on := true
 @export var slow_down_on := false
 
+@export var custom_speed_scale := 1.0
+@export var custom_speed_scale_on := false
+
 
 var current_track_id: int = -1
 var sequence_queue: Array[teVisualSequence]
@@ -97,7 +100,7 @@ func _on_track_finished(_track: teVisualTrackBase, id: int):
 
 func _on_deadline_timeout():
 	print("Warning! Deadline timeout")
-	scheduler.get_track(current_track_id).stop()
+	scheduler.stop(current_track_id)
 	_finish_sequence()
 
 
@@ -108,7 +111,13 @@ func _finish_sequence():
 
 
 func _calc_track_speed_scale(estimated_time_sec: float, sequence_timeout_sec: float) -> float:
-	var estimated_scale = max(estimated_time_sec / sequence_timeout_sec, 0.0001)
+	if custom_speed_scale_on:
+		return custom_speed_scale
+	if is_zero_approx(estimated_time_sec):
+		return 1.0
+	if is_zero_approx(sequence_timeout_sec):
+		return 1.0
+	var estimated_scale = estimated_time_sec / sequence_timeout_sec
 	if slow_down_on:
 		return estimated_scale
 	else:

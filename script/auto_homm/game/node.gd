@@ -6,6 +6,7 @@ class_name teGameNode extends Node
 @export var state: teGameState
 @export var board: teBoardVisual
 @export var combat_ui: teCombatUI
+@export var pixel_art3d: teVisualPixelArt3d
 @export var combat: teCombat
 @export var movie: teCombatMovie
 @export var combat_setup: teCombatSetupController
@@ -90,3 +91,5 @@ func _update_potential_combat_state() :
 	)
 	board.sync_state(potential_combat_state)
 	combat_ui.sync_units(potential_combat_state)
+	if pixel_art3d != null:
+		pixel_art3d.sync(potential_combat_state)

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bg2pe2xsftbdn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lyuy2"]
+radius = 0.75
+height = 3.0
+
+[node name="UnitShadowMesh" type="Node3D" unique_id=1399179971]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1074364643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_lyuy2")

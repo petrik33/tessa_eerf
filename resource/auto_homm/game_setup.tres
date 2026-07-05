@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="teGameSetup" format=3 uid="uid://2c32blfmvke0"]
+
+[ext_resource type="Resource" uid="uid://ecvihwn81f58" path="res://scene/auto_homm/grid/map.tres" id="1_aix6a"]
+[ext_resource type="Resource" uid="uid://bhy432ye7u446" path="res://resource/auto_homm/rule_set.tres" id="2_kdd6g"]
+[ext_resource type="Script" uid="uid://bq0btk6pleh5i" path="res://script/auto_homm/game/setup.gd" id="3_nblm5"]
+[ext_resource type="Resource" uid="uid://c31cby404a1vn" path="res://resource/auto_homm/skin_set.tres" id="4_ej3lx"]
+
+[resource]
+script = ExtResource("3_nblm5")
+grid = ExtResource("1_aix6a")
+skin_set = ExtResource("4_ej3lx")
+rule_set = ExtResource("2_kdd6g")
+metadata/_custom_type_script = "uid://bq0btk6pleh5i"
