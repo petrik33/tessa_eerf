@@ -28,6 +28,9 @@ func _ready():
 
 
 func _process(delta):
+	if Engine.is_editor_hint():
+		return
+	
 	global_position = orbit_point
 
 	if Input.is_action_pressed("camera_right"):

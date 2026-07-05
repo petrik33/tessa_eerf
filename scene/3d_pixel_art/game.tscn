@@ -1213,7 +1213,6 @@ layout = ExtResource("4_ubf4r")
 metadata/_custom_type_script = "uid://bs1nban30c83i"
 
 [node name="Map" type="Node2D" parent="SubViewportContainer/SubViewport/HexSpace" unique_id=1727363513]
-visible = false
 
 [node name="Combined" type="Node2D" parent="SubViewportContainer/SubViewport/HexSpace/Map" unique_id=443312961]
 script = ExtResource("5_nsw4h")

@@ -60,7 +60,6 @@
 
 	void fragment() {
 		ALBEDO = colorPatching();
-	    EMISSION = terrain_border_glow * terrain_border_glow_strength * terrainMask();
 		
 		// PBR
 		METALLIC = 0.0;

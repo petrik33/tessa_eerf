@@ -22,6 +22,10 @@ class_name PixelArt3dTerrainGenerator extends Node
 var generate_button = generate_terrain
 
 
+func _ready() -> void:
+	generate_terrain()
+
+
 func generate_terrain():
 	_clear()
 
@@ -43,7 +47,7 @@ func _spawn_debug_capsule(hex: Vector2i):
 func _create_capsule_mesh() -> Mesh:
 	var capsule = CapsuleMesh.new()
 	capsule.radius = 0.1
-	capsule.height = 0.3
+	capsule.height = 3
 	capsule.radial_segments = 8
 	capsule.rings = 4
 	return capsule

@@ -43,7 +43,7 @@ func _update_transforms():
 	var aspect = _vp_size.x / _vp_size.y
 
 	var pitch = camera_rig.get_pitch()
-	var camera_size = camera_rig.get_size()
+	var camera_size = camera_rig.get_size() / 2
 	var sin_pitch = sin(pitch)
 
 	_pixel_to_world = Vector3(
