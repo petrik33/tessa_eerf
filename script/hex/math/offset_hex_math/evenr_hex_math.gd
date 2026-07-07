@@ -11,7 +11,7 @@ func from_axial(hex: Vector2i) -> Vector2i:
 	return OffsetHexMath.axial_to_evenr(hex)
 
 func is_layout_compatible(layout: HexLayout) -> bool:
-	return HexLayoutMath.is_pointy_top(layout)
+	return layout.is_pointy_top()
 	
 func layout_error_message(_layout: HexLayout) -> String:
 	return "Even-R hex math requires pointy-topped layout."

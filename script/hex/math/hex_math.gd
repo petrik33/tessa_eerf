@@ -87,12 +87,12 @@ static func hex_perimeter_polygon_by_percent(layout: HexLayout, percent: float, 
 	
 	var polygon := PackedVector2Array()
 	
-	var corner_offset := corner_idx_offset % HexLayoutMath.CORNER_NUM
+	var corner_offset := corner_idx_offset % HexLayout.CORNER_NUM
 	
 	var radial_angle := percent * PI * 2
-	var radial_progress := radial_angle / HexLayoutMath.HEX_ANGLE_STEP
+	var radial_progress := radial_angle / HexLayout.HEX_ANGLE_STEP
 	var corner_radial_progress = floor(radial_progress)
-	var segments_filled := (int(corner_radial_progress) % HexLayoutMath.CORNER_NUM) 
+	var segments_filled := (int(corner_radial_progress) % HexLayout.CORNER_NUM) 
 	
 	for idx in range(segments_filled + 1):
 		var corner_idx := corner_offset - idx if inverse else corner_offset + idx

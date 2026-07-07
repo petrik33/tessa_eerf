@@ -5,7 +5,19 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-const INT_MAX := 9223372036854775807 
+const INT_MAX := 9223372036854775807
+
+
+static func random_point_inside_triangle2d(rng: RandomNumberGenerator, a: Vector2, b: Vector2, c: Vector2) -> Vector2:
+	var r1 = sqrt(rng.randf())
+	var r2 = rng.randf()
+	return (1.0 - r1) * a + r1 * (1.0 - r2) * b + r1 * r2 * c
+
+
+static func random_point_inside_triangle3d(rng: RandomNumberGenerator, a: Vector3, b: Vector3, c: Vector3) -> Vector3:
+	var r1 = sqrt(rng.randf())
+	var r2 = rng.randf()
+	return (1.0 - r1) * a + r1 * (1.0 - r2) * b + r1 * r2 * c
 
 
 static func clip_polygon_bottom_percent_halfplane(polygon: PackedVector2Array, percent: float) -> PackedVector2Array:

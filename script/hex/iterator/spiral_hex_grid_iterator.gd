@@ -11,7 +11,7 @@ func _init(radius: int):
 
 func _iter_init(_arg) -> bool:
 	_current_ring = 0
-	_current_direction = HexLayoutMath.CORNER_NUM - 1 # So that first ring finishes in 1 iteration
+	_current_direction = HexLayout.CORNER_NUM - 1 # So that first ring finishes in 1 iteration
 	_current_segment_step = 0
 	return _in_bounds()
 
@@ -20,7 +20,7 @@ func _iter_next(_arg) -> bool:
 	if _current_segment_step >= _current_ring:
 		_current_segment_step = 0
 		_current_direction += 1
-	if _current_direction >= HexLayoutMath.CORNER_NUM:
+	if _current_direction >= HexLayout.CORNER_NUM:
 		_current_direction = 0
 		_current_segment_step = 0
 		_current_ring += 1

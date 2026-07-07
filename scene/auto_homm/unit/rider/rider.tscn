@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://6gwgjxle3u6n"]
+
+[ext_resource type="Texture2D" uid="uid://d1e1svup35f5j" path="res://asset/texture/unit/rider/Horse II/Horse Black/64x64_Atlas_Horse_II_Idle.png" id="1_8c6lw"]
+[ext_resource type="Texture2D" uid="uid://c1ld5w2o8jius" path="res://asset/texture/unit/rider/Rider/Rider Complete/64x64_Atlas_HorseRider_MountIdle.png" id="2_gr5o8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxds4"]
+atlas = ExtResource("1_8c6lw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hen2p"]
+atlas = ExtResource("1_8c6lw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n60j"]
+atlas = ExtResource("1_8c6lw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6twm8"]
+atlas = ExtResource("1_8c6lw")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vwqe"]
+atlas = ExtResource("1_8c6lw")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cth0p"]
+atlas = ExtResource("1_8c6lw")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boc36"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxds4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hen2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n60j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6twm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vwqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cth0p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsb3g"]
+atlas = ExtResource("2_gr5o8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1alcj"]
+atlas = ExtResource("2_gr5o8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_req5w"]
+atlas = ExtResource("2_gr5o8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m40pi"]
+atlas = ExtResource("2_gr5o8")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl0ok"]
+atlas = ExtResource("2_gr5o8")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vel5o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsb3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1alcj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_req5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m40pi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl0ok")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Rider" type="Node2D" unique_id=148058437]
+
+[node name="AnimatedSprites" type="Node2D" parent="." unique_id=349087213]
+position = Vector2(0, -31)
+
+[node name="Horse" type="AnimatedSprite2D" parent="AnimatedSprites" unique_id=870334992]
+sprite_frames = SubResource("SpriteFrames_boc36")
+animation = &"idle"
+
+[node name="Hero" type="AnimatedSprite2D" parent="AnimatedSprites" unique_id=1023507306]
+sprite_frames = SubResource("SpriteFrames_vel5o")
+animation = &"idle"

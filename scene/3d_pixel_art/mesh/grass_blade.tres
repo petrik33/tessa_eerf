@@ -1,0 +1,6 @@
+[gd_resource type="QuadMesh" format=3 uid="uid://dyov7c0bhhk1p"]
+
+[ext_resource type="Material" uid="uid://syydpp6sn7fd" path="res://scene/3d_pixel_art/material/grass_blade.tres" id="1_kp7sg"]
+
+[resource]
+material = ExtResource("1_kp7sg")

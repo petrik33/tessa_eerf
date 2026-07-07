@@ -23,9 +23,10 @@ func _draw_impl(layout: HexLayout):
 	
 func _draw_hex_perimeter_outline(layout: HexLayout, hex: Vector2i):
 	var hex_pos = layout.hex_to_pixel(hex)
-	for dir in range(HexLayoutMath.CORNER_NUM):
-		var neighbor := HexMath.neighbor(hex, dir)
+	var dir := 0
+	for neighbor in HexMath.neighbors_iter(hex):
 		if not grid.has_point(neighbor):
 			var a = layout.hex_corner(dir)
 			var b = layout.hex_corner((dir + 5) % 6)
 			draw_line(hex_pos + a, hex_pos + b, color, width, antialiased)
+		dir += 1

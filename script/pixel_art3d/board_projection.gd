@@ -4,11 +4,19 @@ class_name PixelArt3dBoardProjection extends Node
 
 @export var viewport: SubViewport
 @export var camera_rig: PixelArt3dCameraRig
-
+@export var hex_space: HexSpace
 
 func _ready() -> void:
+	update()
+
+func update():
 	_update_transforms()
 
+func hex_to_world(hex: Vector2i) -> Vector3:
+	return pixel_to_world(hex_space.hex_to_pixel(hex))
+
+func world_to_hex(world: Vector3) -> Vector2i:
+	return hex_space.pixel_to_hex(world_to_pixel(world))
 
 func pixel_to_world(pixel: Vector2) -> Vector3:
 	var ndc = pixel - _vp_center
@@ -18,7 +26,6 @@ func pixel_to_world(pixel: Vector2) -> Vector3:
 		0.0,
 		ndc.y * _pixel_to_world.z
 	)
-
 
 func world_to_pixel(world: Vector3) -> Vector2:
 	var ndc = Vector2(

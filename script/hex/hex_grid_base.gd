@@ -1,6 +1,12 @@
 @tool
 class_name HexGridBase extends Resource
 
+func hex_count() -> int:
+	var count := 0
+	for hex in iterator():
+		count += 1
+	return count
+
 func iterator() -> HexGridIteratorBase:
 	assert(false, "not implemented")
 	return null

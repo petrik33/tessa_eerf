@@ -1,0 +1,53 @@
+-------------------------------------------------------------------------
+PIXEL HORSE ANIMATIONS (VERSION 1.0)
+-------------------------------------------------------------------------
+
+Hello!
+
+This notepad provides the steps to making your own Horse Rider animations with the PNG files.
+
+This pack was made using Aseprite and only Patrons are granted access to the aseprite file. If you do not own this software and or are not a Patron then you are still on luck. I have exported every layer in order for you to be able to make your own regardless of the software or whether you are a Patron or not.
+
+If you are a Patreon I have also separated the Leash, Saddle, Rider Equips (shirt, pants and armor) and the Horses (black, brown and white) and the Horse's armor (copper, iron, silver, steel, gold, cobalt, platinum, adamanting, crimson and angelic) in case you only want complete freedom to customize the rider.
+
+If you are not a patron, you have the Leash, the Rider, and the horse separated.
+
+-------------------------------------------------------------------------
+HORSE I
+-------------------------------------------------------------------------
+
+1. Open your editing software
+2. Open the HORSE I folder, open the color of your preference then select the PNG named 64x64_Atlas_Horse_Base.
+3. Go to the HORSE ARMOR folder and pick the color of your preference. Copy and paste it on top
+4. Go to the LEASH folder and open the PNG named 64x64_Atlas_Horse_Leash_Base. Copy and paste it over the first image.
+5. Go to the RIDER folder and open the PNG named 64x64_Atlas_HorseRider_Base. Copy and paste it on top.
+6. Now you have made your own Horse I Rider that you can export.
+
+OR
+
+Just use the complete atlas for Horse Rider I
+
+-------------------------------------------------------------------------
+HORSE II
+-------------------------------------------------------------------------
+
+1. Open your editing software
+2. Follow the steps to make HORSE I but instead of going to the HORSE I folder you will access HORSE II folder
+3. Now you have made your own Horse II Rider that you can export.
+
+OR
+
+Just use the complete atlas for Horse Rider II
+
+-------------------------------------------------------------------------
+EXTRA INFORMATION
+-------------------------------------------------------------------------
+Some information regarding the sprite dimensions
+- Width 64px
+- Length 64px
+
+This pack only brings the Copper set for the Horse Rider. If you want to play as the character go check my other assets!
+
+Please make sure you read the License of the pack. This can be found at the bottom of the packs website
+
+Thank you for checking my art out. If you like the content please leave a review and, or a comment to let me know about anything. Feel free to post your projects as well!

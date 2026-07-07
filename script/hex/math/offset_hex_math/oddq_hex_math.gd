@@ -11,4 +11,4 @@ func from_axial(hex: Vector2i) -> Vector2i:
 	return OffsetHexMath.axial_to_oddq(hex)
 
 func is_layout_compatible(layout: HexLayout) -> bool:
-	return HexLayoutMath.is_flat_top(layout)
+	return layout.is_flat_top()

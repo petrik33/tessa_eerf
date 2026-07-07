@@ -2,7 +2,9 @@
 @icon("res://editor/icons/hex_space.svg")
 class_name HexSpace extends Node2D
 
+
 signal changed()
+
 
 @export var layout: HexLayout:
 	set(value):
@@ -13,8 +15,16 @@ signal changed()
 			layout.changed.connect(_update)
 		_update()
 
+
 func is_configured() -> bool:
 	return layout != null
+
+func hex_to_pixel(hex: Vector2i) -> Vector2:
+	return layout.hex_to_pixel(hex) + position
+
+func pixel_to_hex(pixel: Vector2) -> Vector2i:
+	return layout.pixel_to_hex(pixel - position)
+
 
 func _update():
 	update_configuration_warnings()

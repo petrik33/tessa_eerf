@@ -34,6 +34,3 @@ shader_parameter/wind_noise = ExtResource("7_t0og0")
 shader_parameter/wind_noise_scale = 0.001
 shader_parameter/sway_angle = 30.0
 shader_parameter/wind_direction = Vector2(0, 0)
-shader_parameter/terrain_center = Vector2(0, 0)
-shader_parameter/terrain_size = Vector2(4, 1)
-shader_parameter/terrain_border_albedo = Color(0.2, 0.1, 0.05, 1)

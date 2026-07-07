@@ -1,22 +1,28 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://b7dqnndqn5otj"]
 
-[ext_resource type="Shader" uid="uid://jsegycen0mlt" path="res://addons/flexible_toon_shader/flexible_toon.gdshader" id="1_5c0aj"]
+[ext_resource type="Shader" uid="uid://bgemvh44xx2ee" path="res://shader/grass_plane.gdshader" id="1_vs3gj"]
+[ext_resource type="Texture2D" uid="uid://1c8c8blct0x8" path="res://scene/3d_pixel_art/texture/grass_albedo2_noise.tres" id="2_f46lm"]
+[ext_resource type="Texture2D" uid="uid://dbonm58uwbt6p" path="res://scene/3d_pixel_art/texture/grass_albedo_noise.tres" id="3_1icp2"]
+[ext_resource type="Texture2D" uid="uid://diavrj8cborid" path="res://debug.png" id="4_sb8q4"]
+[ext_resource type="Texture2D" uid="uid://bwrcf8q8geqbi" path="res://scene/3d_pixel_art/texture/wind_noise.tres" id="5_0yhye"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_5c0aj")
-shader_parameter/albedo = Color(0.21568628, 0.53333336, 0.07450981, 1)
-shader_parameter/clamp_diffuse_to_max = false
-shader_parameter/cuts = 3
-shader_parameter/wrap = 0.0
-shader_parameter/steepness = 1.0
-shader_parameter/use_attenuation = true
-shader_parameter/use_specular = true
-shader_parameter/specular_strength = 1.0
-shader_parameter/specular_shininess = 16.0
-shader_parameter/use_rim = true
-shader_parameter/rim_width = 8.0
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/use_ramp = false
-shader_parameter/use_borders = false
-shader_parameter/border_width = 0.01
+shader = ExtResource("1_vs3gj")
+shader_parameter/albedo = Color(0.21960784, 0.38039216, 0.1764706, 1)
+shader_parameter/albedo_noise = ExtResource("3_1icp2")
+shader_parameter/albedo_noise_scale = 0.01
+shader_parameter/albedo2_threshold = 0.6000000285
+shader_parameter/albedo2 = Color(0.26666668, 0.39215687, 0.15294118, 1)
+shader_parameter/albedo2_noise = ExtResource("2_f46lm")
+shader_parameter/albedo3_threshold = 0.6000000285
+shader_parameter/albedo3 = Color(0.2829, 0.41, 0.1558, 1)
+shader_parameter/wind_noise = ExtResource("5_0yhye")
+shader_parameter/wind_noise_scale = 0.01
+shader_parameter/sway_angle = 30.0
+shader_parameter/wind_direction = Vector2(0, 0)
+shader_parameter/terrain_texture = ExtResource("4_sb8q4")
+shader_parameter/terrain_center = Vector2(0.4, -0.7)
+shader_parameter/terrain_size = Vector2(64, 32)
+shader_parameter/terrain_border_glow = Vector3(1, 1, 1)
+shader_parameter/terrain_border_glow_strength = 1.0
