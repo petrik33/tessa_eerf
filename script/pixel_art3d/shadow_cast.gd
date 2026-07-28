@@ -2,7 +2,7 @@ class_name PixelArt3dShadowCast extends Node
 
 
 @export var board: teBoardVisual
-@export var bridge: PixelArt3dSpaceBridge
+@export var projection: PixelArt3dBoardProjection
 @export var directional_light: DirectionalLight3D
 @export var container: Node3D
 @export var shadow_mesh_scene: PackedScene
@@ -21,9 +21,7 @@ func sync_units(state: teCombatState):
 		sync_shadow_mesh(unit_id, state)
 	for unit_id in unit_shadow_mesh:
 		if not state.has_unit(unit_id):
-			var shadow_mesh = unit_shadow_mesh[unit_id]
-			unit_shadow_mesh.erase(unit_id)
-			destroy_shadow_mesh(shadow_mesh)
+			destroy_shadow_mesh(unit_id)
 	sync_mesh_positions()
 
 
@@ -42,7 +40,7 @@ func sync_mesh_positions():
 	for unit_id in unit_shadow_mesh:
 		var unit_view := board.get_unit(unit_id)
 		var mesh := unit_shadow_mesh[unit_id]
-		var projected_pos := bridge.project_to_ground_plane(unit_view.global_position)
+		var projected_pos := projection.pixel_to_world(unit_view.global_position)
 		mesh.global_position = projected_pos + shadow_offset
 
 
@@ -52,6 +50,8 @@ func create_shadow_mesh() -> Node3D:
 	return shadow_mesh
 
 
-func destroy_shadow_mesh(shadow_mesh: Node3D):
+func destroy_shadow_mesh(unit_id: int):
+	var shadow_mesh := unit_shadow_mesh[unit_id]
+	unit_shadow_mesh.erase(unit_id)
 	container.remove_child(shadow_mesh)
 	shadow_mesh.queue_free()

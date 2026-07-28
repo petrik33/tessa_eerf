@@ -6,7 +6,6 @@ class_name teGameNode extends Node
 @export var state: teGameState
 @export var board: teBoardVisual
 @export var combat_ui: teCombatUI
-@export var pixel_art3d: teVisualPixelArt3d
 @export var combat: teCombat
 @export var movie: teCombatMovie
 @export var combat_setup: teCombatSetupController
@@ -21,41 +20,42 @@ var potential_combat_state: teCombatState
 
 func _ready() -> void:
 	state = visual_config.read_game_state()
-	var id := 0
-	for visuals in visual_config.get_unit_visuals():
-		var unit_view := _create_unit_view(visuals)
-		board.attach_unit(unit_view, id)
-		id += 1
 	_update_potential_combat_state()
 	combat_setup.activate(state.current_team)
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dbg_start_combat"):
-		if combat.is_active():
+		if combat.is_active() or movie.is_playing():
 			return
-		if movie.is_playing():
-			return
-		combat_setup.deactivate()
-		board.clear_all_hover()
-		movie.start(combat)
-		combat.start(potential_combat_state, setup.rule_set.rules)
+		_deactivate_combat_setup()
+		_start_combat()
 	if event.is_action_pressed("dbg_finish_combat"):
-		if combat.is_active():
-			combat.stop()
-		movie.stop()
-		if not combat_setup.is_active():
-			_update_potential_combat_state()
-			combat_setup.activate(state.current_team)
-		
+		if not combat.is_active() and not movie.is_playing():
+			return
+		_stop_combat()
+		_activate_combat_setup()
 
 
-func _create_unit_view(visuals: Node2D) -> teUnitView:
-	var unit_view := unit_view_scene.instantiate() as teUnitView
-	units_node.add_child(unit_view)
-	visuals.position = Vector2.ZERO
-	unit_view.attach_visuals(visuals)
-	return unit_view
+func _deactivate_combat_setup() -> void:
+	combat_setup.deactivate()
+	board.clear_all_hover()
+
+
+func _activate_combat_setup() -> void:
+	board.clear_all_hover()
+	_update_potential_combat_state()
+	combat_setup.activate(state.current_team)
+
+
+func _start_combat() -> void:
+	movie.start_filming()
+	combat.start(potential_combat_state, setup.rule_set.rules)
+
+
+func _stop_combat() -> void:
+	movie.stop_filming()
+	combat.stop()
 
 
 func _on_place_unit_requested(unit_id: int, hex: Vector2i):
@@ -64,22 +64,22 @@ func _on_place_unit_requested(unit_id: int, hex: Vector2i):
 	var updated_state := state.duplicate(true)
 	updated_state.current_team.units_placement.erase(unit_id)
 	updated_state.current_team.units_placement.set(unit_id, hex)
-	#if not setup.rule_set.rules.is_valid(updated_state):
-		#return
+	if not setup.rule_set.rules.is_valid(updated_state):
+		return
 	state = updated_state
-	combat_setup.current_team = state.current_team.duplicate()
+	combat_setup.update_current_team(state.current_team)
 	_update_potential_combat_state()
 
 
 func _on_combat_finished(_final_state: teCombatState):
-	if movie.is_playing():
-		await movie.finished
-	movie.stop()
-	_update_potential_combat_state()
-	combat_setup.activate(state.current_team)
+	movie.finish_filming()
 
 
-func _update_potential_combat_state() :
+func _on_movie_finished():
+	_activate_combat_setup()
+
+
+func _update_potential_combat_state():
 	var next_combat := teCombatSetup.new()
 	var next_map := teCombatMap.new()
 	next_map.grid = setup.grid
@@ -91,5 +91,3 @@ func _update_potential_combat_state() :
 	)
 	board.sync_state(potential_combat_state)
 	combat_ui.sync_units(potential_combat_state)
-	if pixel_art3d != null:
-		pixel_art3d.sync(potential_combat_state)

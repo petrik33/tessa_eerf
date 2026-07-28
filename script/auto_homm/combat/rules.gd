@@ -124,5 +124,5 @@ func resolve(
 	return resolved
 
 
-func is_valid(runtime: teCombatRuntime) -> bool:
+func is_valid(state: teGameState) -> bool:
 	return true

@@ -9,20 +9,16 @@ class_name teVisualGameConfig extends Node
 @export var enemy_grid: HexGridBase
 
 
-func get_unit_visuals() -> Array[Node2D]:
-	var visuals: Array[Node2D] = []
-	for node in units_node.get_children():
-		if node is teUnitVisualsBase:
-			if not node.visible:
-				continue
-			visuals.append(node)
-	return visuals
-
-
 func read_game_state() -> teGameState:
 	var state := teGameState.new()
 	var unit_id = 0
-	for visuals in get_unit_visuals():
+	var unit_visuals: Array[Node2D] = []
+	
+	for node in units_node.get_children():
+		if node is teUnitVisualsBase and node.visible:
+			unit_visuals.append(node)
+	
+	for visuals in unit_visuals:
 		var unit := teCombatUnit.new()
 		unit.definition_uid = try_find_unit_definition_uid_by_visuals(visuals)
 		unit.rank = 1
@@ -33,6 +29,11 @@ func read_game_state() -> teGameState:
 		if team == state.current_team:
 			state.squad.units_id.append(unit_id)
 		unit_id += 1
+	
+	for visuals in unit_visuals:
+		visuals.queue_free()
+	unit_visuals.clear()
+	
 	return state
 
 

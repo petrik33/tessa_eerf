@@ -2,6 +2,7 @@ class_name teCombatMovie extends Node
 
 
 signal turn_played()
+signal queue_empty()
 signal finished()
 
 
@@ -11,33 +12,31 @@ signal finished()
 @export var cutter: teVisualCutterBase
 
 
-var combat: teCombat
-
-
 func is_playing() -> bool:
 	return producer.is_playing()
 
 
-func is_live() -> bool:
-	return combat != null
+func is_filming() -> bool:
+	return _live
 
 
-func start(_combat: teCombat):
-	if is_live():
-		stop()
-	combat = _combat
-	combat.started.connect(_on_combat_started)
-	combat.action_taken.connect(_on_combat_action_taken)
+func start_filming():
+	if is_filming():
+		stop_filming()
 	producer.start()
+	_live = true
 
 
-func stop():
-	if not is_live():
-		return
+func stop_filming():
 	producer.stop()
-	combat.action_taken.disconnect(_on_combat_action_taken)
-	combat.started.disconnect(_on_combat_started)
-	combat = null
+	finish_filming()
+
+
+func finish_filming():
+	_live = false
+	
+
+var _live: bool
 
 
 func _on_combat_action_taken(state: teCombatState, resolved: teCombatResolvedAction):
@@ -47,12 +46,10 @@ func _on_combat_action_taken(state: teCombatState, resolved: teCombatResolvedAct
 	producer.enqueue(root_action, cutter.cut_time(resolved.action))
 
 
-func _on_combat_started(initial_state: teCombatState):
-	board.sync_state(initial_state)
-
-
 func _on_producer_sequence_finished():
 	turn_played.emit()
-	if is_live() and not combat.is_active() and producer.queue_empty():
+	if not producer.queue_empty():
+		return
+	queue_empty.emit()
+	if not is_filming():
 		finished.emit()
-	

@@ -1162,8 +1162,8 @@ metadata/_custom_type_script = "uid://cx0e5cbn7xncm"
 [node name="Board" type="Node" parent="Controllers" unique_id=476741378 node_paths=PackedStringArray("units_attach", "hex_space", "hex_hover_outline")]
 script = ExtResource("28_e52gc")
 skin_set = ExtResource("5_m6xp2")
-unit_view_scene = ExtResource("6_6327r")
 board_unit_view_scene = ExtResource("7_t034j")
+unit_view_scene = ExtResource("6_6327r")
 units_attach = NodePath("../../HexSpace/Units")
 hex_space = NodePath("../../HexSpace")
 hex_hover_outline = NodePath("../../HexSpace/Outline/Selected")

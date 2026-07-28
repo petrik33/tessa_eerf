@@ -49,7 +49,6 @@ func stop():
 		return
 	turn_timer.stop()
 	runtime = null
-	finished.emit(state)
 	state = null
 
 
@@ -67,6 +66,7 @@ func _process_command(command: teCombatCommandBase):
 	_take_scheduled(expanded.actions)
 	if rules.is_finished(state):
 		stop()
+		finished.emit(state)
 		return
 	turn_timer.start()
 

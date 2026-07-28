@@ -222,7 +222,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 2.0,
@@ -314,8 +314,7 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_hjl7q")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_wlhx3")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
-frame = 2
-frame_progress = 1.0
+frame_progress = 0.2652053
 offset = Vector2(0, -18)

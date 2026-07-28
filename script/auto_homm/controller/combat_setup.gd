@@ -17,17 +17,22 @@ func is_active() -> bool:
 
 
 func activate(team: teCombatTeam):
-	current_team = team
+	update_current_team(team)
 	hex_picking.hovered.connect(_on_hex_hovered)
 	hex_picking.clicked.connect(_on_hex_clicked)
 	hex_picking.left_grid.connect(_on_hex_grid_left)
 
 
 func deactivate():
+	clear_unit_selection()
 	hex_picking.hovered.disconnect(_on_hex_hovered)
 	hex_picking.clicked.disconnect(_on_hex_clicked)
 	hex_picking.left_grid.disconnect(_on_hex_grid_left)
 	current_team = null
+
+
+func update_current_team(team: teCombatTeam):
+	current_team = team
 
 
 func clear_unit_selection():

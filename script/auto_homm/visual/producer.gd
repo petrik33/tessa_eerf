@@ -27,13 +27,12 @@ signal sequence_finished()
 
 var current_track_id: int = -1
 var sequence_queue: Array[teVisualSequence]
-var is_filming: bool
 
 
 func start():
-	if is_filming:
+	if is_filming():
 		return
-	is_filming = true
+	_filming = true
 	scheduler.track_finished.connect(_on_track_finished)
 	filming_started.emit()
 	if not sequence_queue.is_empty():
@@ -41,7 +40,7 @@ func start():
 
 
 func stop():
-	if not is_filming:
+	if not is_filming():
 		return
 	if is_playing():
 		deadline_timer.stop()
@@ -50,8 +49,12 @@ func stop():
 	clear_queue()
 	scheduler.track_finished.disconnect(_on_track_finished)
 	scheduler.clear()
-	is_filming = false
+	_filming = false
 	filming_finished.emit()
+
+
+func is_filming() -> bool:
+	return _filming
 
 
 func is_playing() -> bool:
@@ -59,7 +62,7 @@ func is_playing() -> bool:
 
 
 func is_waiting() -> bool:
-	return is_filming and not is_playing()
+	return is_filming() and not is_playing()
 
 
 func clear_queue():
@@ -76,8 +79,11 @@ func queue_empty() -> bool:
 	return sequence_queue.is_empty()
 
 
+var _filming: bool
+
+
 func _play_next_track():
-	if not is_filming or queue_empty():
+	if not _filming or queue_empty():
 		return
 	var sequence: teVisualSequence = sequence_queue.pop_front()
 	var estimated_time_sec := scheduler.estimate_duration(director, sequence.root_action)
