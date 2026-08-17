@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://crsosmlqpqmin" path="res://asset/texture/props/SpaceTree.png" id="4_nrd8r"]
 [ext_resource type="Texture2D" uid="uid://bh8ptxw60y7og" path="res://asset/texture/props/SpaceRing.png" id="4_sa63i"]
 [ext_resource type="Texture2D" uid="uid://dfocrrjeyv44b" path="res://asset/texture/props/SmallRock.png" id="5_get50"]
-[ext_resource type="Script" uid="uid://drqoq0he2jdkk" path="res://script/auto_homm/debug/node.gd" id="9_get50"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sa63i"]
 atlas = ExtResource("2_0fj02")
@@ -209,7 +208,3 @@ sprite_frames = SubResource("SpriteFrames_hbbhx")
 autoplay = "default"
 frame = 2
 frame_progress = 0.7071517
-
-[node name="teDebugNode" type="Node" parent="." unique_id=1080804401]
-script = ExtResource("9_get50")
-metadata/_custom_type_script = "uid://drqoq0he2jdkk"

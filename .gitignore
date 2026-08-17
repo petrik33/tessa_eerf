@@ -22,3 +22,5 @@ android/
 source/Obsidian/Tessa Eerf/.obsidian
 source/**/*.png
 source/**/*.pixi
+
+build/**
