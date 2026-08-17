@@ -39,6 +39,8 @@ static func animation_duration_sprite2d(
 	var total := 0.0
 
 	for i in range(from, from + frames):
+		if i < 0:
+			print("Error")
 		var rel := sprite.sprite_frames.get_frame_duration(animation, i)
 		total += rel / fps
 

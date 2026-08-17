@@ -10,6 +10,30 @@ extends Control
 @export var hp_label: Label
 @export var name_label: Label
 
+@export var status_border: teCombatUnitStatusBorder
+@export var bg_panel: Panel
+
+@export var panel_style_idle: StyleBox
+@export var panel_style_active: StyleBox
+
+@export var active: bool:
+	set(value):
+		if value == active:
+			return
+		active = value
+		if bg_panel == null:
+			return
+		if active:
+			if panel_style_active == null:
+				return
+			bg_panel.remove_theme_stylebox_override(&"panel")
+			bg_panel.add_theme_stylebox_override(&"panel", panel_style_active)
+		else:
+			if panel_style_idle == null:
+				return
+			bg_panel.remove_theme_stylebox_override(&"panel")
+			bg_panel.add_theme_stylebox_override(&"panel", panel_style_idle)
+
 
 var max_hp := 100
 var hp := 100
@@ -59,6 +83,20 @@ func set_mana_values(current: int, maximum: int):
 	mana_bar.value = mana
 
 
+func set_effects(effects: Dictionary[int, teCombatEffectInstance]):
+	status_border.clear()
+	for id in effects:
+		var inst := effects[id]
+		if not status_border.shows_effect(teCombatEffects.get_common_effect_name(inst.effect)):
+			continue
+		status_border.add_effect_instance(inst, id)
+
+
+func remove_effect(inst: teCombatEffectInstance, id: int):
+	if status_border.shows_effect(teCombatEffects.get_common_effect_name(inst.effect)):
+		status_border.remove_effect_instancec(inst, id)
+
+
 func add_mana(value: int):
 	set_mana_values(mana + value, max_mana)
 
@@ -69,6 +107,11 @@ func spend_mana(value: int):
 
 func damage(value: int):
 	set_hp_values(max(hp - value, 0), max_hp)
+
+
+func flash_effect(effect_name: StringName):
+	if status_border.shows_effect(effect_name):
+		status_border.flash(effect_name)
 
 
 func heal(value: int):

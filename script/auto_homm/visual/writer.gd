@@ -105,27 +105,35 @@ func write_unit_move(
 func write_damage(
 	state: teCombatState,
 	action: teCombatActionDamage,
-	events_buffer: teCombatEventsBuffer
+	events_buffer: teCombatEventsBuffer,
+	wait_hurt_animation: bool = true
 ) -> teVisualActionBase:
 	var is_lethal := events_buffer.has(func (ev): return ev is teCombatEventUnitDied)
-	var parallel := teVisualActions.parallel()
+	var parallel_damage := teVisualActions.parallel()
+	var parallel_winddown := teVisualActions.parallel()
 	for instance in action.instances:
-		parallel.actions.push_back(teVisualActions.parallel(
+		var hurt_act := teVisualActs.DIE if is_lethal else teVisualActs.GET_HURT
+		parallel_damage.actions.push_back(teVisualActions.parallel(
 			teVisualActions.unit_flash(instance.target_unit_id),
 			teVisualActions.unit_act(
 				instance.target_unit_id,
 				teVisualActs.DIE if is_lethal else teVisualActs.GET_HURT,
-				teVisualActs.GET_HURT,
 				true
 			),
 			teVisualActions.emit(events_buffer, state)
 		))
-	return teVisualActions.sub_sequence(
-		parallel,
+		parallel_winddown.actions.push_back(
+			teVisualActions.unit_wait_winddown(instance.target_unit_id, hurt_act)
+		)
+	var sub_sequence := teVisualActions.sub_sequence(
+		parallel_damage,
 		teVisualActions.freeze_frame(
 			freeze_frame_duration_kill if is_lethal else freeze_frame_duration_hit
 		)
 	)
+	if wait_hurt_animation:
+		sub_sequence.actions.push_back(parallel_winddown)
+	return sub_sequence
 
 
 func write_attack(

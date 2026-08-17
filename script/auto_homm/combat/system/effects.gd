@@ -23,6 +23,15 @@ enum Duration {
 }
 
 
+const POISON := &"POISON"
+
+
+static func get_common_effect_name(effect: teCombatEffectBase) -> StringName:
+	if effect is teCombatEffectPoison:
+		return POISON
+	return ""
+
+
 static func apply_on_hook(
 	hook: teCombatEffects.Hook,
 	unit_id: int,

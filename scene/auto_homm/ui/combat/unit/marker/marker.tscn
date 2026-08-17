@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cbfue1iffqygr" path="res://script/auto_homm/ui/combat/unit/marker.gd" id="1_nunio"]
 [ext_resource type="Script" uid="uid://g43ofjxqxc1c" path="res://script/ui/range_segments.gd" id="2_am5dy"]
+[ext_resource type="StyleBox" uid="uid://s2h1o7gc2h2t" path="res://scene/auto_homm/ui/combat/unit/marker/stylebox/bg_idle.tres" id="2_hh3gs"]
 [ext_resource type="Script" uid="uid://uk40ukh8gbp7" path="res://script/auto_homm/ui/combat/unit/effect_status.gd" id="2_ioexv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nunio"]
-bg_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+[ext_resource type="StyleBox" uid="uid://h4rt1p7egihv" path="res://scene/auto_homm/ui/combat/unit/marker/stylebox/bg_active.tres" id="2_ktmwq"]
+[ext_resource type="Script" uid="uid://by4t4xncnplc3" path="res://script/auto_homm/ui/combat/unit/status_border.gd" id="2_wirx4"]
+[ext_resource type="Material" uid="uid://cg5lfwq4jqgtg" path="res://scene/auto_homm/ui/combat/unit/marker/material/poison_effect.tres" id="3_bbw8q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5vvi"]
 
@@ -68,13 +69,11 @@ colors = PackedColorArray(0.105882354, 0.42745098, 1, 1, 0.24705882, 0.654902, 1
 gradient = SubResource("Gradient_si13h")
 height = 8
 
-[node name="Marker" type="Control" unique_id=617972592 node_paths=PackedStringArray("hp_bar", "hp_damage_bar", "mana_bar", "hp_segments", "hp_label", "name_label")]
+[node name="Marker" type="Control" unique_id=617972592 node_paths=PackedStringArray("hp_bar", "hp_damage_bar", "mana_bar", "hp_segments", "hp_label", "name_label", "status_border", "bg_panel")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -16.0
-offset_top = -4.0
-offset_right = 16.0
-offset_bottom = 5.0
+offset_right = 32.0
+offset_bottom = 9.0
 mouse_filter = 2
 script = ExtResource("1_nunio")
 hp_bar = NodePath("MarginContainer/Content/Hp/Bar")
@@ -83,6 +82,10 @@ mana_bar = NodePath("MarginContainer/Content/Mana/Bar")
 hp_segments = NodePath("MarginContainer/Content/Hp/RangeSegments")
 hp_label = NodePath("MarginContainer/Content/Hp/Label")
 name_label = NodePath("MarginContainer/Content/Info/Name")
+status_border = NodePath("StatusBorder")
+bg_panel = NodePath("Panel")
+panel_style_idle = ExtResource("2_hh3gs")
+panel_style_active = ExtResource("2_ktmwq")
 
 [node name="Panel" type="Panel" parent="." unique_id=1116147467]
 layout_mode = 1
@@ -91,27 +94,34 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nunio")
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_hh3gs")
 
-[node name="StatusBorder" type="Control" parent="." unique_id=1875144949]
+[node name="StatusBorder" type="Control" parent="." unique_id=1875144949 node_paths=PackedStringArray("statuses")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_wirx4")
+statuses = {
+"POISON": NodePath("Poison")
+}
 
 [node name="Poison" type="Control" parent="StatusBorder" unique_id=1736785954]
+material = ExtResource("3_bbw8q")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("2_ioexv")
-effect_ticks = Array[int]([4])
-offset = 6.0
-segment_color = Color(0.6313726, 0, 0, 1)
+tick_width = 4.0
+segment_color = Color(0.49019608, 0.6666667, 0.19607843, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=266599262]
 custom_minimum_size = Vector2(32, 9)
@@ -121,18 +131,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 1
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 1
-theme_override_constants/margin_bottom = 1
+mouse_filter = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
 [node name="Content" type="VBoxContainer" parent="MarginContainer" unique_id=2032870764]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 1
 
 [node name="Hp" type="PanelContainer" parent="MarginContainer/Content" unique_id=233924629]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_s5vvi")
 
 [node name="Bar" type="TextureProgressBar" parent="MarginContainer/Content/Hp" unique_id=1820878616]
@@ -187,7 +200,7 @@ focus_next = NodePath("")
 focus_previous = NodePath("")
 focus_mode = 0
 focus_behavior_recursive = 0
-mouse_filter = 0
+mouse_filter = 2
 mouse_behavior_recursive = 0
 mouse_force_pass_scroll_events = true
 mouse_default_cursor_shape = 0
@@ -231,6 +244,7 @@ vertical_alignment = 1
 [node name="Mana" type="PanelContainer" parent="MarginContainer/Content" unique_id=103969327]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_nunio")
 
 [node name="Bar" type="TextureProgressBar" parent="MarginContainer/Content/Mana" unique_id=496653304]

@@ -40,7 +40,12 @@ func sync_unit_marker(unit_id: int, state: teCombatState):
 		marker = unit_markers[unit_id]
 	marker.set_hp_values(combat_unit.hp_left(), combat_unit.stats.max_hp)
 	marker.set_mana_values(combat_unit.mana_collected, combat_unit.stats.required_mana)
+	marker.set_effects(combat_unit.effects)
 	marker.global_position = unit_view.get_marker_global_position()
+
+
+func unit_set_effects(unit_id: int, effects: Dictionary[int, teCombatEffectInstance]):
+	unit_markers[unit_id].set_effects(effects)
 
 
 func create_marker() -> teCombatUnitMarker:
@@ -62,8 +67,14 @@ func unit_remove_marker(unit_id: int):
 	destroy_marker(marker)
 
 
-func unit_damage(unit_id: int, hp: int):
-	unit_markers[unit_id].damage(hp)
+func unit_set_active(unit_id: int, value: bool):
+	unit_markers[unit_id].active = value
+
+
+func unit_damage(unit_id: int, inst: teCombatDamageInstance):
+	unit_markers[unit_id].damage(floor(inst.base_amount)) # TODO: Potential info loss
+	if teCombatDamage.source_is_effect(inst.source):
+		unit_markers[unit_id].flash_effect(teCombatDamage.source_what_effect(inst.source))
 
 
 func unit_gain_mana(unit_id: int, mana: int):

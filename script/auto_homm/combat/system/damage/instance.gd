@@ -5,6 +5,7 @@ class_name teCombatDamageInstance extends Resource
 @export var type: teCombatDamage.TYPE
 @export var tags := TagSet.new()
 @export var base_amount := 0.0
+@export var source: StringName
 
 var modified_amount := 0.0
 var final_amount := 0.0

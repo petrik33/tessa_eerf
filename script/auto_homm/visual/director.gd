@@ -16,15 +16,14 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 		var visuals = board.get_unit_visuals(action.unit_id)
 		if visuals == null:
 			return teVisualTakes.fail("Can't get unit visuals to act")
-		if visuals.knows_act(action.act):
-			visuals.play_act(action.act, speed_scale)
-			return teVisualTakes.instant()
-		if visuals.knows_act(action.reserve_act):
-			visuals.play_act(action.reserve_act, speed_scale)
+		var actual_act := visuals.actual_act(action.act)
+		if visuals.knows_act(actual_act):
+			visuals.play_act(actual_act, speed_scale)
 			return teVisualTakes.instant()
 		if action.can_be_unknown:
 			return teVisualTakes.instant()
-		return teVisualTakes.fail("Visuals don't know act")
+		else:
+			return teVisualTakes.fail("Visuals don't know act")
 	if action is teVisualActionUnitWindup:
 		var visuals := board.get_unit_visuals(action.unit_id)
 		if visuals == null:
@@ -124,15 +123,23 @@ func estimate_duration(action: teVisualActionBase) -> float:
 		var visuals = board.get_unit_visuals(action.unit_id)
 		if visuals == null:
 			return 0.0
-		return visuals.windup_duration(action.act)
+		var actual_act := visuals.actual_act(action.act)
+		if not visuals.knows_act(actual_act):
+			return 0.0
+		return visuals.windup_duration(actual_act)
 	if action is teVisualActionUnitWaitWinddown:
 		var visuals = board.get_unit_visuals(action.unit_id)
 		if visuals == null:
 			return 0.0
-		return visuals.winddown_duration(action.act)
+		var actual_act := visuals.actual_act(action.act)
+		if not visuals.knows_act(actual_act):
+			return 0.0
+		return visuals.winddown_duration(actual_act)
 	if action is teVisualActionUnitCombo:
 		var visuals = board.get_unit_visuals(action.unit_id)
 		if visuals == null:
+			return 0.0
+		if not visuals.knows_combo(action.base_act, action.total):
 			return 0.0
 		return visuals.combo_duration(action.base_act, action.idx, action.total)
 	if action is teVisualActionUnitFlash:

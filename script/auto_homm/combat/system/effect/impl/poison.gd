@@ -9,4 +9,9 @@ func hooks() -> Array[teCombatEffects.Hook]:
 
 
 func on_hook(unit_id: int, hook: teCombatEffects.Hook, runtime: teCombatRuntime, state: teCombatState, resolved: teCombatResolvedAction):
-	resolved.schedule(teCombatActions.damage(unit_id, teCombatDamage.TYPE.MAGICAL, damage))
+	resolved.schedule(teCombatActions.damage(
+		unit_id,
+		teCombatDamage.TYPE.MAGICAL,
+		damage,
+		teCombatDamage.source_effect(teCombatEffects.POISON)
+	))

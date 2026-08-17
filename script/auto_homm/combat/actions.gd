@@ -30,10 +30,11 @@ static func damage(
 	target_unit_id: int,
 	type: teCombatDamage.TYPE,
 	base_amount: float,
+	source: StringName = "",
 	tags := TagSet.new()
 ) -> teCombatActionDamage:
 	var action := teCombatActionDamage.new()
-	action.instances = [teCombatDamage.instance(target_unit_id, type, base_amount, tags)]
+	action.instances = [teCombatDamage.instance(target_unit_id, type, base_amount, source, tags)]
 	return action
 
 

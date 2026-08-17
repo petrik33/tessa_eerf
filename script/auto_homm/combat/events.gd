@@ -13,9 +13,8 @@ static func unit_attacked(unit_id: int, attacker_id: int, damage: int, is_lethal
 	hit.lethal = is_lethal
 	return hit
 
-static func unit_damaged(unit_id: int, damage: int) -> teCombatEventUnitDamaged:
+static func unit_damaged(damage: teCombatDamageInstance) -> teCombatEventUnitDamaged:
 	var event := teCombatEventUnitDamaged.new()
-	event.unit_id = unit_id
 	event.damage = damage
 	return event
 

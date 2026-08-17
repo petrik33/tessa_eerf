@@ -51,9 +51,9 @@ func update(event: teCombatEventBase):
 	if event is teCombatEventTurnStarted:
 		active_unit_moved = false
 	if event is teCombatEventUnitDamaged:
-		units[event.unit_id].hp_spent = min(
-			units[event.unit_id].hp_spent + event.damage,
-			units[event.unit_id].stats.max_hp
+		units[event.damage.target_unit_id].hp_spent = min(
+			units[event.damage.target_unit_id].hp_spent + event.damage.base_amount,
+			units[event.damage.target_unit_id].stats.max_hp
 		)
 	if event is teCombatEventUnitDied:
 		units.erase(event.unit_id)

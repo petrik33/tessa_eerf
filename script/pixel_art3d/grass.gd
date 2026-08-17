@@ -45,9 +45,7 @@ var _cached_noise_offset: Vector2 = Vector2.ZERO
 func _ready() -> void:
 	_initialize_grass_plane_shader_parameters()
 	_initialize_grass_blades_shader_parameters()
-	if wind:
-		_connect_wind_signals()
-		_update_grass_from_wind()
+	_update_grass_from_wind()
 	if board_texture_renderer:
 		board_texture_renderer.updated.connect(_update_board_texture)
 		_update_board_texture(board_texture_renderer.get_texture())

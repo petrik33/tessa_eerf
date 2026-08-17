@@ -42,7 +42,7 @@
 [ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/auto_homm/visual/cutter.gd" id="37_aqgb5"]
 [ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="37_rca0q"]
 [ext_resource type="Script" uid="uid://c2iyvivunkx07" path="res://script/auto_homm/visual/scheduler.gd" id="37_sgynk"]
-[ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker.tscn" id="38_0k111"]
+[ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker/marker.tscn" id="38_0k111"]
 [ext_resource type="Script" uid="uid://ba7egnixkgh8u" path="res://script/auto_homm/visual/production_log.gd" id="38_krgjf"]
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="38_rca0q"]
 [ext_resource type="Script" uid="uid://duq7x6fmv2lb8" path="res://script/auto_homm/ui/combat/markers.gd" id="38_vq27j"]

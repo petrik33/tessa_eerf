@@ -50,7 +50,7 @@
 [ext_resource type="Script" uid="uid://c2cndqvddug5p" path="res://script/auto_homm/visual/take_log.gd" id="36_vf16f"]
 [ext_resource type="PackedScene" uid="uid://d1gp87bi5qvo8" path="res://scene/auto_homm/ui/combat.tscn" id="37_yp83o"]
 [ext_resource type="Script" uid="uid://duq7x6fmv2lb8" path="res://script/auto_homm/ui/combat/markers.gd" id="38_fkkht"]
-[ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker.tscn" id="39_6skpa"]
+[ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker/marker.tscn" id="39_6skpa"]
 [ext_resource type="Script" uid="uid://kgbi1bn657re" path="res://script/auto_homm/visual/system/projectile.gd" id="40_6k38a"]
 [ext_resource type="PackedScene" uid="uid://bdrkshdc4sl7r" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="41_afd4g"]
 [ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="42_uvo0h"]
@@ -1442,7 +1442,8 @@ director = NodePath("../Director")
 scheduler = NodePath("../Scheduler")
 deadline_threshold_sec = 0.1
 deadlines_on = false
-custom_speed_scale = 0.5
+custom_speed_scale = 1.5
+custom_speed_scale_on = true
 
 [node name="Cutter" type="Node" parent="Controllers/Movie/Crew" unique_id=2034911320]
 script = ExtResource("33_eo0uc")

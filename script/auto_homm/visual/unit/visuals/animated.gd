@@ -56,7 +56,10 @@ func windup_duration(act_name: StringName):
 	return Utils.animation_duration_sprite2d(sprite, act_name, _windup_frame(act_name))
 
 func winddown_duration(act_name: StringName):
-	return Utils.animation_duration_sprite2d(sprite, act_name, -1, _windup_frame(act_name))
+	var from := _windup_frame(act_name)
+	if from == -1:
+		from = 0
+	return Utils.animation_duration_sprite2d(sprite, act_name, -1, from)
 
 func combo_duration(base_act: StringName, idx: int, total: int):
 	var combo_from := 0
@@ -96,8 +99,8 @@ func act_finished_signal() -> Signal:
 func _update_facing():
 	sprite.flip_h = not facing_right
 
-func _windup_frame(act_name: StringName) -> int:
-	return windup_frames.get(act_name, -1)
+func _windup_frame(windup_name: StringName) -> int:
+	return windup_frames.get(windup_name, -1)
 
 func _on_winddown():
 	go_idle()

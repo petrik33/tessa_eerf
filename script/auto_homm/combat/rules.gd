@@ -108,10 +108,7 @@ func resolve(
 		))
 	if action is teCombatActionDamage:
 		for instance in action.instances:
-			resolved.emit(teCombatEvents.unit_damaged(
-				instance.target_unit_id,
-				instance.base_amount
-			))
+			resolved.emit(teCombatEvents.unit_damaged(instance))
 			if teCombatDamage.is_lethal(state, instance):
 				resolved.emit(teCombatEvents.unit_died(instance.target_unit_id))
 				if state.active_unit_id() == instance.target_unit_id:

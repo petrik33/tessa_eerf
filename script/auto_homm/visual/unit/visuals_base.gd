@@ -3,6 +3,13 @@ class_name teUnitVisualsBase extends Node2D
 
 
 @export var node_to_glow: Node2D
+@export var act_subs: Dictionary[StringName, StringName]
+
+
+func actual_act(act_name: StringName) -> StringName:
+	if act_subs.has(act_name):
+		return act_subs[act_name]
+	return act_name
 
 
 func play_act(act_name: StringName, speed_scale: float):

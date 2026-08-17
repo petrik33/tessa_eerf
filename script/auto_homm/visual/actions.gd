@@ -47,13 +47,11 @@ static func unit_windup_sequence(
 static func unit_act(
 	unit_id: int,
 	act: StringName,
-	reserve_act: StringName = &"",
 	can_be_unknown: bool = false
 ) -> teVisualActionBase:
 	var action := teVisualActionUnitAct.new()
 	action.unit_id = unit_id
 	action.act = act
-	action.reserve_act = reserve_act
 	action.can_be_unknown = can_be_unknown
 	return action
 
