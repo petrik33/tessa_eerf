@@ -1,0 +1,69 @@
+filters:
+  and:
+    - base == link("DB Units.base")
+properties:
+  file.name:
+    displayName: Name
+  Pack:
+    displayName: Pack
+  Special:
+    displayName: Special
+  Access:
+    displayName: Access
+  Portrait:
+    displayName: Portrait
+  Tags:
+    displayName: Tags
+  Height (px):
+    displayName: Height (px)
+  Author:
+    displayName: Author
+  Art:
+    displayName: Art
+  Animations:
+    displayName: Animations
+  URL:
+    displayName: URL
+  Notes:
+    displayName: Notes
+  Splash:
+    displayName: Splash
+  Art-Tags:
+    displayName: Art-Tags
+views:
+  - type: table
+    name: Table View
+    order:
+      - file.name
+      - tags
+      - Animations
+      - Special
+      - Art-Tags
+      - Height (px)
+      - Access
+      - Author
+      - Pack
+      - URL
+      - Notes
+    sort:
+      - property: Art-Tags
+        direction: ASC
+      - property: file.name
+        direction: ASC
+      - property: tags
+        direction: ASC
+    columnSize:
+      note.tags: 250
+      note.Animations: 186
+      note.Special: 74
+      note.Art-Tags: 138
+      note.Height (px): 97
+      note.Access: 70
+      note.Author: 86
+      note.Pack: 90
+      note.URL: 276
+    rowHeight: tall
+  - type: cards
+    name: Gallery
+    image: note.Art
+    imageFit: contain
