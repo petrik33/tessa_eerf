@@ -5,7 +5,6 @@ class_name teCombatState extends Resource
 @export var units: Dictionary[int, teCombatUnitState]
 @export var unit_teams: Dictionary[int, int]
 @export var initiative_holder_id: int = -1
-@export var active_unit_moved: bool
 
 
 static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teCombatUnitRoster) -> teCombatState:
@@ -33,10 +32,6 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 	return state
 
 
-func turn_in_progress() -> bool:
-	return active_unit_moved
-
-
 func active_unit() -> teCombatUnitState:
 	if initiative_holder_id == -1:
 		return null
@@ -48,8 +43,6 @@ func active_unit_id() -> int:
 
 
 func update(event: teCombatEventBase):
-	if event is teCombatEventTurnStarted:
-		active_unit_moved = false
 	if event is teCombatEventUnitDamaged:
 		units[event.damage.target_unit_id].hp_spent = min(
 			units[event.damage.target_unit_id].hp_spent + event.damage.base_amount,
@@ -58,6 +51,8 @@ func update(event: teCombatEventBase):
 	if event is teCombatEventUnitDied:
 		units.erase(event.unit_id)
 		unit_teams.erase(event.unit_id)
+	if event is teCombatEventInitiativeReleased:
+		initiative_holder_id = -1
 	if event is teCombatEventInitiativeProgressed:
 		for id in units:
 			units[id].initiative_progress += event.progress
@@ -66,7 +61,6 @@ func update(event: teCombatEventBase):
 		units[initiative_holder_id].initiative_progress = 0
 	if event is teCombatEventUnitMoved:
 		units[event.unit_id].hex = event.path.back()
-		active_unit_moved = true
 	if event is teCombatEventManaGained:
 		var target = units[event.unit_id]
 		target.mana_collected = min(target.stats.required_mana, target.mana_collected + event.mana)

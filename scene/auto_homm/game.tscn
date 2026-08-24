@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://d3t3qgj2hvca0" path="res://scene/auto_homm/debug/debug.tscn" id="19_bdy12"]
 [ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="21_sun1c"]
 [ext_resource type="Shader" uid="uid://bxw8qfsdoe88f" path="res://shader/auto_homm/focus_overlay.gdshader" id="22_2p32r"]
-[ext_resource type="Texture2D" uid="uid://d2vh3pu27os3r" path="res://asset/ui/hourglass.png" id="24_2xycu"]
+[ext_resource type="Texture2D" uid="uid://d2vh3pu27os3r" path="res://asset/texture/ui/icon/hourglass.png" id="24_2xycu"]
 [ext_resource type="Script" uid="uid://c7cqwtc2k2l4p" path="res://script/auto_homm/visual/board_visual.gd" id="28_e52gc"]
 [ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="28_mehdm"]
 [ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="29_mehdm"]

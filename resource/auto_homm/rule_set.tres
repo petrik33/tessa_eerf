@@ -114,15 +114,34 @@ script = ExtResource("4_ikphj")
 base_stats = SubResource("Resource_qy02j")
 metadata/_custom_type_script = "uid://bxwdn821h7m3q"
 
+[sub_resource type="Resource" id="Resource_upeoa"]
+script = ExtResource("5_ikphj")
+attack_range = 4
+
+[sub_resource type="Resource" id="Resource_gbku1"]
+script = ExtResource("4_ikphj")
+base_stats = SubResource("Resource_upeoa")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
+[sub_resource type="Resource" id="Resource_1wij3"]
+script = ExtResource("5_ikphj")
+
+[sub_resource type="Resource" id="Resource_o48ip"]
+script = ExtResource("4_ikphj")
+base_stats = SubResource("Resource_1wij3")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
 [sub_resource type="Resource" id="Resource_yaq7i"]
 script = ExtResource("3_ikphj")
 units = Dictionary[StringName, ExtResource("4_ikphj")]({
 &"blind_huntress": SubResource("Resource_wsd47"),
 &"ground_monk": SubResource("Resource_5lh6l"),
+&"leaf_ranger": SubResource("Resource_gbku1"),
 &"martial_hero": SubResource("Resource_eqe1j"),
 &"necromancer": SubResource("Resource_n3uly"),
 &"paladin": SubResource("Resource_l6cay"),
-&"red_hood_archer": SubResource("Resource_0dchg")
+&"red_hood_archer": SubResource("Resource_0dchg"),
+&"water_priestess": SubResource("Resource_o48ip")
 })
 metadata/_custom_type_script = "uid://daavssjfuh6c3"
 

@@ -2,8 +2,7 @@
 class_name teVisualDirectorBase extends Node
 
 
-signal take_started(take: teVisualTake)
-signal take_cut(take: teVisualTake)
+signal combat_event(event: teCombatEventBase, state: teCombatState)
 
 
 @abstract

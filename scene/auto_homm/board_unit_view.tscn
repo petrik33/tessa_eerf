@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://w778dl2mxji7" path="res://scene/auto_homm/vfx/board_unit_view_flash.tscn" id="4_rdlfa"]
 [ext_resource type="Shader" uid="uid://l0wihqbflfey" path="res://shader/auto_homm/luminance_based_flash.gdshader" id="5_jnodn"]
 [ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker/marker.tscn" id="6_a31u8"]
+[ext_resource type="PackedScene" uid="uid://c11sibhxthp80" path="res://scene/auto_homm/ui/combat/hero/marker.tscn" id="8_65srk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmwjp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_65srk"]
 resource_local_to_scene = true
 shader = ExtResource("5_jnodn")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -33,11 +34,17 @@ visible = false
 visible = false
 
 [node name="Flash" parent="." unique_id=129286827 instance=ExtResource("4_rdlfa")]
-flash_material = SubResource("ShaderMaterial_nmwjp")
+flash_material = SubResource("ShaderMaterial_65srk")
 target_strength = 1.25
 
 [node name="MarkerTracker" type="Marker2D" parent="." unique_id=498545476]
 position = Vector2(-16, 6)
 
 [node name="Marker" parent="MarkerTracker" unique_id=617972592 instance=ExtResource("6_a31u8")]
+visible = false
+
+[node name="HeroMarkerTracker" type="Marker2D" parent="." unique_id=1678334540]
+position = Vector2(-20, 6)
+
+[node name="Marker2" parent="HeroMarkerTracker" unique_id=1219699860 instance=ExtResource("8_65srk")]
 visible = false

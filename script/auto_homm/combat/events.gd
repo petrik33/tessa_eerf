@@ -29,11 +29,9 @@ static func unit_moved(unit_id: int, path: Array[Vector2i]) -> teCombatEventUnit
 	event.path = path
 	return event
 
-static func turn_started() -> teCombatEventTurnStarted:
-	return teCombatEventTurnStarted.new()
-
-static func turn_finished() -> teCombatEventTurnFinished:
-	return teCombatEventTurnFinished.new()
+static func initiative_released() -> teCombatEventInitiativeReleased:
+	var event := teCombatEventInitiativeReleased.new()
+	return event
 
 static func initiative_progressed(progress: float) -> teCombatEventInitiativeProgressed:
 	var event := teCombatEventInitiativeProgressed.new()

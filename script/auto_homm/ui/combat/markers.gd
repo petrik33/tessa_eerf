@@ -1,12 +1,16 @@
 class_name teCombatUiMarkers extends Node
 
 
-@export var markers_container: Node2D
 @export var board: teBoardVisual
+@export var markers_container: Node2D
 @export var unit_marker_scene: PackedScene
 
 
 var unit_markers: Dictionary[int, teCombatUnitMarker]
+
+
+func _ready() -> void:
+	set_process(false)
 
 
 func _process(_delta: float) -> void:
@@ -44,6 +48,10 @@ func sync_unit_marker(unit_id: int, state: teCombatState):
 	marker.global_position = unit_view.get_marker_global_position()
 
 
+func get_marker(unit_id: int) -> teCombatUnitMarker:
+	return unit_markers[unit_id]
+
+
 func unit_set_effects(unit_id: int, effects: Dictionary[int, teCombatEffectInstance]):
 	unit_markers[unit_id].set_effects(effects)
 
@@ -65,6 +73,11 @@ func unit_remove_marker(unit_id: int):
 	var marker = unit_markers[unit_id]
 	unit_markers.erase(unit_id)
 	destroy_marker(marker)
+
+
+func units_clear_active():
+	for unit_id in unit_markers:
+		unit_markers[unit_id].active = false
 
 
 func unit_set_active(unit_id: int, value: bool):

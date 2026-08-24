@@ -65,6 +65,8 @@ func knows_windup(act_name: StringName) -> bool:
 @abstract func windup_signal() -> Signal
 @abstract func act_finished_signal() -> Signal
 
+@abstract func get_socket(socket_name: StringName) -> Vector2
+
 
 func go_idle():
 	pass

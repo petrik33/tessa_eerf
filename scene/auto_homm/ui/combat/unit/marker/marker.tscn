@@ -10,63 +10,63 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5vvi"]
 
-[sub_resource type="Gradient" id="Gradient_s5vvi"]
+[sub_resource type="Gradient" id="Gradient_hh3gs"]
 colors = PackedColorArray(0.16470589, 0.16470589, 0.16470589, 1, 0.06666667, 0.06666667, 0.06666667, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nunio"]
-gradient = SubResource("Gradient_s5vvi")
+gradient = SubResource("Gradient_hh3gs")
 width = 8
 fill_to = Vector2(0, 1)
 
-[sub_resource type="Gradient" id="Gradient_nunio"]
+[sub_resource type="Gradient" id="Gradient_p0t06"]
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 0.13333334, 1, 1, 1, 0.0627451, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_am5dy"]
-gradient = SubResource("Gradient_nunio")
+gradient = SubResource("Gradient_p0t06")
 width = 8
 fill_to = Vector2(0, 1)
 
-[sub_resource type="Gradient" id="Gradient_am5dy"]
+[sub_resource type="Gradient" id="Gradient_njg10"]
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(0.23921569, 0.68235296, 0.2784314, 1, 0.34901962, 0.8392157, 0.37254903, 1, 0.4862745, 1, 0.52156866, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ioexv"]
-gradient = SubResource("Gradient_am5dy")
+gradient = SubResource("Gradient_njg10")
 height = 8
 
-[sub_resource type="Gradient" id="Gradient_ioexv"]
+[sub_resource type="Gradient" id="Gradient_8qn81"]
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(0.8509804, 0.47843137, 0, 1, 1, 0.70980394, 0.2784314, 1, 1, 0.8156863, 0.5372549, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_wirx4"]
-gradient = SubResource("Gradient_ioexv")
+gradient = SubResource("Gradient_8qn81")
 height = 8
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nunio"]
 
-[sub_resource type="Gradient" id="Gradient_6b2tb"]
+[sub_resource type="Gradient" id="Gradient_5vox5"]
 colors = PackedColorArray(0.10980392, 0.17254902, 0.26666668, 1, 0.039215688, 0.078431375, 0.14117648, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bbw8q"]
-gradient = SubResource("Gradient_6b2tb")
+gradient = SubResource("Gradient_5vox5")
 width = 8
 fill_to = Vector2(0, 1)
 
-[sub_resource type="Gradient" id="Gradient_ui45a"]
+[sub_resource type="Gradient" id="Gradient_cq12s"]
 colors = PackedColorArray(1, 1, 1, 0.09411765, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_k503h"]
-gradient = SubResource("Gradient_ui45a")
+gradient = SubResource("Gradient_cq12s")
 width = 8
 fill_to = Vector2(0, 1)
 
-[sub_resource type="Gradient" id="Gradient_si13h"]
+[sub_resource type="Gradient" id="Gradient_q4to4"]
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(0.105882354, 0.42745098, 1, 1, 0.24705882, 0.654902, 1, 1, 0.34901962, 0.8392157, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vbldr"]
-gradient = SubResource("Gradient_si13h")
+gradient = SubResource("Gradient_q4to4")
 height = 8
 
 [node name="Marker" type="Control" unique_id=617972592 node_paths=PackedStringArray("hp_bar", "hp_damage_bar", "mana_bar", "hp_segments", "hp_label", "name_label", "status_border", "bg_panel")]
@@ -229,6 +229,7 @@ metadata/_custom_type_script = "uid://g43ofjxqxc1c"
 [node name="Damage" type="TextureProgressBar" parent="MarginContainer/Content/Hp" unique_id=443346921]
 visible = false
 layout_mode = 2
+value = 100.0
 nine_patch_stretch = true
 texture_over = SubResource("GradientTexture2D_am5dy")
 texture_progress = SubResource("GradientTexture2D_wirx4")

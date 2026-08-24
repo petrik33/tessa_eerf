@@ -1,9 +1,6 @@
 class_name teVisualDirector extends teVisualDirectorBase
 
 
-signal combat_event(event: teCombatEventBase, state: teCombatState)
-
-
 @export var board: teBoardVisual
 @export var projectile_system: teVisualProjectileSystem
 @export var vfx_system: teVisualVfxSystem
@@ -64,8 +61,8 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 		else:
 			return teVisualTakes.instant()
 	if action is teVisualActionUnitShootProjectile:
-		var shooter := board.get_unit(action.shooter_id)
-		var target := board.get_unit(action.target_id)
+		var shooter := board.get_unit_visuals(action.shooter_id)
+		var target := board.get_unit_visuals(action.target_id)
 		var origin_pos := board.hex_space.to_local(shooter.get_socket(teVisualUnitSockets.RANGED))
 		var target_pos := board.hex_space.to_local(target.get_socket(teVisualUnitSockets.TARGET))
 		return direct_take(teVisualActions.shoot_projectile(
@@ -101,7 +98,7 @@ func direct_take(action: teVisualActionBase, speed_scale := 1.0) -> teVisualTake
 			)
 		)
 	if action is teVisualActionVfxOnTarget:
-		var unit := board.get_unit(action.target_unit_id)
+		var unit := board.get_unit_visuals(action.target_unit_id)
 		var pos := unit.get_socket(action.socket)
 		return teVisualTakes.async(
 			func(): await vfx_system.play(
@@ -148,8 +145,8 @@ func estimate_duration(action: teVisualActionBase) -> float:
 		else:
 			return 0.0
 	if action is teVisualActionUnitShootProjectile:
-		var shooter := board.get_unit(action.shooter_id)
-		var target := board.get_unit(action.target_id)
+		var shooter := board.get_unit_visuals(action.shooter_id)
+		var target := board.get_unit_visuals(action.target_id)
 		var origin_pos := board.hex_space.to_local(shooter.get_socket(teVisualUnitSockets.RANGED))
 		var target_pos := board.hex_space.to_local(target.get_socket(teVisualUnitSockets.TARGET))
 		return projectile_system.estimate_shot_duration(

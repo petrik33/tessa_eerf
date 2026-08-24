@@ -5,14 +5,10 @@ class_name teGameNode extends Node
 @export var setup: teGameSetup
 @export var state: teGameState
 @export var board: teBoardVisual
-@export var combat_ui: teCombatUI
+@export var ui: teUI
 @export var combat: teCombat
 @export var movie: teCombatMovie
 @export var combat_setup: teCombatSetupController
-
-# Shouldn't be here
-@export var units_node: Node2D
-@export var unit_view_scene: PackedScene
 
 
 var potential_combat_state: teCombatState
@@ -22,6 +18,7 @@ func _ready() -> void:
 	state = visual_config.read_game_state()
 	_update_potential_combat_state()
 	combat_setup.activate(state.current_team)
+	board.units_go_idle()
 
 
 func _input(event: InputEvent) -> void:
@@ -44,12 +41,14 @@ func _deactivate_combat_setup() -> void:
 
 func _activate_combat_setup() -> void:
 	board.clear_all_hover()
+	ui.set_setup_mode()
 	_update_potential_combat_state()
 	combat_setup.activate(state.current_team)
 
 
 func _start_combat() -> void:
 	movie.start_filming()
+	ui.set_combat_mode(potential_combat_state)
 	combat.start(potential_combat_state, setup.rule_set.rules)
 
 
@@ -90,4 +89,4 @@ func _update_potential_combat_state():
 		next_combat, setup.rule_set.units, state.unit_roster
 	)
 	board.sync_state(potential_combat_state)
-	combat_ui.sync_units(potential_combat_state)
+	ui.set_potential_combat_state(potential_combat_state)

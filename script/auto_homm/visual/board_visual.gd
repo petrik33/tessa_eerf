@@ -23,6 +23,11 @@ func sync_state(combat: teCombatState):
 		pixel_art3d.sync(combat)
 
 
+func units_go_idle():
+	for unit_id in units:
+		units[unit_id].view.visuals.go_idle()
+
+
 func sync_units(combat: teCombatState):
 	var combat_units_id := combat.all_units_id()
 	for unit_id in units:
@@ -75,6 +80,7 @@ func create_unit(uid: StringName, id: int) -> teBoardUnitView:
 	units_attach.add_child(visuals)
 	var unit_view := create_unit_view(visuals)
 	units_attach.add_child(unit_view)
+	visuals.go_idle()
 	return attach_unit(unit_view, id)
 
 

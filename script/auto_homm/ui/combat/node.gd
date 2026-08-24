@@ -1,17 +1,24 @@
 class_name teCombatUI extends Node
 
 
-@export var combat: teCombat
-@export var board: teBoardVisual
+@export var director: teVisualDirectorBase
 @export var markers: teCombatUiMarkers
+
+
+func activate(state: teCombatState):
+	markers.set_process(true)
+	director.combat_event.connect(_on_combat_event)
+	sync_units(state)
+
+
+func deactivate():
+	director.combat_event.disconnect(_on_combat_event)
+	markers.units_clear_active()
+	markers.set_process(false)
 
 
 func sync_units(combat_state: teCombatState):
 	markers.sync(combat_state)
-
-
-func _on_combat_started(initial_state: teCombatState):
-	sync_units(initial_state)
 
 
 func _on_combat_event(event: teCombatEventBase, state: teCombatState):
@@ -26,7 +33,7 @@ func _on_combat_event(event: teCombatEventBase, state: teCombatState):
 		markers.unit_remove_marker(event.unit_id)
 	if event is teCombatEventEffectApplied or event is teCombatEventEffectConsumed:
 		markers.unit_set_effects(event.unit_id, state.unit(event.unit_id).effects)
+	if event is teCombatEventInitiativeReleased:
+		markers.units_clear_active()
 	if event is teCombatEventInitiativeTaken:
 		markers.unit_set_active(event.unit_id, true)
-	if event is teCombatEventInitiativeProgressed:
-		markers.unit_set_active(state.initiative_holder_id, false)

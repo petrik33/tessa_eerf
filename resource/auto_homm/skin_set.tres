@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="teSkinSet" load_steps=8 format=3 uid="uid://c31cby404a1vn"]
+[gd_resource type="Resource" script_class="teUnitSkinSet" format=3 uid="uid://c31cby404a1vn"]
 
 [ext_resource type="PackedScene" uid="uid://dyt6sh81t35pd" path="res://scene/auto_homm/unit/blind_huntress/blind_huntress.tscn" id="1_fe01w"]
 [ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="1_ffarb"]
@@ -7,15 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://ba8hm538xfpt6" path="res://scene/auto_homm/unit/martial_hero/martial_hero.tscn" id="3_ffarb"]
 [ext_resource type="PackedScene" uid="uid://yeda2nifrlx8" path="res://scene/auto_homm/unit/paladin/paladin.tscn" id="4_xfgtf"]
 [ext_resource type="PackedScene" uid="uid://des0ux6tte0v1" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer.tscn" id="5_ffarb"]
+[ext_resource type="PackedScene" uid="uid://baqf1e3omn7t6" path="res://scene/auto_homm/unit/leaf_ranger/leaf_ranger.tscn" id="7_fe01w"]
+[ext_resource type="PackedScene" uid="uid://bnpce8dcgeml3" path="res://scene/auto_homm/unit/water_priestess/water_priestess.tscn" id="8_d38f2"]
 
 [resource]
 script = ExtResource("1_rujsr")
 scenes = Dictionary[StringName, PackedScene]({
 &"blind_huntress": ExtResource("1_fe01w"),
 &"ground_monk": ExtResource("2_ffarb"),
+&"leaf_ranger": ExtResource("7_fe01w"),
 &"martial_hero": ExtResource("3_ffarb"),
 &"necromancer": ExtResource("1_ffarb"),
 &"paladin": ExtResource("4_xfgtf"),
-&"red_hood_archer": ExtResource("5_ffarb")
+&"red_hood_archer": ExtResource("5_ffarb"),
+&"water_priestess": ExtResource("8_d38f2")
 })
 metadata/_custom_type_script = "uid://swxv64ugjqfe"

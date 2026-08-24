@@ -44,8 +44,8 @@ func write_initiative_advance(
 	events_buffer: teCombatEventsBuffer
 ) -> teVisualActionBase:
 	return teVisualActions.sub_sequence(
-		teVisualActions.wait(initiative_advance_time_sec),
-		teVisualActions.emit(events_buffer, state)
+		teVisualActions.emit(events_buffer, state),
+		teVisualActions.wait(initiative_advance_time_sec)
 	)
 
 

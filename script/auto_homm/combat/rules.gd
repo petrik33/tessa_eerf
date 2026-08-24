@@ -78,6 +78,7 @@ func resolve(
 	if action is teCombatActionInitiativeAdvance:
 		var next_unit_id := teCombatInitiative.calc_next_unit_id(state)
 		var progress_made := teCombatInitiative.progress_left(state.unit(next_unit_id))
+		resolved.emit(teCombatEvents.initiative_released())
 		resolved.emit(teCombatEvents.initiative_progressed(progress_made))
 		resolved.emit(teCombatEvents.initiative_taken(next_unit_id))
 		teCombatEffects.apply_on_hook(teCombatEffects.Hook.TURN_START, next_unit_id, runtime, state, resolved)
@@ -108,6 +109,8 @@ func resolve(
 		))
 	if action is teCombatActionDamage:
 		for instance in action.instances:
+			if not state.has_unit(instance.target_unit_id):
+				continue
 			resolved.emit(teCombatEvents.unit_damaged(instance))
 			if teCombatDamage.is_lethal(state, instance):
 				resolved.emit(teCombatEvents.unit_died(instance.target_unit_id))

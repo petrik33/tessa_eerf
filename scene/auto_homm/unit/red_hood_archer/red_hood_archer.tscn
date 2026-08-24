@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://des0ux6tte0v1"]
 
-[ext_resource type="Script" uid="uid://3dme4uxypqvh" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer.gd" id="1_qrxtw"]
+[ext_resource type="Script" uid="uid://clvxp2i6wcbas" path="res://script/auto_homm/visual/unit/visuals/animated.gd" id="1_qrxtw"]
 [ext_resource type="Shader" uid="uid://d2quulealucgi" path="res://shader/auto_chess/pixel_art_glow.gdshader" id="2_yjyko"]
 [ext_resource type="Texture2D" uid="uid://o4hjd41ywbyn" path="res://asset/texture/unit/red_hood_archer/spr_ArcherIdle_strip_NoBkg.png" id="3_qrxtw"]
 [ext_resource type="Texture2D" uid="uid://c5vftmqfi6a8c" path="res://asset/texture/unit/red_hood_archer/spr_ArcherDeath_strip_NoBkg.png" id="3_xtfeo"]
@@ -616,28 +616,27 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="RedHoodArcher" type="Node2D" unique_id=23992539 node_paths=PackedStringArray("ranged_arrow_origin", "sprite", "node_to_glow")]
+[node name="RedHoodArcher" type="Node2D" unique_id=1277310255 node_paths=PackedStringArray("sprite", "sockets", "node_to_glow")]
 script = ExtResource("1_qrxtw")
-ranged_arrow_origin = NodePath("AnimatedSprite2D/Markers/ArrowOrigin")
 sprite = NodePath("AnimatedSprite2D")
 windup_frames = Dictionary[StringName, int]({
 &"ranged": 9
 })
+sockets = {
+&"ranged": NodePath("ArrowOrigin")
+}
 node_to_glow = NodePath("AnimatedSprite2D")
+metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=976366034]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1767117508]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_yjyko")
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_qu5vg")
-animation = &"ranged"
+animation = &"idle"
 autoplay = "idle"
-frame = 13
-frame_progress = 1.0
 
-[node name="Markers" type="Node2D" parent="AnimatedSprite2D" unique_id=332571072]
-
-[node name="ArrowOrigin" type="Marker2D" parent="AnimatedSprite2D/Markers" unique_id=76207121]
+[node name="ArrowOrigin" type="Marker2D" parent="." unique_id=466221652]
 unique_name_in_owner = true
 visible = false
-position = Vector2(9, -10.5)
+position = Vector2(9, -22.5)

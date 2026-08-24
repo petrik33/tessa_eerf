@@ -31,35 +31,35 @@ func set_target(node: Node2D):
 
 func flash(time: float = 1.0, color := Color.WHITE):
 	var previous_material := target_node.material
-	
+
 	target_node.material = flash_material
-	
+
 	flash_material.set_shader_parameter("flash_color", color)
 	flash_material.set_shader_parameter("strength", target_strength)
-	
+
 	if tween and tween.is_running():
 		tween.kill()
-	
+
 	tween = create_tween()
 	tween.set_trans(trans_type)
 	tween.set_ease(ease_type)
-	
+
 	var total_weight := hold_weight + down_weight
 	if total_weight <= 0.0:
 		total_weight = 1.0
-	
+
 	var hold_time := time * (hold_weight / total_weight)
 	var down_time := time * (down_weight / total_weight)
-	
+
 	tween.tween_interval(hold_time)
-	
+
 	tween.tween_property(
 		flash_material,
 		"shader_parameter/strength",
 		0.0,
 		down_time
 	)
-	
+
 	await tween.finished
-	
+
 	target_node.material = previous_material

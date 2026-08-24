@@ -3,6 +3,7 @@ class_name teUnitVisualsAnimated extends teUnitVisualsBase
 
 @export var sprite: AnimatedSprite2D
 @export var windup_frames: Dictionary[StringName, int]
+@export var sockets: Dictionary[StringName, Node2D]
 
 
 @onready var windup_trigger := AnimationFrameTrigger.new(sprite)
@@ -13,6 +14,18 @@ var facing_right: bool
 
 const IDLE_ANIMATION := &"idle"
 const MOVE_ANIMATION := &"walk"
+
+const DEFAULT_TARGET_OFFSET := Vector2(0.0, -12.0)
+
+
+func get_socket(socket_name: StringName) -> Vector2:
+	if sockets.has(socket_name):
+		return sockets[socket_name].global_position
+	if socket_name == teVisualUnitSockets.TARGET:
+		return global_position + DEFAULT_TARGET_OFFSET
+	if socket_name == teVisualUnitSockets.ORIGIN:
+		return global_position
+	return global_position
 
 
 func go_idle():
