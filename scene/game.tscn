@@ -1088,6 +1088,11 @@ cache/0/10/0/glyphs/402653212/texture_idx = 0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b3ha2"]
 blend_mode = 1
 
+[sub_resource type="Resource" id="Resource_ri40t"]
+script = ExtResource("45_w3mww")
+attack = 1
+metadata/_custom_type_script = "uid://w6o4p73o148l"
+
 [sub_resource type="Resource" id="Resource_aqgb5"]
 script = ExtResource("45_w3mww")
 attack = 2
@@ -1096,11 +1101,6 @@ skill_socket = &"origin"
 metadata/_custom_type_script = "uid://w6o4p73o148l"
 
 [sub_resource type="Resource" id="Resource_vq27j"]
-script = ExtResource("45_w3mww")
-attack = 1
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_ri40t"]
 script = ExtResource("45_w3mww")
 attack = 1
 metadata/_custom_type_script = "uid://w6o4p73o148l"
