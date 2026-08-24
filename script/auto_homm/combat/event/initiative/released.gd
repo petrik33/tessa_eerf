@@ -1,0 +1,1 @@
+class_name teCombatEventInitiativeReleased extends teCombatEventBase

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://ckblt5dy2ce4q"]
+
+[ext_resource type="Script" uid="uid://wgxey7d5tj5x" path="res://script/auto_homm/visual/system/projectile/node2d.gd" id="1_rplbv"]
+[ext_resource type="Texture2D" uid="uid://bnuujd7p8m4mx" path="res://asset/texture/unit/leaf_ranger/projectiles_and_effects/arrow/arrow_.png" id="2_g68am"]
+
+[node name="LeafRangerArrow" type="Node2D" unique_id=93709948]
+script = ExtResource("1_rplbv")
+metadata/_custom_type_script = "uid://wgxey7d5tj5x"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=871162883]
+texture = ExtResource("2_g68am")
+offset = Vector2(-13, 0)
