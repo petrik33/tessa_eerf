@@ -9,6 +9,7 @@ class_name teGameNode extends Node
 @export var combat: teCombat
 @export var movie: teCombatMovie
 @export var combat_setup: teCombatSetupController
+@export var pixel_art3d: teVisualPixelArt3d
 
 
 var potential_combat_state: teCombatState
@@ -16,45 +17,48 @@ var potential_combat_state: teCombatState
 
 func _ready() -> void:
 	state = visual_config.read_game_state()
-	_update_potential_combat_state()
-	combat_setup.activate(state.current_team)
-	board.units_go_idle()
+	_activate_combat_setup()
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dbg_start_combat"):
-		if combat.is_active() or movie.is_playing():
+		if movie.is_live():
 			return
 		_deactivate_combat_setup()
 		_start_combat()
 	if event.is_action_pressed("dbg_finish_combat"):
-		if not combat.is_active() and not movie.is_playing():
+		if not movie.is_live():
 			return
 		_stop_combat()
 		_activate_combat_setup()
 
 
-func _deactivate_combat_setup() -> void:
-	combat_setup.deactivate()
-	board.clear_all_hover()
-
-
 func _activate_combat_setup() -> void:
-	board.clear_all_hover()
-	ui.set_setup_mode()
 	_update_potential_combat_state()
+	board.units_go_idle()
+	ui.set_setup_mode()
+	combat_setup.place_unit_requested.connect(_on_place_unit_requested)
 	combat_setup.activate(state.current_team)
 
 
+func _deactivate_combat_setup() -> void:
+	board.clear_all_hover()
+	combat_setup.deactivate()
+	combat_setup.place_unit_requested.disconnect(_on_place_unit_requested)
+
+
 func _start_combat() -> void:
-	movie.start_filming()
 	ui.set_combat_mode(potential_combat_state)
+	movie.finished.connect(_on_movie_finished)
+	movie.start()
 	combat.start(potential_combat_state, setup.rule_set.rules)
 
 
 func _stop_combat() -> void:
-	movie.stop_filming()
+	board.clear_all_hover()
 	combat.stop()
+	movie.stop()
+	movie.finished.disconnect(_on_movie_finished)
 
 
 func _on_place_unit_requested(unit_id: int, hex: Vector2i):
@@ -70,11 +74,9 @@ func _on_place_unit_requested(unit_id: int, hex: Vector2i):
 	_update_potential_combat_state()
 
 
-func _on_combat_finished(_final_state: teCombatState):
-	movie.finish_filming()
-
-
 func _on_movie_finished():
+	movie.finished.disconnect(_on_movie_finished)
+	board.clear_all_hover()
 	_activate_combat_setup()
 
 
@@ -89,4 +91,5 @@ func _update_potential_combat_state():
 		next_combat, setup.rule_set.units, state.unit_roster
 	)
 	board.sync_state(potential_combat_state)
+	pixel_art3d.sync(potential_combat_state)
 	ui.set_potential_combat_state(potential_combat_state)

@@ -10,4 +10,5 @@ script = ExtResource("3_nblm5")
 grid = ExtResource("1_aix6a")
 skin_set = ExtResource("4_ej3lx")
 rule_set = ExtResource("2_kdd6g")
+hero_id = 0
 metadata/_custom_type_script = "uid://bq0btk6pleh5i"

@@ -41,13 +41,12 @@
 [ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker/marker.tscn" id="41_ghkpf"]
 [ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="42_jnxo0"]
 [ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="43_fkyeg"]
+[ext_resource type="Script" uid="uid://d16k8137ow65w" path="res://script/auto_homm/visual/movie/producer.gd" id="44_eycuj"]
 [ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="44_l2kpm"]
 [ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/profile.gd" id="45_w3mww"]
 [ext_resource type="PackedScene" uid="uid://b00my3rka8ncb" path="res://scene/auto_homm/visual/producer.tscn" id="46_gork7"]
 [ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/auto_homm/visual/cutter.gd" id="47_rvd0c"]
 [ext_resource type="Script" uid="uid://c2iyvivunkx07" path="res://script/auto_homm/visual/scheduler.gd" id="48_mpwi1"]
-[ext_resource type="Script" uid="uid://ba7egnixkgh8u" path="res://script/auto_homm/visual/production_log.gd" id="49_gpkgx"]
-[ext_resource type="Script" uid="uid://c2cndqvddug5p" path="res://script/auto_homm/visual/take_log.gd" id="50_nnuj6"]
 [ext_resource type="Script" uid="uid://m6xoopmu678a" path="res://script/auto_homm/visual/pixel_art3d.gd" id="51_eaxkq"]
 [ext_resource type="Script" uid="uid://0felhi0n70wf" path="res://script/pixel_art3d/shadow_cast.gd" id="52_2bg44"]
 [ext_resource type="PackedScene" uid="uid://bg2pe2xsftbdn" path="res://scene/3d_pixel_art/sub_scene/unit_shadow_mesh.tscn" id="53_38ruv"]
@@ -1057,7 +1056,7 @@ units = Dictionary[StringName, ExtResource("45_w3mww")]({
 })
 metadata/_custom_type_script = "uid://bpvhp1jac8kkb"
 
-[node name="Game" type="Node3D" unique_id=1328541158]
+[node name="Root" type="Node3D" unique_id=1328541158]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=225623015]
 anchors_preset = 15
@@ -1132,12 +1131,12 @@ multimesh = ExtResource("10_pihuv")
 
 [node name="Overlay2D" type="Node2D" parent="SubViewportContainer/SubViewport" unique_id=297241443]
 
-[node name="Heroes" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D" unique_id=1920723926]
+[node name="HeroStands" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D" unique_id=1920723926]
 
-[node name="Ally" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/Heroes" unique_id=457825878]
+[node name="Ally" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/HeroStands" unique_id=457825878]
 position = Vector2(67, 91)
 
-[node name="Enemy" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/Heroes" unique_id=1653345196]
+[node name="Enemy" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/HeroStands" unique_id=1653345196]
 position = Vector2(586, 254)
 
 [node name="CombatSpace" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D" unique_id=333595847]
@@ -1250,13 +1249,13 @@ position = Vector2(52, 165)
 [node name="LeafRanger" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Units" unique_id=743174360 node_paths=PackedStringArray("sockets") instance=ExtResource("25_60gyb")]
 position = Vector2(-25, 30)
 sockets = {
-&"ranged": NodePath("")
+&"ranged": null
 }
 
 [node name="RedHoodArcher" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Units" unique_id=1277310255 node_paths=PackedStringArray("sockets") instance=ExtResource("26_sqbv5")]
 position = Vector2(366, 6)
 sockets = {
-&"ranged": NodePath("")
+&"ranged": null
 }
 
 [node name="WaterPriestess" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Units" unique_id=420760380 instance=ExtResource("27_ntqlo")]
@@ -1266,22 +1265,21 @@ position = Vector2(182, 29)
 
 [node name="VFX" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace" unique_id=906241189]
 
-[node name="Controllers" type="Node" parent="." unique_id=1743007742]
-
-[node name="Game" type="Node" parent="Controllers" unique_id=374270782 node_paths=PackedStringArray("visual_config", "board", "ui", "combat", "movie", "combat_setup")]
+[node name="Game" type="Node" parent="." unique_id=374270782 node_paths=PackedStringArray("visual_config", "board", "ui", "combat", "movie", "combat_setup", "pixel_art3d")]
 script = ExtResource("29_msst1")
-visual_config = NodePath("../VisualConfig")
+visual_config = NodePath("VisualConfig")
 setup = ExtResource("30_ysy4j")
-board = NodePath("../Board")
-ui = NodePath("../UI")
-combat = NodePath("../Combat")
-movie = NodePath("../Movie")
-combat_setup = NodePath("../Setup")
+board = NodePath("Board")
+ui = NodePath("UI")
+combat = NodePath("Combat")
+movie = NodePath("Movie")
+combat_setup = NodePath("Setup")
+pixel_art3d = NodePath("PixelArt3D")
 metadata/_custom_type_script = "uid://b3t8mmyxnogy4"
 
-[node name="Debug" parent="Controllers" unique_id=998006211 instance=ExtResource("32_8yp4t")]
+[node name="Debug" parent="Game" unique_id=998006211 instance=ExtResource("32_8yp4t")]
 
-[node name="VisualConfig" type="Node" parent="Controllers" unique_id=123649397 node_paths=PackedStringArray("units_node", "hex_space", "visual")]
+[node name="VisualConfig" type="Node" parent="Game" unique_id=123649397 node_paths=PackedStringArray("units_node", "hex_space", "visual")]
 script = ExtResource("33_ukfbm")
 units_node = NodePath("../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Units")
 hex_space = NodePath("../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace")
@@ -1290,7 +1288,7 @@ ally_grid = ExtResource("18_r4lcn")
 enemy_grid = ExtResource("20_ledes")
 metadata/_custom_type_script = "uid://cx0e5cbn7xncm"
 
-[node name="Board" type="Node" parent="Controllers" unique_id=2104814613 node_paths=PackedStringArray("visual", "units_attach", "hex_space", "hex_hover_outline")]
+[node name="Board" type="Node" parent="Game" unique_id=2104814613 node_paths=PackedStringArray("visual", "units_attach", "hex_space", "hex_hover_outline")]
 script = ExtResource("35_t8t51")
 visual = NodePath("../Visual")
 board_unit_view_scene = ExtResource("36_gwutc")
@@ -1300,88 +1298,81 @@ hex_space = NodePath("../../SubViewportContainer/SubViewport/Overlay2D/CombatSpa
 hex_hover_outline = NodePath("../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Outline/Selected")
 metadata/_custom_type_script = "uid://c7cqwtc2k2l4p"
 
-[node name="Combat" parent="Controllers" unique_id=1529090557 instance=ExtResource("37_tor7x")]
+[node name="Combat" parent="Game" unique_id=1529090557 instance=ExtResource("37_tor7x")]
 
-[node name="Setup" type="Node" parent="Controllers" unique_id=1427401997 node_paths=PackedStringArray("hex_picking", "board")]
+[node name="Setup" type="Node" parent="Game" unique_id=1427401997 node_paths=PackedStringArray("hex_picking", "board")]
 script = ExtResource("38_07day")
 hex_picking = NodePath("../HexPicking")
 board = NodePath("../Board")
 metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 
-[node name="UI" type="Node" parent="Controllers" unique_id=1946464241 node_paths=PackedStringArray("board", "combat")]
+[node name="UI" type="Node" parent="Game" unique_id=1946464241 node_paths=PackedStringArray("board", "combat")]
 script = ExtResource("37_k2cbn")
 board = NodePath("../Board")
 combat = NodePath("Combat")
 
-[node name="Combat" type="Node" parent="Controllers/UI" unique_id=1725123253 node_paths=PackedStringArray("director", "markers")]
+[node name="Combat" type="Node" parent="Game/UI" unique_id=1725123253 node_paths=PackedStringArray("director", "markers")]
 script = ExtResource("38_ri40t")
-director = NodePath("../../Movie/Director")
+director = NodePath("../../Movie/Producer/Director")
 markers = NodePath("Markers")
 metadata/_custom_type_script = "uid://codjbbmyiilwl"
 
-[node name="Markers" type="Node" parent="Controllers/UI/Combat" unique_id=885662776 node_paths=PackedStringArray("board", "markers_container")]
+[node name="Markers" type="Node" parent="Game/UI/Combat" unique_id=885662776 node_paths=PackedStringArray("board", "markers_container")]
 script = ExtResource("40_uaqmu")
 board = NodePath("../../../Board")
 markers_container = NodePath("../../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Markers")
 unit_marker_scene = ExtResource("41_ghkpf")
 metadata/_custom_type_script = "uid://duq7x6fmv2lb8"
 
-[node name="Movie" parent="Controllers" unique_id=1318524910 node_paths=PackedStringArray("board", "producer", "writer", "cutter") instance=ExtResource("42_jnxo0")]
-board = NodePath("../Board")
+[node name="Movie" parent="Game" unique_id=1318524910 node_paths=PackedStringArray("playback", "producer", "combat") instance=ExtResource("42_jnxo0")]
+playback = NodePath("Playback")
 producer = NodePath("Producer")
-writer = NodePath("Writer")
-cutter = NodePath("Cutter")
+combat = NodePath("../Combat")
 
-[node name="Director" type="Node" parent="Controllers/Movie" unique_id=1753845749 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
-script = ExtResource("43_fkyeg")
-board = NodePath("../../Board")
-projectile_system = NodePath("../../Visual/Projectiles")
-vfx_system = NodePath("../../Visual/VFX")
-freeze_system = NodePath("../../Visual/FreezeSystem")
-movement_system = NodePath("../../Visual/MovementSystem")
-metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
-
-[node name="Writer" type="Node" parent="Controllers/Movie" unique_id=1752715738 node_paths=PackedStringArray("visual")]
-script = ExtResource("44_l2kpm")
-visual = NodePath("../../Visual")
-initiative_advance_time_sec = 0.5
-metadata/_custom_type_script = "uid://celv2masnj3io"
-
-[node name="Producer" parent="Controllers/Movie" unique_id=1328117501 node_paths=PackedStringArray("director", "scheduler") instance=ExtResource("46_gork7")]
-director = NodePath("../Director")
-scheduler = NodePath("../Scheduler")
+[node name="Playback" parent="Game/Movie" unique_id=1328117501 node_paths=PackedStringArray("director", "scheduler") instance=ExtResource("46_gork7")]
+director = NodePath("../Producer/Director")
+scheduler = NodePath("Scheduler")
 deadline_threshold_sec = 0.1
 deadlines_on = false
 custom_speed_scale = 1.5
 custom_speed_scale_on = true
 
-[node name="Cutter" type="Node" parent="Controllers/Movie" unique_id=2034911320]
+[node name="Scheduler" type="Node" parent="Game/Movie/Playback" unique_id=1421736490]
+script = ExtResource("48_mpwi1")
+metadata/_custom_type_script = "uid://c2iyvivunkx07"
+
+[node name="Producer" type="Node" parent="Game/Movie" unique_id=177119849 node_paths=PackedStringArray("director", "writer", "cutter")]
+script = ExtResource("44_eycuj")
+director = NodePath("Director")
+writer = NodePath("Writer")
+cutter = NodePath("Cutter")
+metadata/_custom_type_script = "uid://d16k8137ow65w"
+
+[node name="Director" type="Node" parent="Game/Movie/Producer" unique_id=1753845749 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
+script = ExtResource("43_fkyeg")
+board = NodePath("../../../Board")
+projectile_system = NodePath("../../../Visual/Projectiles")
+vfx_system = NodePath("../../../Visual/VFX")
+freeze_system = NodePath("../../../Visual/FreezeSystem")
+movement_system = NodePath("../../../Visual/MovementSystem")
+metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
+
+[node name="Writer" type="Node" parent="Game/Movie/Producer" unique_id=1752715738 node_paths=PackedStringArray("visual")]
+script = ExtResource("44_l2kpm")
+visual = NodePath("../../../Visual")
+initiative_advance_time_sec = 0.5
+metadata/_custom_type_script = "uid://celv2masnj3io"
+
+[node name="Cutter" type="Node" parent="Game/Movie/Producer" unique_id=2034911320]
 script = ExtResource("47_rvd0c")
 uniform_time_sec = 2.0
 metadata/_custom_type_script = "uid://div15hdt2vtdg"
 
-[node name="Scheduler" type="Node" parent="Controllers/Movie" unique_id=1421736490]
-script = ExtResource("48_mpwi1")
-metadata/_custom_type_script = "uid://c2iyvivunkx07"
-
-[node name="ProductionLog" type="Node" parent="Controllers/Movie" unique_id=677266367 node_paths=PackedStringArray("combat", "producer", "scheduler", "take_log")]
-script = ExtResource("49_gpkgx")
-combat = NodePath("../../Combat")
-producer = NodePath("../Producer")
-scheduler = NodePath("../Scheduler")
-take_log = NodePath("TakeLog")
-metadata/_custom_type_script = "uid://ba7egnixkgh8u"
-
-[node name="TakeLog" type="Node" parent="Controllers/Movie/ProductionLog" unique_id=1969792285 node_paths=PackedStringArray("combat")]
-script = ExtResource("50_nnuj6")
-combat = NodePath("../../../Combat")
-metadata/_custom_type_script = "uid://c2cndqvddug5p"
-
-[node name="PixelArt3D" type="Node" parent="Controllers" unique_id=1386457433 node_paths=PackedStringArray("shadow_cast")]
+[node name="PixelArt3D" type="Node" parent="Game" unique_id=1386457433 node_paths=PackedStringArray("shadow_cast")]
 script = ExtResource("51_eaxkq")
 shadow_cast = NodePath("ShadowCast")
 
-[node name="ShadowCast" type="Node" parent="Controllers/PixelArt3D" unique_id=1765157525 node_paths=PackedStringArray("board", "projection", "directional_light", "container")]
+[node name="ShadowCast" type="Node" parent="Game/PixelArt3D" unique_id=1765157525 node_paths=PackedStringArray("board", "projection", "directional_light", "container")]
 script = ExtResource("52_2bg44")
 board = NodePath("../../Board")
 projection = NodePath("../BoardProjection")
@@ -1391,27 +1382,23 @@ shadow_mesh_scene = ExtResource("53_38ruv")
 light_offset = 0.0
 metadata/_custom_type_script = "uid://0felhi0n70wf"
 
-[node name="Wind" type="Node" parent="Controllers/PixelArt3D" unique_id=6091015]
+[node name="Wind" type="Node" parent="Game/PixelArt3D" unique_id=6091015]
 script = ExtResource("54_5b6od")
 speed = 10.0
 
-[node name="Grass" type="Node" parent="Controllers/PixelArt3D" unique_id=1131686189 node_paths=PackedStringArray("wind", "grass_blades", "grass_plane", "wind_debug", "board_texture_renderer")]
+[node name="Grass" type="Node" parent="Game/PixelArt3D" unique_id=1131686189 node_paths=PackedStringArray("wind")]
 script = ExtResource("55_5k7l7")
 wind = NodePath("../Wind")
-grass_blades = NodePath("")
-grass_plane = NodePath("")
 wind_noise = ExtResource("56_bcrvl")
-wind_debug = NodePath("")
-board_texture_renderer = NodePath("")
 
-[node name="BoardProjection" type="Node" parent="Controllers/PixelArt3D" unique_id=1884170670 node_paths=PackedStringArray("viewport", "camera_rig", "hex_space")]
+[node name="BoardProjection" type="Node" parent="Game/PixelArt3D" unique_id=1884170670 node_paths=PackedStringArray("viewport", "camera_rig", "hex_space")]
 script = ExtResource("58_ijl75")
 viewport = NodePath("../../../SubViewportContainer/SubViewport")
 camera_rig = NodePath("../../../SubViewportContainer/SubViewport/World3D/CameraRig")
 hex_space = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace")
 metadata/_custom_type_script = "uid://c4ehifrwublxb"
 
-[node name="TerrainGenerator" type="Node" parent="Controllers/PixelArt3D" unique_id=1586863940 node_paths=PackedStringArray("hex_space", "board_projection", "heroes_node", "container")]
+[node name="TerrainGenerator" type="Node" parent="Game/PixelArt3D" unique_id=1586863940 node_paths=PackedStringArray("hex_space", "board_projection", "heroes_node", "container")]
 script = ExtResource("59_li1mj")
 hex_space = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace")
 grid = ExtResource("16_pprli")
@@ -1423,7 +1410,7 @@ plane_material = ExtResource("7_ll3i0")
 terrain_material = ExtResource("3_ntqlo")
 terrain_height = 0.1
 hex_scale = 0.92
-heroes_node = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/Heroes")
+heroes_node = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/HeroStands")
 heroes_terrain_layout = ExtResource("60_uft43")
 heroes_terrain_material = ExtResource("3_ntqlo")
 heroes_terrain_y_offset = -6
@@ -1431,19 +1418,19 @@ heroes_terrain_height = 0.1
 container = NodePath("../../../SubViewportContainer/SubViewport/World3D/Objects/Terrain")
 metadata/_custom_type_script = "uid://b813m8me4mfgb"
 
-[node name="HexPicking" type="Node" parent="Controllers" unique_id=1432731041 node_paths=PackedStringArray("space")]
+[node name="HexPicking" type="Node" parent="Game" unique_id=1432731041 node_paths=PackedStringArray("space")]
 script = ExtResource("72_cg813")
 space = NodePath("../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace")
 grid = ExtResource("16_pprli")
 metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
-[node name="Visual" type="Node" parent="Controllers" unique_id=1397887690 node_paths=PackedStringArray("projectile", "vfx")]
+[node name="Visual" type="Node" parent="Game" unique_id=1397887690 node_paths=PackedStringArray("projectile", "vfx")]
 script = ExtResource("63_ckp4v")
 profile = SubResource("Resource_mrjeg")
 projectile = NodePath("Projectiles")
 vfx = NodePath("VFX")
 
-[node name="Projectiles" type="Node" parent="Controllers/Visual" unique_id=1198221270 node_paths=PackedStringArray("group_node")]
+[node name="Projectiles" type="Node" parent="Game/Visual" unique_id=1198221270 node_paths=PackedStringArray("group_node")]
 script = ExtResource("61_dr4d8")
 group_node = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Projectiles")
 scenes = Dictionary[StringName, PackedScene]({
@@ -1456,7 +1443,7 @@ trajectories = Dictionary[StringName, ExtResource("63_k6asn")]({
 projectile_scene = ExtResource("65_k8rp2")
 metadata/_custom_type_script = "uid://kgbi1bn657re"
 
-[node name="VFX" type="Node" parent="Controllers/Visual" unique_id=538825524 node_paths=PackedStringArray("parent_node")]
+[node name="VFX" type="Node" parent="Game/Visual" unique_id=538825524 node_paths=PackedStringArray("parent_node")]
 script = ExtResource("66_a55gf")
 library = Dictionary[StringName, PackedScene]({
 &"necromancer": ExtResource("67_8fuu1"),
@@ -1465,19 +1452,14 @@ library = Dictionary[StringName, PackedScene]({
 parent_node = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/VFX")
 metadata/_custom_type_script = "uid://cvee6hi1txtqj"
 
-[node name="FreezeSystem" parent="Controllers/Visual" unique_id=258549042 instance=ExtResource("69_320ch")]
+[node name="FreezeSystem" parent="Game/Visual" unique_id=258549042 instance=ExtResource("69_320ch")]
 
-[node name="MovementSystem" type="Node" parent="Controllers/Visual" unique_id=11463292]
+[node name="MovementSystem" type="Node" parent="Game/Visual" unique_id=11463292]
 script = ExtResource("70_hjyq2")
 metadata/_custom_type_script = "uid://bm0ws3t3savhd"
 
-[node name="BoardCombatObserver" parent="Controllers/Visual" unique_id=1973503903 node_paths=PackedStringArray("board") instance=ExtResource("71_krdhj")]
+[node name="BoardCombatObserver" parent="Game/Visual" unique_id=1973503903 node_paths=PackedStringArray("board") instance=ExtResource("71_krdhj")]
 board = NodePath("../../Board")
 
-[connection signal="action_taken" from="Controllers/Combat" to="Controllers/Movie" method="_on_combat_action_taken"]
-[connection signal="finished" from="Controllers/Combat" to="Controllers/Game" method="_on_combat_finished"]
-[connection signal="place_unit_requested" from="Controllers/Setup" to="Controllers/Game" method="_on_place_unit_requested"]
-[connection signal="finished" from="Controllers/Movie" to="Controllers/Game" method="_on_movie_finished"]
-[connection signal="combat_event" from="Controllers/Movie/Director" to="Controllers/PixelArt3D" method="_on_combat_event"]
-[connection signal="combat_event" from="Controllers/Movie/Director" to="Controllers/Visual/BoardCombatObserver" method="_on_combat_event"]
-[connection signal="sequence_finished" from="Controllers/Movie/Producer" to="Controllers/Movie" method="_on_producer_sequence_finished"]
+[connection signal="combat_event" from="Game/Movie/Producer/Director" to="Game/PixelArt3D" method="_on_combat_event"]
+[connection signal="combat_event" from="Game/Movie/Producer/Director" to="Game/Visual/BoardCombatObserver" method="_on_combat_event"]

@@ -1,10 +1,16 @@
 class_name teVisualSequence extends RefCounted
 
 
+var director: teVisualDirectorBase
 var root_action: teVisualActionBase
 var timeout_sec: float
 
 
-func _init(_root_action: teVisualActionBase, _timeout_sec: float):
-	root_action = _root_action
-	timeout_sec = _timeout_sec
+func _init(
+	pDirector: teVisualDirectorBase,
+	pRoot_action: teVisualActionBase,
+	pTimeout_sec: float
+):
+	director = pDirector
+	root_action = pRoot_action
+	timeout_sec = pTimeout_sec

@@ -1,55 +1,70 @@
 class_name teCombatMovie extends Node
 
 
-signal turn_played()
-signal queue_empty()
+signal sequence_played()
 signal finished()
 
 
-@export var board: teBoardVisual
-@export var producer: teVisualProducer
-@export var writer: teVisualWriterBase
-@export var cutter: teVisualCutterBase
+@export var playback: teMoviePlayback
+@export var producer: teMovieProducer
+
+@export var combat: teCombat
 
 
-func is_playing() -> bool:
-	return producer.is_playing()
+func start():
+	if _is_live:
+		stop()
+	_is_live = true
+	combat.started.connect(_on_combat_started)
+	combat.action_taken.connect(_on_combat_action_taken)
+	combat.finished.connect(_on_combat_finished)
+	playback.sequence_finished.connect(_on_playback_sequence_finished)
+	playback.start()
 
 
-func is_filming() -> bool:
-	return _live
+func stop():
+	if not _is_live:
+		return
+	playback.stop()
+	playback.clear_queue()
+	playback.sequence_finished.disconnect(_on_playback_sequence_finished)
+	combat.finished.disconnect(_on_combat_finished)
+	combat.action_taken.disconnect(_on_combat_action_taken)
+	combat.started.disconnect(_on_combat_started)
+	_is_live = false
 
 
-func start_filming():
-	if is_filming():
-		stop_filming()
-	producer.start()
-	_live = true
+func pause():
+	assert(_is_live)
+	playback.stop()
 
 
-func stop_filming():
-	producer.stop()
-	finish_filming()
+func resume():
+	assert(_is_live)
+	playback.start()
 
 
-func finish_filming():
-	_live = false
-	
+func is_live() -> bool:
+	return _is_live
 
-var _live: bool
+
+var _is_live: bool
+
+
+func _on_combat_started(_initial_state: teCombatState):
+	pass
 
 
 func _on_combat_action_taken(state: teCombatState, resolved: teCombatResolvedAction):
-	var root_action := writer.sequence(state, resolved.action, resolved.context, resolved.emitted_events)
-	if root_action == null:
-		return
-	producer.enqueue(root_action, cutter.cut_time(resolved.action))
+	playback.enqueue(producer.sequence(state, resolved))
 
 
-func _on_producer_sequence_finished():
-	turn_played.emit()
-	if not producer.queue_empty():
-		return
-	queue_empty.emit()
-	if not is_filming():
+func _on_combat_finished(_final_state: teCombatState):
+	pass
+
+
+func _on_playback_sequence_finished():
+	sequence_played.emit()
+	if playback.queue_empty() and not combat.is_active():
 		finished.emit()
+		stop()

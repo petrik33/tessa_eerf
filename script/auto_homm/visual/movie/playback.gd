@@ -1,8 +1,5 @@
-class_name teVisualProducer extends Node
+class_name teMoviePlayback extends Node
 
-
-signal filming_started()
-signal filming_finished()
 
 signal sequence_started(
 	sequence: teVisualSequence,
@@ -30,67 +27,64 @@ var sequence_queue: Array[teVisualSequence]
 
 
 func start():
-	if is_filming():
+	if is_playing():
 		return
-	_filming = true
+	_playing = true
 	scheduler.track_finished.connect(_on_track_finished)
-	filming_started.emit()
 	if not sequence_queue.is_empty():
-		_play_next_track()
+		_play_next_sequence()
 
 
 func stop():
-	if not is_filming():
+	if not is_playing():
 		return
-	if is_playing():
+	if not is_idle():
 		deadline_timer.stop()
 		scheduler.stop(current_track_id)
 		current_track_id = -1
-	clear_queue()
 	scheduler.track_finished.disconnect(_on_track_finished)
 	scheduler.clear()
-	_filming = false
-	filming_finished.emit()
-
-
-func is_filming() -> bool:
-	return _filming
+	_playing = false
 
 
 func is_playing() -> bool:
-	return current_track_id != -1
+	return _playing
+
+
+func is_idle() -> bool:
+	return current_track_id == -1
 
 
 func is_waiting() -> bool:
-	return is_filming() and not is_playing()
+	return is_playing() and is_idle()
 
 
 func clear_queue():
 	sequence_queue.clear()
 
 
-func enqueue(action: teVisualActionBase, time_sec: float):
-	sequence_queue.push_back(teVisualSequence.new(action, time_sec))
+func enqueue(sequence: teVisualSequence):
+	sequence_queue.push_back(sequence)
 	if is_waiting():
-		_play_next_track()
+		_play_next_sequence()
 
 
 func queue_empty() -> bool:
 	return sequence_queue.is_empty()
 
 
-var _filming: bool
+var _playing: bool
 
 
-func _play_next_track():
-	if not _filming or queue_empty():
+func _play_next_sequence():
+	if queue_empty():
 		return
 	var sequence: teVisualSequence = sequence_queue.pop_front()
 	var estimated_time_sec := scheduler.estimate_duration(director, sequence.root_action)
 	var speed_scale = _calc_track_speed_scale(estimated_time_sec, sequence.timeout_sec)
 	current_track_id = scheduler.schedule(director, sequence.root_action, speed_scale)
 	if current_track_id == -1:
-		_play_next_track()
+		_play_next_sequence()
 		return
 	if deadlines_on:
 		deadline_timer.start(sequence.timeout_sec + deadline_threshold_sec)
@@ -113,7 +107,7 @@ func _on_deadline_timeout():
 func _finish_sequence():
 	current_track_id = -1
 	sequence_finished.emit()
-	_play_next_track()
+	_play_next_sequence()
 
 
 func _calc_track_speed_scale(estimated_time_sec: float, sequence_timeout_sec: float) -> float:

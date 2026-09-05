@@ -30,6 +30,7 @@ func get_socket(socket_name: StringName) -> Vector2:
 
 func go_idle():
 	sprite.play(IDLE_ANIMATION)
+	winddown_trigger = null
 	_update_facing()
 
 func start_moving():
@@ -117,4 +118,3 @@ func _windup_frame(windup_name: StringName) -> int:
 
 func _on_winddown():
 	go_idle()
-	winddown_trigger = null

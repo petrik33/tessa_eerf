@@ -1,13 +1,10 @@
-class_name teHeroCombat extends Node
+@abstract
+class_name teCombatBase extends Node
 
 
-#signal hero_turn_started()
 signal started(first_state: teCombatState)
 signal action_taken(state: teCombatState, resolved: teCombatResolvedAction)
 signal finished(final_state: teCombatState)
-
-
-@export var turn_timer: Timer
 
 
 var rules: teCombatRules
@@ -28,25 +25,13 @@ func start(_initial_state: teCombatState, _rules: teCombatRules):
 	state = initial_state.duplicate()
 	runtime = teCombatRuntime.new(initial_state)
 	started.emit(initial_state)
-	_process_command(teCombatCommands.start_combat())
-
-
-func next_step():
-	assert(is_active())
-	_process_command(next_command())
-
-
-func next_command() -> teCombatCommandBase:
-	if rules.is_hero_turn(state):
-		return teCombatCommands.skip_hero_turn()
-	else:
-		return rules.auto_command(runtime, state)
+	_try_process_command(teCombatCommands.start_combat())
+	_next_step()
 
 
 func stop():
 	if not is_active():
 		return
-	turn_timer.stop()
 	runtime = null
 	state = null
 
@@ -57,17 +42,20 @@ func restart():
 	start(initial_state, rules)
 
 
-func _process_command(command: teCombatCommandBase):
+@abstract func _next_step()
+
+
+func _finish():
+	finished.emit(state)
+	stop()
+
+
+func _try_process_command(command: teCombatCommandBase) -> bool:
 	var expanded := rules.expand(runtime, state, command)
 	if not expanded.is_valid():
-		turn_timer.start()
-		return
+		return false
 	_take_scheduled(expanded.actions)
-	if rules.is_finished(state):
-		stop()
-		finished.emit(state)
-		return
-	turn_timer.start()
+	return true
 
 
 func _take_scheduled(scheduled: teCombatScheduledActionsBuffer):
@@ -86,7 +74,3 @@ func _take(action: teCombatActionBase, context: Context = null):
 		runtime.update(event)
 	action_taken.emit(state, resolved)
 	_take_scheduled(resolved.actions_to_resolve())
-
-
-func _on_timer_timeout():
-	next_step()
