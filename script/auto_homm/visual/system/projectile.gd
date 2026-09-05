@@ -10,6 +10,10 @@ class_name teVisualProjectileSystem extends Node
 var created: Array[teVisualProjectileNode2D]
 
 
+func add(uid: StringName, projectile_visuals: PackedScene):
+	scenes.set(uid, projectile_visuals)
+
+
 func count() -> int:
 	return created.size()
 

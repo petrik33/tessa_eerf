@@ -5,13 +5,12 @@ signal unit_attached(id: int, unit: teBoardUnitView)
 signal unit_dettached(id: int, view: teUnitView)
 
 
-@export var skin_set: teUnitSkinSet
+@export var visual: teVisual
 @export var board_unit_view_scene: PackedScene
 @export var unit_view_scene: PackedScene
 @export var units_attach: Node2D
 @export var hex_space: HexSpace
 @export var hex_hover_outline: HexGridRendererBase
-@export var pixel_art3d: teVisualPixelArt3d
 
 
 var units: Dictionary[int, teBoardUnitView]
@@ -19,8 +18,6 @@ var units: Dictionary[int, teBoardUnitView]
 
 func sync_state(combat: teCombatState):
 	sync_units(combat)
-	if pixel_art3d != null:
-		pixel_art3d.sync(combat)
 
 
 func units_go_idle():
@@ -76,7 +73,7 @@ func select_unit(unit_id: int):
 
 
 func create_unit(uid: StringName, id: int) -> teBoardUnitView:
-	var visuals := skin_set.scenes[uid].instantiate() as teUnitVisualsBase
+	var visuals := visual.profile.units[uid].visuals.instantiate() as teUnitVisualsBase
 	units_attach.add_child(visuals)
 	var unit_view := create_unit_view(visuals)
 	units_attach.add_child(unit_view)

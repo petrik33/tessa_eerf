@@ -57,6 +57,15 @@ base_stats = SubResource("Resource_le1ug")
 skill = SubResource("Resource_pbg0x")
 metadata/_custom_type_script = "uid://bxwdn821h7m3q"
 
+[sub_resource type="Resource" id="Resource_upeoa"]
+script = ExtResource("5_ikphj")
+attack_range = 4
+
+[sub_resource type="Resource" id="Resource_gbku1"]
+script = ExtResource("4_ikphj")
+base_stats = SubResource("Resource_upeoa")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"
+
 [sub_resource type="Resource" id="Resource_urxnx"]
 script = ExtResource("5_ikphj")
 
@@ -112,15 +121,6 @@ attack_range = 10
 [sub_resource type="Resource" id="Resource_0dchg"]
 script = ExtResource("4_ikphj")
 base_stats = SubResource("Resource_qy02j")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_upeoa"]
-script = ExtResource("5_ikphj")
-attack_range = 4
-
-[sub_resource type="Resource" id="Resource_gbku1"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_upeoa")
 metadata/_custom_type_script = "uid://bxwdn821h7m3q"
 
 [sub_resource type="Resource" id="Resource_1wij3"]

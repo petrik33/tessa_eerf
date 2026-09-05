@@ -11,15 +11,17 @@ var durations: Dictionary[StringName, float]
 
 func _enter_tree() -> void:
 	for uid in library:
-		var vfx_scene := library[uid]
-		var vfx := vfx_scene.instantiate() as teVisualVfxInstanceBase
-		durations[uid] = vfx.duration()
-		vfx.queue_free()
+		durations[uid] = _calc_duration(library[uid])
 
 
 func _exit_tree() -> void:
 	for instance in playing:
 		instance.queue_free()
+
+
+func add(uid: StringName, vfx_visuals: PackedScene):
+	library.set(uid, vfx_visuals)
+	durations[uid] = _calc_duration(vfx_visuals)
 
 
 func play(
@@ -48,3 +50,10 @@ func play(
 
 func duration(vfx_uid: StringName) -> float:
 	return durations[vfx_uid]
+
+
+func _calc_duration(vfx_visuals: PackedScene):
+	var vfx := vfx_visuals.instantiate() as teVisualVfxInstanceBase
+	var duration := vfx.duration()
+	vfx.queue_free()
+	return duration

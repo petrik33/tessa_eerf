@@ -67,10 +67,6 @@ region = Rect2(4032, 1792, 288, 128)
 atlas = ExtResource("2_x5ptv")
 region = Rect2(4320, 1792, 288, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gr4m4"]
-atlas = ExtResource("2_x5ptv")
-region = Rect2(0, 1664, 288, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbpdm"]
 atlas = ExtResource("2_x5ptv")
 region = Rect2(288, 1664, 288, 128)
@@ -244,9 +240,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gr4m4")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_fbpdm")
 }, {
 "duration": 1.0,
@@ -364,5 +357,5 @@ metadata/_custom_type_script = "uid://clvxp2i6wcbas"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1740101220]
 sprite_frames = SubResource("SpriteFrames_tf1er")
-animation = &"idle"
+animation = &"melee"
 offset = Vector2(0, -63)

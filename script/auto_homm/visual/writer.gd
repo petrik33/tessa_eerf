@@ -1,17 +1,12 @@
 class_name teVisualWriter extends teVisualWriterBase
 
 
-@export var unit_profiles: Dictionary[StringName, teVisualWritingUnitProfile]
-
+@export var visual: teVisual
 
 @export var freeze_frame_duration_hit := 0.33
 @export var freeze_frame_duration_kill := 0.74
 
 @export var initiative_advance_time_sec := 0.3
-
-
-func get_unit_profile(uid: StringName) -> teVisualWritingUnitProfile:
-	return unit_profiles.get(uid, teVisualWritingUnitProfile.new())
 
 
 func intro(_initial_state: teCombatState) -> teVisualSequence:
@@ -68,7 +63,7 @@ func write_skill_visual(
 	_events_buffer: teCombatEventsBuffer
 ) -> teVisualActionBase:
 	var unit := state.unit(action.unit_id)
-	var unit_profile := get_unit_profile(unit.definition_uid)
+	var unit_profile := visual.profile.units[unit.definition_uid]
 	match unit_profile.skill:
 		teVisualWriting.SkillVisual.VFX:
 			var unit_target := action.target as teCombatTargetUnit
@@ -76,7 +71,7 @@ func write_skill_visual(
 				var parallel_vfx := teVisualActions.parallel()
 				for unit_id in unit_target.units_id:
 					parallel_vfx.actions.push_back(teVisualActions.vfx_on_target(
-						teVisualWritingVfx.skill(unit.definition_uid),
+						teVisual.unit_skill_vfx_uid(unit.definition_uid),
 						unit_id, {}, unit_profile.skill_socket
 					))
 				return parallel_vfx
@@ -145,7 +140,7 @@ func write_attack(
 	var attacker := state.unit(action.unit_id)
 	if not attacker:
 		return null
-	var unit_profile := get_unit_profile(attacker.definition_uid)
+	var unit_profile := visual.profile.units[attacker.definition_uid]
 	var attack_kind := unit_profile.attack
 	var combo_hit_idx = context.read_or(teCombatContext.COMBO_HIT, -1)
 	var combo_length = context.read_or(teCombatContext.COMBO_LENGTH, 0)
@@ -185,11 +180,11 @@ func write_attack_post_windup(
 			return teVisualActions.unit_shoot_projectile(
 				attacker_id,
 				target_id,
-				attacker.definition_uid
+				teVisual.unit_projectile_name(attacker.definition_uid)
 			)
 		teVisualWriting.AttackKind.CAST:
 			return teVisualActions.vfx_on_target(
-				attacker.definition_uid,
+				teVisual.unit_cast_vfx_uid(attacker.definition_uid),
 				target_id,
 			)
 	return null

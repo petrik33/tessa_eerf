@@ -3,7 +3,7 @@ class_name teVisualGameConfig extends Node
 
 @export var units_node: Node2D
 @export var hex_space: HexSpace
-@export var skin_set: teUnitSkinSet
+@export var visual: teVisual
 
 @export var ally_grid: HexGridBase
 @export var enemy_grid: HexGridBase
@@ -39,7 +39,7 @@ func read_game_state() -> teGameState:
 
 func try_find_unit_definition_uid_by_visuals(visuals: Node2D) -> StringName:
 	var scene_path := visuals.scene_file_path
-	for key in skin_set.scenes.keys():
-		if skin_set.scenes[key].resource_path == scene_path:
+	for key in visual.profile.units.keys():
+		if visual.profile.units[key].visuals.resource_path == scene_path:
 			return key
 	return ""
