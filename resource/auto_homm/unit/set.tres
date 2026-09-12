@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="teUnitSet" format=3 uid="uid://b2k6fmss4dwyi"]
+
+[ext_resource type="Script" uid="uid://daavssjfuh6c3" path="res://script/auto_homm/combat/unit/set.gd" id="1_nfuen"]
+[ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="2_pxuqx"]
+[ext_resource type="Resource" uid="uid://bnpf1vy0xqucr" path="res://resource/auto_homm/unit/definition/blind_huntress.tres" id="3_i8drl"]
+[ext_resource type="Resource" uid="uid://dll61ua7o3037" path="res://resource/auto_homm/unit/definition/ground_monk.tres" id="4_npu8u"]
+[ext_resource type="Resource" uid="uid://bd7pxn40j2qy0" path="res://resource/auto_homm/unit/definition/martial_hero.tres" id="5_f21en"]
+[ext_resource type="Resource" uid="uid://ckd00wrrxhf8e" path="res://resource/auto_homm/unit/definition/necromancer.tres" id="6_3pm50"]
+[ext_resource type="Resource" uid="uid://brqsmquus630r" path="res://resource/auto_homm/unit/definition/paladin.tres" id="7_6xqlc"]
+[ext_resource type="Resource" uid="uid://bppvwnodg2una" path="res://resource/auto_homm/unit/definition/red_hood_archer.tres" id="8_07vck"]
+[ext_resource type="Resource" uid="uid://d4he6shvy4vab" path="res://resource/auto_homm/unit/definition/leaf_ranger.tres" id="9_23l54"]
+[ext_resource type="Resource" uid="uid://rya2vwglch6y" path="res://resource/auto_homm/unit/definition/water_priestess.tres" id="10_adyra"]
+
+[resource]
+script = ExtResource("1_nfuen")
+units = Dictionary[StringName, ExtResource("2_pxuqx")]({
+&"blind_huntress": ExtResource("3_i8drl"),
+&"ground_monk": ExtResource("4_npu8u"),
+&"leaf_ranger": ExtResource("9_23l54"),
+&"martial_hero": ExtResource("5_f21en"),
+&"necromancer": ExtResource("6_3pm50"),
+&"paladin": ExtResource("7_6xqlc"),
+&"red_hood_archer": ExtResource("8_07vck"),
+&"water_priestess": ExtResource("10_adyra")
+})
+metadata/_custom_type_script = "uid://daavssjfuh6c3"

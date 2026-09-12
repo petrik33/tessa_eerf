@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="teUnitDefinition" format=3 uid="uid://d4he6shvy4vab"]
+
+[ext_resource type="Script" uid="uid://bmmh4y5p4r5ej" path="res://script/auto_homm/unit/stats.gd" id="1_f200s"]
+[ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="2_fe834"]
+
+[sub_resource type="Resource" id="Resource_3vxop"]
+script = ExtResource("1_f200s")
+attack_range = 5
+
+[resource]
+script = ExtResource("2_fe834")
+base_stats = SubResource("Resource_3vxop")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://c43hpc6lapgg"]
+
+[ext_resource type="PackedScene" uid="uid://hdsknl3q5dcn" path="res://scene/auto_homm/unit/ground_monk/ground_monk.tscn" id="1_cjyju"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_rhcm2"]
+
+[resource]
+script = ExtResource("2_rhcm2")
+actor = ExtResource("1_cjyju")
+metadata/_custom_type_script = "uid://w6o4p73o148l"

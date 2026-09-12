@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://mmjgevorsoih"]
+
+[ext_resource type="PackedScene" uid="uid://dyt6sh81t35pd" path="res://scene/auto_homm/unit/blind_huntress/blind_huntress.tscn" id="1_uwm3c"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_t1yad"]
+
+[resource]
+script = ExtResource("2_t1yad")
+actor = ExtResource("1_uwm3c")
+metadata/_custom_type_script = "uid://w6o4p73o148l"

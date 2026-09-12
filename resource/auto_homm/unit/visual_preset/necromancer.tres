@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://bpthgt4p3s8m5"]
+
+[ext_resource type="PackedScene" uid="uid://clodbolh7jpeq" path="res://scene/auto_homm/unit/necromancer/necromancer.tscn" id="1_2j3po"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_rfxn5"]
+[ext_resource type="PackedScene" uid="uid://bw45ewg6oq7gc" path="res://scene/auto_homm/unit/necromancer/cast.tscn" id="3_a7i0h"]
+[ext_resource type="PackedScene" uid="uid://dy3culhlehwps" path="res://scene/auto_homm/unit/necromancer/skill_vfx.tscn" id="4_rfxn5"]
+
+[resource]
+script = ExtResource("2_rfxn5")
+actor = ExtResource("1_2j3po")
+attack = 2
+skill = 0
+vfx = Dictionary[StringName, PackedScene]({
+&"cast": ExtResource("3_a7i0h"),
+&"skill": ExtResource("4_rfxn5")
+})
+metadata/_custom_type_script = "uid://w6o4p73o148l"

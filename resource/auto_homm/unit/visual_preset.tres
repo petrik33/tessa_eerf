@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="teVisualPresetUnits" format=3 uid="uid://bk1bqd5x7qi6r"]
+
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="1_k3cw4"]
+[ext_resource type="Resource" uid="uid://mmjgevorsoih" path="res://resource/auto_homm/unit/visual_preset/blind_huntress.tres" id="2_0dibj"]
+[ext_resource type="Script" uid="uid://ce1dcw5ladkos" path="res://script/auto_homm/visual/preset/units.gd" id="2_y2p5a"]
+[ext_resource type="Resource" uid="uid://c43hpc6lapgg" path="res://resource/auto_homm/unit/visual_preset/ground_monk.tres" id="3_mj43c"]
+[ext_resource type="Resource" uid="uid://4umdnuo2wjlo" path="res://resource/auto_homm/unit/visual_preset/leaf_ranger.tres" id="4_mqnqw"]
+[ext_resource type="Resource" uid="uid://daj0e75kw37pu" path="res://resource/auto_homm/unit/visual_preset/martial_hero.tres" id="5_6eohd"]
+[ext_resource type="Resource" uid="uid://bpthgt4p3s8m5" path="res://resource/auto_homm/unit/visual_preset/necromancer.tres" id="6_o0a4k"]
+[ext_resource type="Resource" uid="uid://crvmmjpyy73nk" path="res://resource/auto_homm/unit/visual_preset/paladin.tres" id="7_d47mb"]
+[ext_resource type="Resource" uid="uid://emtdsfhg6oy" path="res://resource/auto_homm/unit/visual_preset/red_hood_archer.tres" id="8_vscc0"]
+[ext_resource type="Resource" uid="uid://cy68g84sdx7sj" path="res://resource/auto_homm/unit/visual_preset/water_priestess.tres" id="9_l151q"]
+
+[resource]
+script = ExtResource("2_y2p5a")
+presets = Dictionary[StringName, ExtResource("1_k3cw4")]({
+&"blind_huntress": ExtResource("2_0dibj"),
+&"ground_monk": ExtResource("3_mj43c"),
+&"leaf_ranger": ExtResource("4_mqnqw"),
+&"martial_hero": ExtResource("5_6eohd"),
+&"necromancer": ExtResource("6_o0a4k"),
+&"paladin": ExtResource("7_d47mb"),
+&"red_hood_archer": ExtResource("8_vscc0"),
+&"water_priestess": ExtResource("9_l151q")
+})
+metadata/_custom_type_script = "uid://ce1dcw5ladkos"

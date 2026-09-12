@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://daj0e75kw37pu"]
+
+[ext_resource type="PackedScene" uid="uid://ba8hm538xfpt6" path="res://scene/auto_homm/unit/martial_hero/martial_hero.tscn" id="1_u2ygn"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_3u6wb"]
+
+[resource]
+script = ExtResource("2_3u6wb")
+actor = ExtResource("1_u2ygn")
+metadata/_custom_type_script = "uid://w6o4p73o148l"

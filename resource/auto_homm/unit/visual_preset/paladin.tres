@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://crvmmjpyy73nk"]
+
+[ext_resource type="PackedScene" uid="uid://yeda2nifrlx8" path="res://scene/auto_homm/unit/paladin/paladin.tscn" id="1_me5ld"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_og3si"]
+
+[resource]
+script = ExtResource("2_og3si")
+actor = ExtResource("1_me5ld")
+metadata/_custom_type_script = "uid://w6o4p73o148l"

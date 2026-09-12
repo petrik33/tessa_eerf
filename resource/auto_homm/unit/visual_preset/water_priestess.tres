@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://cy68g84sdx7sj"]
+
+[ext_resource type="PackedScene" uid="uid://bnpce8dcgeml3" path="res://scene/auto_homm/unit/water_priestess/water_priestess.tscn" id="1_nsjr4"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_6igav"]
+
+[resource]
+script = ExtResource("2_6igav")
+actor = ExtResource("1_nsjr4")
+metadata/_custom_type_script = "uid://w6o4p73o148l"

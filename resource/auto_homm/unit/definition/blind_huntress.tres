@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="teUnitDefinition" format=3 uid="uid://bnpf1vy0xqucr"]
+
+[ext_resource type="Script" uid="uid://bmmh4y5p4r5ej" path="res://script/auto_homm/unit/stats.gd" id="1_ty7md"]
+[ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="2_ueak4"]
+
+[sub_resource type="Resource" id="Resource_uxbsg"]
+script = ExtResource("1_ty7md")
+
+[resource]
+script = ExtResource("2_ueak4")
+base_stats = SubResource("Resource_uxbsg")
+metadata/_custom_type_script = "uid://bxwdn821h7m3q"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://4umdnuo2wjlo"]
+
+[ext_resource type="PackedScene" uid="uid://baqf1e3omn7t6" path="res://scene/auto_homm/unit/leaf_ranger/leaf_ranger.tscn" id="1_41lid"]
+[ext_resource type="PackedScene" uid="uid://ckblt5dy2ce4q" path="res://scene/auto_homm/unit/leaf_ranger/leaf_ranger_arrow.tscn" id="2_13syn"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="3_32dsv"]
+
+[resource]
+script = ExtResource("3_32dsv")
+actor = ExtResource("1_41lid")
+attack = 1
+projectiles = Dictionary[StringName, PackedScene]({
+&"ranged": ExtResource("2_13syn")
+})
+metadata/_custom_type_script = "uid://w6o4p73o148l"

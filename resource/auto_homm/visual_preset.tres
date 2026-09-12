@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="teVisualPreset" format=3 uid="uid://cxu2kurpgytc8"]
+
+[ext_resource type="Script" uid="uid://bpvhp1jac8kkb" path="res://script/auto_homm/visual/preset.gd" id="1_y2p5a"]
+[ext_resource type="Resource" uid="uid://bk1bqd5x7qi6r" path="res://resource/auto_homm/unit/visual_preset.tres" id="2_217vb"]
+
+[resource]
+script = ExtResource("1_y2p5a")
+units = ExtResource("2_217vb")
+metadata/_custom_type_script = "uid://bpvhp1jac8kkb"

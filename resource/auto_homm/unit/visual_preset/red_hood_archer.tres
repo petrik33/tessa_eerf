@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="teVisualUnitPreset" format=3 uid="uid://emtdsfhg6oy"]
+
+[ext_resource type="PackedScene" uid="uid://des0ux6tte0v1" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer.tscn" id="1_pw06r"]
+[ext_resource type="PackedScene" uid="uid://bdrkshdc4sl7r" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="2_05xm5"]
+[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/preset.gd" id="2_7wt5y"]
+
+[resource]
+script = ExtResource("2_7wt5y")
+actor = ExtResource("1_pw06r")
+attack = 1
+projectiles = Dictionary[StringName, PackedScene]({
+&"ranged": ExtResource("2_05xm5")
+})
+metadata/_custom_type_script = "uid://w6o4p73o148l"
