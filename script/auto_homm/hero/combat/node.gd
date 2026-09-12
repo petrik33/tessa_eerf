@@ -1,92 +1,29 @@
-class_name teHeroCombat extends Node
+class_name teHeroCombat extends teCombatBase
 
 
-#signal hero_turn_started()
-signal started(first_state: teCombatState)
-signal action_taken(state: teCombatState, resolved: teCombatResolvedAction)
-signal finished(final_state: teCombatState)
+@export var cinematic_playback: CinematicPlayback
+@export var hero_state: teHeroCombatState
+@export var controller: teHeroCombatController
 
 
-@export var turn_timer: Timer
+func _ready() -> void:
+	controller.command_requested.connect(_on_controller_command_requested)
 
 
-var rules: teCombatRules
-var runtime: teCombatRuntime
-var state: teCombatState
-var initial_state: teCombatState
-
-
-func is_active() -> bool:
-	return runtime != null
-
-
-func start(_initial_state: teCombatState, _rules: teCombatRules):
-	if is_active():
-		stop()
-	rules = _rules
-	initial_state = _initial_state.duplicate()
-	state = initial_state.duplicate()
-	runtime = teCombatRuntime.new(initial_state)
-	started.emit(initial_state)
-	_process_command(teCombatCommands.start_combat())
-
-
-func next_step():
-	assert(is_active())
-	_process_command(next_command())
-
-
-func next_command() -> teCombatCommandBase:
-	if rules.is_hero_turn(state):
-		return teCombatCommands.skip_hero_turn()
+func _next_step():
+	var current_unit_id := state.active_unit_id()
+	var auto_command := rules.auto_command(runtime, state)
+	if hero_state.is_hero(current_unit_id):
+		while not cinematic_playback.queue_empty():
+			await cinematic_playback.sequence_finished
+		controller.activate(state, runtime, auto_command)
 	else:
-		return rules.auto_command(runtime, state)
+		var processed := _try_process_command(auto_command)
+		#assert(processed, "Couldn't process auto command")
+		_next_step()
 
 
-func stop():
-	if not is_active():
-		return
-	turn_timer.stop()
-	runtime = null
-	state = null
-
-
-func restart():
-	if initial_state == null:
-		return
-	start(initial_state, rules)
-
-
-func _process_command(command: teCombatCommandBase):
-	var expanded := rules.expand(runtime, state, command)
-	if not expanded.is_valid():
-		turn_timer.start()
-		return
-	_take_scheduled(expanded.actions)
-	if rules.is_finished(state):
-		stop()
-		finished.emit(state)
-		return
-	turn_timer.start()
-
-
-func _take_scheduled(scheduled: teCombatScheduledActionsBuffer):
-	for idx in range(scheduled.size()):
-		var action := scheduled.actions[idx]
-		var context := scheduled.context[idx]
-		_take(action, context)
-
-
-func _take(action: teCombatActionBase, context: Context = null):
-	var resolved := rules.resolve(state, runtime, action, context)
-	if not resolved.is_valid():
-		return
-	for event in resolved.events_to_emit():
-		state.update(event)
-		runtime.update(event)
-	action_taken.emit(state, resolved)
-	_take_scheduled(resolved.actions_to_resolve())
-
-
-func _on_timer_timeout():
-	next_step()
+func _on_controller_command_requested(command: teCombatCommandBase):
+	if _try_process_command(command):
+		controller.deactivate()
+		_next_step()

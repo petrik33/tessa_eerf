@@ -1,7 +1,7 @@
 class_name teBoardVisual extends Node
 
 
-signal unit_attached(id: int, unit: teBoardUnitView)
+signal unit_attached(id: int, unit: teBoardUnit)
 signal unit_dettached(id: int, view: teUnitView)
 
 
@@ -13,7 +13,7 @@ signal unit_dettached(id: int, view: teUnitView)
 @export var hex_hover_outline: HexGridRendererBase
 
 
-var units: Dictionary[int, teBoardUnitView]
+var units: Dictionary[int, teBoardUnit]
 
 
 func sync_state(combat: teCombatState):
@@ -72,8 +72,8 @@ func select_unit(unit_id: int):
 	units[unit_id].set_selected(true)
 
 
-func create_unit(uid: StringName, id: int) -> teBoardUnitView:
-	var visuals := visual.profile.units[uid].visuals.instantiate() as teUnitVisualsBase
+func create_unit(uid: StringName, id: int) -> teBoardUnit:
+	var visuals := visual.get_unit_preset(uid).actor.instantiate() as teUnitActorBase
 	units_attach.add_child(visuals)
 	var unit_view := create_unit_view(visuals)
 	units_attach.add_child(unit_view)
@@ -86,8 +86,8 @@ func destroy_unit(id: int):
 	unit_view.queue_free()
 
 
-func attach_unit(unit_view: teUnitView, id: int) -> teBoardUnitView:
-	var board_unit_view := board_unit_view_scene.instantiate() as teBoardUnitView
+func attach_unit(unit_view: teUnitView, id: int) -> teBoardUnit:
+	var board_unit_view := board_unit_view_scene.instantiate() as teBoardUnit
 	board_unit_view.attach_view(unit_view)
 	units_attach.add_child(board_unit_view)
 	units[id] = board_unit_view
@@ -105,17 +105,17 @@ func dettach_unit(id: int) -> teUnitView:
 	return dettached_unit
 
 
-func create_unit_view(visuals: teUnitVisualsBase) -> teUnitView:
+func create_unit_view(visuals: teUnitActorBase) -> teUnitView:
 	var unit_view := unit_view_scene.instantiate() as teUnitView
 	unit_view.attach_visuals(visuals)
 	return unit_view
 
 
-func get_unit(id: int) -> teBoardUnitView:
+func get_unit(id: int) -> teBoardUnit:
 	return units[id]
 
 
-func get_unit_visuals(id: int) -> teUnitVisualsBase:
+func get_unit_visuals(id: int) -> teUnitActorBase:
 	return get_unit(id).view.visuals
 
 

@@ -1,8 +1,35 @@
 class_name teCombatUI extends Node
 
 
-@export var director: teVisualDirectorBase
+@export var director: CinematicDirectorBase
 @export var markers: teCombatUiMarkers
+
+@export var target_hex_renderer: HexFilledRenderer
+@export var target_outline_colors: Dictionary[TargetOutline, Color]
+
+@export var auto_target_hex_renderer: HexGridRendererBase
+
+
+enum TargetOutline {
+	HEAL,
+	ATTACK,
+	MOVE_AND_ATTACK,
+	CAST
+}
+
+
+func outline_target_hex(grid: HexGridBase, target: TargetOutline):
+	target_hex_renderer.grid = grid
+	target_hex_renderer.hex_color = target_outline_colors[target]
+
+
+func outline_auto_target_hex(grid: HexGridBase):
+	auto_target_hex_renderer.grid = grid
+
+
+func clear_outlines():
+	target_hex_renderer.grid = null
+	auto_target_hex_renderer.grid = null
 
 
 func activate(state: teCombatState):
@@ -12,8 +39,9 @@ func activate(state: teCombatState):
 
 
 func deactivate():
-	director.combat_event.disconnect(_on_combat_event)
+	clear_outlines()
 	markers.units_clear_active()
+	director.combat_event.disconnect(_on_combat_event)
 	markers.set_process(false)
 
 

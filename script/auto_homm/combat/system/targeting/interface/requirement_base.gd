@@ -6,7 +6,7 @@ class_name teCombatTargetRequirementBase extends Resource
 func fits(
 	target: teCombatTargetBase,
 	state: teCombatState,
-	context: Context
+	unit_id: int
 ) -> bool
 
 

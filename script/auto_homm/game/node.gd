@@ -6,8 +6,8 @@ class_name teGameNode extends Node
 @export var state: teGameState
 @export var board: teBoardVisual
 @export var ui: teUI
-@export var combat: teCombat
-@export var movie: teCombatMovie
+@export var combat: teCombatBase
+@export var cinematic: Cinematic
 @export var combat_setup: teCombatSetupController
 @export var pixel_art3d: teVisualPixelArt3d
 
@@ -22,12 +22,12 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("dbg_start_combat"):
-		if movie.is_live():
+		if cinematic.is_live():
 			return
 		_deactivate_combat_setup()
 		_start_combat()
 	if event.is_action_pressed("dbg_finish_combat"):
-		if not movie.is_live():
+		if not cinematic.is_live():
 			return
 		_stop_combat()
 		_activate_combat_setup()
@@ -49,16 +49,16 @@ func _deactivate_combat_setup() -> void:
 
 func _start_combat() -> void:
 	ui.set_combat_mode(potential_combat_state)
-	movie.finished.connect(_on_movie_finished)
-	movie.start()
+	cinematic.finished.connect(_on_cinematic_finished)
+	cinematic.start()
 	combat.start(potential_combat_state, setup.rule_set.rules)
 
 
 func _stop_combat() -> void:
 	board.clear_all_hover()
 	combat.stop()
-	movie.stop()
-	movie.finished.disconnect(_on_movie_finished)
+	cinematic.stop()
+	cinematic.finished.disconnect(_on_cinematic_finished)
 
 
 func _on_place_unit_requested(unit_id: int, hex: Vector2i):
@@ -67,15 +67,13 @@ func _on_place_unit_requested(unit_id: int, hex: Vector2i):
 	var updated_state := state.duplicate(true)
 	updated_state.current_team.units_placement.erase(unit_id)
 	updated_state.current_team.units_placement.set(unit_id, hex)
-	if not setup.rule_set.rules.is_valid(updated_state):
-		return
 	state = updated_state
 	combat_setup.update_current_team(state.current_team)
 	_update_potential_combat_state()
 
 
-func _on_movie_finished():
-	movie.finished.disconnect(_on_movie_finished)
+func _on_cinematic_finished():
+	cinematic.finished.disconnect(_on_cinematic_finished)
 	board.clear_all_hover()
 	_activate_combat_setup()
 

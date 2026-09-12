@@ -1,5 +1,5 @@
 @abstract
-class_name teUnitVisualsBase extends Node2D
+class_name teUnitActorBase extends Node2D
 
 
 @export var node_to_glow: Node2D

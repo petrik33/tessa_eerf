@@ -2,151 +2,29 @@
 
 [ext_resource type="Script" uid="uid://b3by6egx2vlst" path="res://script/auto_homm/combat/rule_set.gd" id="1_3dsa1"]
 [ext_resource type="Script" uid="uid://56bdwaw8x0ql" path="res://script/auto_homm/combat/rules.gd" id="1_dnmu3"]
-[ext_resource type="Script" uid="uid://daavssjfuh6c3" path="res://script/auto_homm/combat/unit/set.gd" id="3_ikphj"]
-[ext_resource type="Script" uid="uid://bxwdn821h7m3q" path="res://script/auto_homm/unit/definition.gd" id="4_ikphj"]
-[ext_resource type="Script" uid="uid://bmmh4y5p4r5ej" path="res://script/auto_homm/unit/stats.gd" id="5_ikphj"]
-[ext_resource type="Script" uid="uid://l7eeknl6jwp5" path="res://script/auto_homm/combat/system/effect/impl/combo.gd" id="6_urxnx"]
-[ext_resource type="Script" uid="uid://c887x0hx6ft7x" path="res://script/auto_homm/combat/system/skill/cast/apply_effect.gd" id="7_5lh6l"]
-[ext_resource type="Script" uid="uid://t0fycew1djni" path="res://script/auto_homm/combat/system/skill/unit.gd" id="7_wsd47"]
-[ext_resource type="Script" uid="uid://n60j1rpr6spd" path="res://script/auto_homm/combat/system/targeting/selection/self.gd" id="9_5lh6l"]
-[ext_resource type="Script" uid="uid://w725jw6e04nu" path="res://script/auto_homm/combat/system/effect/impl/poison.gd" id="10_2wb03"]
-[ext_resource type="Script" uid="uid://dwdaoppkl4lb8" path="res://script/auto_homm/combat/system/targeting/selection/enemies.gd" id="11_eqe1j"]
+[ext_resource type="Script" uid="uid://bca1e7chhdvta" path="res://script/auto_homm/combat/system/targeting/interface/priority/unit.gd" id="1_yaq7i"]
+[ext_resource type="Script" uid="uid://blruj48e2n7of" path="res://script/auto_homm/combat/system/targeting/priority/nearest.gd" id="2_le1ug"]
+[ext_resource type="Script" uid="uid://c5y030l0t06rg" path="res://script/auto_homm/combat/system/targeting/query/enemies.gd" id="3_wsd47"]
+[ext_resource type="Resource" uid="uid://b2k6fmss4dwyi" path="res://resource/auto_homm/unit/set.tres" id="4_l61na"]
+
+[sub_resource type="Resource" id="Resource_urxnx"]
+script = ExtResource("2_le1ug")
+metadata/_custom_type_script = "uid://blruj48e2n7of"
+
+[sub_resource type="Resource" id="Resource_5lh6l"]
+script = ExtResource("3_wsd47")
+metadata/_custom_type_script = "uid://c5y030l0t06rg"
 
 [sub_resource type="Resource" id="Resource_d2lcd"]
 script = ExtResource("1_dnmu3")
-metadata/_custom_type_script = "uid://56bdwaw8x0ql"
-
-[sub_resource type="Resource" id="Resource_ikphj"]
-script = ExtResource("5_ikphj")
-
-[sub_resource type="Resource" id="Resource_wsd47"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_ikphj")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_le1ug"]
-script = ExtResource("5_ikphj")
-max_hp = 133
-required_mana = 7
-attack_damage = 13
-
-[sub_resource type="Resource" id="Resource_55dpk"]
-script = ExtResource("6_urxnx")
-metadata/_custom_type_script = "uid://l7eeknl6jwp5"
-
-[sub_resource type="Resource" id="Resource_nfb0r"]
-script = ExtResource("7_5lh6l")
-effect = SubResource("Resource_55dpk")
-duration = 3
-metadata/_custom_type_script = "uid://c887x0hx6ft7x"
-
-[sub_resource type="Resource" id="Resource_qcag6"]
-script = ExtResource("9_5lh6l")
-metadata/_custom_type_script = "uid://n60j1rpr6spd"
-
-[sub_resource type="Resource" id="Resource_pbg0x"]
-script = ExtResource("7_wsd47")
-cast = SubResource("Resource_nfb0r")
-selection = SubResource("Resource_qcag6")
-ends_turn = false
-metadata/_custom_type_script = "uid://t0fycew1djni"
-
-[sub_resource type="Resource" id="Resource_5lh6l"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_le1ug")
-skill = SubResource("Resource_pbg0x")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_upeoa"]
-script = ExtResource("5_ikphj")
-attack_range = 4
-
-[sub_resource type="Resource" id="Resource_gbku1"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_upeoa")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_urxnx"]
-script = ExtResource("5_ikphj")
-
-[sub_resource type="Resource" id="Resource_eqe1j"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_urxnx")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_2wb03"]
-script = ExtResource("5_ikphj")
-required_mana = 7
-attack_range = 10
-
-[sub_resource type="Resource" id="Resource_82dls"]
-script = ExtResource("10_2wb03")
-metadata/_custom_type_script = "uid://w725jw6e04nu"
-
-[sub_resource type="Resource" id="Resource_pxlwc"]
-script = ExtResource("7_5lh6l")
-effect = SubResource("Resource_82dls")
-charges = 3
-metadata/_custom_type_script = "uid://c887x0hx6ft7x"
-
-[sub_resource type="Resource" id="Resource_stapm"]
-script = ExtResource("11_eqe1j")
-metadata/_custom_type_script = "uid://dwdaoppkl4lb8"
-
-[sub_resource type="Resource" id="Resource_yr3rm"]
-script = ExtResource("7_wsd47")
-cast = SubResource("Resource_pxlwc")
-selection = SubResource("Resource_stapm")
-metadata/_custom_type_script = "uid://t0fycew1djni"
-
-[sub_resource type="Resource" id="Resource_n3uly"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_2wb03")
-skill = SubResource("Resource_yr3rm")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_deqbk"]
-script = ExtResource("5_ikphj")
-metadata/_custom_type_script = "uid://bmmh4y5p4r5ej"
-
-[sub_resource type="Resource" id="Resource_l6cay"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_deqbk")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_qy02j"]
-script = ExtResource("5_ikphj")
-attack_range = 10
-
-[sub_resource type="Resource" id="Resource_0dchg"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_qy02j")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_1wij3"]
-script = ExtResource("5_ikphj")
-
-[sub_resource type="Resource" id="Resource_o48ip"]
-script = ExtResource("4_ikphj")
-base_stats = SubResource("Resource_1wij3")
-metadata/_custom_type_script = "uid://bxwdn821h7m3q"
-
-[sub_resource type="Resource" id="Resource_yaq7i"]
-script = ExtResource("3_ikphj")
-units = Dictionary[StringName, ExtResource("4_ikphj")]({
-&"blind_huntress": SubResource("Resource_wsd47"),
-&"ground_monk": SubResource("Resource_5lh6l"),
-&"leaf_ranger": SubResource("Resource_gbku1"),
-&"martial_hero": SubResource("Resource_eqe1j"),
-&"necromancer": SubResource("Resource_n3uly"),
-&"paladin": SubResource("Resource_l6cay"),
-&"red_hood_archer": SubResource("Resource_0dchg"),
-&"water_priestess": SubResource("Resource_o48ip")
+enemies_query = SubResource("Resource_5lh6l")
+attack_target_priority = Dictionary[int, ExtResource("1_yaq7i")]({
+0: SubResource("Resource_urxnx")
 })
-metadata/_custom_type_script = "uid://daavssjfuh6c3"
+metadata/_custom_type_script = "uid://56bdwaw8x0ql"
 
 [resource]
 script = ExtResource("1_3dsa1")
 rules = SubResource("Resource_d2lcd")
-units = SubResource("Resource_yaq7i")
+units = ExtResource("4_l61na")
 metadata/_custom_type_script = "uid://b3by6egx2vlst"

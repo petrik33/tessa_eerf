@@ -5,15 +5,14 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-static func unit_attack(unit_id: int, target_id: int) -> teCombatCommandUnitAttack:
-	var command := teCombatCommandUnitAttack.new()
+static func attack(unit_id: int, target_id: int) -> teCombatCommandAttack:
+	var command := teCombatCommandAttack.new()
 	command.unit_id = unit_id
 	command.target_id = target_id
 	return command
 
-static func unit_wait(unit_id: int) -> teCombatCommandUnitWait:
-	var command := teCombatCommandUnitWait.new()
-	command.unit_id = unit_id
+static func wait() -> teCombatCommandWait:
+	var command := teCombatCommandWait.new()
 	return command
 
 static func start_combat() -> teCombatCommandStart:
@@ -22,8 +21,8 @@ static func start_combat() -> teCombatCommandStart:
 static func skip_hero_turn() -> teCombatCommandSkipHeroTurn:
 	return teCombatCommandSkipHeroTurn.new()
 
-static func unit_cast_skill(unit_id: int, target: teCombatTargetBase) -> teCombatCommandUnitCastSkill:
-	var command := teCombatCommandUnitCastSkill.new()
+static func cast_skill(unit_id: int, target: teCombatTargetBase) -> teCombatCommandCastSkill:
+	var command := teCombatCommandCastSkill.new()
 	command.unit_id = unit_id
 	command.target = target
 	return command

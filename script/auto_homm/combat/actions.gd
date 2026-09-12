@@ -5,22 +5,22 @@ func _init() -> void:
 	Utils.assert_static_lib()
 
 
-static func unit_attack(unit_id: int, target_id: int) -> teCombatActionUnitAttack:
-	var action := teCombatActionUnitAttack.new()
+static func attack(unit_id: int, target_id: int) -> teCombatActionAttack:
+	var action := teCombatActionAttack.new()
 	action.unit_id = unit_id
 	action.target_id = target_id
 	return action
 
 
-static func unit_move(unit_id: int, movement_path: teCombatMovementPath) -> teCombatActionUnitMove:
-	var action := teCombatActionUnitMove.new()
+static func move(unit_id: int, movement_path: teCombatMovementPath) -> teCombatActionMove:
+	var action := teCombatActionMove.new()
 	action.unit_id = unit_id
 	action.path = movement_path
 	return action
 
 
-static func unit_cast(unit_id: int, target: teCombatTargetBase) -> teCombatActionUnitCastSkill:
-	var action := teCombatActionUnitCastSkill.new()
+static func cast(unit_id: int, target: teCombatTargetBase) -> teCombatActionCastSkill:
+	var action := teCombatActionCastSkill.new()
 	action.unit_id = unit_id
 	action.target = target
 	return action

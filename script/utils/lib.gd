@@ -5,6 +5,34 @@ func _init() -> void:
 	assert_static_lib()
 
 
+static func iter_prioritized(
+	iter: Object,
+	is_prior: Callable
+) -> Variant:
+	var arg = []
+	if not iter._iter_init(arg):
+		return null
+
+	var most_prior = iter._iter_get(arg)
+
+	while iter._iter_next(arg):
+		var value = iter._iter_get(arg)
+		if is_prior.call(value, most_prior):
+			most_prior = value
+
+	return most_prior
+
+
+static func iter_first(
+	iter: Object
+) -> Variant:
+	var arg = []
+	if not iter._iter_init(arg):
+		return null
+	
+	return iter._iter_get(arg)
+
+
 static func to_typed(type: int, array: Array):
 	return Array(array, type, "", null)
 

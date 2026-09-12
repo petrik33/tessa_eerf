@@ -15,7 +15,7 @@ func read_game_state() -> teGameState:
 	var unit_visuals: Array[Node2D] = []
 	
 	for node in units_node.get_children():
-		if node is teUnitVisualsBase and node.visible:
+		if node is teUnitActorBase and node.visible:
 			unit_visuals.append(node)
 	
 	for visuals in unit_visuals:
@@ -38,8 +38,8 @@ func read_game_state() -> teGameState:
 
 
 func try_find_unit_definition_uid_by_visuals(visuals: Node2D) -> StringName:
-	var scene_path := visuals.scene_file_path
-	for key in visual.profile.units.keys():
-		if visual.profile.units[key].visuals.resource_path == scene_path:
-			return key
+	var scene_path := visuals.scene_file_path 
+	for unit_uid in visual.preset.units.presets:
+		if visual.preset.units.presets[unit_uid].actor.resource_path == scene_path:
+			return unit_uid
 	return ""

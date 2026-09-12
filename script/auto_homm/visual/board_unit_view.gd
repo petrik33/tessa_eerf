@@ -1,10 +1,10 @@
-class_name teBoardUnitView extends Node2D
+class_name teBoardUnit extends Node2D
 
 
 @export var view_attach: Node2D
 @export var marker_tracker: Node2D
 @export var hero_marker_tracker: Node2D
-@export var flash_vfx: teBoardUnitViewFlash
+@export var flash_vfx: teBoardUnitFlash
 
 
 var view: teUnitView

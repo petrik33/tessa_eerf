@@ -1,4 +1,4 @@
-class_name teBoardUnitViewFlash extends Node
+class_name teBoardUnitFlash extends Node
 
 
 @export var flash_material: ShaderMaterial

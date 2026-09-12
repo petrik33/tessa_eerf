@@ -1,4 +1,4 @@
-class_name teUnitVisualsAnimated extends teUnitVisualsBase
+class_name teUnitActorAnimated extends teUnitActorBase
 
 
 @export var sprite: AnimatedSprite2D

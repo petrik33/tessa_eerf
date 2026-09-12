@@ -57,19 +57,6 @@ static func mana_spent(unit_id: int, mana: int) -> teCombatEventManaSpent:
 	return event
 
 
-static func next_attack_modifier_consumed(unit_id: int) -> teCombatEventUnitNextAttackModifierConsumed:
-	var event := teCombatEventUnitNextAttackModifierConsumed.new()
-	event.unit_id = unit_id
-	return event
-
-
-static func next_attack_modified(unit_id: int, pattern: teCombatAttackPatternBase) -> teCombatEventUnitNextAttackModified:
-	var event := teCombatEventUnitNextAttackModified.new()
-	event.unit_id = unit_id
-	event.next_attack_pattern = pattern
-	return event
-
-
 static func effect_consumed(unit_id: int, effect_id: int) -> teCombatEventEffectConsumed:
 	var event := teCombatEventEffectConsumed.new()
 	event.unit_id = unit_id

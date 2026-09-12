@@ -1,4 +1,4 @@
-class_name teCombatTargetingBfsHexIter extends teCombatTargetHexQueryBase.Iter
+class_name teCombatTargetingBfsHexIter extends teCombatTargetQueryBase.Iter
 
 
 var grid: HexGridBase

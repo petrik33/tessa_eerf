@@ -22,14 +22,19 @@ static func from(setup: teCombatSetup, unit_set: teUnitSet, unit_roster: teComba
 			unit_initial_state.initiative_progress = 0.0
 			unit_initial_state.stats = unit_definition.base_stats.duplicate()
 			unit_initial_state.definition_uid = placed_unit.definition_uid
-			if unit_definition.custom_attack_pattern != null:
-				unit_initial_state.attack_pattern = unit_definition.custom_attack_pattern.duplicate()
 			if unit_definition.skill != null:
 				unit_initial_state.skill = unit_definition.skill.duplicate(true)
 			state.units[unit_id] = unit_initial_state
 			state.unit_teams[unit_id] = team_id
 		team_id += 1
 	return state
+
+
+func unit_at_hex(hex: Vector2i) -> int:
+	for unit_id in units:
+		if unit(unit_id).hex == hex:
+			return unit_id
+	return -1
 
 
 func active_unit() -> teCombatUnitState:
@@ -67,9 +72,6 @@ func update(event: teCombatEventBase):
 	if event is teCombatEventManaSpent:
 		var target = units[event.unit_id]
 		target.mana_collected = max(0, target.mana_collected - event.amount)
-	if event is teCombatEventUnitNextAttackModifierConsumed:
-		var target = units[event.unit_id]
-		target.next_attack_pattern = null
 	if event is teCombatEventEffectApplied:
 		var target = units[event.unit_id]
 		target.effects.set(event.effect_id, event.effect)

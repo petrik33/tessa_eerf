@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dtavfh04dvr10" path="res://script/hex/renderer/hex_perimeter_renderer.gd" id="15_y6ipy"]
 [ext_resource type="Resource" uid="uid://ecvihwn81f58" path="res://scene/auto_homm/grid/map.tres" id="16_pprli"]
 [ext_resource type="Script" uid="uid://pjy55ieuvcl5" path="res://script/hex/renderer/hex_filled_renderer.gd" id="17_1bcm7"]
+[ext_resource type="Script" uid="uid://b3kuj58myv8xi" path="res://script/hex/grid/point_list_hex_grid.gd" id="18_k2cbn"]
 [ext_resource type="Resource" uid="uid://cfvc63jynxb4o" path="res://scene/auto_homm/grid/ally.tres" id="18_r4lcn"]
 [ext_resource type="Script" uid="uid://k7hs7m35gx78" path="res://script/hex/renderer/hex_outline_renderer.gd" id="19_p13b6"]
 [ext_resource type="Resource" uid="uid://bamd8hi5bp7wj" path="res://scene/auto_homm/grid/enemy.tres" id="20_ledes"]
@@ -35,18 +36,17 @@
 [ext_resource type="PackedScene" uid="uid://blc7d7qhuv7c6" path="res://scene/auto_homm/board_unit_view.tscn" id="36_gwutc"]
 [ext_resource type="Script" uid="uid://sjys07kvusmw" path="res://script/auto_homm/ui/node.gd" id="37_k2cbn"]
 [ext_resource type="PackedScene" uid="uid://bxi1j6sx4s8e1" path="res://scene/auto_homm/combat.tscn" id="37_tor7x"]
-[ext_resource type="Script" uid="uid://bsvjxvw8ny7j8" path="res://script/auto_homm/controller/combat_setup.gd" id="38_07day"]
+[ext_resource type="Script" uid="uid://bsvjxvw8ny7j8" path="res://script/auto_homm/combat/setup_controller.gd" id="38_07day"]
 [ext_resource type="Script" uid="uid://codjbbmyiilwl" path="res://script/auto_homm/ui/combat/node.gd" id="38_ri40t"]
 [ext_resource type="Script" uid="uid://duq7x6fmv2lb8" path="res://script/auto_homm/ui/combat/markers.gd" id="40_uaqmu"]
 [ext_resource type="PackedScene" uid="uid://dlxfjmn1h0ih7" path="res://scene/auto_homm/ui/combat/unit/marker/marker.tscn" id="41_ghkpf"]
-[ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/movie.tscn" id="42_jnxo0"]
-[ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/auto_homm/visual/director.gd" id="43_fkyeg"]
-[ext_resource type="Script" uid="uid://d16k8137ow65w" path="res://script/auto_homm/visual/movie/producer.gd" id="44_eycuj"]
-[ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/auto_homm/visual/writer.gd" id="44_l2kpm"]
-[ext_resource type="Script" uid="uid://w6o4p73o148l" path="res://script/auto_homm/visual/unit/profile.gd" id="45_w3mww"]
+[ext_resource type="PackedScene" uid="uid://sj1uhv6p1wjg" path="res://scene/auto_homm/cinematic.tscn" id="42_jnxo0"]
+[ext_resource type="Script" uid="uid://c07e3w8vfxr4a" path="res://script/cinematic/director.gd" id="43_fkyeg"]
+[ext_resource type="Script" uid="uid://d16k8137ow65w" path="res://script/cinematic/producer.gd" id="44_eycuj"]
+[ext_resource type="Script" uid="uid://celv2masnj3io" path="res://script/cinematic/writer.gd" id="44_l2kpm"]
 [ext_resource type="PackedScene" uid="uid://b00my3rka8ncb" path="res://scene/auto_homm/visual/producer.tscn" id="46_gork7"]
-[ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/auto_homm/visual/cutter.gd" id="47_rvd0c"]
-[ext_resource type="Script" uid="uid://c2iyvivunkx07" path="res://script/auto_homm/visual/scheduler.gd" id="48_mpwi1"]
+[ext_resource type="Script" uid="uid://div15hdt2vtdg" path="res://script/cinematic/cutter.gd" id="47_rvd0c"]
+[ext_resource type="Script" uid="uid://c2iyvivunkx07" path="res://script/cinematic/scheduler.gd" id="48_mpwi1"]
 [ext_resource type="Script" uid="uid://m6xoopmu678a" path="res://script/auto_homm/visual/pixel_art3d.gd" id="51_eaxkq"]
 [ext_resource type="Script" uid="uid://0felhi0n70wf" path="res://script/pixel_art3d/shadow_cast.gd" id="52_2bg44"]
 [ext_resource type="PackedScene" uid="uid://bg2pe2xsftbdn" path="res://scene/3d_pixel_art/sub_scene/unit_shadow_mesh.tscn" id="53_38ruv"]
@@ -54,6 +54,7 @@
 [ext_resource type="Script" uid="uid://c3buehanto0br" path="res://script/pixel_art3d/grass.gd" id="55_5k7l7"]
 [ext_resource type="Texture2D" uid="uid://bwrcf8q8geqbi" path="res://scene/3d_pixel_art/texture/wind_noise.tres" id="56_bcrvl"]
 [ext_resource type="Script" uid="uid://c4ehifrwublxb" path="res://script/pixel_art3d/board_projection.gd" id="58_ijl75"]
+[ext_resource type="Resource" uid="uid://cxu2kurpgytc8" path="res://resource/auto_homm/visual_preset.tres" id="58_ri40t"]
 [ext_resource type="Script" uid="uid://b813m8me4mfgb" path="res://script/pixel_art3d/terrain_generator.gd" id="59_li1mj"]
 [ext_resource type="Resource" uid="uid://d02j3h0tjad1l" path="res://resource/auto_homm/heroes_hex_layout.tres" id="60_uft43"]
 [ext_resource type="Script" uid="uid://kgbi1bn657re" path="res://script/auto_homm/visual/system/projectile.gd" id="61_dr4d8"]
@@ -61,7 +62,6 @@
 [ext_resource type="PackedScene" uid="uid://bdrkshdc4sl7r" path="res://scene/auto_homm/unit/red_hood_archer/red_hood_archer_arrow.tscn" id="62_sh3oo"]
 [ext_resource type="Script" uid="uid://cbvbepnqlfl55" path="res://script/auto_homm/visual/node.gd" id="63_ckp4v"]
 [ext_resource type="Script" uid="uid://c0ttp13gbn1ki" path="res://script/auto_homm/visual/system/projectile/trajectory.gd" id="63_k6asn"]
-[ext_resource type="Script" uid="uid://bpvhp1jac8kkb" path="res://script/auto_homm/visual/profile.gd" id="64_anyr7"]
 [ext_resource type="Resource" uid="uid://c1xp7j2damyng" path="res://script/auto_homm/visual/system/projectile/trajectory/straight.tres" id="64_qw3ie"]
 [ext_resource type="PackedScene" uid="uid://domdm6o77icu4" path="res://scene/auto_homm/visual/projectile.tscn" id="65_k8rp2"]
 [ext_resource type="Script" uid="uid://cvee6hi1txtqj" path="res://script/auto_homm/visual/system/vfx.gd" id="66_a55gf"]
@@ -70,7 +70,10 @@
 [ext_resource type="PackedScene" uid="uid://bqb0jlb11iw1m" path="res://scene/auto_homm/unfiltered/freeze_system.tscn" id="69_320ch"]
 [ext_resource type="Script" uid="uid://bm0ws3t3savhd" path="res://script/auto_homm/visual/system/movement.gd" id="70_hjyq2"]
 [ext_resource type="PackedScene" uid="uid://csbs8cpl6yvhg" path="res://scene/auto_homm/unfiltered/board_combat_observer.tscn" id="71_krdhj"]
+[ext_resource type="Script" uid="uid://cra1ja14ngjs0" path="res://script/auto_homm/hero/combat/node.gd" id="72_60gyb"]
 [ext_resource type="Script" uid="uid://cry7o5rka2bla" path="res://script/hex/node/hex_picking.gd" id="72_cg813"]
+[ext_resource type="Script" uid="uid://40qq6alvhirw" path="res://script/auto_homm/hero/combat/controller.gd" id="73_eycuj"]
+[ext_resource type="Script" uid="uid://by1w0o3v11ciu" path="res://script/auto_homm/hero/combat/state.gd" id="73_ntqlo"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7bfyt"]
 blend_mode = 3
@@ -988,73 +991,20 @@ cache/0/10/0/glyphs/402653212/texture_idx = 0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b3ha2"]
 blend_mode = 1
 
-[sub_resource type="Resource" id="Resource_ttaya"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("25_2rd6w")
-metadata/_custom_type_script = "uid://w6o4p73o148l"
+[sub_resource type="Resource" id="Resource_60gyb"]
+script = ExtResource("18_k2cbn")
+points = Array[Vector2i]([Vector2i(2, 3)])
+metadata/_custom_type_script = "uid://b3kuj58myv8xi"
 
-[sub_resource type="Resource" id="Resource_ll3i0"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("27_qqqmw")
-metadata/_custom_type_script = "uid://w6o4p73o148l"
+[sub_resource type="Resource" id="Resource_eycuj"]
+script = ExtResource("18_k2cbn")
+points = Array[Vector2i]([Vector2i(7, 0), Vector2i(3, 1)])
+metadata/_custom_type_script = "uid://b3kuj58myv8xi"
 
-[sub_resource type="Resource" id="Resource_oaewx"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("25_60gyb")
-attack = 1
-projectiles = Dictionary[StringName, PackedScene]({
-&"ranged": ExtResource("61_k2cbn")
-})
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_v2qj1"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("22_8uyid")
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_pihuv"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("23_rgg3n")
-attack = 2
-skill = 0
-vfx = Dictionary[StringName, PackedScene]({
-&"cast": ExtResource("67_8fuu1"),
-&"skill": ExtResource("68_y7khi")
-})
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_lc0fo"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("24_gabd8")
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_rrpyk"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("26_sqbv5")
-attack = 1
-projectiles = Dictionary[StringName, PackedScene]({
-&"ranged": ExtResource("62_sh3oo")
-})
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_vmpj5"]
-script = ExtResource("45_w3mww")
-visuals = ExtResource("27_ntqlo")
-metadata/_custom_type_script = "uid://w6o4p73o148l"
-
-[sub_resource type="Resource" id="Resource_mrjeg"]
-script = ExtResource("64_anyr7")
-units = Dictionary[StringName, ExtResource("45_w3mww")]({
-&"blind_huntress": SubResource("Resource_ttaya"),
-&"ground_monk": SubResource("Resource_ll3i0"),
-&"leaf_ranger": SubResource("Resource_oaewx"),
-&"martial_hero": SubResource("Resource_v2qj1"),
-&"necromancer": SubResource("Resource_pihuv"),
-&"paladin": SubResource("Resource_lc0fo"),
-&"red_hood_archer": SubResource("Resource_rrpyk"),
-&"water_priestess": SubResource("Resource_vmpj5")
-})
-metadata/_custom_type_script = "uid://bpvhp1jac8kkb"
+[sub_resource type="Resource" id="Resource_ckp4v"]
+script = ExtResource("73_ntqlo")
+heroes_id = Array[int]([5])
+metadata/_custom_type_script = "uid://by1w0o3v11ciu"
 
 [node name="Root" type="Node3D" unique_id=1328541158]
 
@@ -1226,6 +1176,18 @@ outline_color = Color(1, 1, 1, 0.30980393)
 outline_width = 1.0
 metadata/_custom_type_script = "uid://k7hs7m35gx78"
 
+[node name="Autotarget" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Outline" unique_id=1471008415]
+script = ExtResource("19_p13b6")
+outline_color = Color(0.9607843, 0.88235295, 0.08235294, 1)
+grid = SubResource("Resource_60gyb")
+metadata/_custom_type_script = "uid://k7hs7m35gx78"
+
+[node name="AllTargets" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Outline" unique_id=1889966292]
+script = ExtResource("17_1bcm7")
+hex_color = Color(0.4862745, 0.54509807, 1, 0.29411766)
+grid = SubResource("Resource_eycuj")
+metadata/_custom_type_script = "uid://pjy55ieuvcl5"
+
 [node name="Markers" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace" unique_id=83167854]
 
 [node name="Units" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace" unique_id=1379562838]
@@ -1265,14 +1227,14 @@ position = Vector2(182, 29)
 
 [node name="VFX" type="Node2D" parent="SubViewportContainer/SubViewport/Overlay2D/CombatSpace" unique_id=906241189]
 
-[node name="Game" type="Node" parent="." unique_id=374270782 node_paths=PackedStringArray("visual_config", "board", "ui", "combat", "movie", "combat_setup", "pixel_art3d")]
+[node name="Game" type="Node" parent="." unique_id=374270782 node_paths=PackedStringArray("visual_config", "board", "ui", "combat", "cinematic", "combat_setup", "pixel_art3d")]
 script = ExtResource("29_msst1")
 visual_config = NodePath("VisualConfig")
 setup = ExtResource("30_ysy4j")
 board = NodePath("Board")
 ui = NodePath("UI")
-combat = NodePath("Combat")
-movie = NodePath("Movie")
+combat = NodePath("HeroCombat")
+cinematic = NodePath("Cinematic")
 combat_setup = NodePath("Setup")
 pixel_art3d = NodePath("PixelArt3D")
 metadata/_custom_type_script = "uid://b3t8mmyxnogy4"
@@ -1304,17 +1266,24 @@ metadata/_custom_type_script = "uid://c7cqwtc2k2l4p"
 script = ExtResource("38_07day")
 hex_picking = NodePath("../HexPicking")
 board = NodePath("../Board")
-metadata/_custom_type_script = "uid://bsvjxvw8ny7j8"
 
 [node name="UI" type="Node" parent="Game" unique_id=1946464241 node_paths=PackedStringArray("board", "combat")]
 script = ExtResource("37_k2cbn")
 board = NodePath("../Board")
 combat = NodePath("Combat")
 
-[node name="Combat" type="Node" parent="Game/UI" unique_id=1725123253 node_paths=PackedStringArray("director", "markers")]
+[node name="Combat" type="Node" parent="Game/UI" unique_id=1725123253 node_paths=PackedStringArray("director", "markers", "target_hex_renderer", "auto_target_hex_renderer")]
 script = ExtResource("38_ri40t")
-director = NodePath("../../Movie/Producer/Director")
+director = NodePath("../../Cinematic/Producer/Director")
 markers = NodePath("Markers")
+target_hex_renderer = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Outline/AllTargets")
+target_outline_colors = Dictionary[int, Color]({
+0: Color(0, 0.87058824, 0, 1),
+1: Color(0.7254902, 0, 0, 1),
+2: Color(0.8156863, 0.40392157, 0, 1),
+3: Color(0, 0.4117647, 0.72156864, 1)
+})
+auto_target_hex_renderer = NodePath("../../../SubViewportContainer/SubViewport/Overlay2D/CombatSpace/Outline/Autotarget")
 metadata/_custom_type_script = "uid://codjbbmyiilwl"
 
 [node name="Markers" type="Node" parent="Game/UI/Combat" unique_id=885662776 node_paths=PackedStringArray("board", "markers_container")]
@@ -1324,12 +1293,12 @@ markers_container = NodePath("../../../../SubViewportContainer/SubViewport/Overl
 unit_marker_scene = ExtResource("41_ghkpf")
 metadata/_custom_type_script = "uid://duq7x6fmv2lb8"
 
-[node name="Movie" parent="Game" unique_id=1318524910 node_paths=PackedStringArray("playback", "producer", "combat") instance=ExtResource("42_jnxo0")]
+[node name="Cinematic" parent="Game" unique_id=1318524910 node_paths=PackedStringArray("playback", "producer", "combat") instance=ExtResource("42_jnxo0")]
 playback = NodePath("Playback")
 producer = NodePath("Producer")
-combat = NodePath("../Combat")
+combat = NodePath("../HeroCombat")
 
-[node name="Playback" parent="Game/Movie" unique_id=1328117501 node_paths=PackedStringArray("director", "scheduler") instance=ExtResource("46_gork7")]
+[node name="Playback" parent="Game/Cinematic" unique_id=1328117501 node_paths=PackedStringArray("director", "scheduler") instance=ExtResource("46_gork7")]
 director = NodePath("../Producer/Director")
 scheduler = NodePath("Scheduler")
 deadline_threshold_sec = 0.1
@@ -1337,36 +1306,31 @@ deadlines_on = false
 custom_speed_scale = 1.5
 custom_speed_scale_on = true
 
-[node name="Scheduler" type="Node" parent="Game/Movie/Playback" unique_id=1421736490]
+[node name="Scheduler" type="Node" parent="Game/Cinematic/Playback" unique_id=1421736490]
 script = ExtResource("48_mpwi1")
-metadata/_custom_type_script = "uid://c2iyvivunkx07"
 
-[node name="Producer" type="Node" parent="Game/Movie" unique_id=177119849 node_paths=PackedStringArray("director", "writer", "cutter")]
+[node name="Producer" type="Node" parent="Game/Cinematic" unique_id=177119849 node_paths=PackedStringArray("director", "writer", "cutter")]
 script = ExtResource("44_eycuj")
 director = NodePath("Director")
 writer = NodePath("Writer")
 cutter = NodePath("Cutter")
-metadata/_custom_type_script = "uid://d16k8137ow65w"
 
-[node name="Director" type="Node" parent="Game/Movie/Producer" unique_id=1753845749 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
+[node name="Director" type="Node" parent="Game/Cinematic/Producer" unique_id=1753845749 node_paths=PackedStringArray("board", "projectile_system", "vfx_system", "freeze_system", "movement_system")]
 script = ExtResource("43_fkyeg")
 board = NodePath("../../../Board")
 projectile_system = NodePath("../../../Visual/Projectiles")
 vfx_system = NodePath("../../../Visual/VFX")
 freeze_system = NodePath("../../../Visual/FreezeSystem")
 movement_system = NodePath("../../../Visual/MovementSystem")
-metadata/_custom_type_script = "uid://c07e3w8vfxr4a"
 
-[node name="Writer" type="Node" parent="Game/Movie/Producer" unique_id=1752715738 node_paths=PackedStringArray("visual")]
+[node name="Writer" type="Node" parent="Game/Cinematic/Producer" unique_id=1752715738 node_paths=PackedStringArray("visual")]
 script = ExtResource("44_l2kpm")
 visual = NodePath("../../../Visual")
 initiative_advance_time_sec = 0.5
-metadata/_custom_type_script = "uid://celv2masnj3io"
 
-[node name="Cutter" type="Node" parent="Game/Movie/Producer" unique_id=2034911320]
+[node name="Cutter" type="Node" parent="Game/Cinematic/Producer" unique_id=2034911320]
 script = ExtResource("47_rvd0c")
 uniform_time_sec = 2.0
-metadata/_custom_type_script = "uid://div15hdt2vtdg"
 
 [node name="PixelArt3D" type="Node" parent="Game" unique_id=1386457433 node_paths=PackedStringArray("shadow_cast")]
 script = ExtResource("51_eaxkq")
@@ -1426,7 +1390,7 @@ metadata/_custom_type_script = "uid://cry7o5rka2bla"
 
 [node name="Visual" type="Node" parent="Game" unique_id=1397887690 node_paths=PackedStringArray("projectile", "vfx")]
 script = ExtResource("63_ckp4v")
-profile = SubResource("Resource_mrjeg")
+preset = ExtResource("58_ri40t")
 projectile = NodePath("Projectiles")
 vfx = NodePath("VFX")
 
@@ -1461,5 +1425,19 @@ metadata/_custom_type_script = "uid://bm0ws3t3savhd"
 [node name="BoardCombatObserver" parent="Game/Visual" unique_id=1973503903 node_paths=PackedStringArray("board") instance=ExtResource("71_krdhj")]
 board = NodePath("../../Board")
 
-[connection signal="combat_event" from="Game/Movie/Producer/Director" to="Game/PixelArt3D" method="_on_combat_event"]
-[connection signal="combat_event" from="Game/Movie/Producer/Director" to="Game/Visual/BoardCombatObserver" method="_on_combat_event"]
+[node name="HeroCombat" type="Node" parent="Game" unique_id=468528690 node_paths=PackedStringArray("cinematic_playback", "controller")]
+script = ExtResource("72_60gyb")
+cinematic_playback = NodePath("../Cinematic/Playback")
+hero_state = SubResource("Resource_ckp4v")
+controller = NodePath("Controller")
+metadata/_custom_type_script = "uid://cra1ja14ngjs0"
+
+[node name="Controller" type="Node" parent="Game/HeroCombat" unique_id=798185324 node_paths=PackedStringArray("board", "hex_picking", "ui")]
+script = ExtResource("73_eycuj")
+board = NodePath("../../Board")
+hex_picking = NodePath("../../HexPicking")
+ui = NodePath("../../UI/Combat")
+metadata/_custom_type_script = "uid://40qq6alvhirw"
+
+[connection signal="combat_event" from="Game/Cinematic/Producer/Director" to="Game/PixelArt3D" method="_on_combat_event"]
+[connection signal="combat_event" from="Game/Cinematic/Producer/Director" to="Game/Visual/BoardCombatObserver" method="_on_combat_event"]

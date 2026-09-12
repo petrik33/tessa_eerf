@@ -4,24 +4,24 @@ class_name teCombatTargetUnitRequirementBase extends teCombatTargetRequirementBa
 
 @abstract
 func unit_fits(
-	unit: teCombatUnitState,
+	target_unit: teCombatUnitState,
 	state: teCombatState,
-	id: int,
-	context: Context
+	unit_id: int,
+	target_id: int
 ) -> bool
 
 
 func fits(
 	target: teCombatTargetBase,
 	state: teCombatState,
-	context: Context
+	unit_id: int
 ) -> bool:
 	var unit_target := target as teCombatTargetUnit
 	return unit_fits(
 		state.unit(unit_target.unit_id),
 		state,
-		unit_target.unit_id,
-		context
+		unit_id,
+		unit_target.unit_id
 	)
 
 
