@@ -1,5 +1,5 @@
 @tool
-extends RefCounted
+extends "res://addons/godot_ai/handlers/command_handler.gd"
 
 const ErrorCodes := preload("res://addons/godot_ai/utils/error_codes.gd")
 
@@ -227,6 +227,10 @@ func set_main_scene(params: Dictionary) -> Dictionary:
 	}
 
 
+func _editor_readiness() -> String:
+	return McpConnection.get_readiness()
+
+
 func run_project(params: Dictionary) -> Dictionary:
 	var mode: String = params.get("mode", "main")
 	var autosave: bool = params.get("autosave", true)
@@ -244,6 +248,14 @@ func run_project(params: Dictionary) -> Dictionary:
 				true,
 				"Project was already running; no action taken"
 			)
+		)
+
+	if _editor_readiness() == "importing":
+		return ErrorCodes.make_not_ready(
+			ErrorCodes.SUB_EDITOR_IMPORTING,
+			"Editor is importing resources; cannot start the project yet",
+			true,
+			"Wait for resource importing to finish, then retry project_run."
 		)
 
 	var validation_error: Variant = null
@@ -360,6 +372,14 @@ func _run_project_current_liveness_response(base_data: Dictionary) -> Dictionary
 ## re-validated after every await; the response is dropped silently when
 ## either died (the server's command timeout surfaces the failure).
 static func _finish_run_project_deferred(
+	request_id: String, base_data: Dictionary, connection, debugger_plugin
+) -> void:
+	var work := ScriptWork.begin("run_project")
+	await _settle_run_project(request_id, base_data, connection, debugger_plugin)
+	ScriptWork.finish(work)
+
+
+static func _settle_run_project(
 	request_id: String, base_data: Dictionary, connection, debugger_plugin
 ) -> void:
 	var tree: SceneTree = connection.get_tree()
@@ -591,6 +611,12 @@ func stop_project(params: Dictionary) -> Dictionary:
 # server's 5s request timeout will surface the failure to the caller.
 # `static` is load-bearing (#712): see _finish_run_project_deferred.
 static func _finish_stop_project_deferred(request_id: String, connection) -> void:
+	var work := ScriptWork.begin("stop_project")
+	await _settle_stop_project(request_id, connection)
+	ScriptWork.finish(work)
+
+
+static func _settle_stop_project(request_id: String, connection) -> void:
 	var tree: SceneTree = connection.get_tree()
 	await tree.process_frame
 	await tree.process_frame
